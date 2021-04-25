@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.4', '>= 5.2.4.3'
+gem 'rails', '~> 5.2.5'
 
 gem 'activerecord-nulldb-adapter'
 # Use sqlite3 as the database for Active Record
@@ -104,8 +104,6 @@ gem 'rolify'
 gem 'flipflop', '~> 2.3'
 gem 'lograge'
 
-gem 'zk'
-
 gem 'mods', '~> 2.4'
 
 group :aws, :test do
@@ -120,8 +118,6 @@ end
 gem 'sidekiq'
 
 gem 'secure_headers'
-
-gem 'honeybadger', '~> 3.0'
 
 gem 'codemirror-rails'
 gem 'riiif', '~> 1.1'
