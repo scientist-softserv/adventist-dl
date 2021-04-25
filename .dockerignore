@@ -9,3 +9,5 @@ tmp/*
 artifacts/*
 coverage/*
 chart/*
+ops/*
+.gitlab-ci.yml

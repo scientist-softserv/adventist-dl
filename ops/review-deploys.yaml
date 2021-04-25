@@ -1,0 +1,16 @@
+brandingVolume:
+  enabled: false
+derivativesVolume:
+  enabled: false
+uploadsVolume:
+  enabled: false
+livenessProbe:
+  enabled: false
+readinessProbe:
+  enabled: false
+
+ingress:
+  enabled: true
+
+imagePullSecrets:
+  - name: gitlab-registry
