@@ -1,0 +1,398 @@
+
+@import "variables";
+@import url('https://fonts.googleapis.com/css2?family=Nobile:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
+
+
+body { 
+    font-family: "Nobile" !important;
+    background-color: #2C2C2C !important;
+    color: $white !important;
+    }
+
+h1, h2, h3, h4, h5, h6 { 
+    font-family: "Nobile" !important;
+    font-weight: bold;
+    color: $white !important;
+    }
+p {
+    color: $white !important;
+}
+
+
+/* LINK COLORS */
+a {
+    font-weight: bold;
+    color: $white !important;
+ }
+a:hover, a:focus { 
+    color: $lightyellow !important; 
+    }
+#sort-dropdown .dropdown-toggle, #per_page-dropdown .dropdown-toggle { 
+    color: $lightyellow !important;
+    }
+
+
+//     /* MAIN NAV */
+.nav{
+    padding-left: 30px;
+}
+.navbar-default {
+    background-color: $mediumgrey;
+}
+.navbar-inverse .navbar-link { 
+    color: $white !important;
+     }
+.navbar-inverse .navbar-link:hover { 
+    color: $black !important
+    }
+footer.navbar.navbar-inverse.site-footer {
+    background-color: $mediumyellow !important;
+    border: none ;
+    padding: inherit ;
+    height: auto;
+    }
+.navbar-inverse .navbar-nav > li > a, .navbar-inverse .navbar-text, .navbar-inverse .navbar-brand {
+    color: $white !important;
+}
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .open > a:hover,
+.navbar-inverse .navbar-nav > .open > a:focus { 
+    background-color: $black !important; }
+.navbar-inverse .navbar-nav > li > a,
+.navbar-inverse .navbar-text,
+.navbar-inverse .navbar-brand { 
+    color: $white; }
+.navbar-inverse { 
+    background-color: $black !important; 
+    border-color: inherit; 
+}
+ul#user_utility_links {
+    padding-top: 20px;
+}
+.dropdown-menu {
+    background-color: $black;
+}
+.dropdown-menu > li > a:hover, .twitter-typeahead .tt-menu > li > a:hover, .dropdown-menu > li > a:focus, .twitter-typeahead .tt-menu > li > a:focus {
+    background-color: $darkgrey;
+}
+.dropdown-menu .divider{
+    background-color: $darkgrey !important;
+}
+
+/* HOME PAGE SEARCH BAR NAV */
+#masthead #logo img {
+    max-height: 90px;
+    padding: 10px 0px;
+}
+.image-masthead{
+    border-bottom: none !important;
+}
+.image-masthead .site-title {
+    min-height: 170px;
+}
+
+.image-masthead .background-container-gradient{
+    background: rgba(255,255,255,.3);
+}
+
+.image-masthead .background-container {
+    background-image: url('https://i.ibb.co/ZmFsXZ6/William-Simpson-with-a-group-of-baptismal-candidates-in-front-of-an-evangelistic-tent.jpg') !important;
+    background-position: center;
+    filter: none !important;
+}
+
+.image-masthead .navbar .active > a, .image-masthead .navbar .active > a:hover, .image-masthead .navbar .active > a:focus {
+    background-color: $black !important;
+}
+
+.image-masthead .navbar .navbar-nav a {
+    color: $white;
+    text-transform: none;
+}
+.navbar-static-top {
+    border: 0px solid white !important;
+}
+#search-field-header{
+    background-color: black;
+    border: 0px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+    height: 36px !important;
+}
+button#search-submit-header {
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+    background-color: $mediumgrey !important;
+    border: 2px solid $mediumgrey !important;
+}
+
+/* HOME PAGE NAV-PILL TABS */
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    background-color: transparent !important ;
+}
+.nav > li > a:hover, .nav > li > a:focus {
+    background-color: $mediumgrey !important;
+}
+
+// /* PRIMARY BUTTON STYLES */
+.btn-primary {
+  background-color: $mediumyellow !important;
+  border-color: $darkyellow !important;
+  border: 2px solid $darkyellow !important;
+}
+.btn-primary:focus,
+.btn-primary.focus {
+  background-color: $darkyellow !important;
+  border-color: $darkyellow !important;
+  border: 2px solid $darkyellow !important;
+  outline: 0px !important;
+}
+
+.btn-primary:hover {
+  background-color: $darkyellow !important;
+  border-color: $darkyellow !important;
+  border: 2px solid $darkyellow !important;
+  outline: 0px !important;
+}
+.btn-primary:active,
+.btn-primary.active {
+  background-color: $darkyellow !important;
+  border-color: $darkyellow !important;
+  border: 2px solid $darkyellow !important;
+  outline: 0px !important;
+}
+.btn-primary:active:hover,
+.btn-primary:active:focus,
+.btn-primary:active.focus,
+.btn-primary.active:hover,
+.btn-primary.active:focus,
+.btn-primary.active.focus{
+  background-color: $mediumyellow !important;
+  border-color: $darkyellow !important;
+  border: 2px solid $darkyellow !important;
+  outline: 0px !important;
+}
+.btn-primary.disabled:hover,
+.btn-primary.disabled:focus,
+.btn-primary.disabled.focus,
+.btn-primary[disabled]:hover,
+.btn-primary[disabled]:focus,
+.btn-primary[disabled].focus {
+  background-color: $mediumyellow !important;;
+  border-color: $darkyellow !important;
+  color: grey !important;
+  border: 2px solid $darkyellow !important;
+  outline: 0px !important;
+}
+
+/* DEFAULT BUTTON STYLES */
+.btn-link {
+    color: $lightyellow !important;
+}
+.btn-default {
+  background-color: transparent !important;
+  color: $white !important;
+  outline: 0px !important;
+  border: 2px solid $mediumgrey !important;
+}
+.btn-default:focus,
+.btn-default.focus {
+    outline: 0px !important;
+    border: 2px solid $mediumgrey !important;
+}
+
+.btn-default:hover {
+    outline: 0px !important;
+    border: 2px solid $darkyellow;
+}
+.btn-default:active,
+.btn-default.active {
+    outline: 0px !important;
+    border: 2px solid $darkyellow;
+}
+.btn-default:active:hover,
+.btn-default:active:focus,
+.btn-default:active.focus,
+.btn-default.active:hover,
+.btn-default.active:focus,
+.btn-default.active.focus{
+    outline: 0px !important;
+    border: 2px solid $darkyellow;
+}
+.btn-default.disabled:hover,
+.btn-default.disabled:focus,
+.btn-default.disabled.focus,
+.btn-default[disabled]:hover,
+.btn-default[disabled]:focus,
+.btn-default[disabled].focus {
+    outline: 0px !important;
+    border: 2px solid $mediumgrey;
+    color: grey !important;
+}
+
+// /* FACET PANEL STYLES */
+.panel-default > .panel-heading {
+    color: $white !important;
+    background-color: $black !important;
+    border-color: transparent !important;
+    border: 0px solid transparent !important;
+}
+.panel-default { 
+    border-color: transparent !important;
+    border: 0px solid transparent !important; 
+}
+.panel-heading.collapse-toggle .panel-title:after { 
+    color: $white;
+}
+
+
+// /*MODALS */
+
+.modal-content{
+    background-color: $darkgrey;
+}
+
+.modal-header{
+    border-bottom: 1px solid $black;
+}
+.select-worktype {
+    border-top: 0px solid transparent;
+}
+
+.select-work-icon {
+    color: white !important;
+}
+
+.close {
+    color: white;
+    text-shadow: none;
+    opacity: 0.6;
+}
+
+.modal-footer{
+    border-top: 1px solid $black;
+}
+
+// SEARCH RESULTS PAGE
+.constraints-container {
+    border-radius: 4px;
+    background-color: $mediumgrey
+}
+
+// ALERTS
+.alert-info {
+    color: $white;
+    background-color: $mediumgrey;
+    border-color: transparent;
+    border: 0px solid transparent;
+}
+.alert-success {
+    color: $black;
+    background-color: $lightyellow;
+    border-color: transparent;
+    border: 0px solid transparent;
+}
+.alert-warning {
+    color: $white;
+    background-color: $darkyellow;
+    border-color: transparent;
+    border: 0px solid transparent;
+}
+
+// FORMS
+
+.form-control, .form-control[readonly] {
+    color: white;
+    background-color:$mediumgrey;
+    border: 1px solid $lightgrey;
+}
+.form-control{
+    transition: border ease-in-out 0.2s, box-shadow ease-in-out 0.15s
+}
+.form-control:focus{
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: 2px solid $mediumyellow !important;
+}
+
+// Breadcrumbs
+.breadcrumb {
+    border: 0px solid $black !important;
+    background-color: $black !important;
+    border-radius: 4px !important;
+}
+nav.breadcrumb {
+    margin-top: 50px;
+}
+
+//LABELS
+
+.label-success{
+    background-color: $mediumyellow
+}
+.label-info{
+    background-color: $darkyellow
+}
+.label-primary{
+    background-color: $lightyellow
+}
+
+// DASHBOARD PAGES
+.main-content {
+    background-color: $darkgrey;
+}
+.panel-body {
+    padding: 15px;
+    background-color: black !important;
+}
+.list-group-item{
+    background-color: $darkgrey;
+    border: 1px solid $mediumgrey;
+}
+.table-striped > tbody > tr:nth-of-type(odd){
+    background-color: $mediumgrey;
+}
+.table-striped > tbody > tr:nth-of-type(even){
+    background-color: $black;
+}
+.table > tbody > tr > td, .table > tfoot > tr > th, .table > tfoot > tr > td {
+    border-top: 0px solid transparent;
+    border-radius: 8px !important;
+}
+.dashboard .nav-tabs > li.active > a, .dashboard .nav-tabs > li.active > a:hover {
+    border-top: 2px solid $mediumgrey !important;
+    background-color: transparent !important;
+}
+.dashboard .list-filters {
+    background-color: $mediumgrey;
+    border-radius: 4px;
+}
+select {
+    background-color: $mediumgrey;
+    border-radius: 4px;
+}
+.sidebar .sidebar-toggle {
+    background-color: $black;
+}
+
+.pagination > .disabled > a {
+    background-color: $mediumgrey
+}
+
+//ADD WORK PAGE
+.tab-content {
+    background-color: $darkgrey;
+}
+.dashboard .panel{
+    background-color: $darkgrey;
+    border: 2px solid $mediumgrey !important;
+}
+
+.panel-footer{
+    background-color: transparent !important;
+}
+.legend {
+    color: white;
+
+}
