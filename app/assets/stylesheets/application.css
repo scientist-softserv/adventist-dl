@@ -19,3 +19,5 @@
  *= require bootstrap-datepicker
  *= require_self
  */
+
+ @import "adl-overrides";
