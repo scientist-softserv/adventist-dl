@@ -1,0 +1,50 @@
+<% content_for(:navbar) do %>
+  <div class="image-masthead">
+    <div class="background-container" style="background-image: url('<%= banner_image %>')">
+    </div>
+    <span class="background-container-gradient">
+    </span>
+
+    <div class="container site-title-container">
+
+
+      <div class="site-title h1" style="text-align: center;">
+      <% if @presenter.display_share_button? %>
+            <div class="home-share-work text-center">
+            <% if signed_in? %>
+                <% if @presenter.create_many_work_types? %>
+                    <%= link_to '#',
+                        class: "btn btn-primary btn-lg",
+                        data: { behavior: 'select-work', target: '#worktypes-to-create', 'create-type' => 'single' } do %>
+                        <i class="glyphicon glyphicon-upload" aria-hidden="true"></i> <%= t('hyrax.share_button') %>
+                <% end %>
+        <% else # simple link to the first work type %>
+            <%= link_to new_polymorphic_path([main_app, @presenter.first_work_type]),
+                    class: 'btn btn-primary btn-lg' do %>
+                <i class="glyphicon glyphicon-upload" aria-hidden="true"></i> <%= t('hyrax.share_button') %>
+            <% end %>
+    <% end %>
+  <% else %>
+    <%= link_to hyrax.my_works_path,
+      class: "btn btn-primary btn-lg" do %>
+      <i class="glyphicon glyphicon-upload" aria-hidden="true"></i> <%= t('hyrax.share_button') %>
+    <% end %>
+<% end %>
+    <%
+=begin%>
+ <p class="terms-of-use"><%= link_to t(:'hyrax.pages.tabs.terms_page'), hyrax.terms_path %></p> 
+<%
+=end%>
+    </div>
+    <% end %> 
+        <%= render "hyrax/homepage/marketing" if controller_name == 'homepage' %>
+      </div>
+    </div>
+
+    <%= render '/controls' %>
+  </div>
+<% end %>
+<% content_for(:precontainer_content) do %>
+  <%= render 'hyrax/homepage/announcement' if controller_name == 'homepage' %>
+<% end %>
+<%= render template: 'layouts/hyrax' %>

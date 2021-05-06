@@ -78,6 +78,10 @@ ul#user_utility_links {
 .dropdown-menu .divider{
     background-color: $darkgrey !important;
 }
+a.btn.btn-primary.btn-lg {
+    float: right;
+    border: 3px solid #985F03 !important;
+}
 
 /* HOME PAGE SEARCH BAR NAV */
 #masthead #logo img {
