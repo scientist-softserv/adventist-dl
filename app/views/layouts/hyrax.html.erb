@@ -29,7 +29,10 @@
         <%= content_for?(:content) ? yield(:content) : yield %>
 
     </div><!-- /#content-wrapper -->
-    <%= render 'shared/footer' %>
+    <%= render partial: 'shared/footer' %>
     <%= render 'shared/ajax_modal' %>
+    <%= render 'hyrax/homepage/secondary_footer' if controller_name == 'pages'%>
+    <%= render 'secondary_footer' if controller_name == 'homepage'%>
+    <%= render 'hyrax/homepage/secondary_footer' if controller_name == 'contact_form'%>
   </body>
 </html>

@@ -494,7 +494,7 @@ en:
     controls:
       about: About
       contact: Contact
-      help: Help
+      help: Other Resources
       home: Home
     dashboard:
       additional_notifications: See all notifications
@@ -935,7 +935,7 @@ en:
     select_type:
       description: General purpose worktype
       name: Work
-    share_button: Share Your Work
+    share_button: Contribute
     single_use_links:
       button: Single-Use Link to File
       copy:

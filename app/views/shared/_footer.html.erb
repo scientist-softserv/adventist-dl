@@ -1,13 +1,11 @@
 <footer class="navbar navbar-inverse site-footer">
   <div class="container-fluid">
     <div class="navbar-text text-left">
-        <p><%= t('hyrax.footer.service_html') %></p>
-        <p>Hyku v<%= Hyku::VERSION %></p>
+         <p class="terms-of-use"><%= link_to t(:'hyrax.pages.tabs.terms_page'), hyrax.terms_path %></p>
     </div>
     <div class="navbar-right">
       <div class="navbar-text text-right">
-        <p><%= t('hyrax.footer.copyright_html') %></p>
-        <p><%= t('hyrax.background_attribution_html') %></p>
+        <p><b>© Adventist Digital Library, 2021</b></p>
         <% if admin_host? && !user_signed_in? %>
           <p><%= link_to t('hyku.footer.admin_login', default: [:'hyrax.toolbar.profile.login']), main_app.new_user_session_path %></p>
         <% end %>
