@@ -42,6 +42,11 @@ a:hover, a:focus {
     color: $lightyellow !important;
     }
 
+//style all inputs to dark mode
+input{
+    background-color: $mediumgrey;
+    border-radius: 4px;
+}
 
 //     /* MAIN NAV */
 .nav{
