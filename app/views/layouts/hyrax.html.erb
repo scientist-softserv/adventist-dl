@@ -31,6 +31,7 @@
     </div><!-- /#content-wrapper -->
     <%= render partial: 'shared/footer' %>
     <%= render 'shared/ajax_modal' %>
+    <%# OVERRIDE to add secondary footer at the bottom of the home page, contact page, about page, and other resources/help page%>
     <%= render 'hyrax/homepage/secondary_footer' if controller_name == 'pages'%>
     <%= render 'secondary_footer' if controller_name == 'homepage'%>
     <%= render 'hyrax/homepage/secondary_footer' if controller_name == 'contact_form'%>
