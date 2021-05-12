@@ -117,13 +117,17 @@ hyku.review:
     KUBE_NAMESPACE: hyku-review
     HELM_EXTRA_ARGS: >
       --values ops/review-deploys.yaml
+      --set image.repository="$DEPLOY_IMAGE"
+      --set image.tag="$DEPLOY_TAG"
+      --set worker.image.repository="$DEPLOY_IMAGE"
+      --set worker.image.tag="$DEPLOY_TAG"
       --set ingress.enabled=true
       --set ingress.hosts[0].host=hyku-$CI_MERGE_REQUEST_ID.$KUBE_INGRESS_BASE_DOMAIN
-      --set ingress.hosts[0].paths={"/"}
+      --set ingress.hosts[0].paths[0].path="/"
   script:
     - helm registry login -u "gitlab-ci-token" -p "$CI_JOB_TOKEN" $CI_REGISTRY
-    - helm chart pull ghcr.io/samvera/hyrax/hyrax-helm:0.17.0
-    - helm chart export ghcr.io/samvera/hyrax/hyrax-helm:0.17.0
+    - helm chart pull ghcr.io/samvera/hyrax/hyrax-helm:0.18.0
+    - helm chart export ghcr.io/samvera/hyrax/hyrax-helm:0.18.0
     - deploy hyrax
   allow_failure: true
   tags:
@@ -159,8 +163,6 @@ hyku.review.stop:
         --install \
         --atomic \
         --timeout 15m0s \
-        --set image.repository="$DEPLOY_IMAGE" \
-        --set image.tag="$DEPLOY_TAG" \
         $HELM_EXTRA_ARGS \
         --namespace="$KUBE_NAMESPACE" \
         --create-namespace \
