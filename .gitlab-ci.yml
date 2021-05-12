@@ -122,7 +122,7 @@ hyku.review:
       --set worker.image.repository="$DEPLOY_IMAGE"
       --set worker.image.tag="$DEPLOY_TAG"
       --set ingress.enabled=true
-      --set ingress.hosts[0].host=hyku-$CI_MERGE_REQUEST_ID.$KUBE_INGRESS_BASE_DOMAIN
+      --set ingress.hosts[0].host=adl-hyku-$CI_MERGE_REQUEST_ID.notch8.cloud
       --set ingress.hosts[0].paths[0].path="/"
   script:
     - helm registry login -u "gitlab-ci-token" -p "$CI_JOB_TOKEN" $CI_REGISTRY
