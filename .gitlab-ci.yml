@@ -159,7 +159,7 @@ hyku.review.stop:
     chart="${1}"
 
     helm upgrade \
-        --kubeconfig $KUBECONFIG_BL \
+        --kubeconfig $KUBECONFIG_R2 \
         --install \
         --atomic \
         --timeout 15m0s \
