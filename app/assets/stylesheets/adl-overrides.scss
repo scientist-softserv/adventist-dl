@@ -61,7 +61,7 @@ input{
 .navbar-inverse .navbar-link:hover { 
     color: $black !important
     }
-footer.navbar.navbar-inverse.site-footer {
+.navbar.navbar-inverse.site-footer {
     background-color: $mediumyellow !important;
     border: none ;
     padding: inherit ;
@@ -469,8 +469,14 @@ select {
     min-height: 200px;
     background-color: $black;
     padding: 40px 10px;
-    position: relative;
-    top: 67px;
+    position: absolute;
+    bottom: 67px;
+    display: block;
+    width: 100%;
+    right: 0px !important;
+    left: 0px !important;
+    margin-right: 0px !important;
+    margin-left: 0px !important;
 }
 
 .footer-logo{
