@@ -51,6 +51,19 @@ worker:
     - name: SOLR_CONFIGSET_NAME
       value: adl-hyku-stage
 
+podSecurityContext:
+  runAsUser: 1001
+  runAsGroup: 101
+  fsGroup: 101
+  fsGroupChangePolicy: "OnRootMismatch"
+
+worker:
+  podSecurityContext:
+    runAsUser: 1001
+    runAsGroup: 101
+    fsGroup: 101
+    fsGroupChangePolicy: "OnRootMismatch"
+
 solrEnabled: true
 # solrExistingSecret: solr-admin-password
 # externalSolrHost: solr.staging-solr.svc.cluster.local
