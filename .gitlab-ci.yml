@@ -120,6 +120,14 @@ hyku.review:
       --set ingress.enabled=true
       --set ingress.hosts[0].host=adl-hyku-$CI_MERGE_REQUEST_ID.notch8.cloud
       --set ingress.hosts[0].paths[0].path="/"
+      --set ingress.hosts[1].host=*.adl-hyku-$CI_MERGE_REQUEST_ID.notch8.cloud
+      --set ingress.hosts[1].paths[0].path="/"
+      --set extraEnvVars[0].name=SETTINGS__MULTITENANCY__ADMIN_HOST
+      --set extraEnvVars[0].value=adl-hyku-$CI_MERGE_REQUEST_ID.notch8.cloud
+      --set extraEnvVars[1].name=SETTINGS__MULTITENANCY__ROOT_HOST
+      --set extraEnvVars[1].value=adl-hyku-$CI_MERGE_REQUEST_ID.notch8.cloud
+      --set extraEnvVars[1].name=SETTINGS__MULTITENANCY__DEFAULT_HOST
+      --set extraEnvVars[1].value=%{tenant}.adl-hyku-$CI_MERGE_REQUEST_ID.notch8.cloud
   script:
     - helm registry login -u "gitlab-ci-token" -p "$CI_JOB_TOKEN" $CI_REGISTRY
     - helm chart pull ghcr.io/samvera/hyrax/hyrax-helm:0.18.0
