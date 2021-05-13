@@ -29,6 +29,8 @@ extraEnvVars:
     value: "%{tenant}.adl-hyku-staging.notch8.cloud"
   - name: SETTINGS__MULTITENANCY__ADMIN_ONLY_TENANT_CREATION
     value: "false"
+  - name: CONFDIR
+    value: "/app/samvera/hyrax-webapp/solr/config"
 
 solrEnabled: true
 # solrExistingSecret: solr-admin-password
