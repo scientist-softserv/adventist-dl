@@ -32,7 +32,7 @@ extraEnvVars:
   - name: CONFDIR
     value: "/app/samvera/hyrax-webapp/solr/config"
   - name: RAILS_LOG_TO_STDOUT
-    value: true
+    value: "true"
   - name: SOLR_CONFIGSET_NAME
     value: adl-hyku-stage
 
@@ -47,7 +47,7 @@ worker:
     - name: SETTINGS__MULTITENANCY__ADMIN_ONLY_TENANT_CREATION
       value: "false"
     - name: RAILS_LOG_TO_STDOUT
-      value: true
+      value: "true"
     - name: SOLR_CONFIGSET_NAME
       value: adl-hyku-stage
 
