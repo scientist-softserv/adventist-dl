@@ -12,5 +12,8 @@ readinessProbe:
 ingress:
   enabled: true
 
+redis:
+  architecture: standalone
+
 imagePullSecrets:
   - name: gitlab-registry

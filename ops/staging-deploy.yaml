@@ -1,0 +1,43 @@
+livenessProbe:
+  enabled: false
+readinessProbe:
+  enabled: false
+
+brandingVolume:
+  storageClass: nfs
+derivativesVolume:
+  storageClass: nfs
+uploadsVolume:
+  storageClass: nfs
+
+ingress:
+  enabled: true
+  hosts:
+    - host: adl-hyku-staging.notch8.cloud
+      paths:
+        - path: /
+    - host: "*.adl-hyku-staging.notch8.cloud"
+      paths:
+        - path: /
+
+extraEnvVars:
+  - name: SETTINGS__MULTITENANCY__ADMIN_HOST
+    value: adl-hyku-staging.notch8.cloud
+  - name: SETTINGS__MULTITENANCY__ROOT_HOST
+    value: adl-hyku-staging.notch8.cloud
+  - name: SETTINGS__MULTITENANCY__DEFAULT_HOST
+    value: "%{tenant}.adl-hyku-staging.notch8.cloud"
+  - name: SETTINGS__MULTITENANCY__ADMIN_ONLY_TENANT_CREATION
+    value: "false"
+
+solrEnabled: true
+# solrExistingSecret: solr-admin-password
+# externalSolrHost: solr.staging-solr.svc.cluster.local
+# externalSolrUser: admin
+# externalSolrCollection: "adl-hyku-staging"
+
+redis:
+  architecture: standalone
+
+imagePullSecrets:
+  - name: gitlab-registry
