@@ -165,12 +165,10 @@ hyku.staging:
     - .deploy
   environment:
     name: hyku.staging
-    url: http://adlhyku-staging.$KUBE_INGRESS_BASE_DOMAIN
+    url: http://adl-hyku-staging.notch8.cloud
     on_stop: hyku.staging.stop
-    auto_stop_in: 1 day
   only:
     refs:
-      - merge_requests
       - main
   variables:
     DEPLOY_IMAGE: $CI_REGISTRY_IMAGE
