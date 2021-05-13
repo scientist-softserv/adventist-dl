@@ -114,13 +114,9 @@ hyku.review:
     DEPLOY_TAG: $CI_COMMIT_SHA
     HELM_EXPERIMENTAL_OCI: 1
     HELM_RELEASE_NAME: hyku-$CI_MERGE_REQUEST_ID
-    KUBE_NAMESPACE: hyku-review
+    KUBE_NAMESPACE: adl-review
     HELM_EXTRA_ARGS: >
       --values ops/review-deploys.yaml
-      --set image.repository="$DEPLOY_IMAGE"
-      --set image.tag="$DEPLOY_TAG"
-      --set worker.image.repository="$DEPLOY_IMAGE"
-      --set worker.image.tag="$DEPLOY_TAG"
       --set ingress.enabled=true
       --set ingress.hosts[0].host=adl-hyku-$CI_MERGE_REQUEST_ID.notch8.cloud
       --set ingress.hosts[0].paths[0].path="/"
@@ -129,7 +125,6 @@ hyku.review:
     - helm chart pull ghcr.io/samvera/hyrax/hyrax-helm:0.18.0
     - helm chart export ghcr.io/samvera/hyrax/hyrax-helm:0.18.0
     - deploy hyrax
-  allow_failure: true
   tags:
     - kubernetes
 
@@ -145,7 +140,7 @@ hyku.review.stop:
   allow_failure: true
   variables:
     HELM_RELEASE_NAME: hyku-$CI_MERGE_REQUEST_ID
-    KUBE_NAMESPACE: hyku-review
+    KUBE_NAMESPACE: adl-review
     GIT_STRATEGY: none
   script:
     - delete
@@ -163,6 +158,10 @@ hyku.review.stop:
         --install \
         --atomic \
         --timeout 15m0s \
+        --set image.repository="$DEPLOY_IMAGE" \
+        --set image.tag="$DEPLOY_TAG" \
+        --set worker.image.repository="$DEPLOY_IMAGE" \
+        --set worker.image.tag="$DEPLOY_TAG" \
         $HELM_EXTRA_ARGS \
         --namespace="$KUBE_NAMESPACE" \
         --create-namespace \
