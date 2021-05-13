@@ -3,6 +3,7 @@ stages:
   - build
   - test
   - review
+  - staging
 
 before_script:
   - export TAG=${CI_COMMIT_SHA}
@@ -19,6 +20,7 @@ hyku.build:
   only:
     refs:
       - merge_requests
+      - main
   tags:
     - local
 
@@ -93,6 +95,7 @@ test:
   only:
     refs:
       - merge_requests
+      - main
   tags:
     - kubernetes
 
@@ -103,7 +106,7 @@ hyku.review:
     - .deploy
   environment:
     name: hyku.review/$CI_MERGE_REQUEST_ID
-    url: http://hyku-$CI_MERGE_REQUEST_ID.$KUBE_INGRESS_BASE_DOMAIN
+    url: http://adl-hyku-$CI_MERGE_REQUEST_ID.$KUBE_INGRESS_BASE_DOMAIN
     on_stop: hyku.review.stop
     auto_stop_in: 1 day
   only:
@@ -126,10 +129,13 @@ hyku.review:
       --set extraEnvVars[0].value=adl-hyku-$CI_MERGE_REQUEST_ID.notch8.cloud
       --set extraEnvVars[1].name=SETTINGS__MULTITENANCY__ROOT_HOST
       --set extraEnvVars[1].value=adl-hyku-$CI_MERGE_REQUEST_ID.notch8.cloud
-      --set extraEnvVars[1].name=SETTINGS__MULTITENANCY__DEFAULT_HOST
-      --set extraEnvVars[1].value=%{tenant}.adl-hyku-$CI_MERGE_REQUEST_ID.notch8.cloud
+      --set extraEnvVars[2].name=SETTINGS__MULTITENANCY__DEFAULT_HOST
+      --set extraEnvVars[2].value=%{tenant}.adl-hyku-$CI_MERGE_REQUEST_ID.notch8.cloud
+      --set extraEnvVars[3].name=SETTINGS__MULTITENANCY__ADMIN_ONLY_TENANT_CREATION
+      --set extraEnvVars[3].value="false"
+      --set extraEnvVars[3].name=CONFDIR
+      --set extraEnvVars[3].value="/app/samvera/hyrax-webapp/solr/config"
   script:
-    - helm registry login -u "gitlab-ci-token" -p "$CI_JOB_TOKEN" $CI_REGISTRY
     - helm chart pull ghcr.io/samvera/hyrax/hyrax-helm:0.18.0
     - helm chart export ghcr.io/samvera/hyrax/hyrax-helm:0.18.0
     - deploy hyrax
@@ -149,6 +155,51 @@ hyku.review.stop:
   variables:
     HELM_RELEASE_NAME: hyku-$CI_MERGE_REQUEST_ID
     KUBE_NAMESPACE: adl-review
+    GIT_STRATEGY: none
+  script:
+    - delete
+  tags:
+    - kubernetes
+
+hyku.staging:
+  stage: staging
+  extends:
+    - .deploy
+  environment:
+    name: hyku.staging
+    url: http://adl-hyku-staging.notch8.cloud
+    on_stop: hyku.staging.stop
+  only:
+    refs:
+      - main
+  variables:
+    DEPLOY_IMAGE: $CI_REGISTRY_IMAGE
+    DEPLOY_TAG: $CI_COMMIT_SHA
+    HELM_EXPERIMENTAL_OCI: 1
+    HELM_RELEASE_NAME: hyku-staging
+    KUBE_NAMESPACE: adl-staging
+    HELM_EXTRA_ARGS: >
+      --values ops/staging-deploy.yaml
+  script:
+    - helm chart pull ghcr.io/samvera/hyrax/hyrax-helm:0.18.0
+    - helm chart export ghcr.io/samvera/hyrax/hyrax-helm:0.18.0
+    - deploy hyrax
+  tags:
+    - kubernetes
+
+hyku.staging.stop:
+  stage: staging
+  extends:
+    - .deploy
+  environment:
+    name: hyku.staging
+    url: http://adlhyku-staging.$KUBE_INGRESS_BASE_DOMAIN
+    action: stop
+  when: manual
+  allow_failure: true
+  variables:
+    HELM_RELEASE_NAME: hyku-staging
+    KUBE_NAMESPACE: adl-staging
     GIT_STRATEGY: none
   script:
     - delete
