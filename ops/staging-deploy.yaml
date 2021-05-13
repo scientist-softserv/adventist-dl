@@ -31,6 +31,38 @@ extraEnvVars:
     value: "false"
   - name: CONFDIR
     value: "/app/samvera/hyrax-webapp/solr/config"
+  - name: RAILS_LOG_TO_STDOUT
+    value: true
+  - name: SOLR_CONFIGSET_NAME
+    value: adl-hyku-stage
+
+worker:
+  extraEnvVars:
+    - name: SETTINGS__MULTITENANCY__ADMIN_HOST
+      value: adl-hyku-staging.notch8.cloud
+    - name: SETTINGS__MULTITENANCY__ROOT_HOST
+      value: adl-hyku-staging.notch8.cloud
+    - name: SETTINGS__MULTITENANCY__DEFAULT_HOST
+      value: "%{tenant}.adl-hyku-staging.notch8.cloud"
+    - name: SETTINGS__MULTITENANCY__ADMIN_ONLY_TENANT_CREATION
+      value: "false"
+    - name: RAILS_LOG_TO_STDOUT
+      value: true
+    - name: SOLR_CONFIGSET_NAME
+      value: adl-hyku-stage
+
+podSecurityContext:
+  runAsUser: 1001
+  runAsGroup: 101
+  fsGroup: 101
+  fsGroupChangePolicy: "OnRootMismatch"
+
+worker:
+  podSecurityContext:
+    runAsUser: 1001
+    runAsGroup: 101
+    fsGroup: 101
+    fsGroupChangePolicy: "OnRootMismatch"
 
 solrEnabled: true
 # solrExistingSecret: solr-admin-password
