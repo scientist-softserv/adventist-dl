@@ -9,7 +9,7 @@ gem 'activerecord-nulldb-adapter'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
 # Use Puma as the app server
-gem 'puma', '~> 3.12'
+gem 'puma', '~> 4.3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -81,8 +81,10 @@ group :development do
 end
 
 # Bulkrax
-gem 'bulkrax', git: 'https://github.com/samvera-labs/bulkrax.git'
-gem 'willow_sword', git: 'https://github.com/notch8/willow_sword.git'
+group :bulkrax do
+  gem 'bulkrax', git: 'https://github.com/samvera-labs/bulkrax.git'
+  gem 'willow_sword', git: 'https://github.com/notch8/willow_sword.git'
+end
 
 gem 'blacklight', '~> 6.7'
 gem 'blacklight_oai_provider', '~> 6.1', '>= 6.1.1'
@@ -97,7 +99,7 @@ gem 'devise-i18n'
 gem 'devise_invitable', '~> 1.6'
 
 gem 'apartment'
-gem 'config', '~> 2.2', '>= 2.2.1'
+gem 'config', '>= 2.2.1', '< 4.0'
 gem 'is_it_working'
 gem 'rolify'
 
