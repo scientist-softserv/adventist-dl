@@ -43,7 +43,7 @@ Jump In: [![Slack Status](http://slack.samvera.org/badge.svg)](http://slack.samv
 
 #### Dory
 
-On OS X or Linux we recommend running [Dory](https://github.com/FreedomBen/dory). It acts as a proxy allowing you to access domains locally such as hyku.test or tenant.hyku.test, making multitenant development more straightforward and prevents the need to bind ports locally. Be sure to adjust your ~/.dory.yml file to support the .test tld.  You can still run in development via docker with out Dory, but to do so please uncomment the ports section in docker-compose.yml and then find the running application at localhost:3000
+On OS X or Linux we recommend running [Dory](https://github.com/FreedomBen/dory). It acts as a proxy allowing you to access domains locally such as hyku.test or tenant.hyku.test, making multitenant development more straightforward and prevents the need to bind ports locally. Be sure to [adjust your ~/.dory.yml file to support the .test tld](https://github.com/FreedomBen/dory#config-file).  You can still run in development via docker with out Dory, but to do so please uncomment the ports section in docker-compose.yml and then find the running application at localhost:3000
 
 ```bash
 gem install dory
@@ -138,7 +138,8 @@ Hyku supports multitenancy using the `apartment` gem. `apartment` works best wit
 ## Importing
 ### enable Bulkrax:
 
-Set bulkrax -> enabled to true in settings (via file or env variable)
+- Set bulkrax -> enabled to true in settings (via file or env variable)
+- Add `  require bulkrax/application` to app/assets/javascripts/application.js and app/assets/stylesheets/application.css files.
 
 (in a `docker-compose exec web bash` if you're doing docker otherwise in your terminal)
 ```bash
