@@ -158,6 +158,9 @@ hyku.review.stop:
     GIT_STRATEGY: none
   script:
     - delete
+  only:
+    refs:
+      - merge_requests
   tags:
     - kubernetes
 
@@ -230,7 +233,7 @@ hyku.staging.stop:
 
   function delete() {
     echo "Deleting release: $HELM_RELEASE_NAME..."
-    helm delete --namespace "$KUBE_NAMESPACE" "$HELM_RELEASE_NAME"
+    helm --kubeconfig $KUBECONFIG_R2 --namespace "$KUBE_NAMESPACE" delete "$HELM_RELEASE_NAME"
   }
 
 .deploy:
