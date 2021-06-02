@@ -6,7 +6,7 @@ x-app: &app
     target: hyku-base
     args:
       - EXTRA_APK_PACKAGES=less vim bash openjdk11-jre
-  image: ghcr.io/samvera/hyku:latest
+  image: registry.gitlab.com/notch8/adventist-dl:${TAG:-latest}
   env_file:
     - .env
   # NOTE: all common env variables moved to .env
@@ -75,7 +75,7 @@ services:
       - 8983
     volumes:
       - .:/app
-      - solr:/opt/solr/server/solr
+      - solr:/bitnami
     networks:
       internal:
 
@@ -125,11 +125,13 @@ services:
 
   workers:
     <<: *app
+    image: registry.gitlab.com/notch8/adventist-dl/workers:${TAG:-latest}
     build:
       context: .
       target: hyku-worker
       args:
         - EXTRA_WORKER_APK_PACKAGES=ffmpeg
+        - EXTRA_APK_PACKAGES=less vim bash openjdk11-jre
     command: bundle exec sidekiq
     depends_on:
       - check_volumes
