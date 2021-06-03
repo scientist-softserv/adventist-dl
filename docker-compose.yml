@@ -61,7 +61,7 @@ services:
       - SOLR_ADMIN_USERNAME=admin
       - SOLR_ADMIN_PASSWORD=admin
       - SOLR_COLLECTION=hydra-development
-      - SOLR_CLOUD_BOOTSTRAP=no
+      - SOLR_CLOUD_BOOTSTRAP=yes
       - SOLR_ENABLE_CLOUD_MODE=yes
       - SOLR_ENABLE_AUTHENTICATION=yes
       - SOLR_PORT_NUMBER=8983
