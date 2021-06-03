@@ -21,5 +21,3 @@
 *.tmproj
 server.pem
 server.key
-.sops.yml
-k8s
