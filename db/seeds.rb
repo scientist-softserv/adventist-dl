@@ -43,3 +43,9 @@ unless Settings.multitenancy.enabled
 end
 
 
+if Rails.env.development?
+  user = User.find_or_create_by(email: 'admin@example.com') do |u|
+    u.password = 'testing123'
+  end
+  user.add_role(:superadmin)
+end
