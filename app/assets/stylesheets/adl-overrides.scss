@@ -18,6 +18,11 @@ p {
     color: $white !important;
 }
 
+/* prevents footer from covering bottom of page */
+#content-wrapper {
+    margin-bottom: 250px;
+}
+
 .home_marketing_text h1, .home_marketing_text h2{
     color: $black !important;
     text-align: left !important;
