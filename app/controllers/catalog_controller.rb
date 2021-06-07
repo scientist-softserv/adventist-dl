@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class CatalogController < ApplicationController
+  include BlacklightAdvancedSearch::Controller
   include Hydra::Catalog
   include Hydra::Controller::ControllerBehavior
   include BlacklightOaiProvider::Controller
@@ -41,8 +42,10 @@ class CatalogController < ApplicationController
     config.advanced_search[:url_key] ||= 'advanced'
     config.advanced_search[:query_parser] ||= 'dismax'
     config.advanced_search[:form_solr_parameters] ||= {}
+    config.advanced_search[:form_facet_partial] ||= "advanced_search_facets_as_select"
 
-    config.search_builder_class = Hyrax::CatalogSearchBuilder
+    # Use locally customized AdvSearchBuilder so we can enable blacklight_advanced_search
+    config.search_builder_class = AdvSearchBuilder
 
     # Show gallery view
     config.view.gallery.partials = %i[index_header index]

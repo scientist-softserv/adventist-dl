@@ -51,6 +51,10 @@ Layout/DotPosition:
 Style/Documentation:
   Enabled: false
 
+Style/GuardClause:
+  Exclude:
+    - 'app/search_builders/adv_search_builder.rb'
+
 Style/StringLiterals:
   Enabled: false
 

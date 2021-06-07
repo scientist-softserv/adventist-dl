@@ -34,6 +34,8 @@ Rails.application.routes.draw do
   mount Qa::Engine => '/authorities'
 
   mount Blacklight::Engine => '/'
+  mount BlacklightAdvancedSearch::Engine => '/'
+
   mount Hyrax::Engine, at: '/'
   if Settings.bulkrax.enabled
     mount Bulkrax::Engine, at: '/'

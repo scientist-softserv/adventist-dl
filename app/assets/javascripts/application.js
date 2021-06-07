@@ -25,6 +25,7 @@
 //= require blacklight/blacklight
 //= require admin_font_select
 //= require admin_color_select
+//= require blacklight_advanced_search
 
 // Moved the Hyku JS *above* the Hyrax JS to resolve #1187 (following
 // a pattern found in ScholarSphere)
