@@ -5,6 +5,12 @@ module Hyrax
     class CollectionsController < Hyrax::My::CollectionsController
       include Blacklight::AccessControls::Catalog
       include Blacklight::Base
+
+      # copied from hyrax v3.0.2 to provide ability to blacklight range limit
+      configure_blacklight do |config|
+        config.search_builder_class = Hyrax::Dashboard::CollectionsSearchBuilder
+      end
+
       include BreadcrumbsForCollections
       with_themed_layout 'dashboard'
 
@@ -321,19 +327,31 @@ module Hyrax
 
         def presenter
           @presenter ||= begin
-            # Query Solr for the collection.
-            # run the solr query to find the collection members
-            response = repository.search(single_item_search_builder.query)
-            curation_concern = response.documents.first
-            raise CanCan::AccessDenied unless curation_concern
+            # copied from hyrax v3.0.2
             presenter_class.new(curation_concern, current_ability)
           end
+        end
+
+        # copied from hyrax v3.0.2
+        def curation_concern
+          # Query Solr for the collection.
+          # run the solr query to find the collection members
+          response, _docs = single_item_search_service.search_results
+          curation_concern = response.documents.first
+          raise CanCan::AccessDenied unless curation_concern
+          curation_concern
+        end
+
+        # copied from hyrax v3.0.2
+        def single_item_search_service
+          Hyrax::SearchService.new(config: blacklight_config, user_params: params.except(:q, :page), scope: self, search_builder_class: single_item_search_builder_class)
         end
 
         # Instantiates the search builder that builds a query for a single item
         # this is useful in the show view.
         def single_item_search_builder
-          single_item_search_builder_class.new(self).with(params.except(:q, :page))
+          # copied from hyrax v3.0.2
+          search_service.search_builder
         end
 
         def collection_params

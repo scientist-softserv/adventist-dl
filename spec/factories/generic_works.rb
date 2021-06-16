@@ -7,6 +7,8 @@ FactoryBot.define do
     end
 
     title { ["Test title"] }
+    creator { ["Name, Human"] }
+    date_created { "2021-04-01" }
 
     identifier do
       %w[

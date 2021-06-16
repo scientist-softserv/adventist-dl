@@ -13,8 +13,11 @@ class WorkIndexer < Hyrax::WorkIndexer
   def generate_solr_document
     super.tap do |solr_doc|
       solr_doc['creator_ssi'] = object.creator.first.titlecase
-      solr_doc['date_created_ssi'] = object.date_created.first
+      solr_doc['date_created_ssi'] = object.date_created
       solr_doc['title_ssi'] = object.title.first.titlecase
+      # expects date created to be array with single string in yyyy-mm-dd format
+      solr_doc['sorted_date_isi'] = object.date_created.tr('-', '')
+      solr_doc['sorted_year_isi'] = object.date_created.slice(0..3)
     end
   end
 end

@@ -49,7 +49,7 @@ class CreateAccount
   def fillin_translations
     collection_types = Hyrax::CollectionType.all
     collection_types.each do |c|
-      next unless c.title =~ /^translation missing/
+      next unless c.title.match?(/^translation missing/)
       oldtitle = c.title
       c.title = I18n.t(c.title.gsub("translation missing: en.", ''))
       c.save
