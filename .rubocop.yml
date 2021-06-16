@@ -24,6 +24,41 @@ AllCops:
     # disabling collections controller as most of the rubocop errors are in hyrax
     - 'app/controllers/hyrax/dashboard/collections_controller.rb'
 
+Layout/IndentationConsistency:
+  EnforcedStyle: rails
+
+Layout/DotPosition:
+  EnforcedStyle: leading
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'
+    - 'lib/tasks/*.rake'
+    - 'app/controllers/catalog_controller.rb'
+    - 'app/models/hyrax/basic_metadata.rb'
+
+Metrics/ClassLength:
+  Exclude:
+    - 'app/controllers/catalog_controller.rb'
+    - 'app/controllers/hyrax/file_sets_controller.rb'
+
+Metrics/LineLength:
+  Max: 120
+  Exclude:
+    - 'app/controllers/catalog_controller.rb'
+    - 'app/controllers/hyrax/file_sets_controller.rb'
+    - 'app/controllers/hyrax/my/collections_controller.rb'
+    - 'app/models/hyrax/basic_metadata.rb'
+    - 'app/services/hyrax/collection_types/permissions_service.rb'
+    - 'spec/controllers/curation_concerns/generic_works_controller_spec.rb'
+    - 'spec/features/facet_by_year_spec.rb'
+    - 'spec/services/iiif_collection_thumbnail_path_service_spec.rb'
+    - 'spec/services/iiif_work_thumbnail_path_service_spec.rb'
+    - 'spec/routing/proprietor/accounts_routing_spec.rb'
+
+Metrics/ModuleLength:
+  Max: 200
+
 Rails:
   Enabled: true
 
@@ -33,40 +68,9 @@ Rails/DynamicFindBy:
   Exclude:
     - 'lib/importer/factory/object_factory.rb'
 
-Metrics/LineLength:
-  Max: 120
+Rails/FilePath:
   Exclude:
-    - 'app/controllers/catalog_controller.rb'
-    - 'spec/controllers/curation_concerns/generic_works_controller_spec.rb'
-    - 'spec/services/iiif_collection_thumbnail_path_service_spec.rb'
-    - 'spec/services/iiif_work_thumbnail_path_service_spec.rb'
-    - 'spec/routing/proprietor/accounts_routing_spec.rb'
-
-Layout/IndentationConsistency:
-  EnforcedStyle: rails
-
-Layout/DotPosition:
-  EnforcedStyle: leading
-
-Style/Documentation:
-  Enabled: false
-
-Style/GuardClause:
-  Exclude:
-    - 'app/search_builders/adv_search_builder.rb'
-
-Style/StringLiterals:
-  Enabled: false
-
-Style/WordArray:
-  Enabled: false
-
-Metrics/ClassLength:
-  Exclude:
-    - 'app/controllers/catalog_controller.rb'
-
-Metrics/ModuleLength:
-  Max: 200
+    - 'spec/routing/**/*'
 
 Rails/HasAndBelongsToMany:
   Exclude:
@@ -90,10 +94,6 @@ RSpec/DescribeClass:
     - 'spec/routing/**/*'
     - 'spec/tasks/**/*'
 
-Rails/FilePath:
-  Exclude:
-    - 'spec/routing/**/*'
-
 RSpec/ExpectActual:
   Exclude:
     - 'spec/routing/**/*'
@@ -104,14 +104,17 @@ RSpec/VerifiedDoubles:
 RSpec/MessageExpectation:
   Enabled: false
 
+RSpec/ExampleLength:
+  Max: 16
+  Exclude:
+    - 'spec/features/facet_by_year_spec.rb'
+    - 'spec/requests/date_range_limit_spec.rb'
+
 # By default RSpec/MessageSpies has the following:
-#   Prefer have_received for setting message expectations. Setup form as a spy using allow or instance_spy.
+# Prefer have_received for setting message expectations. Setup form as a spy using allow or instance_spy.
 RSpec/MessageSpies:
   Enabled: true
   EnforcedStyle: receive
-
-RSpec/ExampleLength:
-  Max: 16
 
 RSpec/NestedGroups:
   Max: 4
@@ -119,8 +122,21 @@ RSpec/NestedGroups:
 RSpec/MultipleExpectations:
   Enabled: false
 
-Metrics/BlockLength:
+Style/ClassAndModuleChildren:
   Exclude:
-    - 'spec/**/*.rb'
-    - 'lib/tasks/*.rake'
-    - 'app/controllers/catalog_controller.rb'
+    - 'app/authorities/qa/authorities/collections.rb'
+    - 'app/authorities/qa/authorities/find_works.rb'
+    - 'app/controllers/hyrax/homepage_controller.rb'
+
+Style/Documentation:
+  Enabled: false
+
+Style/GuardClause:
+  Exclude:
+    - 'app/search_builders/adv_search_builder.rb'
+
+Style/StringLiterals:
+  Enabled: false
+
+Style/WordArray:
+  Enabled: false
