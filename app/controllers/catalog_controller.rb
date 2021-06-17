@@ -186,6 +186,7 @@ class CatalogController < ApplicationController
     end
 
     config.add_search_field('creator') do |field|
+      field.label = "Author"
       field.solr_parameters = { "spellcheck.dictionary": "creator" }
       solr_name = solr_name("creator", :stored_searchable)
       field.solr_local_parameters = {
@@ -228,14 +229,15 @@ class CatalogController < ApplicationController
       }
     end
 
+    date_fields = ['date_created_tesim', 'sorted_date_isi', 'sorted_month_isi']
+
     config.add_search_field('date_created') do |field|
       field.solr_parameters = {
         "spellcheck.dictionary": "date_created"
       }
-      solr_name = solr_name("created", :stored_searchable)
       field.solr_local_parameters = {
-        qf: solr_name,
-        pf: solr_name
+        qf: date_fields.join(' '),
+        pf: date_fields.join(' ')
       }
     end
 
