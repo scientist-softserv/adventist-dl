@@ -15,8 +15,21 @@ hyku.build:
   stage: build
   script:
     - docker login -u "gitlab-ci-token" -p "$CI_JOB_TOKEN" $CI_REGISTRY
-    - docker build . -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker build . --target hyku-base -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+  only:
+    refs:
+      - merge_requests
+      - main
+  tags:
+    - local
+
+hyku.build.worker:
+  stage: build
+  script:
+    - docker login -u "gitlab-ci-token" -p "$CI_JOB_TOKEN" $CI_REGISTRY
+    - docker build . --target hyku-worker -t $CI_REGISTRY_IMAGE/worker:$CI_COMMIT_SHA
+    - docker push $CI_REGISTRY_IMAGE/worker:$CI_COMMIT_SHA
   only:
     refs:
       - merge_requests
@@ -222,7 +235,7 @@ hyku.staging.stop:
         --timeout 15m0s \
         --set image.repository="$DEPLOY_IMAGE" \
         --set image.tag="$DEPLOY_TAG" \
-        --set worker.image.repository="$DEPLOY_IMAGE" \
+        --set worker.image.repository="$DEPLOY_IMAGE/worker" \
         --set worker.image.tag="$DEPLOY_TAG" \
         $HELM_EXTRA_ARGS \
         --namespace="$KUBE_NAMESPACE" \
