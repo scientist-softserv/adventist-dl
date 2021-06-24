@@ -2,7 +2,7 @@
 
 class GenericWork < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
-  include ::Hyrax::BasicMetadata
+  include AdventistMetadata
 
   validates :title, presence: { message: 'Your work must have a title.' }
 
