@@ -43,7 +43,7 @@ unless Settings.multitenancy.enabled
 end
 
 
-if Rails.env.development?
+if Rails.env.development? || ActiveModel::Type::Boolean.new.cast(ENV['HYKU_DEMO_ADMIN_USER'])
   user = User.find_or_create_by(email: 'admin@example.com') do |u|
     u.password = 'testing123'
   end

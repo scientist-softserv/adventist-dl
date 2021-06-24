@@ -148,6 +148,8 @@ hyku.review:
       --set extraEnvVars[3].value="false"
       --set extraEnvVars[3].name=CONFDIR
       --set extraEnvVars[3].value="/app/samvera/hyrax-webapp/solr/config"
+      --set extraEnvVars[4].name=HYKU_DEMO_ADMIN_USER
+      --set extraEnvVars[4].value="true"
   script:
     - helm chart pull ghcr.io/samvera/hyrax/hyrax-helm:0.18.0
     - helm chart export ghcr.io/samvera/hyrax/hyrax-helm:0.18.0
