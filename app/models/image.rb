@@ -11,7 +11,7 @@ class Image < ActiveFedora::Base
 
   # This must come after the properties because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
-  include ::Hyrax::BasicMetadata
+  include AdventistMetadata
 
   self.indexer = ImageIndexer
   # Change this to restrict which works can be added as a child.

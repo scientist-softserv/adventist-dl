@@ -35,7 +35,7 @@ Metrics/BlockLength:
     - 'spec/**/*.rb'
     - 'lib/tasks/*.rake'
     - 'app/controllers/catalog_controller.rb'
-    - 'app/models/hyrax/basic_metadata.rb'
+    - 'app/models/adventist_metadata.rb'
 
 Metrics/ClassLength:
   Exclude:
@@ -48,7 +48,7 @@ Metrics/LineLength:
     - 'app/controllers/catalog_controller.rb'
     - 'app/controllers/hyrax/file_sets_controller.rb'
     - 'app/controllers/hyrax/my/collections_controller.rb'
-    - 'app/models/hyrax/basic_metadata.rb'
+    - 'app/models/adventist_metadata.rb'
     - 'app/services/hyrax/collection_types/permissions_service.rb'
     - 'spec/controllers/curation_concerns/generic_works_controller_spec.rb'
     - 'spec/features/facet_by_year_spec.rb'
