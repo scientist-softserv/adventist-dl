@@ -119,7 +119,7 @@ hyku.review:
     - .deploy
   environment:
     name: hyku.review/$CI_MERGE_REQUEST_ID
-    url: http://adl-hyku-$CI_MERGE_REQUEST_ID.$KUBE_INGRESS_BASE_DOMAIN
+    url: http://adl-hyku-$CI_MERGE_REQUEST_ID.notch8.cloud
     on_stop: hyku.review.stop
     auto_stop_in: 1 day
   only:
@@ -148,6 +148,8 @@ hyku.review:
       --set extraEnvVars[3].value="false"
       --set extraEnvVars[3].name=CONFDIR
       --set extraEnvVars[3].value="/app/samvera/hyrax-webapp/solr/config"
+      --set extraEnvVars[4].name=HYKU_DEMO_ADMIN_USER
+      --set extraEnvVars[4].value="true"
   script:
     - helm chart pull ghcr.io/samvera/hyrax/hyrax-helm:0.18.0
     - helm chart export ghcr.io/samvera/hyrax/hyrax-helm:0.18.0

@@ -31,6 +31,8 @@ extraEnvVars:
     value: "false"
   - name: CONFDIR
     value: "/app/samvera/hyrax-webapp/solr/config"
+  - name: HYKU_DEMO_ADMIN_USER
+    value: "true"
   - name: RAILS_LOG_TO_STDOUT
     value: "true"
   - name: SOLR_CONFIGSET_NAME
