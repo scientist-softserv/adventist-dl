@@ -119,7 +119,7 @@ hyku.review:
     - .deploy
   environment:
     name: hyku.review/$CI_MERGE_REQUEST_ID
-    url: http://adl-hyku-$CI_MERGE_REQUEST_ID.$KUBE_INGRESS_BASE_DOMAIN
+    url: http://adl-hyku-$CI_MERGE_REQUEST_ID.notch8.cloud
     on_stop: hyku.review.stop
     auto_stop_in: 1 day
   only:
