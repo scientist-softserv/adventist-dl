@@ -14,7 +14,7 @@ RSpec.describe 'Creating a new Work', :clean do
 
   it 'creates the work' do
     visit '/'
-    click_link "Share Your Work"
+    click_link "Contribute"
     expect(page).to have_button "Create work"
   end
 end
