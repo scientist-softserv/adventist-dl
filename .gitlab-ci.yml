@@ -137,8 +137,15 @@ hyku.review:
       --set extraEnvVars[2].value=%{tenant}.adl-hyku-$CI_MERGE_REQUEST_ID.notch8.cloud
       --set extraEnvVars[3].name=SETTINGS__MULTITENANCY__ADMIN_ONLY_TENANT_CREATION
       --set extraEnvVars[3].value="false"
-      --set extraEnvVars[3].name=CONFDIR
-      --set extraEnvVars[3].value="/app/samvera/hyrax-webapp/solr/config"
+      --set extraEnvVars[4].name=CONFDIR
+      --set extraEnvVars[4].value="/app/samvera/hyrax-webapp/solr/config"
+      --set extraEnvVars[5].name=RAILS_LOG_TO_STDOUT
+      --set extraEnvVars[5].value="true"
+      --set extraEnvVars[6].name=SUPER_ADMIN_EMAIL
+      --set extraEnvVars[6].value="support@notch8.com"
+      --set extraEnvVars[7].name=SUPER_ADMIN_PASSWORD
+      --set extraEnvVars[7].value="testing123"
+
   script:
     - helm chart pull ghcr.io/samvera/hyrax/hyrax-helm:0.18.0
     - helm chart export ghcr.io/samvera/hyrax/hyrax-helm:0.18.0
