@@ -74,7 +74,6 @@ services:
     expose:
       - 8983
     volumes:
-      - .:/app
       - solr:/bitnami
     networks:
       internal:
@@ -119,7 +118,6 @@ services:
       - zoo1
       - chrome
       - initialize_app
-      - db_migrate
     expose:
       - 3000
 
@@ -141,7 +139,6 @@ services:
       - redis
       - zoo1
       - initialize_app
-      - db_migrate
 
 
   # Do not recurse through all of tmp. derivitives will make booting
@@ -163,18 +160,16 @@ services:
     entrypoint: ["sh", "-c"]
     command:
       - >
-        solrcloud-upload-configset.sh /app/samvera/hyrax-webapp/solr/config;
-        solrcloud-assign-configset.sh;
-        SOLR_COLLECTION_NAME=hydra-test solrcloud-assign-configset.sh;
-    depends_on:
-      - solr
-
-  db_migrate:
-    <<: *app
-    entrypoint: ["sh", "-c"]
-    command: db-migrate-seed.sh
+        solrcloud-upload-configset.sh /app/samvera/hyrax-webapp/solr/config &&
+        solrcloud-assign-configset.sh &&
+        SOLR_COLLECTION_NAME=hydra-test solrcloud-assign-configset.sh &&
+        db-migrate-seed.sh
     depends_on:
       - db
+      - solr
+      - fcrepo
+      
+      
 
   redis:
     image: redis:5
