@@ -6,7 +6,7 @@ stages:
   - staging
 
 before_script:
-  - export TAG=${CI_COMMIT_SHA}
+  - export TAG=${CI_COMMIT_SHORT_SHA}
   - export BRANCH=${CI_COMMIT_REF_NAME}
   - export REGISTRY_HOST=${CI_REGISTRY}
   - export REGISTRY_URI="/${CI_PROJECT_PATH}"
@@ -15,21 +15,9 @@ hyku.build:
   stage: build
   script:
     - docker login -u "gitlab-ci-token" -p "$CI_JOB_TOKEN" $CI_REGISTRY
-    - docker build . --target hyku-base -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
-    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
-  only:
-    refs:
-      - merge_requests
-      - main
-  tags:
-    - local
-
-hyku.build.worker:
-  stage: build
-  script:
-    - docker login -u "gitlab-ci-token" -p "$CI_JOB_TOKEN" $CI_REGISTRY
-    - docker build . --target hyku-worker -t $CI_REGISTRY_IMAGE/worker:$CI_COMMIT_SHA
-    - docker push $CI_REGISTRY_IMAGE/worker:$CI_COMMIT_SHA
+    - docker-compose build web workers
+    - docker-compose push web
+    - docker-compose push workers
   only:
     refs:
       - merge_requests
@@ -39,20 +27,21 @@ hyku.build.worker:
 
 lint:
   stage: test
-  image: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+  image: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
   allow_failure: true
   script:
+    - cd /app/samvera/hyrax-webapp
     - bundle check || bundle
     - bundle exec rubocop
   only:
     refs:
       - merge_requests
   tags:
-    - docker
+    - kubernetes
 
 test:
   stage: test
-  image: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+  image: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
   allow_failure: true
   variables:
     ALLOW_ANONYMOUS_LOGIN: "yes"
@@ -86,6 +75,7 @@ test:
     SOLR_ZK_HOSTS: zk:2181
     ZOO_HEAP_SIZE: 128
     ZOO_PORT_NUMBER: 2181
+    GIT_STRATEGY: none
   services:
     - name: bitnami/postgresql:12.6.0
       alias: db
@@ -104,7 +94,7 @@ test:
       solrcloud-upload-configset.sh /app/samvera/hyrax-webapp/solr/config;
       solrcloud-assign-configset.sh;
   script:
-    - bundle exec rspec
+    - cd /app/samvera/hyrax-webapp && bundle exec rspec spec/models
   only:
     refs:
       - merge_requests
@@ -119,7 +109,7 @@ hyku.review:
     - .deploy
   environment:
     name: hyku.review/$CI_MERGE_REQUEST_ID
-    url: http://adl-hyku-$CI_MERGE_REQUEST_ID.notch8.cloud
+    url: http://adl-hyku-$CI_MERGE_REQUEST_ID.$KUBE_INGRESS_BASE_DOMAIN
     on_stop: hyku.review.stop
     auto_stop_in: 1 day
   only:
@@ -127,7 +117,8 @@ hyku.review:
       - merge_requests
   variables:
     DEPLOY_IMAGE: $CI_REGISTRY_IMAGE
-    DEPLOY_TAG: $CI_COMMIT_SHA
+    DEPLOY_TAG: $CI_COMMIT_SHORT_SHA
+    WORKER_IMAGE: ${CI_REGISTRY_IMAGE}/workers
     HELM_EXPERIMENTAL_OCI: 1
     HELM_RELEASE_NAME: hyku-$CI_MERGE_REQUEST_ID
     KUBE_NAMESPACE: adl-review
@@ -146,10 +137,18 @@ hyku.review:
       --set extraEnvVars[2].value=%{tenant}.adl-hyku-$CI_MERGE_REQUEST_ID.notch8.cloud
       --set extraEnvVars[3].name=SETTINGS__MULTITENANCY__ADMIN_ONLY_TENANT_CREATION
       --set extraEnvVars[3].value="false"
-      --set extraEnvVars[3].name=CONFDIR
-      --set extraEnvVars[3].value="/app/samvera/hyrax-webapp/solr/config"
-      --set extraEnvVars[4].name=HYKU_DEMO_ADMIN_USER
-      --set extraEnvVars[4].value="true"
+      --set extraEnvVars[4].name=CONFDIR
+      --set extraEnvVars[4].value="/app/samvera/hyrax-webapp/solr/config"
+      --set extraEnvVars[5].name=RAILS_LOG_TO_STDOUT
+      --set extraEnvVars[5].value="true"
+      --set extraEnvVars[6].name=SUPER_ADMIN_EMAIL
+      --set extraEnvVars[6].value="support@notch8.com"
+      --set extraEnvVars[7].name=SUPER_ADMIN_PASSWORD
+      --set extraEnvVars[7].value="testing123"
+      --set extraEnvVars[8].name=SETTINGS__SOLR__COLLECTION_OPTIONS__COLLECTION__CONFIG_NAME
+      --set extraEnvVars[8].value="$CI_COMMIT_SHORT_SHA"
+      --set extraEnvVars[9].name=SOLR_CONFIGSET_NAME
+      --set extraEnvVars[9].value="$CI_COMMIT_SHORT_SHA"
   script:
     - helm chart pull ghcr.io/samvera/hyrax/hyrax-helm:0.18.0
     - helm chart export ghcr.io/samvera/hyrax/hyrax-helm:0.18.0
@@ -192,7 +191,8 @@ hyku.staging:
       - main
   variables:
     DEPLOY_IMAGE: $CI_REGISTRY_IMAGE
-    DEPLOY_TAG: $CI_COMMIT_SHA
+    DEPLOY_TAG: $CI_COMMIT_SHORT_SHA
+    WORKER_IMAGE: ${CI_REGISTRY_IMAGE}/workers
     HELM_EXPERIMENTAL_OCI: 1
     HELM_RELEASE_NAME: hyku-staging
     KUBE_NAMESPACE: adl-staging
@@ -237,7 +237,7 @@ hyku.staging.stop:
         --timeout 15m0s \
         --set image.repository="$DEPLOY_IMAGE" \
         --set image.tag="$DEPLOY_TAG" \
-        --set worker.image.repository="$DEPLOY_IMAGE/worker" \
+        --set worker.image.repository="$WORKER_IMAGE" \
         --set worker.image.tag="$DEPLOY_TAG" \
         $HELM_EXTRA_ARGS \
         --namespace="$KUBE_NAMESPACE" \
