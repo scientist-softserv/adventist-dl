@@ -73,6 +73,7 @@ test:
     SOLR_ZK_HOSTS: zk:2181
     ZOO_HEAP_SIZE: 128
     ZOO_PORT_NUMBER: 2181
+    GIT_STRATEGY: none
   services:
     - name: bitnami/postgresql:12.6.0
       alias: db

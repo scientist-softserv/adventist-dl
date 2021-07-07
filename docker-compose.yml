@@ -130,7 +130,7 @@ services:
       context: .
       target: hyku-worker
       args:
-        - EXTRA_WORKER_APK_PACKAGES=ffmpeg
+        - EXTRA_WORKER_APK_PACKAGES=ffmpeg libreoffice libreoffice-base libreoffice-lang-uk
         - EXTRA_APK_PACKAGES=less vim bash openjdk11-jre
     command: bundle exec sidekiq
     depends_on:

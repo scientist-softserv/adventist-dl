@@ -23,5 +23,8 @@
 .rubocop_todo.yml
 .scss-lint.yml
 .solr_wrapper
+solr/solr/*
+fcrpo/*
+pg/*
 Dockerfile*
 fits.log
