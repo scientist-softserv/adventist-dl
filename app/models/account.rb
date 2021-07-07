@@ -8,7 +8,7 @@ class Account < ApplicationRecord
   # @see Settings.multitenancy.default_host
   def self.default_cname(piece)
     return unless piece
-    raise ArgumentError, "param '#{piece}' must not contain trailing dots" if piece =~ /\.\Z/
+    raise ArgumentError, "param '#{piece}' must not contain trailing dots" if piece.match?(/\.\Z/)
     default_host = Settings.multitenancy.default_host || "%{tenant}.#{admin_host}"
     canonical_cname(format(default_host, tenant: piece.parameterize))
   end

@@ -127,3 +127,6 @@ gem 'riiif', '~> 1.1'
 gem 'bootstrap-datepicker-rails'
 gem 'parser', '~> 2.5.3'
 gem 'tether-rails'
+
+gem 'blacklight_advanced_search'
+gem 'blacklight_range_limit', '6.5.0'

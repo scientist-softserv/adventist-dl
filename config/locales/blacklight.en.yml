@@ -5,7 +5,7 @@ en:
       fields:
         facet:
           based_near_label_sim: Location
-          creator_sim: Creator
+          creator_sim: Author
           file_format_sim: Format
           generic_type_sim: Type
           depositor_ssim: Depositor
@@ -16,7 +16,7 @@ en:
         index:
           based_near_label_tesim: Location
           contributor_tesim: Contributor
-          creator_tesim: Creator
+          creator_tesim: Author
           date_created_tesim: Date Created
           date_modified_dtsi: Date Modified
           date_uploaded_dtsi: Date Uploaded
@@ -32,7 +32,7 @@ en:
         show:
           based_near_label_tesim: Location
           contributor_tesim: Contributor
-          creator_tesim: Creator
+          creator_tesim: Author
           date_created_tesim: Date Created
           date_modified_dtsi: Date Modified
           date_uploaded_dtsi: Date Uploaded

@@ -1132,7 +1132,7 @@ en:
       defaults:
         admin_set_id: Administrative Set
         based_near: Location
-        creator: Creator
+        creator: Author
         date_created: Date Created
         description: Description
         embargo_release_date: until

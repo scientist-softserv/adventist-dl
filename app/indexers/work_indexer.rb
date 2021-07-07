@@ -10,9 +10,17 @@ class WorkIndexer < Hyrax::WorkIndexer
   include Hyrax::IndexesLinkedMetadata
 
   # Uncomment this block if you want to add custom indexing behavior:
-  # def generate_solr_document
-  #  super.tap do |solr_doc|
-  #    solr_doc['my_custom_field_ssim'] = object.my_custom_property
-  #  end
-  # end
+  def generate_solr_document
+    super.tap do |solr_doc|
+      solr_doc['creator_ssi'] = object.creator.first.titlecase if object.creator.present?
+      solr_doc['date_created_ssi'] = object.date_created if object.date_created.present?
+      solr_doc['title_ssi'] = object.title.first.titlecase if object.title.present?
+      if object.date_created.present?
+        # expects date created to be array with single string in yyyy-mm-dd format
+        solr_doc['sorted_date_isi'] = object.date_created.tr('-', '').to_i
+        solr_doc['sorted_month_isi'] = object.date_created.tr('-', '').slice(0..5).to_i
+        solr_doc['sorted_year_isi'] = object.date_created.slice(0..3).to_i
+      end
+    end
+  end
 end

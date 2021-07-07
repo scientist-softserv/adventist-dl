@@ -1,19 +1,33 @@
 # frozen_string_literal: true
 
 class CatalogController < ApplicationController
+  include BlacklightAdvancedSearch::Controller
   include Hydra::Catalog
   include Hydra::Controller::ControllerBehavior
   include BlacklightOaiProvider::Controller
+  include BlacklightRangeLimit::ControllerOverride
 
   # These before_action filters apply the hydra access controls
   before_action :enforce_show_permissions, only: :show
 
-  def self.uploaded_field
-    solr_name('system_create', :stored_sortable, type: :date)
+  def self.created_field
+    solr_name('date_created', :stored_sortable)
+  end
+
+  def self.creator_field
+    solr_name('creator', :stored_sortable)
   end
 
   def self.modified_field
     solr_name('system_modified', :stored_sortable, type: :date)
+  end
+
+  def self.title_field
+    solr_name('title', :stored_sortable)
+  end
+
+  def self.uploaded_field
+    solr_name('system_create', :stored_sortable, type: :date)
   end
 
   configure_blacklight do |config|
@@ -29,8 +43,10 @@ class CatalogController < ApplicationController
     config.advanced_search[:url_key] ||= 'advanced'
     config.advanced_search[:query_parser] ||= 'dismax'
     config.advanced_search[:form_solr_parameters] ||= {}
+    config.advanced_search[:form_facet_partial] ||= "advanced_search_facets_as_select"
 
-    config.search_builder_class = Hyrax::CatalogSearchBuilder
+    # Use locally customized AdvSearchBuilder so we can enable blacklight_advanced_search
+    config.search_builder_class = AdvSearchBuilder
 
     # Show gallery view
     config.view.gallery.partials = %i[index_header index]
@@ -56,7 +72,7 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
     config.add_facet_field solr_name("human_readable_type", :facetable), label: "Type", limit: 5
     config.add_facet_field solr_name("resource_type", :facetable), label: "Resource Type", limit: 5
-    config.add_facet_field solr_name("creator", :facetable), limit: 5
+    config.add_facet_field solr_name("creator", :facetable), label: "Author", limit: 5
     config.add_facet_field solr_name("contributor", :facetable), label: "Contributor", limit: 5
     config.add_facet_field solr_name("keyword", :facetable), limit: 5
     config.add_facet_field solr_name("subject", :facetable), limit: 5
@@ -65,6 +81,13 @@ class CatalogController < ApplicationController
     config.add_facet_field solr_name("publisher", :facetable), limit: 5
     config.add_facet_field solr_name("file_format", :facetable), limit: 5
     config.add_facet_field solr_name('member_of_collections', :symbol), limit: 5, label: 'Collections'
+    config.add_facet_field 'sorted_year_isi',
+                           label: 'Date Created',
+                           range: {
+                             num_segments: 5,
+                             segments: true,
+                             maxlength: 4
+                           }
 
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
@@ -77,7 +100,7 @@ class CatalogController < ApplicationController
     config.add_index_field solr_name("description", :stored_searchable), itemprop: 'description', helper_method: :iconify_auto_link
     config.add_index_field solr_name("keyword", :stored_searchable), itemprop: 'keywords', link_to_search: solr_name("keyword", :facetable)
     config.add_index_field solr_name("subject", :stored_searchable), itemprop: 'about', link_to_search: solr_name("subject", :facetable)
-    config.add_index_field solr_name("creator", :stored_searchable), itemprop: 'creator', link_to_search: solr_name("creator", :facetable)
+    config.add_index_field solr_name("creator", :stored_searchable), label: "Author", itemprop: 'creator', link_to_search: solr_name("creator", :facetable)
     config.add_index_field solr_name("contributor", :stored_searchable), itemprop: 'contributor', link_to_search: solr_name("contributor", :facetable)
     config.add_index_field solr_name("proxy_depositor", :symbol), label: "Depositor", helper_method: :link_to_profile
     config.add_index_field solr_name("depositor"), label: "Owner", helper_method: :link_to_profile
@@ -101,7 +124,7 @@ class CatalogController < ApplicationController
     config.add_show_field solr_name("description", :stored_searchable)
     config.add_show_field solr_name("keyword", :stored_searchable)
     config.add_show_field solr_name("subject", :stored_searchable)
-    config.add_show_field solr_name("creator", :stored_searchable)
+    config.add_show_field solr_name("creator", :stored_searchable), label: "Author"
     config.add_show_field solr_name("contributor", :stored_searchable)
     config.add_show_field solr_name("publisher", :stored_searchable)
     config.add_show_field solr_name("based_near_label", :stored_searchable)
@@ -163,6 +186,7 @@ class CatalogController < ApplicationController
     end
 
     config.add_search_field('creator') do |field|
+      field.label = "Author"
       field.solr_parameters = { "spellcheck.dictionary": "creator" }
       solr_name = solr_name("creator", :stored_searchable)
       field.solr_local_parameters = {
@@ -205,14 +229,15 @@ class CatalogController < ApplicationController
       }
     end
 
+    date_fields = ['date_created_tesim', 'sorted_date_isi', 'sorted_month_isi']
+
     config.add_search_field('date_created') do |field|
       field.solr_parameters = {
         "spellcheck.dictionary": "date_created"
       }
-      solr_name = solr_name("created", :stored_searchable)
       field.solr_local_parameters = {
-        qf: solr_name,
-        pf: solr_name
+        qf: date_fields.join(' '),
+        pf: date_fields.join(' ')
       }
     end
 
@@ -334,10 +359,15 @@ class CatalogController < ApplicationController
     # except in the relevancy case).
     # label is key, solr field is value
     config.add_sort_field "score desc, #{uploaded_field} desc", label: "relevance"
-    config.add_sort_field "#{uploaded_field} desc", label: "date uploaded \u25BC"
-    config.add_sort_field "#{uploaded_field} asc", label: "date uploaded \u25B2"
-    config.add_sort_field "#{modified_field} desc", label: "date modified \u25BC"
-    config.add_sort_field "#{modified_field} asc", label: "date modified \u25B2"
+
+    config.add_sort_field "#{title_field} desc", label: "Title \u25BC"
+    config.add_sort_field "#{title_field} asc", label: "Title \u25B2"
+    config.add_sort_field "#{creator_field} desc", label: "Author \u25BC"
+    config.add_sort_field "#{creator_field} asc", label: "Author \u25B2"
+    config.add_sort_field "#{created_field} desc", label: "Date Created \u25BC"
+    config.add_sort_field "#{created_field} asc", label: "Date Created \u25B2"
+    config.add_sort_field "#{modified_field} desc", label: "Date Modified \u25BC"
+    config.add_sort_field "#{modified_field} asc", label: "Date Modified \u25B2"
 
     config.oai = {
       provider: {

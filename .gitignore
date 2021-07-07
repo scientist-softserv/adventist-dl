@@ -62,3 +62,6 @@ supervisord.pid
 Dockerfile-local
 docker/docker-compose-2.dev.yml
 docker/local-docker-compose-2.yml
+
+# mac add on
+.DS_Store
