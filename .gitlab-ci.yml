@@ -145,7 +145,10 @@ hyku.review:
       --set extraEnvVars[6].value="support@notch8.com"
       --set extraEnvVars[7].name=SUPER_ADMIN_PASSWORD
       --set extraEnvVars[7].value="testing123"
-
+      --set extraEnvVars[8].name=SETTINGS__SOLR__COLLECTION_OPTIONS__COLLECTION__CONFIG_NAME
+      --set extraEnvVars[8].value="$CI_COMMIT_SHORT_SHA"
+      --set extraEnvVars[9].name=SOLR_CONFIGSET_NAME
+      --set extraEnvVars[9].value="$CI_COMMIT_SHORT_SHA"
   script:
     - helm chart pull ghcr.io/samvera/hyrax/hyrax-helm:0.18.0
     - helm chart export ghcr.io/samvera/hyrax/hyrax-helm:0.18.0
