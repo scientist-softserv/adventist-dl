@@ -15,9 +15,11 @@ hyku.build:
   stage: build
   script:
     - docker login -u "gitlab-ci-token" -p "$CI_JOB_TOKEN" $CI_REGISTRY
-    - docker-compose build web workers
+    - docker-compose build web
+    - docker-compose build worker
     - docker-compose push web
-    - docker-compose push workers
+    - docker-compose push worker
+
   only:
     refs:
       - merge_requests
@@ -46,36 +48,40 @@ test:
   variables:
     ALLOW_ANONYMOUS_LOGIN: "yes"
     CONFDIR: "/app/samvera/hyrax-webapp/solr/config"
+    CHROME_HOSTNAME: chrome
     DATABASE_ADAPTER: postgresql
-    DATABASE_NAME: hyku
     DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
     DATABASE_HOST: db
+    DATABASE_NAME: hyku
     DATABASE_URL: postgres://postgres:postgres@db/hyku
     DATABASE_USER: postgres
+    DB_HOST: db
+    DB_PORT: 5432
+    FCREPO_HOST: fcrepo
+    FCREPO_PORT: 8081
+    FEDORA_URL: http://fcrepo:8081/rest
+    FF_NETWORK_PER_BUILD: 1
+    GIT_STRATEGY: none
+    JAVA_OPTIONS: -Djetty.port=8081
+    IN_DOCKER: "true"
     POSTGRESQL_DATABASE: hyku
     POSTGRESQL_PASSWORD: postgres
-    DB_PORT: 5432
-    DB_HOST: db
-    FCREPO_PORT: 8080
-    FCREPO_HOST: fcrepo
-    FEDORA_URL: http://fcrepo:8080/fcrepo/rest
     REDIS_HOST: redis
-    SETTINGS__SOLR_URL: http://admin:admin@solr:8983/solr/hyku-test
+    SETTINGS__SOLR__URL: http://admin:admin@solr:8983/solr/
+    SOLR_ADMIN_PASSWORD: admin
     SOLR_ADMIN_USER: admin
     SOLR_ADMIN_USERNAME: admin
-    SOLR_ADMIN_PASSWORD: admin
-    SOLR_CONFIGSET_NAME: hyku
-    SOLR_COLLECTION_NAME: hyku-test
     SOLR_CLOUD_BOOTSTRAP: "yes"
-    SOLR_ENABLE_CLOUD_MODE: "yes"
+    SOLR_COLLECTION_NAME: hyku-test
+    SOLR_CONFIGSET_NAME: hyku
     SOLR_ENABLE_AUTHENTICATION: "yes"
-    SOLR_PORT: 8983
+    SOLR_ENABLE_CLOUD_MODE: "yes"
     SOLR_HOST: solr
-    SOLR_URL: http://admin:admin@solr:8983/solr/hyku-test
+    SOLR_PORT: 8983
+    SOLR_URL: http://admin:admin@solr:8983/solr/
     SOLR_ZK_HOSTS: zk:2181
     ZOO_HEAP_SIZE: 128
     ZOO_PORT_NUMBER: 2181
-    GIT_STRATEGY: none
   services:
     - name: bitnami/postgresql:12.6.0
       alias: db
@@ -91,14 +97,29 @@ test:
       alias: chrome
   before_script:
     - >-
-      solrcloud-upload-configset.sh /app/samvera/hyrax-webapp/solr/config;
-      solrcloud-assign-configset.sh;
+      solrcloud-upload-configset.sh /app/samvera/hyrax-webapp/solr/config &&
+      SOLR_COLLECTION_NAME=hydra-test solrcloud-assign-configset.sh &&
+      solrcloud-assign-configset.sh
   script:
-    - cd /app/samvera/hyrax-webapp && bundle exec rspec spec/models
+    - rm -f /home/app/webapp/tmp/capybara/*
+    - rm -rf $CI_PROJECT_DIR/capybara
+    - cd /app/samvera/hyrax-webapp
+    # - sleep 30m
+    - rspec --format progress --tag ~speed:slow --format RspecJunitFormatter --out rspec.xml
+  after_script:
+    - test -e /home/app/webapp/tmp/capybara && cp -r /home/app/webapp/tmp/capybara $CI_PROJECT_DIR/capybara
+    - test -e /home/app/webapp/rspec.xml && cp /home/app/webapp/rspec.xml $CI_PROJECT_DIR/rspec.xml
   only:
     refs:
       - merge_requests
       - main
+  artifacts:
+    when: always
+    paths:
+      - capybara/*.html
+      - rspec.xml
+    reports:
+      junit: rspec.xml
   tags:
     - kubernetes
 
@@ -118,7 +139,7 @@ hyku.review:
   variables:
     DEPLOY_IMAGE: $CI_REGISTRY_IMAGE
     DEPLOY_TAG: $CI_COMMIT_SHORT_SHA
-    WORKER_IMAGE: ${CI_REGISTRY_IMAGE}/workers
+    WORKER_IMAGE: $CI_REGISTRY_IMAGE/worker
     HELM_EXPERIMENTAL_OCI: 1
     HELM_RELEASE_NAME: hyku-$CI_MERGE_REQUEST_ID
     KUBE_NAMESPACE: adl-review
@@ -141,14 +162,14 @@ hyku.review:
       --set extraEnvVars[4].value="/app/samvera/hyrax-webapp/solr/config"
       --set extraEnvVars[5].name=RAILS_LOG_TO_STDOUT
       --set extraEnvVars[5].value="true"
-      --set extraEnvVars[6].name=SUPER_ADMIN_EMAIL
-      --set extraEnvVars[6].value="support@notch8.com"
-      --set extraEnvVars[7].name=SUPER_ADMIN_PASSWORD
-      --set extraEnvVars[7].value="testing123"
+      --set extraEnvVars[6].name=INITIAL_ADMIN_EMAIL
+      --set extraEnvVars[6].value=support@notch8.com
+      --set extraEnvVars[7].name=INITIAL_ADMIN_PASSWORD
+      --set extraEnvVars[7].value=testing123
       --set extraEnvVars[8].name=SETTINGS__SOLR__COLLECTION_OPTIONS__COLLECTION__CONFIG_NAME
-      --set extraEnvVars[8].value="$CI_COMMIT_SHORT_SHA"
+      --set extraEnvVars[8].value=$CI_COMMIT_SHORT_SHA
       --set extraEnvVars[9].name=SOLR_CONFIGSET_NAME
-      --set extraEnvVars[9].value="$CI_COMMIT_SHORT_SHA"
+      --set extraEnvVars[9].value=$CI_COMMIT_SHORT_SHA
   script:
     - helm chart pull ghcr.io/samvera/hyrax/hyrax-helm:0.18.0
     - helm chart export ghcr.io/samvera/hyrax/hyrax-helm:0.18.0
@@ -192,7 +213,7 @@ hyku.staging:
   variables:
     DEPLOY_IMAGE: $CI_REGISTRY_IMAGE
     DEPLOY_TAG: $CI_COMMIT_SHORT_SHA
-    WORKER_IMAGE: ${CI_REGISTRY_IMAGE}/workers
+    WORKER_IMAGE: $CI_REGISTRY_IMAGE/worker
     HELM_EXPERIMENTAL_OCI: 1
     HELM_RELEASE_NAME: hyku-staging
     KUBE_NAMESPACE: adl-staging

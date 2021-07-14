@@ -85,11 +85,7 @@ if ENV['CHROME_HOSTNAME'].present?
   end
   Capybara.server_host = '0.0.0.0'
   Capybara.server_port = 3001
-  ENV['WEB_HOST'] ||= if ENV['IN_DOCKER']
-                        'web'
-                      else
-                        `hostname -s`.strip
-                      end
+  ENV['WEB_HOST'] ||= `hostname -s`.strip
   Capybara.app_host = "http://#{ENV['WEB_HOST']}:#{Capybara.server_port}"
 else
   capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(

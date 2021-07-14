@@ -5,7 +5,7 @@ x-app: &app
     context: .
     target: hyku-base
     args:
-      - EXTRA_APK_PACKAGES=less vim bash openjdk11-jre
+      - EXTRA_APK_PACKAGES=less vim bash openjdk11-jre ffmpeg rsync
   image: registry.gitlab.com/notch8/adventist-dl:${TAG:-latest}
   env_file:
     - .env
@@ -17,7 +17,6 @@ x-app: &app
     - .:/app/samvera/hyrax-webapp
   networks:
     internal:
-
 
 volumes:
   fcrepo:
@@ -79,13 +78,13 @@ services:
       internal:
 
   fcrepo:
-    image: cbeer/fcrepo4:4.7
+    image: ghcr.io/samvera/fcrepo4:4.7.5
+    volumes:
+      - fcrepo:/data:cached
     env_file:
       - .env
     expose:
       - 8080
-    volumes:
-      - fcrepo:/data
     environment:
       - JAVA_OPTS=${JAVA_OPTS} -Dfcrepo.modeshape.configuration="classpath:/config/file-simple/repository.json" -Dfcrepo.object.directory="/data/objects" -Dfcrepo.binary.directory="/data/binaries"
     networks:
@@ -118,19 +117,21 @@ services:
       - zoo1
       - chrome
       - initialize_app
+      - worker
     expose:
       - 3000
 
-  workers:
+  worker:
     <<: *app
-    image: registry.gitlab.com/notch8/adventist-dl/workers:${TAG:-latest}
     build:
       context: .
       target: hyku-worker
       args:
-        - EXTRA_WORKER_APK_PACKAGES=ffmpeg libreoffice libreoffice-base libreoffice-lang-uk
-        - EXTRA_APK_PACKAGES=less vim bash openjdk11-jre
-    command: bundle exec sidekiq
+        - EXTRA_APK_PACKAGES=less vim bash openjdk11-jre ffmpeg rsync
+      cache_from:
+        - registry.gitlab.com/notch8/adventist-dl:${TAG:-latest}
+        - registry.gitlab.com/notch8/adventist-dl/worker:${TAG:-latest}
+    image: registry.gitlab.com/notch8/adventist-dl/worker:${TAG:-latest}
     depends_on:
       - check_volumes
       - db
@@ -139,7 +140,6 @@ services:
       - redis
       - zoo1
       - initialize_app
-
 
   # Do not recurse through all of tmp. derivitives will make booting
   # very slow and eventually just time out as data grows
@@ -168,8 +168,6 @@ services:
       - db
       - solr
       - fcrepo
-      
-      
 
   redis:
     image: redis:5
