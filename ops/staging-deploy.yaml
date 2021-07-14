@@ -62,11 +62,11 @@ extraEnvVars:
   - name: RAILS_ENV
     value: production
   - name: RAILS_LOG_TO_STDOUT
-    value: true
+    value: "true"
   - name: RAILS_MAX_THREADS
     value: 5 # for puma and sidekiq
   - name: RAILS_SERVE_STATIC_FILES
-    value: true
+    value: "true"
   - name: REDIS_HOST
     value: staging-redis-master
   - name: REDIS_URL
@@ -82,11 +82,11 @@ extraEnvVars:
   - name: SETTINGS__MULTITENANCY__ADMIN_HOST
     value: staging-nnp-web.notch8.cloud
   - name: SETTINGS__MULTITENANCY__ADMIN_ONLY_TENANT_CREATION
-    value: true
+    value: "true"
   - name: SETTINGS__MULTITENANCY__DEFAULT_HOST
     value: staging-nnp-web.notch8.cloud
   - name: SETTINGS__MULTITENANCY__ENABLED
-    value: false
+    value: "false"
   - name: SETTINGS__SOLR__COLLECTION_OPTIONS__COLLECTION__CONFIG_NAME
     value: hyku-adventist
   - name: SETTINGS__SOLR__CONFIGSET
@@ -151,11 +151,11 @@ worker:
   - name: RAILS_ENV
     value: production
   - name: RAILS_LOG_TO_STDOUT
-    value: true
+    value: "true"
   - name: RAILS_MAX_THREADS
     value: 5 # for puma and sidekiq
   - name: RAILS_SERVE_STATIC_FILES
-    value: true
+    value: "true"
   - name: REDIS_HOST
     value: staging-redis-master
   - name: REDIS_URL
@@ -171,11 +171,11 @@ worker:
   - name: SETTINGS__MULTITENANCY__ADMIN_HOST
     value: staging-nnp-web.notch8.cloud
   - name: SETTINGS__MULTITENANCY__ADMIN_ONLY_TENANT_CREATION
-    value: true
+    value: "true"
   - name: SETTINGS__MULTITENANCY__DEFAULT_HOST
     value: staging-nnp-web.notch8.cloud
   - name: SETTINGS__MULTITENANCY__ENABLED
-    value: false
+    value: "false"
   - name: SETTINGS__SOLR__COLLECTION_OPTIONS__COLLECTION__CONFIG_NAME
     value: hyku-adventist
   - name: SETTINGS__SOLR__CONFIGSET
