@@ -18,7 +18,7 @@ RSpec.describe SolrEndpoint do
     let(:af_options) do
       { read_timeout: 120,
         open_timeout: 120,
-        url: "http://127.0.0.1:8985/solr/hydra-test" }
+        url: Settings.solr.url + 'hydra-test' }
     end
 
     before do

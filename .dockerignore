@@ -18,10 +18,6 @@
 .hound.yml
 .idea
 .internal_test_app/*
-.rspec
-.rubocop.yml
-.rubocop_todo.yml
-.scss-lint.yml
 .solr_wrapper
 solr/solr/*
 fcrpo/*
