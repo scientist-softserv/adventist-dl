@@ -56,7 +56,7 @@ extraEnvVars:
   - name: IN_DOCKER
     value: "true"
   - name: LD_LIBRARY_PATH
-    value: /opt/fits-latest/tools/mediainfo/linux
+    value: /app/fits/tools/mediainfo/linux
   - name: PASSENGER_APP_ENV
     value: production
   - name: RAILS_CACHE_STORE_URL
@@ -80,7 +80,7 @@ extraEnvVars:
   - name: SETTINGS__DEVISE__INVITATION_FROM_EMAIL
     value: support@notch8.com
   - name: SETTINGS__FITS_PATH
-    value: /opt/fits/fits.sh
+    value: /app/fits/fits.sh
   - name: SETTINGS__MULTITENANCY__ADMIN_HOST
     value: staging-nnp-web.notch8.cloud
   - name: SETTINGS__MULTITENANCY__ADMIN_ONLY_TENANT_CREATION
@@ -151,7 +151,7 @@ worker:
   - name: IN_DOCKER
     value: "true"
   - name: LD_LIBRARY_PATH
-    value: /opt/fits-latest/tools/mediainfo/linux
+    value: /app/fits/tools/mediainfo/linux
   - name: PASSENGER_APP_ENV
     value: production
   - name: RAILS_CACHE_STORE_URL
@@ -175,7 +175,7 @@ worker:
   - name: SETTINGS__DEVISE__INVITATION_FROM_EMAIL
     value: support@notch8.com
   - name: SETTINGS__FITS_PATH
-    value: /opt/fits/fits.sh
+    value: /app/fits/fits.sh
   - name: SETTINGS__MULTITENANCY__ADMIN_HOST
     value: staging-nnp-web.notch8.cloud
   - name: SETTINGS__MULTITENANCY__ADMIN_ONLY_TENANT_CREATION
