@@ -111,7 +111,7 @@ Hyrax.config do |config|
      if Settings.s3.upload_bucket
        "uploads/#{Apartment::Tenant.current}"
      else
-       Rails.root + 'public' + 'uploads' + Apartment::Tenant.current
+       ENV['HYRAX_UPLOAD_PATH'].present? ? ENV['HYRAX_UPLOAD_PATH'] : Rails.root + 'public' + 'uploads' + Apartment::Tenant.current
      end
    end
   end
@@ -162,18 +162,18 @@ Hyrax.config do |config|
   #   config.browse_everything = nil
   # end
   config.browse_everything = nil
-  
+
   config.iiif_image_server = true
-  
+
   config.iiif_image_url_builder = lambda do |file_id, base_url, size|
     Riiif::Engine.routes.url_helpers.image_url(file_id, host: base_url, size: size)
   end
-  
+
   config.iiif_info_url_builder = lambda do |file_id, base_url|
     uri = Riiif::Engine.routes.url_helpers.info_url(file_id, host: base_url)
     uri.sub(%r{/info\.json\Z}, '')
   end
-  
+
 end
 
 Date::DATE_FORMATS[:standard] = "%m/%d/%Y"
