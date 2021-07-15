@@ -110,7 +110,7 @@ extraEnvVars:
   - name: SOLR_URL
     value: http://admin:***REMOVED***@solr.staging-solr:8983/solr/
   - name: SMTP_ENABLED
-    value: true
+    value: "true"
   - name: SMTP_USER_NAME
     value: fc604e3b82d260
   - name: SMTP_PASSWORD
@@ -120,7 +120,7 @@ extraEnvVars:
   - name: SMTP_DOMAIN
     value: smtp.mailtrap.io
   - name: SMTP_PORT
-    value: '2525'
+    value: "2525"
   - name: SMTP_TYPE
     value: cram_md5
 
@@ -219,7 +219,7 @@ worker:
   - name: SOLR_URL
     value: http://admin:***REMOVED***@solr.staging-solr:8983/solr/
   - name: SMTP_ENABLED
-    value: true
+    value: "true"
   - name: SMTP_USER_NAME
     value: fc604e3b82d260
   - name: SMTP_PASSWORD
@@ -229,7 +229,7 @@ worker:
   - name: SMTP_DOMAIN
     value: smtp.mailtrap.io
   - name: SMTP_PORT
-    value: '2525'
+    value: "2525"
   - name: SMTP_TYPE
     value: cram_md5
 
