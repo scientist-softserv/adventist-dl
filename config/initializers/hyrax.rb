@@ -106,14 +106,12 @@ Hyrax.config do |config|
 
   # Temporary path to hold uploads before they are ingested into FCrepo.
   # This must be a lambda that returns a Pathname
-  if Settings.multitenancy.enabled
-   config.upload_path = ->() do
-     if Settings.s3.upload_bucket
-       "uploads/#{Apartment::Tenant.current}"
-     else
-       ENV['HYRAX_UPLOAD_PATH'].present? ? ENV['HYRAX_UPLOAD_PATH'] : Rails.root + 'public' + 'uploads' + Apartment::Tenant.current
-     end
-   end
+  config.upload_path = ->() do
+    if Settings.s3.upload_bucket
+      "uploads/#{Apartment::Tenant.current}"
+    else
+      ENV['HYRAX_UPLOAD_PATH'].present? ? Pathname.new(File.join(ENV['HYRAX_UPLOAD_PATH'], Apartment::Tenant.current)) : Rails.root.join('public', 'uploads', Apartment::Tenant.current)
+    end
   end
 
   # Location on local file system where derivatives will be stored.
