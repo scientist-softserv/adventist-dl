@@ -82,13 +82,13 @@ extraEnvVars:
   - name: SETTINGS__FITS_PATH
     value: /app/fits/fits.sh
   - name: SETTINGS__MULTITENANCY__ADMIN_HOST
-    value: staging-nnp-web.notch8.cloud
+    value: adl-hyku-staging.notch8.cloud
   - name: SETTINGS__MULTITENANCY__ADMIN_ONLY_TENANT_CREATION
     value: "true"
   - name: SETTINGS__MULTITENANCY__DEFAULT_HOST
-    value: staging-nnp-web.notch8.cloud
+    value: "%{tenant}.adl-hyku-staging.notch8.cloud"
   - name: SETTINGS__MULTITENANCY__ENABLED
-    value: "false"
+    value: "true"
   - name: SETTINGS__SOLR__COLLECTION_OPTIONS__COLLECTION__CONFIG_NAME
     value: hyku-adventist
   - name: SETTINGS__SOLR__CONFIGSET
@@ -191,13 +191,13 @@ worker:
   - name: SETTINGS__FITS_PATH
     value: /app/fits/fits.sh
   - name: SETTINGS__MULTITENANCY__ADMIN_HOST
-    value: staging-nnp-web.notch8.cloud
+    value: adl-hyku-staging.notch8.cloud
   - name: SETTINGS__MULTITENANCY__ADMIN_ONLY_TENANT_CREATION
     value: "true"
   - name: SETTINGS__MULTITENANCY__DEFAULT_HOST
-    value: staging-nnp-web.notch8.cloud
+    value: "%{tenant}.adl-hyku-staging.notch8.cloud"
   - name: SETTINGS__MULTITENANCY__ENABLED
-    value: "false"
+    value: "true"
   - name: SETTINGS__SOLR__COLLECTION_OPTIONS__COLLECTION__CONFIG_NAME
     value: hyku-adventist
   - name: SETTINGS__SOLR__CONFIGSET
