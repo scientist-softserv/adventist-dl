@@ -290,11 +290,11 @@ body.public-facing {
     .btn-primary[disabled]:hover,
     .btn-primary[disabled]:focus,
     .btn-primary[disabled].focus {
-    background-color: $mediumyellow !important;;
-    border-color: $darkyellow !important;
-    color: grey !important;
-    border: 2px solid $darkyellow !important;
-    outline: 0 !important;
+        background-color: $mediumyellow !important;;
+        border-color: $darkyellow !important;
+        color: grey !important;
+        border: 2px solid $darkyellow !important;
+        outline: 0 !important;
     }
 
     /* DEFAULT BUTTON STYLES */
@@ -450,12 +450,12 @@ body.public-facing {
     }
     
     .metadata-group dt { 
-    width: 30%; 
-    font-weight: 500
+        width: 30%; 
+        font-weight: 500
     }
 
     .metadata-group dd { 
-    width: 70%; 
+        width: 70%; 
     }
 
     // SEARCH RESULTS PAGE
