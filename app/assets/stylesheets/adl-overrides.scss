@@ -226,10 +226,10 @@ body.public-facing {
 
     // /* PRIMARY BUTTON STYLES */
     .btn-primary {
-    background-color: $mediumyellow !important;
-    border-color: $darkyellow !important;
-    border: 2px solid $darkyellow !important;
-    transition: .2s;
+        background-color: $mediumyellow !important;
+        border-color: $darkyellow !important;
+        border: 2px solid $darkyellow !important;
+        transition: .2s;
     }
 
     .btn-primary:hover, .btn-primary:active,
