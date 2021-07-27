@@ -7,12 +7,14 @@ body.public-facing {
     font-family: "Nobile" !important;
     background-color: #2C2C2C !important;
     color: $white !important;
+    margin: 0;
 
     h1, h2, h3, h4, h5, h6 { 
         font-family: "Nobile" !important;
         font-weight: bold;
         color: $white !important;
-        }
+    }
+    
     p {
         color: $white !important;
     }
@@ -22,19 +24,20 @@ body.public-facing {
     #content-wrapper {
         margin-bottom: 280px;
     }
-    @media (max-width: 991px){
+
+    @media (max-width: 991px) {
         #content-wrapper {
             margin-bottom: 350px;
         }
     }
 
-    .home_marketing_text h1, .home_marketing_text h2{
+    .home_marketing_text h1, .home_marketing_text h2 {
         color: $black !important;
         text-align: left !important;
         padding-top: 40px;
     }
 
-    h6.custom-nav-text{
+    h6.custom-nav-text {
         margin: 20px 30px;
         text-transform: uppercase;
         letter-spacing: 1px;
@@ -44,63 +47,77 @@ body.public-facing {
     a {
         color: $white !important;
     }
+
     a:hover, a:focus { 
         color: $lightyellow !important; 
-        }
+    }
+
     #sort-dropdown .dropdown-toggle, #per_page-dropdown .dropdown-toggle { 
         color: $lightyellow !important;
-        }
+    }
 
     //style all inputs to dark mode
-    input{
+    input {
         background-color: $mediumgrey;
         border-radius: 4px;
     }
 
     //     /* MAIN NAV */
-    .nav{
+    .nav {
         padding-left: 30px;
     }
+
     .navbar-default {
         background-color: $mediumgrey;
     }
+
     .navbar-inverse .navbar-link, .navbar-inverse .navbar-nav > li > a, .navbar-inverse .navbar-text, .navbar-inverse .navbar-brand { 
         color: $white !important;
-        }
+    }
+
     .navbar.navbar-inverse.site-footer {
         background-color: $mediumyellow !important;
         border: none ;
         padding: inherit ;
         height: auto;
-        }
+    }
+
     .navbar-inverse .navbar-link:hover, .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-text:hover, .navbar-inverse .navbar-brand:hover { 
         color: $lightyellow !important
-        }
+    }
 
     .navbar-inverse .navbar-nav > .open > a,
     .navbar-inverse .navbar-nav > .open > a:hover,
     .navbar-inverse .navbar-nav > .open > a:focus { 
-        background-color: $black !important; }
+        background-color: $black !important; 
+    }
+
     .navbar-inverse .navbar-nav > li > a,
     .navbar-inverse .navbar-text,
     .navbar-inverse .navbar-brand { 
-        color: $white; }
+        color: $white;
+    }
     .navbar-inverse { 
         background-color: $black !important; 
         border-color: inherit; 
     }
+
     ul#user_utility_links {
         padding-top: 20px;
     }
+
     .dropdown-menu {
         background-color: $black;
     }
+
     .dropdown-menu > li > a:hover, .twitter-typeahead .tt-menu > li > a:hover, .dropdown-menu > li > a:focus, .twitter-typeahead .tt-menu > li > a:focus {
         background-color: transparent !important;
     }
-    .dropdown-menu .divider{
+
+    .dropdown-menu .divider {
         background-color: $darkgrey !important;
     }
+
     .home-share-work a.btn.btn-primary.btn-lg {
         float: right;
         border: 3px solid #985F03 !important;
@@ -111,41 +128,46 @@ body.public-facing {
 
     // MOBILE NAV
     
-        .navbar-toggle {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            padding: 15px;
-        }
-        .facets-toggle{
-            position: relative;
-            top: 0;
-            right: -5px;
-            padding: 15px;
-        }
+    .navbar-toggle {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        padding: 15px;
+    }
+    
+    .facets-toggle{
+        position: relative;
+        top: 0;
+        right: -5px;
+        padding: 15px;
+    }
     @media (max-width: 1113px){
 
         #masthead .navbar-right {
             margin: 0;
         }
-        ul#user_utility_links{
+
+        ul#user_utility_links {
             padding: 0;
             margin: 0;
             padding-top: 0
         }
+
         div#top-navbar-collapse {
             padding: 0;
             margin: 0;
         }
+
         .nav > li {
             text-align: center
         }
-        .nav > li:hover{
+
+        .nav > li:hover {
             background-color: $darkgrey;
         }
-
     }
-    .navbar.navbar-inverse.navbar-static-top .container-fluid{
+
+    .navbar.navbar-inverse.navbar-static-top .container-fluid {
         padding-right: 0;
         padding-left: 0;
     }
@@ -155,14 +177,16 @@ body.public-facing {
         max-height: 80px;
         padding: 10px 20px;
     }
-    .image-masthead{
+
+    .image-masthead {
         border-bottom: none !important;
     }
+
     .image-masthead .site-title {
         min-height: 170px;
     }
 
-    .image-masthead .background-container-gradient{
+    .image-masthead .background-container-gradient {
         background: rgba(255,255,255,.3);
     }
 
@@ -180,11 +204,12 @@ body.public-facing {
         color: $white;
         text-transform: none;
     }
+
     .navbar-static-top {
         border: 0px solid white !important;
     }
 
-    .site-title-container{
+    .site-title-container {
         margin-right: 20px;
         margin-left: 20px;
     }
@@ -194,7 +219,7 @@ body.public-facing {
         margin-left: 30px;
     }
 
-    #search-field-header{
+    #search-field-header {
         background-color: black;
         border: 0px;
         text-transform: uppercase;
@@ -202,6 +227,7 @@ body.public-facing {
         font-weight: 500;
         height: 36px !important;
     }
+
     button#search-submit-header {
         background-color: $mediumgrey !important;
         border: 2px solid $mediumgrey !important;
@@ -215,11 +241,12 @@ body.public-facing {
         font-weight: 500;
         padding-left: 0;
     }
+
     .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
         background-color: transparent !important ;
     }
 
-    ul.nav.nav-pills{
+    ul.nav.nav-pills {
         padding: 0px;
         float: none;
     }
@@ -248,7 +275,7 @@ body.public-facing {
     .btn-primary:active.focus,
     .btn-primary.active:hover,
     .btn-primary.active:focus,
-    .btn-primary.active.focus{
+    .btn-primary.active.focus {
     background-color: $mediumyellow !important;
     border-color: $darkyellow !important;
     border: 2px solid $darkyellow !important;
@@ -273,12 +300,14 @@ body.public-facing {
     .btn-link {
         color: $lightyellow !important;
     }
+
     .btn-default {
     background-color: transparent !important;
     color: $white !important;
     outline: 0px !important;
     border: 2px solid $mediumgrey !important;
     }
+
     .btn-default:focus,
     .btn-default.focus {
         outline: 0px !important;
@@ -297,10 +326,11 @@ body.public-facing {
     .btn-default:active.focus,
     .btn-default.active:hover,
     .btn-default.active:focus,
-    .btn-default.active.focus{
+    .btn-default.active.focus {
         outline: 0px !important;
         border: 2px solid $darkyellow;
     }
+
     .btn-default.disabled:hover,
     .btn-default.disabled:focus,
     .btn-default.disabled.focus,
@@ -319,16 +349,19 @@ body.public-facing {
         border-color: transparent !important;
         border: 0px solid transparent !important;
     }
-    .panel-default > .panel-heading{
+    .panel-default > .panel-heading {
         background-color: $black !important;
     }
-    .panel-default .panel-body{
+
+    .panel-default .panel-body {
         background-color: $black !important;
     }
+
     .panel-default { 
         border-color: transparent !important;
         border: 0px solid transparent !important; 
     }
+
     .panel-heading.collapse-toggle .panel-title:after { 
         color: $white;
     }
@@ -337,16 +370,34 @@ body.public-facing {
         font-size: 14px;
         font-weight: 500;
     }
+    .text-success, .facet-values li .selected {
+        color: $white;
+        font-weight: 500;
+    }
+
+    .panel-success > .panel-heading + .panel-collapse > .panel-body, .facet_limit-active > .panel-heading + .panel-collapse > .panel-body {
+        border-top-color: $white;
+    }
+
+    .search-result-wrapper .collection-counts-wrapper .collection-counts-item {
+        background-color: $darkgrey;
+        color: $white;
+        font-weight: 300;
+        padding: 8px;
+        border: 1px solid $mediumgrey;
+        border-radius: 3px;
+    }
 
     // /*MODALS */
 
-    .modal-content{
+    .modal-content {
         background-color: $darkgrey;
     }
 
-    .modal-header{
+    .modal-header {
         border-bottom: 1px solid $black;
     }
+
     .select-worktype {
         border-top: 0px solid transparent;
     }
@@ -361,46 +412,50 @@ body.public-facing {
         opacity: 0.6;
     }
 
-    .modal-footer{
+    .modal-footer {
         border-top: 1px solid $black;
     }
 
     //WORK-SHOW PAGE
 
-    ul.tabular{
+    ul.tabular {
         font-weight: 300;
     }
     
-    .metadata-group ul.tabular{
+    .metadata-group ul.tabular {
         margin-bottom: 0;
     
     }
     
-    dl.work-show{
+    dl.work-show {
         font-weight: 500;
     }
-    .work-show.metadata-block{
-        .metadata-group{
-          display: flex;
-          padding: 10px
+
+    .work-show.metadata-block {
+        .metadata-group {
+            display: flex;
+            padding: 10px
         }
-        .metadata-group:nth-child(even){ 
-          background-color: $black;
-          border-radius: 5px;
+
+        .metadata-group:nth-child(even) { 
+            background-color: $black;
+            border-radius: 5px;
         }
-        .metadata-group:nth-child(odd){ 
-          background-color: $darkgrey;
-          border-radius: 5px;
+
+        .metadata-group:nth-child(odd) { 
+            background-color: $darkgrey;
+            border-radius: 5px;
         }
-      }
+    }
     
-      .metadata-group dt { 
-        width: 30%; 
-        font-weight: 500
-      }
-      .metadata-group dd { 
-        width: 70%; 
-      }
+    .metadata-group dt { 
+    width: 30%; 
+    font-weight: 500
+    }
+
+    .metadata-group dd { 
+    width: 70%; 
+    }
 
     // SEARCH RESULTS PAGE
     .constraints-container {
@@ -415,12 +470,14 @@ body.public-facing {
         border-color: transparent;
         border: 0px solid transparent;
     }
+
     .alert-success {
         color: $black;
         background-color: $lightyellow;
         border-color: transparent;
         border: 0px solid transparent;
     }
+
     .alert-warning {
         color: $white;
         background-color: $darkyellow;
@@ -439,10 +496,12 @@ body.public-facing {
         background-color:$mediumgrey;
         border: 1px solid grey !important;
     }
-    .form-control{
+
+    .form-control {
         transition: border ease-in-out 0.2s, box-shadow ease-in-out 0.15s
     }
-    .form-control:focus{
+
+    .form-control:focus {
         -webkit-box-shadow: none;
         box-shadow: none;
         border: 2px solid $mediumyellow !important;
@@ -460,35 +519,42 @@ body.public-facing {
 
     //LABELS
 
-    .label-success{
+    .label-success {
         background-color: $mediumyellow
     }
-    .label-info{
+
+    .label-info {
         background-color: $darkyellow
     }
-    .label-primary{
+
+    .label-primary {
         background-color: $lightyellow
     }
 
     // HOMEPAGE RECENT/FEATURED
-    .table-striped > tbody > tr:nth-of-type(odd){
+    .table-striped > tbody > tr:nth-of-type(odd) {
         background-color: $mediumgrey;
     }
-    .table-striped > tbody > tr:nth-of-type(even){
+
+    .table-striped > tbody > tr:nth-of-type(even) {
         background-color: $black;
     }
+
     .table > tbody > tr > td, .table > tfoot > tr > th, .table > tfoot > tr > td {
         border-top: 0px solid transparent;
         border-radius: 4px !important;
     }
+
     ol.list-group.list-group-striped li:nth-of-type(odd) {
         background-color: $mediumgrey;
         border-radius: 4px;
     }
+
     ol.list-group.list-group-striped li:nth-of-type(even) {
         background-color: $black;
         border-radius: 4px;
     }
+
     .recent-item, .featured-item {
         border-top: 0px solid transparent;
         padding: 20px;
@@ -497,16 +563,20 @@ body.public-facing {
     .recent-item .recent-label {
         color:$white !important;
     }
+
     select {
         background-color: $mediumgrey;
         border-radius: 4px;
     }
+
     .featured-item span.featured-label {
         color: $white;
     }
+
     .dd3-content.panel.panel-default {
         background: $darkgrey;
     }
+
     a#recentTab:hover, ul.nav.nav-pills li a:hover{
         background-color: transparent
     }
@@ -516,21 +586,22 @@ body.public-facing {
     .tab-content {
         background-color: $darkgrey;
     }
-    .dashboard .panel{
+
+    .dashboard .panel {
         background-color: $darkgrey;
         border: 2px solid $mediumgrey !important;
     }
 
-    .panel-footer{
+    .panel-footer {
         background-color: transparent !important;
     }
+
     .legend {
         color: white;
-
     }
 
     //SECONDARY FOOTER
-    .secondary-footer{
+    .secondary-footer {
         min-height: 200px;
         background-color: $black;
         padding: 40px 10px;
@@ -544,20 +615,21 @@ body.public-facing {
         margin-left: 0px !important;
     }
 
-    .footer-logo{
+    .footer-logo {
         height: 120px;
         overflow: hidden;
     }
 
-    .footer-logo img{
+    .footer-logo img {
         object-fit: contain;
         width: 100%;
         height: 100%;
     }
 
-    .footer-navlink{
+    .footer-navlink {
         margin-top: 20px
     }
+
     //HIDES the navlinks in the footer for now. Client wants to add them back later.
     div.footer-navlink a {
         display: none;
@@ -568,6 +640,7 @@ body.public-facing {
         margin-bottom: 145px;
         }
     }
+
 //BOTTOM FOOTER
     p.terms-of-use a:hover {
         color: white !important;
@@ -575,23 +648,22 @@ body.public-facing {
 
     //Styles for announcement
 
-    div#announcement.row{
+    div#announcement.row {
         background-color: $mediumgrey;
         border: 0px solid $mediumyellow;
         border-radius: 4px;
         margin: 10px 40px;
     }
-
 }
 
-body.dashboard{
-    a{
+body.dashboard {
+    a {
         color: $black
     }
-    div.sidebar a{
+    div.sidebar a {
         color: $white
     }
-    .sidebar a:hover{
+    .sidebar a:hover {
         color: #000000;
     }
 
