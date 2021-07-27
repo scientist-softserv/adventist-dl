@@ -266,7 +266,7 @@ body.public-facing {
     background-color: $darkyellow !important;
     border-color: $darkyellow !important;
     border: 2px solid $darkyellow !important;
-    outline: 0px !important;
+    outline: 0 !important;
     color: $white !important;
     transform: scale(1.02)
     }
@@ -280,7 +280,7 @@ body.public-facing {
     background-color: $mediumyellow !important;
     border-color: $darkyellow !important;
     border: 2px solid $darkyellow !important;
-    outline: 0px !important;
+    outline: 0 !important;
     color: $white !important;
     }
     
@@ -294,7 +294,7 @@ body.public-facing {
     border-color: $darkyellow !important;
     color: grey !important;
     border: 2px solid $darkyellow !important;
-    outline: 0px !important;
+    outline: 0 !important;
     }
 
     /* DEFAULT BUTTON STYLES */
@@ -305,19 +305,19 @@ body.public-facing {
     .btn-default {
     background-color: transparent !important;
     color: $white !important;
-    outline: 0px !important;
+    outline: 0 !important;
     border: 2px solid $mediumgrey !important;
     }
 
     .btn-default:focus,
     .btn-default.focus {
-        outline: 0px !important;
+        outline: 0 !important;
         border: 2px solid $mediumgrey !important;
     }
 
     .btn-default:hover, .btn-default:active,
     .btn-default.active {
-        outline: 0px !important;
+        outline: 0 !important;
         border: 2px solid $darkyellow;
         color: $lightyellow !important;
     }
@@ -328,7 +328,7 @@ body.public-facing {
     .btn-default.active:hover,
     .btn-default.active:focus,
     .btn-default.active.focus {
-        outline: 0px !important;
+        outline: 0 !important;
         border: 2px solid $darkyellow;
     }
 
@@ -338,7 +338,7 @@ body.public-facing {
     .btn-default[disabled]:hover,
     .btn-default[disabled]:focus,
     .btn-default[disabled].focus {
-        outline: 0px !important;
+        outline: 0 !important;
         border: 2px solid $mediumgrey;
         color: grey !important;
     }
@@ -348,7 +348,7 @@ body.public-facing {
         color: $white !important;
         background-color: $black !important;
         border-color: transparent !important;
-        border: 0px solid transparent !important;
+        border: 0 solid transparent !important;
     }
     .panel-default > .panel-heading {
         background-color: $black !important;
@@ -360,7 +360,7 @@ body.public-facing {
 
     .panel-default { 
         border-color: transparent !important;
-        border: 0px solid transparent !important; 
+        border: 0 solid transparent !important; 
     }
 
     .panel-heading.collapse-toggle .panel-title:after { 
@@ -400,7 +400,7 @@ body.public-facing {
     }
 
     .select-worktype {
-        border-top: 0px solid transparent;
+        border-top: 0 solid transparent;
     }
 
     .select-work-icon {
@@ -469,21 +469,21 @@ body.public-facing {
         color: $white;
         background-color: $mediumgrey;
         border-color: transparent;
-        border: 0px solid transparent;
+        border: 0 solid transparent;
     }
 
     .alert-success {
         color: $black;
         background-color: $lightyellow;
         border-color: transparent;
-        border: 0px solid transparent;
+        border: 0 solid transparent;
     }
 
     .alert-warning {
         color: $white;
         background-color: $darkyellow;
         border-color: transparent;
-        border: 0px solid transparent;
+        border: 0 solid transparent;
     }
 
     .legend {
@@ -510,7 +510,7 @@ body.public-facing {
 
     // Breadcrumbs
     .breadcrumb {
-        border: 0px solid $black !important;
+        border: 0 solid $black !important;
         background-color: $black !important;
         border-radius: 4px !important;
     }
@@ -542,7 +542,7 @@ body.public-facing {
     }
 
     .table > tbody > tr > td, .table > tfoot > tr > th, .table > tfoot > tr > td {
-        border-top: 0px solid transparent;
+        border-top: 0 solid transparent;
         border-radius: 4px !important;
     }
 
@@ -557,7 +557,7 @@ body.public-facing {
     }
 
     .recent-item, .featured-item {
-        border-top: 0px solid transparent;
+        border-top: 0 solid transparent;
         padding: 20px;
     }
 
@@ -610,10 +610,10 @@ body.public-facing {
         bottom: 67px;
         display: block;
         width: 100%;
-        right: 0px !important;
-        left: 0px !important;
-        margin-right: 0px !important;
-        margin-left: 0px !important;
+        right: 0 !important;
+        left: 0 !important;
+        margin-right: 0 !important;
+        margin-left: 0 !important;
     }
 
     .footer-logo {
@@ -651,7 +651,7 @@ body.public-facing {
 
     div#announcement.row {
         background-color: $mediumgrey;
-        border: 0px solid $mediumyellow;
+        border: 0 solid $mediumyellow;
         border-radius: 4px;
         margin: 10px 40px;
     }
