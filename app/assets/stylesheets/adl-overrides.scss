@@ -66,16 +66,16 @@ body.public-facing {
     }
     .navbar-inverse .navbar-link, .navbar-inverse .navbar-nav > li > a, .navbar-inverse .navbar-text, .navbar-inverse .navbar-brand { 
         color: $white !important;
-        }
+    }
     .navbar.navbar-inverse.site-footer {
         background-color: $mediumyellow !important;
         border: none ;
         padding: inherit ;
         height: auto;
-        }
+    }
     .navbar-inverse .navbar-link:hover, .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-text:hover, .navbar-inverse .navbar-brand:hover { 
         color: $lightyellow !important
-        }
+    }
 
     .navbar-inverse .navbar-nav > .open > a,
     .navbar-inverse .navbar-nav > .open > a:hover,
