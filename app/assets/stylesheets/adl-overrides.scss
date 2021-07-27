@@ -74,14 +74,14 @@ body.public-facing {
     .navbar-inverse .navbar-link, .navbar-inverse .navbar-nav > li > a, .navbar-inverse .navbar-text, .navbar-inverse .navbar-brand { 
         color: $white !important;
     }
-
+    
     .navbar.navbar-inverse.site-footer {
         background-color: $mediumyellow !important;
         border: none ;
         padding: inherit ;
         height: auto;
     }
-
+    
     .navbar-inverse .navbar-link:hover, .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-text:hover, .navbar-inverse .navbar-brand:hover { 
         color: $lightyellow !important
     }
@@ -89,7 +89,7 @@ body.public-facing {
     .navbar-inverse .navbar-nav > .open > a,
     .navbar-inverse .navbar-nav > .open > a:hover,
     .navbar-inverse .navbar-nav > .open > a:focus { 
-        background-color: $black !important; 
+        background-color: $black !important;
     }
 
     .navbar-inverse .navbar-nav > li > a,
@@ -97,6 +97,7 @@ body.public-facing {
     .navbar-inverse .navbar-brand { 
         color: $white;
     }
+    
     .navbar-inverse { 
         background-color: $black !important; 
         border-color: inherit; 
@@ -206,7 +207,7 @@ body.public-facing {
     }
 
     .navbar-static-top {
-        border: 0px solid white !important;
+        border: 0 solid white !important;
     }
 
     .site-title-container {
@@ -221,7 +222,7 @@ body.public-facing {
 
     #search-field-header {
         background-color: black;
-        border: 0px;
+        border: 0;
         text-transform: uppercase;
         letter-spacing: 1px;
         font-weight: 500;
@@ -246,17 +247,17 @@ body.public-facing {
         background-color: transparent !important ;
     }
 
-    ul.nav.nav-pills {
-        padding: 0px;
+    ul.nav.nav-pills{
+        padding: 0;
         float: none;
     }
 
     // /* PRIMARY BUTTON STYLES */
     .btn-primary {
-    background-color: $mediumyellow !important;
-    border-color: $darkyellow !important;
-    border: 2px solid $darkyellow !important;
-    transition: .2s;
+        background-color: $mediumyellow !important;
+        border-color: $darkyellow !important;
+        border: 2px solid $darkyellow !important;
+        transition: .2s;
     }
 
     .btn-primary:hover, .btn-primary:active,
