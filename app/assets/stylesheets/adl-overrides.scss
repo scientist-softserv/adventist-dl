@@ -290,11 +290,11 @@ body.public-facing {
     .btn-primary[disabled]:hover,
     .btn-primary[disabled]:focus,
     .btn-primary[disabled].focus {
-    background-color: $mediumyellow !important;;
-    border-color: $darkyellow !important;
-    color: grey !important;
-    border: 2px solid $darkyellow !important;
-    outline: 0px !important;
+        background-color: $mediumyellow !important;;
+        border-color: $darkyellow !important;
+        color: grey !important;
+        border: 2px solid $darkyellow !important;
+        outline: 0px !important;
     }
 
     /* DEFAULT BUTTON STYLES */
