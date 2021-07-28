@@ -123,6 +123,8 @@ extraEnvVars:
     value: "2525"
   - name: SMTP_TYPE
     value: cram_md5
+  - name: SENTRY_DSN
+    value: $SENTRY_DSN
 
 worker:
   replicaCount: 1
@@ -232,6 +234,8 @@ worker:
       value: "2525"
     - name: SMTP_TYPE
       value: cram_md5
+    - name: SENTRY_DSN
+      value: $SENTRY_DSN
 
 podSecurityContext:
   runAsUser: 1001

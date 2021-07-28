@@ -897,6 +897,8 @@ GEM
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
+    sentry-raven (2.13.0)
+      faraday (>= 0.7.6, < 1.0)
     shex (0.6.1)
       ebnf (~> 2.0)
       json-ld (~> 3.1)
@@ -1076,6 +1078,7 @@ DEPENDENCIES
   scss_lint
   secure_headers
   selenium-webdriver
+  sentry-raven
   sidekiq
   simplecov
   solr_wrapper (~> 2.0)

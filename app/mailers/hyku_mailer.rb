@@ -8,11 +8,7 @@ class HykuMailer < ActionMailer::Base
 
   private
 
-  def host_for_tenant
-    if Settings.multitenancy.enabled
-      Account.find_by(tenant: Apartment::Tenant.current)&.cname || Account.admin_host
-    else
-
+    def host_for_tenant
+      Account.find_by(tenant: Apartment::Tenant.current)&.cname || Account.admin_host if Settings.multitenancy.enabled
     end
-  end
 end
