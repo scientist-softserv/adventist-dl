@@ -30,7 +30,7 @@ module Hyrax
     def show
       # @curation_concern ||= Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: params[:id])
       # Line below was line above but was modified to keep Hyrax v2.9.5 prefered method of locating records
-      @curation_concern ||= Hyrax.query_service.find_by(id: params[:id])
+      @curation_concern ||= ActiveFedora::Base.find(params[:id])
       presenter
       query_collection_members
     end
