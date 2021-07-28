@@ -22,12 +22,12 @@
               <%= render 'representative_media', presenter: @presenter, viewer: true %>
             </div>
           <% end %>
-          <div class="col-sm-3 text-center">
+          <div class="col-sm-5 text-center">
             <%= render 'representative_media', presenter: @presenter, viewer: false unless @presenter.universal_viewer? %>
             <%= render 'citations', presenter: @presenter %>
             <%= render 'social_media' %>
           </div>
-          <div class="col-sm-9">
+          <div class="col-sm-7">
             <%= render 'work_description', presenter: @presenter %>
             <%= render 'metadata', presenter: @presenter %>
           </div>
