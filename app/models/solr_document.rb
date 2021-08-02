@@ -29,6 +29,7 @@ class SolrDocument
 
   attribute :extent, Solr::Array, solr_name('extent')
   attribute :rendering_ids, Solr::Array, solr_name('hasFormat', :symbol)
+  attribute :slug, Solr::String, solr_name('slug')
 
   field_semantics.merge!(
     contributor: 'contributor_tesim',
@@ -44,4 +45,8 @@ class SolrDocument
     title: 'title_tesim',
     type: 'human_readable_type_tesim'
   )
+
+  def to_param
+    slug || id
+  end
 end

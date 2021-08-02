@@ -55,6 +55,7 @@ dory up
 ```bash
 docker-compose up web
 ```
+
 This command starts the whole stack in individual containers allowing Rails to be started or stopped independent of the other services.  Once that starts (you'll see the line `Passenger core running in multi-application mode.` to indicate a successful boot), you can view your app in a web browser with at either hyku.test or localhost:3000 (see above).  When done `docker-compose stop` shuts down everything.
 
 #### Tests in Docker
