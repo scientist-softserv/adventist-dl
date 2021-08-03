@@ -27,7 +27,7 @@ body.public-facing {
 
     @media (max-width: 991px) {
         #content-wrapper {
-            margin-bottom: 400px;
+            margin-bottom: 350px;
         }
     }
 
@@ -38,10 +38,24 @@ body.public-facing {
     }
 
     h6.custom-nav-text {
-        margin: 20px 30px;
+        margin: 5.5% 15px;
         text-transform: uppercase;
         letter-spacing: 1px;
         font-size: 14px;
+    }
+
+    @media (max-width: 767px){
+        h6.custom-nav-text {
+            text-align: center;
+            margin: 2.5% 15px;
+        }
+    }
+
+    @media (min-width: 1120px){
+        h6.custom-nav-text {
+            margin: 4% 15px;
+            font-size: 16px;
+        }
     }
 
     /* LINK COLORS */
@@ -128,7 +142,15 @@ body.public-facing {
         border: 3px solid #985F03 !important;
         position: relative;
         margin-bottom: 20px;
-        margin-right: 20px
+        margin-right: 12px
+    }
+    .container-fluid.row {
+        padding: 0;
+        margin: 0;
+    }
+
+    .container > .navbar-header, .container > .navbar-collapse, .container > #facet-panel-collapse, .container-fluid > .navbar-header {
+        margin: 0;
     }
 
     // MOBILE NAV
@@ -193,18 +215,6 @@ body.public-facing {
         padding: 10px;
     }
 
-    // @media (max-width: 385px){
-    //     #masthead #logo img {
-    //         max-width: 300px
-    //     }
-    // }
-
-    // @media (max-width: 385px){
-    //     #masthead #logo img {
-    //         max-width: 250px
-    //     }
-    // }
-
     .image-masthead {
         border-bottom: none !important;
     }
@@ -241,8 +251,17 @@ body.public-facing {
     }
 
     .searchbar-right.navbar-right {
-        padding-right: 30px;
-        padding-left: 30px;
+        padding: 1.5% 30px;
+    }
+
+    @media (max-width: 767px){
+        .searchbar-right.navbar-right {
+            padding-top: 0
+        }
+    }
+
+    #search-form-header {
+        margin-top: 0px;
     }
 
     #search-field-header {
@@ -263,6 +282,22 @@ body.public-facing {
     form.form-horizontal.search-form .form-group .input-group {
         border: 1px solid $lightgrey2;
         border-radius: 4px;
+        margin-bottom: 0px
+    }
+
+    @media (max-width: 440px) {
+        #search-field-header, .form-horizontal.search-form .form-group .input-group .input-group-btn {
+            display: inline-block;
+            text-align: center;
+        }
+
+        .form-horizontal.search-form .form-group .input-group .input-group-btn {
+            width: 100%
+        }
+
+        .form-horizontal.search-form .form-group .input-group {
+            text-align: center
+        }
     }
 
     /* HOME PAGE NAV-PILL TABS */
