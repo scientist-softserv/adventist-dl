@@ -10,8 +10,8 @@ module Hyrax
         extend ActiveModel::Naming
 
         DEFAULT_FONTS = {
-          'body_font'     => 'Nobile',
-          'headline_font' => 'Nobile'
+          'body_font'     => 'Helvetica Neue, Helvetica, Arial, sans-serif;',
+          'headline_font' => 'Helvetica Neue, Helvetica, Arial, sans-serif;'
         }.freeze
 
         DEFAULT_COLORS = {
