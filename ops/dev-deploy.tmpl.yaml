@@ -12,6 +12,23 @@ derivativesVolume:
 uploadsVolume:
   storageClass: efs-sc
 
+extraVolumeMounts:
+  - name: uploads
+    mountPath: /app/samvera/hyrax-webapp/tmp/imports
+    subPath: imports
+  - name: uploads
+    mountPath: /app/samvera/hyrax-webapp/tmp/exports
+    subPath: exports
+  - name: uploads
+    mountPath: /app/samvera/hyrax-webapp/public/system
+    subPath: public-system
+  - name: uploads
+    mountPath: /app/samvera/hyrax-webapp/public/uploads
+    subPath: public-uploads
+  - name: uploads
+    mountPath: /app/samvera/hyrax-webapp/tmp/network_files
+    subPath: network-files
+
 ingress:
   enabled: true
   hosts:
@@ -133,6 +150,22 @@ worker:
     runAsGroup: 101
     fsGroup: 101
     fsGroupChangePolicy: "OnRootMismatch"
+  extraVolumeMounts:
+    - name: uploads
+      mountPath: /app/samvera/hyrax-webapp/tmp/imports
+      subPath: imports
+    - name: uploads
+      mountPath: /app/samvera/hyrax-webapp/tmp/exports
+      subPath: exports
+    - name: uploads
+      mountPath: /app/samvera/hyrax-webapp/public/system
+      subPath: public-system
+    - name: uploads
+      mountPath: /app/samvera/hyrax-webapp/public/uploads
+      subPath: public-uploads
+    - name: uploads
+      mountPath: /app/samvera/hyrax-webapp/tmp/network_files
+      subPath: network-files
   extraEnvVars:
     - name: SETTINGS__MULTITENANCY__ADMIN_HOST
       value: s2.adventistdigitallibrary.org
