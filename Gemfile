@@ -133,3 +133,5 @@ gem 'tether-rails'
 
 gem 'blacklight_advanced_search'
 gem 'blacklight_range_limit', '6.5.0'
+
+gem 'dog_biscuits', git: 'https://github.com/samvera-labs/dog_biscuits.git'
