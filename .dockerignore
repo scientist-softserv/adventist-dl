@@ -7,11 +7,12 @@
 ./importer
 ./log
 ./pg
-./pubilc/uploads
 ./public/assets
+./public/branding
 ./public/packs
 ./public/system
-./tmp
+./public/uploads
+o./tmp
 .coveralls.yml
 .ebextensions
 .fcrepo_wrapper
