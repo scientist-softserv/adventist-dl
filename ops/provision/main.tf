@@ -174,12 +174,61 @@ resource "helm_release" "keel" {
 resource "kubernetes_namespace" "dev" {
   metadata {
     name = "dev"
+    annotations      = {
+      "cattle.io/status"                          = jsonencode(
+        {
+          Conditions = [
+            {
+              LastUpdateTime = "2021-07-28T05:25:40Z"
+              Message        = ""
+              Status         = "True"
+              Type           = "ResourceQuotaInit"
+            },
+            {
+              LastUpdateTime = "2021-07-28T05:25:41Z"
+              Message        = ""
+              Status         = "True"
+              Type           = "InitialRolesPopulated"
+            },
+          ]
+        })
+      "field.cattle.io/projectId" = "c-d2h56:p-pdrrv"
+      "lifecycle.cattle.io/create.namespace-auth" = "true"
+    }
+    labels = {
+      "field.cattle.io/projectId" = "p-pdrrv"
+    }
   }
 }
 
 resource "kubernetes_namespace" "productionn" {
   metadata {
     name = "production"
+    annotations = {
+      "cattle.io/status"                          = jsonencode(
+        {
+          Conditions = [
+            {
+              LastUpdateTime = "2021-07-28T05:25:40Z"
+              Message        = ""
+              Status         = "True"
+              Type           = "ResourceQuotaInit"
+            },
+            {
+              LastUpdateTime = "2021-07-28T05:25:41Z"
+              Message        = ""
+              Status         = "True"
+              Type           = "InitialRolesPopulated"
+            },
+          ]
+        }
+        )
+      "field.cattle.io/projectId"                 = "c-d2h56:p-pdrrv"
+      "lifecycle.cattle.io/create.namespace-auth" = "true"
+    }
+    labels           = {
+      "field.cattle.io/projectId" = "p-pdrrv"
+    }
   }
 }
 
