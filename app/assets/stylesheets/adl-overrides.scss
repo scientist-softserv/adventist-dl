@@ -3,24 +3,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');
 
 
-body.public-facing { 
+body.public-facing {
     font-family: "Source Sans Pro" !important;
     font-size: 15px;
     background-color: #2C2C2C !important;
     color: $white !important;
 
-    h1, h2, h3, h4, h5, h6 { 
+    h1, h2, h3, h4, h5, h6 {
         font-family: "Source Sans Pro" !important;
         font-weight: bold;
         color: $white !important;
     }
-    
+
     p {
         color: $white !important;
     }
 
     /* prevents footer from covering bottom of page */
-    
+
     #content-wrapper {
         margin-bottom: 320px;
     }
@@ -59,16 +59,16 @@ body.public-facing {
     }
 
     /* LINK COLORS */
-    
+
     a {
         color: $white !important;
     }
 
-    a:hover, a:focus { 
-        color: $lightyellow !important; 
+    a:hover, a:focus {
+        color: $lightyellow !important;
     }
 
-    #sort-dropdown .dropdown-toggle, #per_page-dropdown .dropdown-toggle { 
+    #sort-dropdown .dropdown-toggle, #per_page-dropdown .dropdown-toggle {
         color: $lightyellow !important;
     }
 
@@ -88,37 +88,37 @@ body.public-facing {
         background-color: $mediumgrey;
     }
 
-    .navbar-inverse .navbar-link, .navbar-inverse .navbar-nav > li > a, .navbar-inverse .navbar-text, .navbar-inverse .navbar-brand { 
+    .navbar-inverse .navbar-link, .navbar-inverse .navbar-nav > li > a, .navbar-inverse .navbar-text, .navbar-inverse .navbar-brand {
         color: $white !important;
     }
-    
+
     .navbar.navbar-inverse.site-footer {
         background-color: $mediumyellow !important;
         border: none ;
         padding: inherit ;
         height: auto;
     }
-    
-    .navbar-inverse .navbar-link:hover, .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-text:hover, .navbar-inverse .navbar-brand:hover { 
+
+    .navbar-inverse .navbar-link:hover, .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-text:hover, .navbar-inverse .navbar-brand:hover {
         color: $lightyellow !important;
         background-color: transparent !important;
     }
 
     .navbar-inverse .navbar-nav > .open > a,
     .navbar-inverse .navbar-nav > .open > a:hover,
-    .navbar-inverse .navbar-nav > .open > a:focus { 
+    .navbar-inverse .navbar-nav > .open > a:focus {
         background-color: $black !important;
     }
 
     .navbar-inverse .navbar-nav > li > a,
     .navbar-inverse .navbar-text,
-    .navbar-inverse .navbar-brand { 
+    .navbar-inverse .navbar-brand {
         color: $white;
     }
-    
-    .navbar-inverse { 
-        background-color: $black !important; 
-        border-color: inherit; 
+
+    .navbar-inverse {
+        background-color: $black !important;
+        border-color: inherit;
     }
 
     ul#user_utility_links {
@@ -154,7 +154,7 @@ body.public-facing {
     }
 
     // MOBILE NAV
-    
+
     .navbar-toggle {
         position: absolute;
         top: 15px;
@@ -438,7 +438,7 @@ body.public-facing {
         background-color: $black;
         border-radius: 4px !important;
     }
-    
+
     nav.breadcrumb {
         margin-top: 50px;
     }
@@ -452,12 +452,12 @@ body.public-facing {
         border: 0 solid transparent !important;
     }
 
-    .panel-default { 
+    .panel-default {
         border-color: transparent !important;
-        border: 0 solid transparent !important; 
+        border: 0 solid transparent !important;
     }
 
-    .panel-heading.collapse-toggle .panel-title:after { 
+    .panel-heading.collapse-toggle .panel-title:after {
         color: $white;
     }
 
@@ -499,16 +499,16 @@ body.public-facing {
     ul.tabular {
         font-weight: 300;
     }
-    
+
     .metadata-group ul.tabular {
         margin-bottom: 0;
-    
+
     }
-    
+
     dl.work-show {
         font-weight: 500;
     }
-    
+
     .close {
         color: white;
         text-shadow: none;
@@ -521,36 +521,36 @@ body.public-facing {
             padding: 10px
         }
 
-        .metadata-group:nth-child(even) { 
+        .metadata-group:nth-child(even) {
             background-color: $black;
             border-radius: 5px;
         }
 
-        .metadata-group:nth-child(odd) { 
+        .metadata-group:nth-child(odd) {
             background-color: $darkgrey;
             border-radius: 5px;
         }
     }
-        
-    .metadata-group dt { 
-        width: 30%; 
+
+    .metadata-group dt {
+        width: 30%;
         font-weight: 500
     }
-    
+
     .modal-footer{
         border-top: 1px solid $black;
     }
-        .metadata-group dd { 
-            width: 70%; 
+        .metadata-group dd {
+            width: 70%;
         }
-    
+
     // SEARCH RESULTS PAGE
     .constraints-container {
         border-radius: 4px;
         background-color: $mediumgrey
     }
 
-    
+
     // ALERTS
     .alert-info {
         color: $white;
@@ -743,4 +743,15 @@ body.public-facing {
         border-radius: 4px;
         margin: 10px 40px;
     }
+}
+
+body.public-facing.splash-index {
+  section.jumbotron {
+    background: none;
+    background-color: #444444;
+  }
+
+  section.product-features {
+    background-color: #222222;
+  }
 }
