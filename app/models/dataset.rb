@@ -4,6 +4,7 @@
 #  `rails generate dog_biscuits:work Dataset`
 class Dataset < DogBiscuits::Dataset
   include ::Hyrax::WorkBehavior
+  include SlugBug
 
   self.indexer = ::DatasetIndexer
   # Change this to restrict which works can be added as a child.
@@ -13,6 +14,7 @@ class Dataset < DogBiscuits::Dataset
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
   # include ::Hyrax::BasicMetadata
+  include SlugMetadata
   include DogBiscuits::DatasetMetadata
   before_save :combine_dates
 end

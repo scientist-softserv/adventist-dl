@@ -4,6 +4,7 @@
 #  `rails generate dog_biscuits:work ConferenceItem`
 class ConferenceItem < DogBiscuits::ConferenceItem
   include ::Hyrax::WorkBehavior
+  include SlugBug
 
   self.indexer = ::ConferenceItemIndexer
   # Change this to restrict which works can be added as a child.
@@ -13,6 +14,7 @@ class ConferenceItem < DogBiscuits::ConferenceItem
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
   # include ::Hyrax::BasicMetadata
+  include SlugMetadata
   include DogBiscuits::ConferenceItemMetadata
   before_save :combine_dates
 end

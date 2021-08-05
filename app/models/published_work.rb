@@ -4,6 +4,7 @@
 #  `rails generate dog_biscuits:work PublishedWork`
 class PublishedWork < DogBiscuits::PublishedWork
   include ::Hyrax::WorkBehavior
+  include SlugBug
 
   self.indexer = ::PublishedWorkIndexer
   # Change this to restrict which works can be added as a child.
@@ -13,6 +14,7 @@ class PublishedWork < DogBiscuits::PublishedWork
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
   # include ::Hyrax::BasicMetadata
+  include SlugMetadata
   include DogBiscuits::PublishedWorkMetadata
   before_save :combine_dates
 end

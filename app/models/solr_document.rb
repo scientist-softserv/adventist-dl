@@ -31,6 +31,8 @@ class SolrDocument
   attribute :extent, Solr::Array, solr_name('extent')
   attribute :rendering_ids, Solr::Array, solr_name('hasFormat', :symbol)
   attribute :slug, Solr::String, solr_name('slug')
+  attribute :fedora_id, Solr::String, 'fedora_id_ssi'
+  attribute :aark_id, Solr::String, 'aark_id_ssi'
 
   field_semantics.merge!(
     contributor: 'contributor_tesim',

@@ -2,7 +2,7 @@
 
 # Generated via
 #  `rails generate dog_biscuits:work JournalArticle`
-class JournalArticleIndexer < DogBiscuits::JournalArticleIndexer
+class JournalArticleIndexer < WorkIndexer
   # This indexes the default metadata. You can remove it if you want to
   # provide your own metadata and indexing.
   # include Hyrax::IndexesBasicMetadata
@@ -17,6 +17,14 @@ class JournalArticleIndexer < DogBiscuits::JournalArticleIndexer
   #    solr_doc['my_custom_field_ssim'] = object.my_custom_property
   #  end
   # end
+
+  # Add any properties to ensure they are 'mixed in' with the *_labels field in solr
+  def contributors_to_index
+    ['funder']
+  end
+
+  # Add any custom indexing into here. Method must exist, but can be empty.
+  def do_local_indexing(solr_doc); end
 
   # Fetch remote labels for based_near. Copied from Hyrax::IndexesLinkedMetadata
   def rdf_service
