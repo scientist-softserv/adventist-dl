@@ -2,7 +2,8 @@
 
 # Generated via
 #  `rails generate dog_biscuits:work ExamPaper`
-class ExamPaperIndexer < DogBiscuits::ExamPaperIndexer
+class ExamPaperIndexer < WorkIndexer
+  include DogBiscuits::IndexesCommon
   # This indexes the default metadata. You can remove it if you want to
   # provide your own metadata and indexing.
   # include Hyrax::IndexesBasicMetadata
@@ -17,6 +18,11 @@ class ExamPaperIndexer < DogBiscuits::ExamPaperIndexer
   #    solr_doc['my_custom_field_ssim'] = object.my_custom_property
   #  end
   # end
+
+  # Add any custom indexing into here. Method must exist, but can be empty.
+  #
+  # @param [Hash] solr_doc
+  def do_local_indexing(solr_doc); end
 
   # Fetch remote labels for based_near. Copied from Hyrax::IndexesLinkedMetadata
   def rdf_service

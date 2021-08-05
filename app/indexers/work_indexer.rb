@@ -15,6 +15,7 @@ class WorkIndexer < Hyrax::WorkIndexer
       solr_doc['creator_ssi'] = object.creator.first.titlecase if object.creator.present?
       solr_doc['date_created_ssi'] = object.date_created if object.date_created.present?
       solr_doc['title_ssi'] = object.title.first.titlecase if object.title.present?
+      solr_doc['fedora_id_ssi'] = object.id
       solr_doc[ActiveFedora.id_field.to_sym] = object.to_param
       if object.date_created.present?
         # expects date created to be array with single string in yyyy-mm-dd format

@@ -136,6 +136,7 @@ DogBiscuits.config do |config|
     based_near
     rights_statement
     license
+    aark_id
   ]
   config.conference_item_properties_required = Hyrax::GenericWorkForm.required_fields
 
@@ -168,6 +169,7 @@ DogBiscuits.config do |config|
     rights_statement
     license
     source
+    aark_id
   ]
   config.dataset_properties_required = Hyrax::GenericWorkForm.required_fields
 
@@ -189,6 +191,7 @@ DogBiscuits.config do |config|
     rights_statement
     license
     source
+    aark_id
   ]
   config.exam_paper_properties_required = Hyrax::GenericWorkForm.required_fields
 
@@ -224,6 +227,7 @@ DogBiscuits.config do |config|
     rights_statement
     license
     source
+    aark_id
   ]
   config.journal_article_properties_required = Hyrax::GenericWorkForm.required_fields
 
@@ -253,6 +257,7 @@ DogBiscuits.config do |config|
     license
     rights_statement
     source
+    aark_id
   ]
   config.published_work_properties_required = Hyrax::GenericWorkForm.required_fields
 
@@ -280,6 +285,7 @@ DogBiscuits.config do |config|
     license
     rights_statement
     source
+    aark_id
   ]
   config.thesis_properties_required = Hyrax::GenericWorkForm.required_fields
 

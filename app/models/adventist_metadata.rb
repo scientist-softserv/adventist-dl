@@ -34,23 +34,11 @@ module AdventistMetadata
     property :related_url, predicate: ::RDF::RDFS.seeAlso
     property :bibliographic_citation, predicate: ::RDF::Vocab::DC.bibliographicCitation
     property :source, predicate: ::RDF::Vocab::DC.source
-    # adding aark_id to metadata, correct mapping to be completed by client
-    property :aark_id, predicate: ::RDF::URI.intern('https://adl-hyku-staging.notch8.cloud/terms/aark_id'), multiple: false do |index|
-      index.as :stored_searchable
-    end
-    # adding slug field for custom work urls
-    property :slug, predicate: ::RDF::Vocab::DC.alternative, multiple: false do |index|
-      index.as :stored_searchable
-    end
 
     id_blank = proc { |attributes| attributes[:id].blank? }
 
     class_attribute :controlled_properties
     self.controlled_properties = [:based_near]
     accepts_nested_attributes_for :based_near, reject_if: id_blank, allow_destroy: true
-
-    def self.multiple?(field)
-      field.to_s == 'date_created' ? false : super
-    end
   end
 end
