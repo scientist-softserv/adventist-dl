@@ -18,10 +18,13 @@ class WorkIndexer < Hyrax::WorkIndexer
       solr_doc['fedora_id_ssi'] = object.id
       solr_doc[ActiveFedora.id_field.to_sym] = object.to_param
       if object.date_created.present?
+        # rubocop:disable Metrics/LineLength
+        date_created = object.date_created.is_a?(ActiveTriples::Relation) ? object.date_created.first : object.date_created
+        # rubocop:enable Metrics/LineLength
         # expects date created to be array with single string in yyyy-mm-dd format
-        solr_doc['sorted_date_isi'] = object.date_created.tr('-', '').to_i
-        solr_doc['sorted_month_isi'] = object.date_created.tr('-', '').slice(0..5).to_i
-        solr_doc['sorted_year_isi'] = object.date_created.slice(0..3).to_i
+        solr_doc['sorted_date_isi'] = date_created.tr('-', '').to_i
+        solr_doc['sorted_month_isi'] = date_created.tr('-', '').slice(0..5).to_i
+        solr_doc['sorted_year_isi'] = date_created.slice(0..3).to_i
       end
     end
   end

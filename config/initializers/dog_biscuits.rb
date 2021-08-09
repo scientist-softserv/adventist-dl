@@ -199,8 +199,8 @@ DogBiscuits.config do |config|
     title
     creator
     resource_type
+    date_created
     part_of
-    date_published
     license
     abstract
     volume_number
@@ -218,14 +218,12 @@ DogBiscuits.config do |config|
     contributor
     publisher
     output_of
-    resource_type
     subject
     keyword
     language
     based_near
     related_url
     rights_statement
-    license
     source
     aark_id
   ]
@@ -240,6 +238,7 @@ DogBiscuits.config do |config|
     place_of_publication
     publisher
     date_published
+    date_created
     date_available
     part
     pagination
