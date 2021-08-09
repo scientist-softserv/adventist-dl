@@ -762,3 +762,11 @@ body.public-facing.splash-index {
     background-color: #222222;
   }
 }
+
+//fix the collection image thumbnails in the dashboard so they don't overlap with the collection title & so they are square
+.dashboard {
+  .collections-wrapper .thumbnail-title-wrapper .thumbnail-wrapper > img {
+    width: 30px;
+    object-fit: cover;
+  }
+}
