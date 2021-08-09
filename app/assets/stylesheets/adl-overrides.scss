@@ -461,6 +461,13 @@ body.public-facing {
         color: $white;
     }
 
+    .panel.panel-default.permissions-confirm {
+        background-color: $black;
+    }
+    .form-actions.panel-footer {
+        border-top: 1px solid $mediumgrey;
+    }
+
 
     // /*MODALS */
 
