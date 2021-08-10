@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_03_172822) do
+ActiveRecord::Schema.define(version: 2021_07_29_105649) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2020_01_03_172822) do
     t.integer "fcrepo_endpoint_id"
     t.string "name"
     t.integer "redis_endpoint_id"
+    t.boolean "is_public", default: false
     t.index ["cname", "tenant"], name: "index_accounts_on_cname_and_tenant"
     t.index ["cname"], name: "index_accounts_on_cname", unique: true
     t.index ["fcrepo_endpoint_id"], name: "index_accounts_on_fcrepo_endpoint_id", unique: true
@@ -106,6 +107,16 @@ ActiveRecord::Schema.define(version: 2020_01_03_172822) do
     t.index ["parent_id"], name: "index_curation_concerns_operations_on_parent_id"
     t.index ["rgt"], name: "index_curation_concerns_operations_on_rgt"
     t.index ["user_id"], name: "index_curation_concerns_operations_on_user_id"
+  end
+
+  create_table "domain_names", force: :cascade do |t|
+    t.bigint "account_id"
+    t.string "cname"
+    t.boolean "is_active", default: true
+    t.boolean "is_ssl_enabled", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_domain_names_on_account_id"
   end
 
   create_table "domain_terms", id: :serial, force: :cascade do |t|
@@ -262,6 +273,9 @@ ActiveRecord::Schema.define(version: 2020_01_03_172822) do
     t.string "mailbox_type", limit: 25
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_delivered", default: false
+    t.string "delivery_method"
+    t.string "message_id"
     t.index ["notification_id"], name: "index_mailboxer_receipts_on_notification_id"
     t.index ["receiver_id", "receiver_type"], name: "index_mailboxer_receipts_on_receiver_id_and_receiver_type"
   end

@@ -43,7 +43,7 @@ Jump In: [![Slack Status](http://slack.samvera.org/badge.svg)](http://slack.samv
 
 #### Dory
 
-On OS X or Linux we recommend running [Dory](https://github.com/FreedomBen/dory). It acts as a proxy allowing you to access domains locally such as hyku.test or tenant.hyku.test, making multitenant development more straightforward and prevents the need to bind ports locally. Be sure to [adjust your ~/.dory.yml file to support the .test tld](https://github.com/FreedomBen/dory#config-file).  You can still run in development via docker with out Dory, but to do so please uncomment the ports section in docker-compose.yml and then find the running application at localhost:3000
+On OS X or Linux we recommend running [Dory](https://github.com/FreedomBen/dory). It acts as a proxy allowing you to access domains locally such as hyku.test or tenant.hyku.test, making multitenant development more straightforward and prevents the need to bind ports locally. Be sure to [adjust your ~/.dory.yml file to support the .test tld](https://github.com/FreedomBen/dory#config-file).  You can still run in development via docker with out Dory. To do so, copy `docker-compose.override-nodory.yml` to `docker-compose.override.yml` before starting doing docker-compose up.  You can then see the application t the loopback domain 'lvh.me:3000'.
 
 ```bash
 gem install dory
@@ -67,6 +67,9 @@ docker-compose exec web rake
 ```
 
 ### With out Docker
+
+Please note that this is unused by most contributors at this point and will likely become unsupported in a future release of Hyku unless someone in the community steps up to maintain it.
+
 #### For development
 
 ```bash
@@ -104,6 +107,12 @@ We distribute two `docker-compose.yml` configuration files.  The first is set up
 docker-compose up -d web
 ```
 
+Note: You may need to add your user to the "docker" group.
+
+```sudo gpasswd -a $USER docker
+newgrp docker
+```
+
 ### With Vagrant
 
 The [samvera-vagrant project](https://github.com/samvera-labs/samvera-vagrant) provides another simple way to get started "kicking the tires" of Hyku (and [Hyrax](http://hyr.ax/)), making it easy and quick to spin up Hyku. (Note that this is not for production or production-like installations.) It requires [VirtualBox](https://www.virtualbox.org/) and [Vagrant](https://www.vagrantup.com/).
@@ -123,11 +132,13 @@ In single tenant mode, both the application root (eg. localhost, or hyku.test) a
 To change from single- to multi-tenant mode, change the multitenancy/enabled flag to true and restart the application. Change the 'single' tenant account cname in the Accounts edit interface to the correct hostname.
 
 ## Switching accounts
-
-The recommend way to switch your current session from one account to another is by doing:
-
+There are three recommend ways to switch your current session from one account to another by using:
 ```ruby
-AccountElevator.switch!('repo.example.com')
+switch!(Account.first)
+# or
+switch!('my.site.com')
+# or
+switch!('myaccount')
 ```
 
 ## Development Dependencies

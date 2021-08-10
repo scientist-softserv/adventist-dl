@@ -60,6 +60,7 @@ supervisord.log
 supervisord.pid
 .dockerignore
 Dockerfile-local
+docker-compose.override.yml
 docker/docker-compose-2.dev.yml
 docker/local-docker-compose-2.yml
 
