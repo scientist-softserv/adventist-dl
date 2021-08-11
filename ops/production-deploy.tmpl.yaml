@@ -51,7 +51,7 @@ extraEnvVars:
   - name: CONFDIR
     value: "/app/samvera/hyrax-webapp/solr/config"
   - name: INITIAL_ADMIN_EMAIL
-    value: support@notch8.com
+    value: donotreply@adventistdigitallibrary.org
   - name: INITIAL_ADMIN_PASSWORD
     value: testing123
   - name: DATABASE_ADAPTER
@@ -93,9 +93,9 @@ extraEnvVars:
   - name: SETTINGS__ACTIVE_JOB__QUEUE_ADAPTER
     value: sidekiq
   - name: SETTINGS__CONTACT_EMAIL
-    value: support@notch8.com
+    value: donotreply@adventistdigitallibrary.org
   - name: SETTINGS__PRODUCTIONISE__INVITATION_FROM_EMAIL
-    value: support@notch8.com
+    value: donotreply@adventistdigitallibrary.org
   - name: SETTINGS__FITS_PATH
     value: /app/fits/fits.sh
   - name: SETTINGS__MULTITENANCY__ADMIN_HOST
@@ -129,15 +129,15 @@ extraEnvVars:
   - name: SMTP_ENABLED
     value: "true"
   - name: SMTP_USER_NAME
-    value: fc604e3b82d260
+    value: donotreply@adventistdigitallibrary.org
   - name: SMTP_PASSWORD
-    value: $SMTP_PASSWORD
+    value: $SMTP_PRODUCTION_PASSWORD
   - name: SMTP_ADDRESS
-    value: smtp.mailtrap.io
+    value: mail.adventistdigitallibrary.org
   - name: SMTP_DOMAIN
-    value: smtp.mailtrap.io
+    value: adventistdigitallibrary.org
   - name: SMTP_PORT
-    value: "2525"
+    value: "465"
   - name: SMTP_TYPE
     value: cram_md5
   - name: SENTRY_DSN
@@ -178,7 +178,7 @@ worker:
     - name: CONFDIR
       value: "/app/samvera/hyrax-webapp/solr/config"
     - name: INITIAL_ADMIN_EMAIL
-      value: support@notch8.com
+      value: donotreply@adventistdigitallibrary.org
     - name: INITIAL_ADMIN_PASSWORD
       value: testing123
     - name: DATABASE_ADAPTER
@@ -220,9 +220,9 @@ worker:
     - name: SETTINGS__ACTIVE_JOB__QUEUE_ADAPTER
       value: sidekiq
     - name: SETTINGS__CONTACT_EMAIL
-      value: support@notch8.com
+      value: donotreply@adventistdigitallibrary.org
     - name: SETTINGS__PRODUCTIONISE__INVITATION_FROM_EMAIL
-      value: support@notch8.com
+      value: donotreply@adventistdigitallibrary.org
     - name: SETTINGS__FITS_PATH
       value: /app/fits/fits.sh
     - name: SETTINGS__MULTITENANCY__ADMIN_HOST
@@ -256,15 +256,15 @@ worker:
     - name: SMTP_ENABLED
       value: "true"
     - name: SMTP_USER_NAME
-      value: fc604e3b82d260
+      value: donotreply@adventistdigitallibrary.org
     - name: SMTP_PASSWORD
-      value: $SMTP_PASSWORD
+      value: $SMTP_PRODUCTION_PASSWORD
     - name: SMTP_ADDRESS
-      value: smtp.mailtrap.io
+      value: mail.adventistdigitallibrary.org
     - name: SMTP_DOMAIN
-      value: smtp.mailtrap.io
+      value: adventistdigitallibrary.org
     - name: SMTP_PORT
-      value: "2525"
+      value: "465"
     - name: SMTP_TYPE
       value: cram_md5
     - name: SENTRY_DSN

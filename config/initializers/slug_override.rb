@@ -13,6 +13,29 @@ end
 # TESTED
 ActiveFedora::Base.singleton_class.send :prepend, FindWithSlug
 
+ActiveFedora::Persistence.class_eval do
+  def delete(opts = {})
+    return self if new_record?
+
+    @destroyed = true
+
+    id = self.id ## cache so it's still available after delete
+    solr_delete = self.to_param || self.id
+    # Clear out the ETag
+    @ldp_source = build_ldp_resource(id)
+    begin
+      @ldp_source.delete
+    rescue Ldp::NotFound
+      raise ObjectNotFoundError, "Unable to find #{id} in the repository"
+    end
+
+    ## OVERRIDE change delete to to_param instead of ID
+    ActiveFedora::SolrService.delete(solr_delete) if ActiveFedora.enable_solr_updates?
+    self.class.eradicate(id) if opts[:eradicate]
+    freeze
+  end
+end
+
 # TESTED
 ActiveFedora::Relation.class_eval do
   # Override ActiveFedora 12.1 to support slug lookup
