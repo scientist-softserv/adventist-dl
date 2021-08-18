@@ -278,6 +278,10 @@ body.public-facing {
       border: 2px solid $mediumgrey !important;
     }
 
+    div.input-group-btn button.btn.btn-default.dropdown-toggle {
+      background-color: #5b5b5b !important;
+    }
+
     form.form-horizontal.search-form .form-group .input-group {
       border: 1px solid $lightgrey2;
       border-radius: 4px;
