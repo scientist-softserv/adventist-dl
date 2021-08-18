@@ -129,7 +129,7 @@ body.public-facing {
       float: right;
       position: relative;
       margin-bottom: 20px;
-      margin-right: 12px
+      margin-right: 12px;
   }
   .container-fluid.row {
       padding: 0;
@@ -187,7 +187,7 @@ body.public-facing {
     ul#user_utility_links {
       padding: 0;
       margin: 0;
-      padding-top: 0
+      padding-top: 0;
     }
 
     div#top-navbar-collapse {
@@ -259,12 +259,12 @@ body.public-facing {
 
   @media (max-width: 767px){
     .searchbar-right.navbar-right {
-      padding-top: 0
+      padding-top: 0;
     }
   }
 
   #search-form-header {
-    margin-top: 0px;
+    margin-top: 0;
   }
 
   #search-field-header {
@@ -289,7 +289,7 @@ body.public-facing {
   form.form-horizontal.search-form .form-group .input-group {
     border: 1px solid $lightgrey2;
     border-radius: 4px;
-    margin-bottom: 0px
+    margin-bottom: 0;
   }
 
   @media (min-width: 1200px){
@@ -351,7 +351,7 @@ body.public-facing {
     background-color: $mediumyellow !important;
     border-color: $darkyellow !important;
     border: 2px solid $darkyellow !important;
-    outline:0 !important;
+    outline: 0 !important;
     color: $white !important;
   }
 
@@ -455,7 +455,7 @@ body.public-facing {
 
   // Breadcrumbs
   .breadcrumb {
-    border: 0 solid $black ;
+    border: 0 solid $black;
     background-color: $black;
     border-radius: 4px !important;
   }
@@ -546,7 +546,7 @@ body.public-facing {
   .work-show.metadata-block {
     .metadata-group {
       display: flex;
-      padding: 10px
+      padding: 10px;
     }
 
     .metadata-group:nth-child(even) {
@@ -591,7 +591,7 @@ body.public-facing {
   // SEARCH RESULTS PAGE
   .constraints-container {
     border-radius: 4px;
-    background-color: $mediumgrey
+    background-color: $mediumgrey;
   }
 
 
@@ -616,12 +616,12 @@ body.public-facing {
   }
 
   .legend {
-    color: $white !important
+    color: $white !important;
   }
 
   //changes the colors of icons in the dashboard
   .dashboard .main-header h1 .fa {
-    color: $lightyellow
+    color: $lightyellow;
   }
 
   // FORMS
@@ -632,7 +632,7 @@ body.public-facing {
     border: 0;
   }
   .form-control {
-    transition: border ease-in-out 0.2s, box-shadow ease-in-out 0.15s
+    transition: border ease-in-out 0.2s, box-shadow ease-in-out 0.15s;
   }
   .form-control:focus {
     -webkit-box-shadow: none;
@@ -652,13 +652,13 @@ body.public-facing {
 
   //LABELS
   .label-success {
-    background-color: $mediumyellow
+    background-color: $mediumyellow;
   }
   .label-info {
-    background-color: $darkyellow
+    background-color: $darkyellow;
   }
   .label-primary {
-    background-color: $lightyellow
+    background-color: $lightyellow;
   }
 
   //HOME PAGE CONTENT SECTIONS
