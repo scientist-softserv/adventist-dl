@@ -124,6 +124,17 @@ body.public-facing {
     background-color: $black !important;
     border-color: inherit;
   }
+  
+  .home-share-work a.btn.btn-primary.btn-lg {
+      float: right;
+      position: relative;
+      margin-bottom: 20px;
+      margin-right: 12px
+  }
+  .container-fluid.row {
+      padding: 0;
+      margin: 0;
+  }
 
   ul#user_utility_links {
     padding-top: 20px;
@@ -139,18 +150,6 @@ body.public-facing {
 
   .dropdown-menu .divider {
     background-color: $darkgrey !important;
-  }
-
-  .home-share-work a.btn.btn-primary.btn-lg {
-    float: right;
-    border: 3px solid #985F03 !important;
-    position: relative;
-    margin-bottom: 20px;
-    margin-right: 12px
-  }
-  .container-fluid.row {
-    padding: 0;
-    margin: 0;
   }
 
   .container > .navbar-header, .container > .navbar-collapse, .container > #facet-panel-collapse, .container-fluid > .navbar-header {
@@ -244,6 +243,7 @@ body.public-facing {
     color: $white;
     text-transform: none;
   }
+
   .navbar-static-top {
     border:0 solid white !important;
   }
@@ -282,10 +282,21 @@ body.public-facing {
     border: 2px solid $mediumgrey !important;
   }
 
+  div.input-group-btn button.btn.btn-default.dropdown-toggle {
+    background-color: $mediumgrey !important;
+  }
+
   form.form-horizontal.search-form .form-group .input-group {
     border: 1px solid $lightgrey2;
     border-radius: 4px;
     margin-bottom: 0px
+  }
+
+  @media (min-width: 1200px){
+    form.form-horizontal.search-form .form-group .input-group {
+      max-width: 700px;
+      float: right;
+    }
   }
 
   @media (max-width: 440px) {
@@ -321,16 +332,14 @@ body.public-facing {
   }
 
   ul.nav.nav-pills {
-    padding:0;
+    padding: 0;
     float: none;
   }
 
-  // /* PRIMARY BUTTON STYLES */
-
   .btn-primary {
     background-color: $mediumyellow !important;
-    border-color: $darkyellow !important;
-    border: 2px solid $darkyellow !important;
+    border-color: transparent !important;
+    border: 2px solid transparent !important;
   }
 
   a.btn.btn-primary {
@@ -339,7 +348,7 @@ body.public-facing {
 
   .btn-primary:focus,
   .btn-primary.focus {
-    background-color: $darkyellow !important;
+    background-color: $mediumyellow !important;
     border-color: $darkyellow !important;
     border: 2px solid $darkyellow !important;
     outline:0 !important;
@@ -347,7 +356,7 @@ body.public-facing {
   }
 
   .btn-primary:hover {
-    background-color: $darkyellow !important;
+    background-color: $mediumyellow !important;
     border-color: $darkyellow !important;
     border: 2px solid $darkyellow !important;
     outline: 0 !important;
@@ -356,7 +365,7 @@ body.public-facing {
 
   .btn-primary:active,
   .btn-primary.active {
-    background-color: $darkyellow !important;
+    background-color: $mediumyellow !important;
     border-color: $darkyellow !important;
     border: 2px solid $darkyellow !important;
     outline: 0 !important;
@@ -438,6 +447,10 @@ body.public-facing {
     outline: 0 !important;
     border: 2px solid $mediumgrey;
     color: grey !important;
+  }
+
+  a.btn.btn-danger {
+    color: white !important;
   }
 
   // Breadcrumbs
@@ -525,7 +538,7 @@ body.public-facing {
   }
 
   .close {
-    color: white;
+    color: $white;
     text-shadow: none;
     opacity: 0.6;
   }
