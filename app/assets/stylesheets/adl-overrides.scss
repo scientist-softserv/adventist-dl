@@ -255,12 +255,12 @@ body.public-facing {
 
     @media (max-width: 767px){
       .searchbar-right.navbar-right {
-          padding-top: 0
+          padding-top: 0;
       }
     }
 
     #search-form-header {
-      margin-top: 0px;
+      margin-top: 0;
     }
 
     #search-field-header {
@@ -285,7 +285,7 @@ body.public-facing {
     form.form-horizontal.search-form .form-group .input-group {
       border: 1px solid $lightgrey2;
       border-radius: 4px;
-      margin-bottom: 0px
+      margin-bottom: 0;
     }
 
     @media (min-width: 1200px){
@@ -319,7 +319,7 @@ body.public-facing {
     }
 
     .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
-      background-color: transparent !important ;
+      background-color: transparent !important;
     }
 
     .nav > li > a:hover, .nav > li > a:focus {
