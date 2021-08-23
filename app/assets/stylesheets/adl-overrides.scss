@@ -73,10 +73,6 @@ body.public-facing {
     color: $lightyellow !important;
   }
 
-  #sort-dropdown .dropdown-toggle, #per_page-dropdown .dropdown-toggle {
-    color: $lightyellow !important;
-  }
-
   p.terms-of-use a {
     color: $white !important;
   }
@@ -363,6 +359,10 @@ body.public-facing {
     border: 2px solid transparent !important;
   }
 
+  .btn:focus, .facets-toggle:focus, td.toggle input[type=submit]:focus, .btn.focus, .focus.facets-toggle, td.toggle input.focus[type=submit], .btn:active:focus, .facets-toggle:active:focus, td.toggle input[type=submit]:active:focus, .btn:active.focus, .facets-toggle:active.focus, td.toggle input[type=submit]:active.focus, .btn.active:focus, .active.facets-toggle:focus, td.toggle input.active[type=submit]:focus, .btn.active.focus, .active.focus.facets-toggle, td.toggle input.active.focus[type=submit] {
+    outline: 0;
+  }
+
   a.btn.btn-primary {
     color: $white !important;
   }
@@ -645,6 +645,50 @@ body.public-facing {
     color: $lightyellow;
   }
 
+  //COLLECTION-SHOW PAGE
+
+  .hyc-metadata, .hyc-description {
+    padding: 1em;
+  }
+
+  .hyc-blacklight {
+    padding: 0;
+  }
+
+  input#collection_search {
+    padding: 18px;
+  }
+
+  .hyc-container {
+    padding: 1em;
+  }
+
+  div.collection-list legend {
+    color: $white;
+  }
+
+  span#select2-chosen-1 {
+    color: $darkgrey;
+  }
+
+  .dropdown-btn {
+    color: $white;
+    background-color: $black;
+    border: 0;
+  }
+  .dropdown-btn:hover, li.dropdown-item:hover {
+    color: $lightyellow;
+  }
+
+  li.dropdown-item {
+    padding: 10px;
+    width: 200px;
+  }
+  li.dropdown-item:hover {
+    background-color: $darkgrey; 
+  }
+
+
   // FORMS
 
   .form-control, .form-control[readonly] {
@@ -656,9 +700,9 @@ body.public-facing {
     transition: border ease-in-out 0.2s, box-shadow ease-in-out 0.15s;
   }
   .form-control:focus {
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    border: 2px solid $mediumyellow !important;
+    -webkit-box-shadow: inset 0px 0px 0px 2px $mediumyellow;
+    box-shadow: inset 0px 0px 0px 2px $mediumyellow;
+    border: 0;
   }
 
   // Breadcrumbs
