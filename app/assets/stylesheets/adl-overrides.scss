@@ -222,9 +222,14 @@ body.public-facing {
   #masthead #logo img {
     padding: 10px;
     max-height: 104px;
-    max-width: 75%;
   }
 
+  @media (max-width: 553px){
+    #masthead #logo img {
+      max-width: 75%;
+    }
+  }
+  
   a#logo {
     align-self: center;
   }
