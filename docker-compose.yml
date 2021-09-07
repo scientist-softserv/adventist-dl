@@ -107,7 +107,7 @@ services:
     <<: *app
     environment:
       - VIRTUAL_PORT=3000
-      - VIRTUAL_HOST=hyku.test
+      - VIRTUAL_HOST=.hyku.test
     depends_on:
       - check_volumes
       - db
