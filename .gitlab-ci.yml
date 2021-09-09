@@ -72,6 +72,7 @@ test:
     POSTGRESQL_DATABASE: hyku
     POSTGRESQL_PASSWORD: postgres
     REDIS_HOST: redis
+    SETTINGS__BULKRAX__ENABLED: "true"
     SETTINGS__SOLR__URL: http://admin:admin@solr:8983/solr/
     SOLR_ADMIN_PASSWORD: admin
     SOLR_ADMIN_USER: admin
