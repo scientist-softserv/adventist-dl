@@ -225,6 +225,7 @@ hyku.dev:
     HELM_EXPERIMENTAL_OCI: 1
     HELM_RELEASE_NAME: hyku-dev
     KUBE_NAMESPACE: dev
+    SETTINGS__BULKRAX__ENABLED: "true"
     HELM_EXTRA_ARGS: >
       --values ops/dev-deploy.yaml
   script:
@@ -274,6 +275,7 @@ hyku.staging:
     HELM_EXPERIMENTAL_OCI: 1
     HELM_RELEASE_NAME: hyku-staging
     KUBE_NAMESPACE: adl-staging
+    SETTINGS__BULKRAX__ENABLED: "true"
     HELM_EXTRA_ARGS: >
       --values ops/staging-deploy.yaml
   script:
@@ -324,6 +326,7 @@ hyku.production:
     HELM_EXPERIMENTAL_OCI: 1
     HELM_RELEASE_NAME: hyku-production
     KUBE_NAMESPACE: production
+    SETTINGS__BULKRAX__ENABLED: "true"
     HELM_EXTRA_ARGS: >
       --values ops/production-deploy.yaml
   script:
