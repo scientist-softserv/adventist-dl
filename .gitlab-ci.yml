@@ -250,6 +250,7 @@ hyku.dev.stop:
   variables:
     HELM_RELEASE_NAME: hyku-dev
     KUBE_NAMESPACE: dev
+    SETTINGS__BULKRAX__ENABLED: "true"
     GIT_STRATEGY: none
   script:
     - export KUBECONFIG=$KUBECONFIG_ADVENTIST
@@ -300,6 +301,7 @@ hyku.staging.stop:
   variables:
     HELM_RELEASE_NAME: hyku-staging
     KUBE_NAMESPACE: adl-staging
+    SETTINGS__BULKRAX__ENABLED: "true"
     GIT_STRATEGY: none
   script:
     - export KUBECONFIG=$KUBECONFIG_R2
@@ -351,6 +353,7 @@ hyku.production.stop:
   variables:
     HELM_RELEASE_NAME: hyku-production
     KUBE_NAMESPACE: production
+    SETTINGS__BULKRAX__ENABLED: "true"
     GIT_STRATEGY: none
   script:
     - export KUBECONFIG=$KUBECONFIG_ADVENTIST
