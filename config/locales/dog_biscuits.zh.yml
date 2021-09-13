@@ -40,6 +40,99 @@ zh:
           subject_tesim: 学科
           title_tesim: 标题
   dog_biscuits:
+    fields:
+      abstract: 抽象的
+      access_provided_by: 访问提供
+      advisor: 顾问/主管
+      aip_current_location: AIP 当前位置
+      aip_current_path: AIP电流路径
+      aip_resource_uri: AIP 资源 URI
+      aip_size: AIP尺寸
+      aip_status: AIP 状态
+      aip_uuid: AIP UUID
+      alt: 出版地理编码
+      awarding_institution: 颁发机构
+      based_near: 地点
+      based_near_label: 地点
+      bibliographic_citation: 书目引文
+      contributor: 贡献者
+      contributor_combined: 贡献者
+      contributor_type: 贡献者类型
+      creator: 作者
+      date: 日期
+      date_accepted: 接受日期
+      date_collected: 收集日期
+      date_copyrighted: 受版权保护的日期
+      date_issued: 出版日期（印刷时）
+      date_of_award: 获奖日期
+      date_published: 发布日期
+      date_submitted: 提交日期
+      date_valid: 有效日期
+      dc_access_rights: 访问权限
+      dc_format: 格式
+      department: 部门、学校或教职员工
+      depositor: 所有者
+      description: 描述或摘要
+      dip_current_location: DIP 当前位置
+      dip_current_path: DIP 电流路径
+      dip_resource_uri: DIP 资源 URI
+      dip_size: 尺寸
+      dip_status: 拨码状态
+      dip_uuid: DIP UUID
+      doi: DOI
+      edition: 版
+      editor: 编辑
+      embargo_release_date: 禁运发布日期
+      event_date: 活动日期
+      extent: 程度
+      former_identifier: 前标识符
+      funder: 资助者
+      has_restriction: 限制说明
+      human_readable_type: 类型
+      identifier: 标识符
+      isbn: 国际标准书号
+      issue_number: 问题
+      keyword: 关键词
+      language: 语
+      last_access: 上次访问日期
+      lat: 纬度
+      lease_expiration_date: 租约到期日
+      license: 执照
+      location: 地点
+      long: 经度
+      managing_organisation: 管理机构
+      module_code: 模块代码
+      note: 笔记
+      number_of_downloads: 下载次数
+      official_url: 官方网址
+      origin_pipeline: 源管道
+      output_of: 项目或赠款的产出
+      package_ids: 包包含
+      packaged_by_ids: 包装内
+      packaged_by_titles: 包装内
+      pagination: 页面
+      part: 零件名称
+      part_of: 部分
+      place_of_publication: 出版地
+      presented_at: 提交于
+      proxy_depositor: 储户
+      publication_status: 发表状态
+      publisher: 出版商
+      qualification_level: 资质等级
+      qualification_name: 资质名称
+      refereed: 同行评审？
+      related_url: 相关网址
+      resource_type: 资源类型
+      resource_type_general: 一般资源类型
+      rights_statement: 权利声明
+      series: 系列
+      sip_uuid: SIP UUID
+      source: 来源
+      subject: 主题
+      subtitle: 字幕
+      title: 标题
+      transfer_uuid: 转移 UUID
+      volume_number: 体积
     labels:
       abstract: 抽象
       access_provided_by: 访问提供
@@ -50,7 +143,6 @@ zh:
       aip_size: AIP尺寸
       aip_status: AIP状态
       aip_uuid: AIP UUID
-      alt: 高度
       awarding_institution: 颁奖机构
       based_near: 地点
       based_near_label: 地点
@@ -62,7 +154,6 @@ zh:
       date_accepted: 接受日期
       date_collected: 收集日期
       date_copyrighted: 受版权保护的日期
-      date_issued: 发行日期
       date_of_award: 获奖日期
       date_published: 发布日期
       date_submitted: 提交日期
@@ -173,7 +264,7 @@ zh:
         aip_size: AIP尺寸
         aip_status: AIP状态
         aip_uuid: AIP UUID
-        alt: 高度
+        alt: 出版地理编码
         awarding_institution: 颁奖机构
         based_near: 地点
         based_near_label: 地点
@@ -185,7 +276,7 @@ zh:
         date_accepted: 接受日期
         date_collected: 收集日期
         date_copyrighted: 受版权保护的日期
-        date_issued: 发行日期
+        date_issued: 出版日期（印刷时）
         date_of_award: 获奖日期
         date_published: 发布日期
         date_submitted: 提交日期
