@@ -2,6 +2,10 @@
 
 class GenericWork < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
+  include DogBiscuits::DateIssued
+  include DogBiscuits::Geo
+  include DogBiscuits::PartOf
+  include DogBiscuits::PlaceOfPublication
   include SlugMetadata
   include AdventistMetadata
   include SlugBug

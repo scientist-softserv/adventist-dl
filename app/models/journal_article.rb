@@ -5,6 +5,10 @@
 class JournalArticle < DogBiscuits::JournalArticle
   include ::Hyrax::WorkBehavior
   include SlugBug
+  include DogBiscuits::BibliographicCitation
+  include DogBiscuits::DateIssued
+  include DogBiscuits::Geo
+  include DogBiscuits::PlaceOfPublication
 
   self.indexer = ::JournalArticleIndexer
   # Change this to restrict which works can be added as a child.

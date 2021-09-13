@@ -40,6 +40,99 @@ fr:
           subject_tesim: Assujettir
           title_tesim: Titre
   dog_biscuits:
+    fields:
+      abstract: Résumé
+      access_provided_by: Accès fourni par
+      advisor: Conseiller / superviseur
+      aip_current_location: Emplacement actuel de l'AIP
+      aip_current_path: Chemin actuel de l'AIP
+      aip_resource_uri: URI de la ressource AIP
+      aip_size: Taille de l'AIP
+      aip_status: Statut AIP
+      aip_uuid: UUID AIP
+      alt: Publication GéoCode
+      awarding_institution: Institution de certification
+      based_near: Emplacement
+      based_near_label: Emplacement
+      bibliographic_citation: Citation bibliographique
+      contributor: Donateur
+      contributor_combined: Donateur
+      contributor_type: Type de contributeur
+      creator: Auteur
+      date: Date
+      date_accepted: Date d'acceptation
+      date_collected: Date de collecte
+      date_copyrighted: Date de copyright
+      date_issued: Date de publication (telle qu'imprimée)
+      date_of_award: Date de la récompense
+      date_published: Date de publication
+      date_submitted: Date de soumission
+      date_valid: Date de validité
+      dc_access_rights: Des droits d'accès
+      dc_format: Format
+      department: Département, école ou faculté
+      depositor: Propriétaire
+      description: Description ou résumé
+      dip_current_location: Emplacement actuel DIP
+      dip_current_path: Chemin de courant DIP
+      dip_resource_uri: URI de ressource DIP
+      dip_size: Taille de trempette
+      dip_status: Statut DIP
+      dip_uuid: DIP UUID
+      doi: EST CE QUE JE
+      edition: Édition
+      editor: Éditeur
+      embargo_release_date: Les levées d'embargo sur
+      event_date: Date de l'évènement
+      extent: Le degré
+      former_identifier: Ancien identifiant
+      funder: Bailleur de fonds
+      has_restriction: Avis de restriction
+      human_readable_type: Taper
+      identifier: Identifiant
+      isbn: ISBN
+      issue_number: Problème
+      keyword: Mots clés
+      language: Langue
+      last_access: Date du dernier accès
+      lat: Latitude
+      lease_expiration_date: Le bail expire le
+      license: Licence
+      location: Emplacement
+      long: Longitude
+      managing_organisation: Organisation de gestion
+      module_code: Code du module
+      note: Noter
+      number_of_downloads: Nombre de téléchargements
+      official_url: URL officielle
+      origin_pipeline: Pipeline d'origine
+      output_of: Résultat du projet ou de la subvention
+      package_ids: Le paquet contient
+      packaged_by_ids: En paquet
+      packaged_by_titles: En paquet
+      pagination: Pages
+      part: Nom de la pièce
+      part_of: Partie de
+      place_of_publication: Place de publication
+      presented_at: Présenté à
+      proxy_depositor: Déposant
+      publication_status: Statut de publication
+      publisher: Éditeur
+      qualification_level: Niveau de qualification
+      qualification_name: Nom de la qualification
+      refereed: Évalués par les pairs?
+      related_url: URL associée
+      resource_type: Type de ressource
+      resource_type_general: Type de ressource général
+      rights_statement: Déclaration des droits
+      series: Séries
+      sip_uuid: UUID SIP
+      source: La source
+      subject: Sujet
+      subtitle: Sous-titre
+      title: Titre
+      transfer_uuid: Transférer l'UUID
+      volume_number: Le volume
     labels:
       abstract: Abstrait
       access_provided_by: Accès fourni par
@@ -50,7 +143,6 @@ fr:
       aip_size: Taille AIP
       aip_status: Statut AIP
       aip_uuid: UUID AIP
-      alt: Altitude
       awarding_institution: Institution de certification
       based_near: Emplacement
       based_near_label: Emplacement
@@ -62,7 +154,6 @@ fr:
       date_accepted: Date d'acceptation
       date_collected: Date de collecte
       date_copyrighted: Date protégée
-      date_issued: Date d'émission
       date_of_award: Date de la récompense
       date_published: Date de publication
       date_submitted: Date de soumission
@@ -173,7 +264,7 @@ fr:
         aip_size: Taille AIP
         aip_status: Statut AIP
         aip_uuid: UUID AIP
-        alt: Altitude
+        alt: Publication GéoCode
         awarding_institution: Institution de certification
         based_near: Emplacement
         based_near_label: Emplacement
@@ -185,7 +276,7 @@ fr:
         date_accepted: Date d'acceptation
         date_collected: Date de collecte
         date_copyrighted: Date protégée
-        date_issued: Date d'émission
+        date_issued: Date de publication (telle qu'imprimée)
         date_of_award: Date de la récompense
         date_published: Date de publication
         date_submitted: Date de soumission

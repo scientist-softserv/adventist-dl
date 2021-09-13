@@ -40,6 +40,99 @@ it:
           subject_tesim: Soggetto
           title_tesim: Titolo
   dog_biscuits:
+    fields:
+      abstract: Astratto
+      access_provided_by: Accesso fornito da
+      advisor: Consulente / supervisore
+      aip_current_location: Posizione attuale AIP
+      aip_current_path: Percorso corrente AIP
+      aip_resource_uri: URI risorsa AIP
+      aip_size: Dimensione AIP
+      aip_status: Stato AIP
+      aip_uuid: AIP UUID
+      alt: Pubblicazione GeoCodice
+      awarding_institution: Istituto di aggiudicazione
+      based_near: Posizione
+      based_near_label: Posizione
+      bibliographic_citation: Citazione bibliografica
+      contributor: Collaboratore
+      contributor_combined: Collaboratore
+      contributor_type: Tipo di collaboratore
+      creator: Autore
+      date: Data
+      date_accepted: Data di accettazione
+      date_collected: Data raccolta
+      date_copyrighted: Data protetta da copyright
+      date_issued: Data di pubblicazione (come stampato)
+      date_of_award: Data di assegnazione
+      date_published: Data di pubblicazione
+      date_submitted: Data di invio
+      date_valid: Data di validità
+      dc_access_rights: Diritti di accesso
+      dc_format: Formato
+      department: Dipartimento, Scuola o Facoltà
+      depositor: Proprietario
+      description: Descrizione o riepilogo
+      dip_current_location: DIP Posizione attuale
+      dip_current_path: Percorso corrente DIP
+      dip_resource_uri: URI risorsa DIP
+      dip_size: Dimensione IMMERSIONE
+      dip_status: Stato DIP
+      dip_uuid: DIP UUID
+      doi: DOI
+      edition: Edizione
+      editor: Editor
+      embargo_release_date: Rilasci di embargo su
+      event_date: Data dell'evento
+      extent: Estensione
+      former_identifier: Ex identificatore
+      funder: finanziatore
+      has_restriction: Nota di restrizione
+      human_readable_type: Tipo
+      identifier: Identificatore
+      isbn: ISBN
+      issue_number: Problema
+      keyword: Parole chiave
+      language: Lingua
+      last_access: Data dell'ultimo accesso
+      lat: Latitudine
+      lease_expiration_date: Il contratto scade il
+      license: Licenza
+      location: Posizione
+      long: Longitudine
+      managing_organisation: Gestione dell'organizzazione
+      module_code: Codice modulo
+      note: Nota
+      number_of_downloads: Numero di download
+      official_url: URL ufficiale
+      origin_pipeline: Pipeline di origine
+      output_of: Risultato del progetto o della sovvenzione
+      package_ids: Il pacchetto contiene
+      packaged_by_ids: Nel pacchetto
+      packaged_by_titles: Nel pacchetto
+      pagination: Pagine
+      part: Nome della parte
+      part_of: Parte di
+      place_of_publication: Luogo di pubblicazione
+      presented_at: Presentato a
+      proxy_depositor: Depositante
+      publication_status: Stato della pubblicazione
+      publisher: Editore
+      qualification_level: Livello di qualificazione
+      qualification_name: Nome della qualifica
+      refereed: Revisione paritaria?
+      related_url: URL correlato
+      resource_type: Tipo di risorsa
+      resource_type_general: Tipo di risorsa generale
+      rights_statement: Dichiarazione dei diritti
+      series: Serie
+      sip_uuid: SIP UUID
+      source: Fonte
+      subject: Soggetto
+      subtitle: Sottotitolo
+      title: Titolo
+      transfer_uuid: Trasferimento UUID
+      volume_number: Volume
     labels:
       abstract: Astratto
       access_provided_by: Accesso fornito da
@@ -50,7 +143,6 @@ it:
       aip_size: Dimensione AIP
       aip_status: Stato AIP
       aip_uuid: UUID AIP
-      alt: Altitudine
       awarding_institution: Istituzione premiante
       based_near: Posizione
       based_near_label: Posizione
@@ -62,7 +154,6 @@ it:
       date_accepted: Data accettata
       date_collected: Data di raccolta
       date_copyrighted: Data protetta da copyright
-      date_issued: Data emesso
       date_of_award: Data di assegnazione
       date_published: Data di pubblicazione
       date_submitted: Data di presentazione
@@ -173,7 +264,7 @@ it:
         aip_size: Dimensione AIP
         aip_status: Stato AIP
         aip_uuid: UUID AIP
-        alt: Altitudine
+        alt: Pubblicazione GeoCodice
         awarding_institution: Istituzione premiante
         based_near: Posizione
         based_near_label: Posizione
@@ -185,7 +276,7 @@ it:
         date_accepted: Data accettata
         date_collected: Data di raccolta
         date_copyrighted: Data protetta da copyright
-        date_issued: Data emesso
+        date_issued: Data di pubblicazione (come stampato)
         date_of_award: Data di assegnazione
         date_published: Data di pubblicazione
         date_submitted: Data di presentazione
