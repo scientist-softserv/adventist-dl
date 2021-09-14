@@ -65,3 +65,6 @@ docker/local-docker-compose-2.yml
 
 # mac add on
 .DS_Store
+.dory.yml
+docker-compose.override.yml
+docker-compose.override.disabled.yml
