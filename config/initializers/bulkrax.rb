@@ -44,8 +44,8 @@ if Settings.bulkrax.enabled
     config.field_mappings = {
       'Bulkrax::OaiQualifiedDcParser' => {
         'abstract' => { from: ['abstract'] },
-        'aark_id' => { from: ['aark_id'] },
-        'identifier' => { from: ['identifier'], source_identifier: true },
+        'aark_id' => { from: ['aark_id'], source_identifier: true },
+        'identifier' => { from: ['identifier'] },
         'bibliographic_citation' => { from: ['bibliographic_citation'] },
         'creator' => { from: ['creator'] },
         'contributor' => { from: ['contributor'] },
