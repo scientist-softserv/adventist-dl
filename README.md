@@ -27,7 +27,7 @@ Jump In: [![Slack Status](http://slack.samvera.org/badge.svg)](http://slack.samv
   * [Development dependencies](#development-dependencies)
     * [Postgres](#postgres)
   * [Importing](#importing)
-    * [enable Bulkrax](#bulkrax)
+    * [Enable Bulkrax](#enable-bulkrax)
     * [from CSV](#from-csv)
     * [from purl](#from-purl)
   * [Compatibility](#compatibility)
@@ -43,7 +43,7 @@ Jump In: [![Slack Status](http://slack.samvera.org/badge.svg)](http://slack.samv
 
 #### Dory
 
-On OS X or Linux we recommend running [Dory](https://github.com/FreedomBen/dory). It acts as a proxy allowing you to access domains locally such as hyku.test or tenant.hyku.test, making multitenant development more straightforward and prevents the need to bind ports locally. Be sure to [adjust your ~/.dory.yml file to support the .test tld](https://github.com/FreedomBen/dory#config-file).  You can still run in development via docker with out Dory. To do so, copy `docker-compose.override-nodory.yml` to `docker-compose.override.yml` before starting doing docker-compose up.  You can then see the application t the loopback domain 'lvh.me:3000'.
+On OS X or Linux we recommend running [Dory](https://github.com/FreedomBen/dory). It acts as a proxy allowing you to access domains locally such as hyku.test or tenant.hyku.test, making multitenant development more straightforward and prevents the need to bind ports locally. Be sure to [adjust your ~/.dory.yml file to support the .test tld](https://github.com/FreedomBen/dory#config-file).  You can still run in development via docker with out Dory. To do so, copy `docker-compose.override-nodory.yml` to `docker-compose.override.yml` before starting doing docker-compose up.  You can then see the application at the loopback domain 'lvh.me:3000'.
 
 ```bash
 gem install dory
@@ -148,9 +148,9 @@ switch!('myaccount')
 Hyku supports multitenancy using the `apartment` gem. `apartment` works best with a postgres database.
 
 ## Importing
-### enable Bulkrax:
+### Enable Bulkrax:
 
-- Set bulkrax -> enabled to true in settings (via file or env variable)
+- Set bulkrax -> enabled to true in the [config/settings.yml](config/settings.yml) and [.env](.env) files
 - Add `  require bulkrax/application` to app/assets/javascripts/application.js and app/assets/stylesheets/application.css files.
 
 (in a `docker-compose exec web bash` if you're doing docker otherwise in your terminal)

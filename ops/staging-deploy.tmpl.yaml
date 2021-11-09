@@ -90,6 +90,8 @@ extraEnvVars:
     value: redis://:staging@hyku-staging-redis-master:6379/adventist
   - name: SETTINGS__ACTIVE_JOB__QUEUE_ADAPTER
     value: sidekiq
+  - name: SETTINGS__BULKRAX__ENABLED
+    value: "true"
   - name: SETTINGS__CONTACT_EMAIL
     value: support@notch8.com
   - name: SETTINGS__DEVISE__INVITATION_FROM_EMAIL
@@ -213,6 +215,8 @@ worker:
     value: redis://:staging@hyku-staging-redis-master:6379/adventist
   - name: SETTINGS__ACTIVE_JOB__QUEUE_ADAPTER
     value: sidekiq
+  - name: SETTINGS__BULKRAX__ENABLED
+    value: "true"
   - name: SETTINGS__CONTACT_EMAIL
     value: support@notch8.com
   - name: SETTINGS__DEVISE__INVITATION_FROM_EMAIL

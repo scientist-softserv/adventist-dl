@@ -160,9 +160,6 @@ DogBiscuits.config do |config|
     keyword
     language
     based_near
-    alt
-    lat
-    long
     dc_format
     extent
     related_url
@@ -226,6 +223,10 @@ DogBiscuits.config do |config|
     rights_statement
     source
     aark_id
+    place_of_publication
+    date_issued
+    bibliographic_citation
+    alt
   ]
   config.journal_article_properties_required = Hyrax::GenericWorkForm.required_fields
 
@@ -257,6 +258,9 @@ DogBiscuits.config do |config|
     rights_statement
     source
     aark_id
+    extent
+    date_issued
+    alt
   ]
   config.published_work_properties_required = Hyrax::GenericWorkForm.required_fields
 
@@ -285,10 +289,18 @@ DogBiscuits.config do |config|
     rights_statement
     source
     aark_id
+    part_of
+    place_of_publication
+    extent
+    date_issued
+    bibliographic_citation
+    alt
   ]
   config.thesis_properties_required = Hyrax::GenericWorkForm.required_fields
 
   # PROPERTY MAPPINGS
+
+  config.property_mappings[:bibliographic_citation] = { label: 'Bibliographic Citation' }
   # All properties should be included in property_mappings. This is used by generators for building
   #   schema_org, locales, catalog_controller and attribute_rows. Adding info here and using
   #   generators saves on a lot of manual editing.

@@ -40,6 +40,99 @@ pt-BR:
           subject_tesim: Sujeito
           title_tesim: Título
   dog_biscuits:
+    fields:
+      abstract: Resumo
+      access_provided_by: Acesso fornecido por
+      advisor: Conselheiro / supervisor
+      aip_current_location: Localização atual de AIP
+      aip_current_path: Caminho atual AIP
+      aip_resource_uri: URI de recurso AIP
+      aip_size: Tamanho AIP
+      aip_status: Status AIP
+      aip_uuid: AIP UUID
+      alt: Publicação GeoCode
+      awarding_institution: Instituição de premiação
+      based_near: Localização
+      based_near_label: Localização
+      bibliographic_citation: Citação Biblográfica
+      contributor: Contribuinte
+      contributor_combined: Contribuinte
+      contributor_type: Tipo de contribuidor
+      creator: Autor
+      date: Encontro
+      date_accepted: Data de aceitação
+      date_collected: Data coletada
+      date_copyrighted: Data protegida por direitos autorais
+      date_issued: Data de publicação (conforme impresso)
+      date_of_award: Data do prêmio
+      date_published: Data de publicação
+      date_submitted: Data Enviada
+      date_valid: Data válida
+      dc_access_rights: Direitos de acesso
+      dc_format: Formato
+      department: Departamento, Escola ou Corpo Docente
+      depositor: Proprietário
+      description: Descrição ou resumo
+      dip_current_location: Localização atual do DIP
+      dip_current_path: Caminho atual DIP
+      dip_resource_uri: URI de recurso DIP
+      dip_size: Tamanho DIP
+      dip_status: Status DIP
+      dip_uuid: DIP UUID
+      doi: DOI
+      edition: Edição
+      editor: editor
+      embargo_release_date: Lançamentos de embargo em
+      event_date: Data do evento
+      extent: Extensão
+      former_identifier: Identificador anterior
+      funder: Financiador
+      has_restriction: Nota de restrição
+      human_readable_type: Modelo
+      identifier: Identificador
+      isbn: ISBN
+      issue_number: Edição
+      keyword: Palavras-chave
+      language: Língua
+      last_access: Data do último acesso
+      lat: Latitude
+      lease_expiration_date: O aluguel expira em
+      license: Licença
+      location: Localização
+      long: Longitude
+      managing_organisation: Organização de gestão
+      module_code: Código do módulo
+      note: Observação
+      number_of_downloads: Número de downloads
+      official_url: URL oficial
+      origin_pipeline: Pipeline de origem
+      output_of: Resultado do projeto ou doação
+      package_ids: O pacote contém
+      packaged_by_ids: No pacote
+      packaged_by_titles: No pacote
+      pagination: Páginas
+      part: Nome da peça
+      part_of: Parte de
+      place_of_publication: Local de publicação
+      presented_at: Apresentado em
+      proxy_depositor: Depositante
+      publication_status: Status de publicação
+      publisher: Editor
+      qualification_level: Nível de qualificação
+      qualification_name: Nome de qualificação
+      refereed: Revisado por pares?
+      related_url: URL relacionado
+      resource_type: Tipo de recurso
+      resource_type_general: Tipo de recurso geral
+      rights_statement: Declaração de direitos
+      series: Series
+      sip_uuid: SIP UUID
+      source: Fonte
+      subject: Sujeito
+      subtitle: Legenda
+      title: Título
+      transfer_uuid: Transferir UUID
+      volume_number: Volume
     labels:
       abstract: Abstrato
       access_provided_by: Acesso fornecido por
@@ -50,7 +143,6 @@ pt-BR:
       aip_size: Tamanho AIP
       aip_status: Status do AIP
       aip_uuid: AIP UUID
-      alt: Altitude
       awarding_institution: Instituição de premiação
       based_near: Localização
       based_near_label: Localização
@@ -62,7 +154,6 @@ pt-BR:
       date_accepted: Data aceita
       date_collected: Data recolhida
       date_copyrighted: Data protegida por direitos autorais
-      date_issued: Data de emissão
       date_of_award: Data do prêmio
       date_published: Data de publicação
       date_submitted: Data Enviada
@@ -173,7 +264,7 @@ pt-BR:
         aip_size: Tamanho AIP
         aip_status: Status do AIP
         aip_uuid: AIP UUID
-        alt: Altitude
+        alt: Publicação GeoCode
         awarding_institution: Instituição de premiação
         based_near: Localização
         based_near_label: Localização
@@ -185,7 +276,7 @@ pt-BR:
         date_accepted: Data aceita
         date_collected: Data recolhida
         date_copyrighted: Data protegida por direitos autorais
-        date_issued: Data de emissão
+        date_issued: Data de publicação (conforme impresso)
         date_of_award: Data do prêmio
         date_published: Data de publicação
         date_submitted: Data Enviada

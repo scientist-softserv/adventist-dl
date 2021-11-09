@@ -10,10 +10,11 @@ en:
       aip_size: AIP Size
       aip_status: AIP Status
       aip_uuid: AIP UUID
-      alt: Altitude
+      alt: Publication GeoCode
       awarding_institution: Awarding institution
       based_near: Location
       based_near_label: Location
+      bibliographic_citation: Biblographic Citation
       contributor: Contributor
       contributor_combined: Contributor
       contributor_type: Contributor type
@@ -22,7 +23,7 @@ en:
       date_accepted: Date accepted
       date_collected: Date collected
       date_copyrighted: Date copyrighted
-      date_issued: Date issued
+      date_issued: Publication Date (As Printed)
       date_of_award: Date of award
       date_published: Publication date
       date_submitted: Date submitted
@@ -133,7 +134,7 @@ en:
         aip_size: AIP Size
         aip_status: AIP Status
         aip_uuid: AIP UUID
-        alt: Altitude
+        alt: Publication GeoCode
         awarding_institution: Awarding institution
         based_near: Location
         based_near_label: Location
@@ -145,7 +146,7 @@ en:
         date_accepted: Date accepted
         date_collected: Date collected
         date_copyrighted: Date copyrighted
-        date_issued: Date issued
+        date_issued: Publication Date (As Printed)
         date_of_award: Date of award
         date_published: Publication date
         date_submitted: Date submitted

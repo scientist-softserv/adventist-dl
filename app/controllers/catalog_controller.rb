@@ -377,16 +377,14 @@ class CatalogController < ApplicationController
     # whether the sort is ascending or descending (it must be asc or desc
     # except in the relevancy case).
     # label is key, solr field is value
-    config.add_sort_field "score desc, #{uploaded_field} desc", label: "relevance"
+    config.add_sort_field "score desc, #{uploaded_field} desc", label: "Relevance"
 
-    config.add_sort_field "#{title_field} desc", label: "Title \u25BC"
-    config.add_sort_field "#{title_field} asc", label: "Title \u25B2"
-    config.add_sort_field "#{creator_field} desc", label: "Author \u25BC"
-    config.add_sort_field "#{creator_field} asc", label: "Author \u25B2"
-    config.add_sort_field "#{created_field} desc", label: "Date Created \u25BC"
-    config.add_sort_field "#{created_field} asc", label: "Date Created \u25B2"
-    config.add_sort_field "#{modified_field} desc", label: "Date Modified \u25BC"
-    config.add_sort_field "#{modified_field} asc", label: "Date Modified \u25B2"
+    config.add_sort_field "#{title_field} asc", label: "Title"
+    config.add_sort_field "#{creator_field} asc", label: "Author"
+    config.add_sort_field "#{created_field} asc", label: "Published Date (Ascending)"
+    config.add_sort_field "#{created_field} desc", label: "Published Date (Descending)"
+    config.add_sort_field "#{modified_field} asc", label: "Upload Date (Ascending)"
+    config.add_sort_field "#{modified_field} desc", label: "Upload Date (Descending)"
 
     config.oai = {
       provider: {

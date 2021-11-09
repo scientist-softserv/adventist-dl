@@ -6,6 +6,7 @@ x-app: &app
     target: hyku-base
     args:
       - EXTRA_APK_PACKAGES=less vim bash openjdk11-jre ffmpeg rsync
+      - SETTINGS__BULKRAX__ENABLED=true
   image: registry.gitlab.com/notch8/adventist-dl:${TAG:-latest}
   env_file:
     - .env
@@ -110,7 +111,7 @@ services:
     <<: *app
     environment:
       - VIRTUAL_PORT=3000
-      - VIRTUAL_HOST=hyku.test
+      - VIRTUAL_HOST=.hyku.test
     depends_on:
       initialize_app:
         condition: service_healthy
@@ -143,6 +144,7 @@ services:
       target: hyku-worker
       args:
         - EXTRA_APK_PACKAGES=less vim bash openjdk11-jre ffmpeg rsync
+        - SETTINGS__BULKRAX__ENABLED=true
       cache_from:
         - registry.gitlab.com/notch8/adventist-dl:${TAG:-latest}
         - registry.gitlab.com/notch8/adventist-dl/worker:${TAG:-latest}
