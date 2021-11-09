@@ -129,7 +129,7 @@ services:
         condition: service_started
       chrome:
         condition: service_started
-      workers:
+      worker:
         condition: service_started
       initialize_app:
         condition: service_completed_successfully

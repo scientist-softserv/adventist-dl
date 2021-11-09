@@ -3,7 +3,7 @@ stages:
   - build
   - lint
   - test
-  # - review
+  - review
   - staging
 
 before_script:
@@ -129,83 +129,51 @@ test:
   tags:
     - kubernetes
 
-# hyku.review:
-#   stage: review
-#   needs: ["hyku.build"]
-#   extends:
-#     - .deploy
-#   environment:
-#     name: hyku.review/$CI_MERGE_REQUEST_ID
-#     url: http://adl-hyku-$CI_MERGE_REQUEST_ID.$KUBE_INGRESS_BASE_DOMAIN
-#     on_stop: hyku.review.stop
-#     auto_stop_in: 1 day
-#   only:
-#     refs:
-#       - merge_requests
-#   variables:
-#     DEPLOY_IMAGE: $CI_REGISTRY_IMAGE
-#     DEPLOY_TAG: $CI_COMMIT_SHORT_SHA
-#     WORKER_IMAGE: $CI_REGISTRY_IMAGE/worker
-#     HELM_EXPERIMENTAL_OCI: 1
-#     HELM_RELEASE_NAME: hyku-$CI_MERGE_REQUEST_ID
-#     KUBE_NAMESPACE: adl-review
-#     KUBECONFIG: $KUBECONFIG_R2
-#     HELM_EXTRA_ARGS: >
-#       --values ops/review-deploys.yaml
-#       --set ingress.enabled=true
-#       --set ingress.hosts[0].host=adl-hyku-$CI_MERGE_REQUEST_ID.notch8.cloud
-#       --set ingress.hosts[0].paths[0].path="/"
-#       --set ingress.hosts[1].host=*.adl-hyku-$CI_MERGE_REQUEST_ID.notch8.cloud
-#       --set ingress.hosts[1].paths[0].path="/"
-#       --set extraEnvVars[0].name=SETTINGS__MULTITENANCY__ADMIN_HOST
-#       --set extraEnvVars[0].value=adl-hyku-$CI_MERGE_REQUEST_ID.notch8.cloud
-#       --set extraEnvVars[1].name=SETTINGS__MULTITENANCY__ROOT_HOST
-#       --set extraEnvVars[1].value=adl-hyku-$CI_MERGE_REQUEST_ID.notch8.cloud
-#       --set extraEnvVars[2].name=SETTINGS__MULTITENANCY__DEFAULT_HOST
-#       --set extraEnvVars[2].value=%{tenant}.adl-hyku-$CI_MERGE_REQUEST_ID.notch8.cloud
-#       --set extraEnvVars[3].name=SETTINGS__MULTITENANCY__ADMIN_ONLY_TENANT_CREATION
-#       --set extraEnvVars[3].value="false"
-#       --set extraEnvVars[4].name=CONFDIR
-#       --set extraEnvVars[4].value="/app/samvera/hyrax-webapp/solr/config"
-#       --set extraEnvVars[5].name=RAILS_LOG_TO_STDOUT
-#       --set extraEnvVars[5].value="true"
-#       --set extraEnvVars[6].name=INITIAL_ADMIN_EMAIL
-#       --set extraEnvVars[6].value=support@notch8.com
-#       --set extraEnvVars[7].name=INITIAL_ADMIN_PASSWORD
-#       --set extraEnvVars[7].value=testing123
-#       --set extraEnvVars[8].name=SETTINGS__SOLR__COLLECTION_OPTIONS__COLLECTION__CONFIG_NAME
-#       --set extraEnvVars[8].value=$CI_COMMIT_SHORT_SHA
-#       --set extraEnvVars[9].name=SOLR_CONFIGSET_NAME
-#       --set extraEnvVars[9].value=$CI_COMMIT_SHORT_SHA
-#   script:
-#     - helm chart pull ghcr.io/samvera/hyrax/hyrax-helm:0.18.0
-#     - helm chart export ghcr.io/samvera/hyrax/hyrax-helm:0.18.0
-#     - deploy hyrax
-#   tags:
-#     - kubernetes
+hyku.review:
+  stage: review
+  needs: ["hyku.build"]
+  extends:
+    - .deploy
+  environment:
+    name: hyku.review/$CI_MERGE_REQUEST_ID
+    url: http://adl-hyku-$CI_MERGE_REQUEST_ID.$KUBE_INGRESS_BASE_DOMAIN
+    on_stop: hyku.review.stop
+    auto_stop_in: 1 day
+  only:
+    refs:
+      - merge_requests
+  variables:
+    DEPLOY_IMAGE: $CI_REGISTRY_IMAGE
+    DEPLOY_TAG: $CI_COMMIT_SHORT_SHA
+    WORKER_IMAGE: $CI_REGISTRY_IMAGE/worker
+    HELM_EXPERIMENTAL_OCI: 1
+    HELM_EXTRA_ARGS: >
+      --values ops/review-deploy.yaml
+  script:
+    - export KUBECONFIG=$KUBECONFIG_R2
+    - envsubst < ops/review-deploy.tmpl.yaml > ops/review-deploy.yaml
+    - ./bin/helm_deploy hyku-$CI_MERGE_REQUEST_ID adl-review
+  tags:
+    - kubernetes
 
-# hyku.review.stop:
-#   stage: review
-#   extends:
-#     - .deploy
-#   environment:
-#     name: hyku.review/$CI_MERGE_REQUEST_ID
-#     url: http://hyku-$CI_MERGE_REQUEST_ID.$KUBE_INGRESS_BASE_DOMAIN
-#     action: stop
-#   when: manual
-#   allow_failure: true
-#   variables:
-#     HELM_RELEASE_NAME: hyku-$CI_MERGE_REQUEST_ID
-#     KUBE_NAMESPACE: adl-review
-#     GIT_STRATEGY: none
-#     KUBECONFIG: $KUBECONFIG_R2
-#   script:
-#     - delete
-#   only:
-#     refs:
-#       - merge_requests
-#   tags:
-#     - kubernetes
+hyku.review.stop:
+  stage: review
+  extends:
+    - .deploy
+  environment:
+    name: hyku.review/$CI_MERGE_REQUEST_ID
+    url: http://hyku-$CI_MERGE_REQUEST_ID.$KUBE_INGRESS_BASE_DOMAIN
+    action: stop
+  when: manual
+  allow_failure: true
+  script:
+    - export KUBECONFIG=$KUBECONFIG_R2
+    - .//bin/helm_delete hyku-$CI_MERGE_REQUEST_ID adl-review
+  only:
+    refs:
+      - merge_requests
+  tags:
+    - kubernetes
 
 hyku.dev:
   stage: staging
@@ -223,17 +191,12 @@ hyku.dev:
     DEPLOY_TAG: $CI_COMMIT_SHORT_SHA
     WORKER_IMAGE: $CI_REGISTRY_IMAGE/worker
     HELM_EXPERIMENTAL_OCI: 1
-    HELM_RELEASE_NAME: hyku-dev
-    KUBE_NAMESPACE: dev
-    SETTINGS__BULKRAX__ENABLED: "true"
     HELM_EXTRA_ARGS: >
       --values ops/dev-deploy.yaml
   script:
-    - helm chart pull ghcr.io/samvera/hyrax/hyrax-helm:0.18.0
-    - helm chart export ghcr.io/samvera/hyrax/hyrax-helm:0.18.0
     - export KUBECONFIG=$KUBECONFIG_ADVENTIST
     - envsubst < ops/dev-deploy.tmpl.yaml > ops/dev-deploy.yaml
-    - deploy hyrax
+    - ./bin/helm_deploy hyku-dev dev
   tags:
     - kubernetes
 
@@ -247,13 +210,9 @@ hyku.dev.stop:
     action: stop
   when: manual
   allow_failure: true
-  variables:
-    HELM_RELEASE_NAME: hyku-dev
-    KUBE_NAMESPACE: dev
-    GIT_STRATEGY: none
   script:
     - export KUBECONFIG=$KUBECONFIG_ADVENTIST
-    - delete
+    - .//bin/helm_delete hyku-dev dev
   tags:
     - kubernetes
 
@@ -273,17 +232,12 @@ hyku.staging:
     DEPLOY_TAG: $CI_COMMIT_SHORT_SHA
     WORKER_IMAGE: $CI_REGISTRY_IMAGE/worker
     HELM_EXPERIMENTAL_OCI: 1
-    HELM_RELEASE_NAME: hyku-staging
-    KUBE_NAMESPACE: adl-staging
-    SETTINGS__BULKRAX__ENABLED: "true"
     HELM_EXTRA_ARGS: >
       --values ops/staging-deploy.yaml
   script:
-    - helm chart pull ghcr.io/samvera/hyrax/hyrax-helm:0.18.0
-    - helm chart export ghcr.io/samvera/hyrax/hyrax-helm:0.18.0
     - export KUBECONFIG=$KUBECONFIG_R2
     - envsubst < ops/staging-deploy.tmpl.yaml > ops/staging-deploy.yaml
-    - deploy hyrax
+    - ./bin/helm_deploy hyku-staging adl-staging
   tags:
     - kubernetes
 
@@ -297,13 +251,9 @@ hyku.staging.stop:
     action: stop
   when: manual
   allow_failure: true
-  variables:
-    HELM_RELEASE_NAME: hyku-staging
-    KUBE_NAMESPACE: adl-staging
-    GIT_STRATEGY: none
   script:
     - export KUBECONFIG=$KUBECONFIG_R2
-    - delete
+    - .//bin/helm_delete hyku-staging adl-staging
   tags:
     - kubernetes
 
@@ -324,17 +274,12 @@ hyku.production:
     DEPLOY_TAG: $CI_COMMIT_SHORT_SHA
     WORKER_IMAGE: $CI_REGISTRY_IMAGE/worker
     HELM_EXPERIMENTAL_OCI: 1
-    HELM_RELEASE_NAME: hyku-production
-    KUBE_NAMESPACE: production
-    SETTINGS__BULKRAX__ENABLED: "true"
     HELM_EXTRA_ARGS: >
       --values ops/production-deploy.yaml
   script:
-    - helm chart pull ghcr.io/samvera/hyrax/hyrax-helm:0.18.0
-    - helm chart export ghcr.io/samvera/hyrax/hyrax-helm:0.18.0
     - export KUBECONFIG=$KUBECONFIG_ADVENTIST
     - envsubst < ops/production-deploy.tmpl.yaml > ops/production-deploy.yaml
-    - deploy hyrax
+    - ./bin/helm_deploy hyku-production production
   tags:
     - kubernetes
 
@@ -348,43 +293,11 @@ hyku.production.stop:
     action: stop
   when: manual
   allow_failure: true
-  variables:
-    HELM_RELEASE_NAME: hyku-production
-    KUBE_NAMESPACE: production
-    GIT_STRATEGY: none
   script:
     - export KUBECONFIG=$KUBECONFIG_ADVENTIST
-    - delete
+    - .//bin/helm_delete hyku-production production
   tags:
     - kubernetes
 
-.deploy_helpers: &deploy_helpers |
-  function deploy() {
-    helm repo update
-
-    chart="${1}"
-
-    helm upgrade \
-        --install \
-        --atomic \
-        --timeout 15m0s \
-        --set image.repository="$DEPLOY_IMAGE" \
-        --set image.tag="$DEPLOY_TAG" \
-        --set worker.image.repository="$WORKER_IMAGE" \
-        --set worker.image.tag="$DEPLOY_TAG" \
-        $HELM_EXTRA_ARGS \
-        --namespace="$KUBE_NAMESPACE" \
-        --create-namespace \
-        "$HELM_RELEASE_NAME" \
-        "${chart}"
-  }
-
-  function delete() {
-    echo "Deleting release: $HELM_RELEASE_NAME..."
-    helm --namespace "$KUBE_NAMESPACE" delete "$HELM_RELEASE_NAME"
-  }
-
 .deploy:
   image: dtzar/helm-kubectl:3.5.3
-  before_script:
-    - *deploy_helpers

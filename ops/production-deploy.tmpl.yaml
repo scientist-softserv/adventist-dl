@@ -46,8 +46,6 @@ extraEnvVars:
     value: b2.adventistdigitallibrary.org
   - name: SETTINGS__MULTITENANCY__DEFAULT_HOST
     value: "%{tenant}.b2.adventistdigitallibrary.org"
-  - name: SETTINGS__MULTITENANCY__ADMIN_ONLY_TENANT_CREATION
-    value: "false"
   - name: CONFDIR
     value: "/app/samvera/hyrax-webapp/solr/config"
   - name: INITIAL_ADMIN_EMAIL
@@ -100,8 +98,6 @@ extraEnvVars:
     value: donotreply@adventistdigitallibrary.org
   - name: SETTINGS__FITS_PATH
     value: /app/fits/fits.sh
-  - name: SETTINGS__MULTITENANCY__ADMIN_HOST
-    value: b2.adventistdigitallibrary.org
   - name: SETTINGS__MULTITENANCY__ADMIN_ONLY_TENANT_CREATION
     value: "true"
   - name: SETTINGS__MULTITENANCY__DEFAULT_HOST
@@ -175,8 +171,6 @@ worker:
       value: b2.adventistdigitallibrary.org
     - name: SETTINGS__MULTITENANCY__DEFAULT_HOST
       value: "%{tenant}.b2.adventistdigitallibrary.org"
-    - name: SETTINGS__MULTITENANCY__ADMIN_ONLY_TENANT_CREATION
-      value: "false"
     - name: CONFDIR
       value: "/app/samvera/hyrax-webapp/solr/config"
     - name: INITIAL_ADMIN_EMAIL
@@ -229,8 +223,6 @@ worker:
       value: donotreply@adventistdigitallibrary.org
     - name: SETTINGS__FITS_PATH
       value: /app/fits/fits.sh
-    - name: SETTINGS__MULTITENANCY__ADMIN_HOST
-      value: b2.adventistdigitallibrary.org
     - name: SETTINGS__MULTITENANCY__ADMIN_ONLY_TENANT_CREATION
       value: "true"
     - name: SETTINGS__MULTITENANCY__DEFAULT_HOST
