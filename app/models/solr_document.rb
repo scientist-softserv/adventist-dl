@@ -33,6 +33,8 @@ class SolrDocument
   attribute :slug, Solr::String, solr_name('slug')
   attribute :fedora_id, Solr::String, 'fedora_id_ssi'
   attribute :aark_id, Solr::String, 'aark_id_ssi'
+  attribute :bibliographic_citation, Solr::String, solr_name('bibliographic_citation')
+  attribute :alt, Solr::String, solr_name('alt')
 
   field_semantics.merge!(
     contributor: 'contributor_tesim',

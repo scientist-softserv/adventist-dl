@@ -1,6 +1,7 @@
 ---
 stages:
   - build
+  - lint
   - test
   # - review
   - staging
@@ -27,13 +28,18 @@ hyku.build:
     - local
 
 lint:
-  stage: test
+  stage: lint
   image: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
-  allow_failure: true
+  variables:
+    PRONTO_GITLAB_API_ENDPOINT: "https://gitlab.com/api/v4"
+  before_script:
+    - export PRONTO_GITLAB_API_PRIVATE_TOKEN=$GITLAB_API_TOKEN
+  allow_failure: false
   script:
-    - cd /app/samvera/hyrax-webapp
+    - git fetch && git checkout main && git checkout ${CI_COMMIT_SHORT_SHA}
     - bundle check || bundle
-    - bundle exec rubocop
+    - bundle exec pronto run -f gitlab -c origin/main
+    - cd /app/samvera/hyrax-webapp && bundle exec rubocop -P
   only:
     refs:
       - merge_requests
@@ -66,6 +72,7 @@ test:
     POSTGRESQL_DATABASE: hyku
     POSTGRESQL_PASSWORD: postgres
     REDIS_HOST: redis
+    SETTINGS__BULKRAX__ENABLED: "true"
     SETTINGS__SOLR__URL: http://admin:admin@solr:8983/solr/
     SOLR_ADMIN_PASSWORD: admin
     SOLR_ADMIN_USER: admin
@@ -218,6 +225,7 @@ hyku.dev:
     HELM_EXPERIMENTAL_OCI: 1
     HELM_RELEASE_NAME: hyku-dev
     KUBE_NAMESPACE: dev
+    SETTINGS__BULKRAX__ENABLED: "true"
     HELM_EXTRA_ARGS: >
       --values ops/dev-deploy.yaml
   script:
@@ -267,6 +275,7 @@ hyku.staging:
     HELM_EXPERIMENTAL_OCI: 1
     HELM_RELEASE_NAME: hyku-staging
     KUBE_NAMESPACE: adl-staging
+    SETTINGS__BULKRAX__ENABLED: "true"
     HELM_EXTRA_ARGS: >
       --values ops/staging-deploy.yaml
   script:
@@ -317,6 +326,7 @@ hyku.production:
     HELM_EXPERIMENTAL_OCI: 1
     HELM_RELEASE_NAME: hyku-production
     KUBE_NAMESPACE: production
+    SETTINGS__BULKRAX__ENABLED: "true"
     HELM_EXTRA_ARGS: >
       --values ops/production-deploy.yaml
   script:

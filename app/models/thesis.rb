@@ -5,6 +5,12 @@
 class Thesis < DogBiscuits::Thesis
   include ::Hyrax::WorkBehavior
   include SlugBug
+  include DogBiscuits::BibliographicCitation
+  include DogBiscuits::DateIssued
+  include DogBiscuits::Extent
+  include DogBiscuits::Geo
+  include DogBiscuits::PartOf
+  include DogBiscuits::PlaceOfPublication
 
   self.indexer = ::ThesisIndexer
   # Change this to restrict which works can be added as a child.

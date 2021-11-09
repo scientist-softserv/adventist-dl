@@ -5,6 +5,9 @@
 class PublishedWork < DogBiscuits::PublishedWork
   include ::Hyrax::WorkBehavior
   include SlugBug
+  include DogBiscuits::DateIssued
+  include DogBiscuits::Geo
+  include DogBiscuits::Extent
 
   self.indexer = ::PublishedWorkIndexer
   # Change this to restrict which works can be added as a child.
