@@ -4,12 +4,13 @@ if Settings.bulkrax.enabled
 
   Bulkrax.setup do |config|
     # Add local parsers
-    # config.parsers += [
-    #   { name: 'MODS - My Local MODS parser', class_name: 'Bulkrax::ModsXmlParser', partial: 'mods_fields' },
-    # ]
+    config.parsers += [
+      { name: "OAI - Adventist Digital Library", class_name: "Bulkrax::OaiQualifiedDcParser", partial: "oai_fields" },
+    ]
 
     # disable parsers
     config.parsers -= [
+      { name: "OAI - Qualified Dublin Core", class_name: "Bulkrax::OaiQualifiedDcParser", partial: "oai_fields" },
       { name: "OAI - Dublin Core", class_name: "Bulkrax::OaiDcParser", partial: "oai_fields" },
       { name: "CSV - Comma Separated Values", class_name: "Bulkrax::CsvParser", partial: "csv_fields" },
       { name: "Bagit", class_name: "Bulkrax::BagitParser", partial: "bagit_fields" },
