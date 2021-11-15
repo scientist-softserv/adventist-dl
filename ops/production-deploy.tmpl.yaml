@@ -87,7 +87,7 @@ extraEnvVars:
   - name: REDIS_HOST
     value: hyku-production-redis-master
   - name: REDIS_URL
-    value: redis://:staging@hyku-production-redis-master:6379/adventist
+    value: redis://:production@hyku-production-redis-master:6379/adventist
   - name: SETTINGS__ACTIVE_JOB__QUEUE_ADAPTER
     value: sidekiq
   - name: SETTINGS__BULKRAX__ENABLED
