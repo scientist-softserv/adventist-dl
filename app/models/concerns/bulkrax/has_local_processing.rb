@@ -7,8 +7,8 @@ module Bulkrax::HasLocalProcessing
   def add_local
     if self.parsed_metadata['model'] == 'Collection'
       self.parsed_metadata.delete('admin_set_id')
-      nested_collections = self.parsed_metadata.delete('member_of_collection_attributes')
-      self.parsed_metadata['collection'] = nested_collections.map { |k, v| v['id'] } if nested_collections.is_a?(Hash)
+      nested_collections = self.parsed_metadata.delete('member_of_collections_attributes')
+      self.parsed_metadata['collection'] = nested_collections.map { |k, v| v[:id] } if nested_collections.is_a?(Hash)
     end
   end
 end
