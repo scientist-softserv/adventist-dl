@@ -23,7 +23,7 @@ module Bulkrax::HasLocalProcessing
           collection = Collection.where(title_sim: collection_title).first || Collection.create(title: [collection_title], collection_type: Hyrax::CollectionType.find_by(title: 'User Collection'))
           self.parsed_metadata['member_of_collections_attributes'] || {}
           top_key = self.parsed_metadata['member_of_collections_attributes'].keys.map {|k| k.to_i}.sort.last || -1
-          self.parsed_metadata['member_of_collections_attributes'][top_key + 1] = collection.id
+          self.parsed_metadata['member_of_collections_attributes']["#{top_key + 1}"] = {id: collection.id}
         end
       end
     end
