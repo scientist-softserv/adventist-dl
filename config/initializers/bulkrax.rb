@@ -5,7 +5,7 @@ if Settings.bulkrax.enabled
   Bulkrax.setup do |config|
     # Add local parsers
     config.parsers += [
-      { name: "OAI - Adventist Digital Library", class_name: "Bulkrax::OaiQualifiedDcParser", partial: "oai_fields" },
+      { name: "OAI - Adventist Digital Library", class_name: "Bulkrax::OaiAdventistQdcParser", partial: "oai_fields" },
     ]
 
     # disable parsers
@@ -43,7 +43,7 @@ if Settings.bulkrax.enabled
     # or use a uuid
     #    config.fill_in_blank_source_identifiers = ->(parser, index) { SecureRandom.uuid }
     config.field_mappings = {
-      'Bulkrax::OaiQualifiedDcParser' => {
+      'Bulkrax::OaiAdventistQdcParser' => {
         'abstract' => { from: ['abstract'] },
         'aark_id' => { from: ['aark_id'] },
         'identifier' => { from: ['identifier'], source_identifier: true },
