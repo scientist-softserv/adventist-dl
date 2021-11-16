@@ -9,7 +9,7 @@ module Bulkrax::HasLocalProcessing
       add_collection_nesting
     else
       add_part_of_collections if self.parsed_metadata['part_of'].present?
-      add_set_collections if self.parsed_metadata['resource_type'].include?('Issue')
+      add_set_collections if self.parsed_metadata['resource_type']&.include?('Issue')
     end
   end
 
