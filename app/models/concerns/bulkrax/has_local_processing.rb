@@ -24,7 +24,7 @@ module Bulkrax::HasLocalProcessing
 
   def add_part_of_collections
     self.parsed_metadata['part_of'].each do |collection_title|
-      collection = Collection.where(title_sim: collection_title).first || Collection.create(title: [collection_title], collection_type: Hyrax::CollectionType.find_by(title: 'User Collection'))
+      collection = find_or_create_collection(collection_title)
       add_collection_to_work(collection)
     end
   end
@@ -42,10 +42,14 @@ module Bulkrax::HasLocalProcessing
 
     if self.parsed_metadata['part_of'].present?
       self.parsed_metadata['part_of'].each do |collection_title|
-        collection = Collection.where(title_sim: collection_title).first || Collection.create(title: [collection_title], collection_type: Hyrax::CollectionType.find_by(title: 'User Collection'))
+        collection = find_or_create_collection(collection_title)
         self.parsed_metadata['collection'] ||= []
         self.parsed_metadata['collection'] << collection.id
       end
     end
+  end
+
+  def find_or_create_collection(collection_title)
+    Collection.where(title_sim: collection_title).first || Collection.create(title: [collection_title], collection_type: Hyrax::CollectionType.find_by(title: 'User Collection'))
   end
 end
