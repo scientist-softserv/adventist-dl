@@ -70,7 +70,8 @@ if Settings.bulkrax.enabled
         'remote_files' => { from: ['related_url'] },
         'volume_number' => { from: ['volume_number'] },
         'alt' => { from: ['geocode'] },
-        'model' => { from: ['work_type'] }
+        'model' => { from: ['work_type'] },
+        'thumbnail_url' => { from: ['thumbnail_url']}
       }
     }
 
