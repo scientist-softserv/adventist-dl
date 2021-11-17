@@ -35,6 +35,12 @@ ingress:
     - host: s2.adventistdigitallibrary.org
       paths:
         - path: /
+    - host: adl.s2.adventistdigitallibrary.org
+      paths:
+        - path: /
+    - host: sdapi.s2.adventistdigitallibrary.org
+      paths:
+        - path: /
     - host: "*.s2.adventistdigitallibrary.org"
       paths:
         - path: /
