@@ -33,7 +33,7 @@ module Bulkrax
     def add_collection_to_work(collection)
       self.parsed_metadata['member_of_collections_attributes'] || {}
       top_key = self.parsed_metadata['member_of_collections_attributes'].keys.map { |k| k.to_i }.sort.last || -1
-      self.parsed_metadata['member_of_collections_attributes'][top_key + 1.to_s] = { id: collection.id }
+      self.parsed_metadata['member_of_collections_attributes'][(top_key + 1).to_s] = { id: collection.id }
     end
 
     def add_collection_nesting
