@@ -66,7 +66,7 @@ if Settings.bulkrax.enabled
         'part_of' => { from: ['part_of'] },
         'date_created' => { from: ['date_created'] },
         'title' => { from: ['title'] },
-        'subject' => { from: ['subject'] },
+        'subject' => { from: ['subject'], split: ';' },
         'remote_files' => { from: ['related_url'], split: ';', parsed: true },
         'volume_number' => { from: ['volume_number'] },
         'alt' => { from: ['geocode'] },
