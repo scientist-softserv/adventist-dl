@@ -30,12 +30,25 @@ Layout/IndentationConsistency:
 Layout/DotPosition:
   EnforcedStyle: leading
 
+Layout/EmptyLineAfterMagicComment:
+  Exclude:
+    - 'app/matchers/bulkrax/application_matcher.rb'
+
+Lint/UnusedBlockArgument:
+  Exclude:
+    - 'app/models/concerns/bulkrax/has_local_processing.rb'
+
+Metrics/AbcSize:
+  Exclude:
+    - 'app/indexers/hyrax/file_set_indexer.rb'
+
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*.rb'
     - 'lib/tasks/*.rake'
     - 'app/controllers/catalog_controller.rb'
     - 'app/models/adventist_metadata.rb'
+    - 'config/initializers/bulkrax.rb'
 
 Metrics/ClassLength:
   Exclude:
@@ -55,6 +68,13 @@ Metrics/LineLength:
     - 'spec/services/iiif_collection_thumbnail_path_service_spec.rb'
     - 'spec/services/iiif_work_thumbnail_path_service_spec.rb'
     - 'spec/routing/proprietor/accounts_routing_spec.rb'
+    - 'app/actors/hyrax/actors/create_with_remote_files_actor.rb'
+    - 'app/actors/hyrax/actors/file_set_actor.rb'
+    - 'app/matchers/bulkrax/application_matcher.rb'
+    - 'app/models/concerns/bulkrax/file_factory.rb'
+    - 'app/models/concerns/bulkrax/has_matchers.rb'
+    - 'config/initializers/bulkrax.rb'
+    - 'app/models/concerns/bulkrax/has_local_processing.rb'
 
 Metrics/ModuleLength:
   Max: 200
@@ -72,9 +92,18 @@ Rails/FilePath:
   Exclude:
     - 'spec/routing/**/*'
 
+Rails/FindBy:
+  Exclude:
+    - 'app/models/concerns/bulkrax/has_local_processing.rb'
+
 Rails/HasAndBelongsToMany:
   Exclude:
     - 'app/models/role.rb'
+
+Rails/Presence:
+  Exclude:
+    - 'app/actors/hyrax/actors/file_set_actor.rb'
+    - 'app/indexers/hyrax/file_set_indexer.rb'
 
 RSpec/AnyInstance:
   Enabled: false
@@ -131,9 +160,32 @@ Style/ClassAndModuleChildren:
 Style/Documentation:
   Enabled: false
 
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - 'app/actors/hyrax/actors/create_with_remote_files_actor.rb'
+    - 'app/actors/hyrax/actors/file_set_actor.rb'
+    - 'app/indexers/hyrax/file_set_indexer.rb'
+    - 'app/models/concerns/hyrax/file_set_behavior.rb'
+
 Style/GuardClause:
   Exclude:
     - 'app/search_builders/adv_search_builder.rb'
+    - 'app/models/concerns/bulkrax/has_local_processing.rb'
+
+Style/SymbolProc:
+  Exclude:
+    - 'app/models/concerns/bulkrax/has_local_processing.rb'
+
+Style/RedundantReturn:
+  Exclude:
+    - 'app/matchers/bulkrax/application_matcher.rb'
+    - 'app/models/concerns/bulkrax/has_matchers.rb'
+
+Style/RedundantSelf:
+  Exclude:
+    - 'app/matchers/bulkrax/application_matcher.rb'
+    - 'app/models/bulkrax/oai_adventist_qdc_entry.rb'
+    - 'app/models/concerns/bulkrax/has_local_processing.rb'
 
 Style/StringLiterals:
   Enabled: false

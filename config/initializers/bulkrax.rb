@@ -5,7 +5,7 @@ if Settings.bulkrax.enabled
   Bulkrax.setup do |config|
     # Add local parsers
     config.parsers += [
-      { name: "OAI - Adventist Digital Library", class_name: "Bulkrax::OaiAdventistQdcParser", partial: "oai_fields" },
+      { name: "OAI - Adventist Digital Library", class_name: "Bulkrax::OaiAdventistQdcParser", partial: "oai_adventist_fields" }
     ]
 
     # disable parsers
@@ -67,14 +67,28 @@ if Settings.bulkrax.enabled
         'date_created' => { from: ['date_created'] },
         'title' => { from: ['title'] },
         'subject' => { from: ['subject'] },
-        'remote_files' => { from: ['related_url'] },
+        'remote_files' => { from: ['related_url'], split: ';', parsed: true },
         'volume_number' => { from: ['volume_number'] },
         'alt' => { from: ['geocode'] },
         'model' => { from: ['work_type'] },
-        'thumbnail_url' => { from: ['thumbnail_url']}
+        'thumbnail_url' => { from: ['thumbnail_url'], default_thumbnail: true, parsed: true }
       }
     }
-
+    # Lambda to set the default field mapping
+    config.default_field_mapping = lambda do |field|
+      return if field.blank?
+      {
+        field.to_s =>
+        {
+          from: [field.to_s],
+          split: false,
+          parsed: Bulkrax::ApplicationMatcher.method_defined?("parse_#{field}"),
+          if: nil,
+          excluded: false,
+          default_thumbnail: false
+        }
+      }
+    end
     # WorkType to use as the default if none is specified in the import
     # Default is the first returned by Hyrax.config.curation_concerns
     # config.default_work_type = MyWork
