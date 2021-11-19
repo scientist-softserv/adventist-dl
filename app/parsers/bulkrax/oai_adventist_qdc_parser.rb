@@ -3,7 +3,7 @@
 module Bulkrax
   class OaiAdventistQdcParser < OaiQualifiedDcParser
     def entry_class
-      OaiQualifiedDcEntry
+      Bulkrax::OaiAdventistQdcEntry
     end
   end
 end
