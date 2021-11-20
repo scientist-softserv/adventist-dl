@@ -75,6 +75,7 @@ Metrics/LineLength:
     - 'app/models/concerns/bulkrax/has_matchers.rb'
     - 'config/initializers/bulkrax.rb'
     - 'app/models/concerns/bulkrax/has_local_processing.rb'
+    - 'app/services/hyrax/manifest_builder_service.rb'
 
 Metrics/ModuleLength:
   Max: 200
