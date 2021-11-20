@@ -71,7 +71,8 @@ if Settings.bulkrax.enabled
         'volume_number' => { from: ['volume_number'] },
         'alt' => { from: ['geocode'] },
         'model' => { from: ['work_type'] },
-        'thumbnail_url' => { from: ['thumbnail_url'], default_thumbnail: true, parsed: true }
+        'thumbnail_url' => { from: ['thumbnail_url'], default_thumbnail: true, parsed: true },
+        'official_url' => { from: ['remote_url'] }
       }
     }
     # Lambda to set the default field mapping
