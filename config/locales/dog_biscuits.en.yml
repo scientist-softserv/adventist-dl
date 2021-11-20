@@ -21,9 +21,10 @@ en:
       creator: Author
       date: Date
       date_accepted: Date accepted
+      date_created: Date created
       date_collected: Date collected
       date_copyrighted: Date copyrighted
-      date_issued: Publication Date (As Printed)
+      date_issued: Date
       date_of_award: Date of award
       date_published: Publication date
       date_submitted: Date submitted
@@ -144,9 +145,10 @@ en:
         creator: Author
         date: Date
         date_accepted: Date accepted
+        date_created: Date created
         date_collected: Date collected
         date_copyrighted: Date copyrighted
-        date_issued: Publication Date (As Printed)
+        date_issued: Date
         date_of_award: Date of award
         date_published: Publication date
         date_submitted: Date submitted
