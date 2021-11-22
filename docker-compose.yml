@@ -5,7 +5,6 @@ x-app: &app
     context: .
     target: hyku-base
     args:
-      - EXTRA_APK_PACKAGES=less vim bash openjdk11-jre ffmpeg rsync
       - SETTINGS__BULKRAX__ENABLED=true
   image: registry.gitlab.com/notch8/adventist-dl:${TAG:-latest}
   env_file:
@@ -143,7 +142,6 @@ services:
       context: .
       target: hyku-worker
       args:
-        - EXTRA_APK_PACKAGES=less vim bash openjdk11-jre ffmpeg rsync
         - SETTINGS__BULKRAX__ENABLED=true
       cache_from:
         - registry.gitlab.com/notch8/adventist-dl:${TAG:-latest}
