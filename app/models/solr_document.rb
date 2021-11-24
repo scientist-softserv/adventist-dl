@@ -41,7 +41,7 @@ class SolrDocument
     creator: 'creator_tesim',
     date: 'date_created_tesim',
     description: 'description_tesim',
-    identifier: 'identifier_tesim',
+    identifier: 'aark_id_tesim',
     language: 'language_tesim',
     publisher: 'publisher_tesim',
     relation: 'nesting_collection__pathnames_ssim',
