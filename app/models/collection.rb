@@ -7,4 +7,8 @@ class Collection < ActiveFedora::Base
   include SlugMetadata
   include AdventistMetadata
   self.indexer = CollectionIndexer
+
+  def after_update_nested_collection_relationship_indices
+    Rails.logger.error "skipping extra indexing"
+  end
 end
