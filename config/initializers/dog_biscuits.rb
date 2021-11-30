@@ -58,6 +58,7 @@ DogBiscuits.config do |config|
   # config.index_properties += [] # add to the end of the current list
   # config.index_properties -= [] # remove from the current list
   # config.index_properties = [] # replace the current list
+  config.index_properties += [:source]
 
   # Solr fields to exclude from search
   #   Add values as symbols (eg. :creator)

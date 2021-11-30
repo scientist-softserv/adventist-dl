@@ -5,9 +5,14 @@
 <%= render 'shared/citations' %>
 <%= render './shared/additional_citations' %>
 <div class="row work-type">
-  <div class="col-xs-12">
+<%# OVERRIDE Hyrax 2.9.1 here to hide the work type H1 title on all show-work pages %>
+  <%
+=begin%>
+ <div class="col-xs-12">
     <%= render 'work_type', presenter: @presenter %>
-  </div>
+  </div> 
+<%
+=end%>
   <div class="col-xs-12">&nbsp;</div>
   <div itemscope itemtype="http://schema.org/CreativeWork" class="col-xs-12">
     <div class="panel panel-default">
