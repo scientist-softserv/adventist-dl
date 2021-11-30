@@ -63,7 +63,7 @@ pt-BR:
       date_accepted: Data de aceitação
       date_collected: Data coletada
       date_copyrighted: Data protegida por direitos autorais
-      date_issued: Data de publicação (conforme impresso)
+      date_issued: Data de emissão
       date_of_award: Data do prêmio
       date_published: Data de publicação
       date_submitted: Data Enviada
@@ -112,7 +112,7 @@ pt-BR:
       packaged_by_titles: No pacote
       pagination: Páginas
       part: Nome da peça
-      part_of: Parte de
+      part_of: Periódica
       place_of_publication: Local de publicação
       presented_at: Apresentado em
       proxy_depositor: Depositante

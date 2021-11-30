@@ -112,7 +112,7 @@ es:
       packaged_by_titles: En paquete
       pagination: Paginas
       part: Nombre de la pieza
-      part_of: Parte de
+      part_of: Periódica
       place_of_publication: Lugar de publicacion
       presented_at: Presentado en
       proxy_depositor: Depositor
@@ -277,7 +277,7 @@ es:
         date_accepted: Fecha aceptada
         date_collected: Fecha de recogida
         date_copyrighted: Fecha con derechos de autor
-        date_issued: Fecha de publicación (impresa)
+        date_issued: Fecha de emisión
         date_of_award: Fecha del premio
         date_published: Fecha de publicación
         date_submitted: Fecha Enviado

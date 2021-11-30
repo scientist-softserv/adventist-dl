@@ -63,7 +63,7 @@ de:
       date_accepted: Datum akzeptiert
       date_collected: Datum gesammelt
       date_copyrighted: Datum urheberrechtlich geschützt
-      date_issued: Erscheinungsdatum (wie gedruckt)
+      date_issued: Ausgabetag
       date_of_award: Datum der Auszeichnung
       date_published: Veröffentlichungsdatum
       date_submitted: Datum eingereicht
@@ -112,7 +112,7 @@ de:
       packaged_by_titles: Im Paket
       pagination: Seiten
       part: Teilname
-      part_of: Teil von
+      part_of: Zeitschrift
       place_of_publication: Ort der Veröffentlichung
       presented_at: Präsentiert bei
       proxy_depositor: Einleger

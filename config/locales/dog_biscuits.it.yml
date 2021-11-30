@@ -112,7 +112,7 @@ it:
       packaged_by_titles: Nel pacchetto
       pagination: Pagine
       part: Nome della parte
-      part_of: Parte di
+      part_of: Periodica
       place_of_publication: Luogo di pubblicazione
       presented_at: Presentato a
       proxy_depositor: Depositante
@@ -277,7 +277,7 @@ it:
         date_accepted: Data accettata
         date_collected: Data di raccolta
         date_copyrighted: Data protetta da copyright
-        date_issued: Data di pubblicazione (come stampato)
+        date_issued: Data emesso
         date_of_award: Data di assegnazione
         date_published: Data di pubblicazione
         date_submitted: Data di presentazione

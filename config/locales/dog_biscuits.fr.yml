@@ -63,7 +63,7 @@ fr:
       date_accepted: Date d'acceptation
       date_collected: Date de collecte
       date_copyrighted: Date de copyright
-      date_issued: Date de publication (telle qu'imprimée)
+      date_issued: Date d'émission
       date_of_award: Date de la récompense
       date_published: Date de publication
       date_submitted: Date de soumission
@@ -112,7 +112,7 @@ fr:
       packaged_by_titles: En paquet
       pagination: Pages
       part: Nom de la pièce
-      part_of: Partie de
+      part_of: Périodique
       place_of_publication: Place de publication
       presented_at: Présenté à
       proxy_depositor: Déposant
