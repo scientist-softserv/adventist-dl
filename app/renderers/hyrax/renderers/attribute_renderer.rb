@@ -16,7 +16,7 @@ Hyrax::Renderers::AttributeRenderer.class_eval do
     markup = ''
 
     return markup if values.blank? && !options[:include_empty]
-    markup << %(<div class='metadata-group'><dt>#{label}</dt>\n<dd><ul class='tabular'>)
+    markup << %(<div class='metadata-group md-#{field}'><dt>#{label}</dt>\n<dd><ul class='tabular'>)
     attributes = microdata_object_attributes(field).merge(class: "attribute attribute-#{field}")
     Array(values).each do |value|
       markup << "<li#{html_attributes(attributes)}>#{attribute_value_to_html(value.to_s)}</li>"
@@ -28,7 +28,7 @@ Hyrax::Renderers::AttributeRenderer.class_eval do
   def render_dl_row
     return '' if values.blank? && !options[:include_empty]
 
-    markup = %(<div class='metadata-group'><dt>#{label}</dt>\n<dd><ul class='tabular'>)
+    markup = %(<div class='metadata-group md-#{field}'><dt>#{label}</dt>\n<dd><ul class='tabular'>)
 
     attributes = microdata_object_attributes(field).merge(class: "attribute attribute-#{field}")
 
