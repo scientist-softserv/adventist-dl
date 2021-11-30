@@ -76,6 +76,31 @@ module Hyrax
 
         ##
         # @deprecated supports old :member_of_collection_ids arguments
+        def assign_for_collection_ids(env)
+          collection_ids = env.attributes.delete(:member_of_collection_ids)
+
+          return false unless valid_membership?(env, collection_ids: collection_ids)
+
+          if collection_ids
+            Deprecation.warn(self, ':member_of_collection_ids has been deprecated for removal in Hyrax 3.0. ' \
+                                   'use :member_of_collections_attributes instead.')
+
+            collection_ids = [] if collection_ids.empty?
+            other_collections = collections_without_edit_access(env)
+
+            collections = ::Collection.find(collection_ids)
+            raise "Tried to assign collections with ids: #{collection_ids}, but none were found" unless
+              collections
+
+            env.curation_concern.member_of_collections = collections
+            env.curation_concern.member_of_collections.concat(other_collections)
+          end
+
+          true
+        end
+
+        ##
+        # @deprecated supports old :member_of_collection_ids arguments
         def collections_without_edit_access(env)
           env.curation_concern.member_of_collections.select { |coll| env.current_ability.cannot?(:edit, coll) }
         end
