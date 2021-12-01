@@ -14,7 +14,7 @@ module Hyrax
         apply_authorities(env)
         env.curation_concern.reindex_extent = Hyrax::Adapters::NestingIndexAdapter::LIMITED_REINDEX
 
-       super
+        super
       end
 
       # @param [Hyrax::Actors::Environment] env

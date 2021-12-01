@@ -15,7 +15,7 @@ module SlugMetadata
       index.as :stored_searchable
     end
 
-    # TODO Remove these overrides after mass index
+    # TODO: Remove these overrides after mass index
     def after_update_nested_collection_relationship_indices
       @during_save = false
     end
@@ -24,7 +24,5 @@ module SlugMetadata
       return if @during_save
       # reindex_nested_relationships_for(id: id, extent: reindex_extent)
     end
-
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Hyrax
   module HomepagePresenterDecorator
     # add feature flag for featured researcher
