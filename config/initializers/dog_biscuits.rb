@@ -48,7 +48,7 @@ DogBiscuits.config do |config|
   #   The ordering of the field names is the order of the display
   #   The properties must have been indexed as facetable
   #   Add values as symbols (eg. :creator)
-  # config.facet_properties += [] # add to the end of the current list
+  config.facet_properties += [:source] # add to the end of the current list
   config.facet_only_properties -= [:contributor_type] # remove from the current list
   # config.facet_properties = [] # replace the current list
 
@@ -57,8 +57,8 @@ DogBiscuits.config do |config|
   #   Add values as symbols (eg. :creator)
   # config.index_properties += [] # add to the end of the current list
   # config.index_properties -= [] # remove from the current list
-  # config.index_properties = [] # replace the current list
-  config.index_properties += [:source]
+  config.index_properties = [:title, :creator, :part_of, :date_issued, :subject, :source, :description] # replace the current list
+  # config.index_properties += [] # add to the end of the current list
 
   # Solr fields to exclude from search
   #   Add values as symbols (eg. :creator)
