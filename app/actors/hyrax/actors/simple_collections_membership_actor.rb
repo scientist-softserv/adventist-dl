@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 # Skips the single collection assignment logic
 # Skips permission checks
-
 
 module Hyrax
   module Actors
@@ -34,8 +35,6 @@ module Hyrax
         # @param env [Hyrax::Actors::Enviornment]
         # @return [Boolean]
         #
-        # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
-        # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
         def assign_nested_attributes_for_collection(env)
           attributes_collection = env.attributes.delete(:member_of_collections_attributes)
 
@@ -63,8 +62,6 @@ module Hyrax
 
           true
         end
-        # rubocop:enable Metrics/MethodLength, Metrics/AbcSize
-        # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
         ##
         # @deprecated supports old :member_of_collection_ids arguments
@@ -100,7 +97,9 @@ module Hyrax
         end
 
         def valid_membership?(env, collection_ids:)
-          multiple_memberships = Hyrax::MultipleMembershipChecker.new(item: env.curation_concern).check(collection_ids: collection_ids)
+          multiple_memberships = Hyrax::MultipleMembershipChecker
+                                 .new(item: env.curation_concern)
+                                 .check(collection_ids: collection_ids)
           if multiple_memberships
             env.curation_concern.errors.add(:collections, multiple_memberships)
             return false

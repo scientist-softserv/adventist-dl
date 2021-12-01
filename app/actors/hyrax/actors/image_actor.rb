@@ -12,8 +12,6 @@ module Hyrax
 
         super
       end
-
-
     end
   end
 end
