@@ -612,16 +612,7 @@ body.public-facing {
     .metadata-group {
       display: flex;
       padding: 10px;
-    }
-
-    .metadata-group:nth-child(even) {
-      background-color: $black;
-      border-radius: 5px;
-    }
-
-    .metadata-group:nth-child(odd) {
-      background-color: $darkgrey;
-      border-radius: 5px;
+      border-bottom: 1px solid $darkgrey;
     }
   }
 
