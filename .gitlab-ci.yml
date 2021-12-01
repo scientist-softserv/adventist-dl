@@ -1,10 +1,9 @@
 ---
 stages:
   - build
-  - lint
-  - test
+  - go
+  - stop
   - review
-  - staging
 
 before_script:
   - export TAG=${CI_COMMIT_SHORT_SHA}
@@ -28,7 +27,7 @@ hyku.build:
     - local
 
 lint:
-  stage: lint
+  stage: go
   image: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
   variables:
     PRONTO_GITLAB_API_ENDPOINT: "https://gitlab.com/api/v4"
@@ -47,7 +46,7 @@ lint:
     - kubernetes
 
 test:
-  stage: test
+  stage: go
   image: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
   allow_failure: true
   variables:
@@ -176,7 +175,7 @@ test:
 #     - kubernetes
 
 hyku.dev:
-  stage: staging
+  stage: go
   extends:
     - .deploy
   environment:
@@ -201,7 +200,7 @@ hyku.dev:
     - kubernetes
 
 hyku.dev.stop:
-  stage: staging
+  stage: stop
   extends:
     - .deploy
   environment:
@@ -217,7 +216,7 @@ hyku.dev.stop:
     - kubernetes
 
 hyku.staging:
-  stage: staging
+  stage: go
   extends:
     - .deploy
   environment:
@@ -242,7 +241,7 @@ hyku.staging:
     - kubernetes
 
 hyku.staging.stop:
-  stage: staging
+  stage: stop
   extends:
     - .deploy
   environment:
@@ -258,7 +257,7 @@ hyku.staging.stop:
     - kubernetes
 
 hyku.production:
-  stage: staging
+  stage: go
   extends:
     - .deploy
   environment:
@@ -268,7 +267,7 @@ hyku.production:
   only:
     refs:
       - main
-      - production-no-collection-index
+      - production
   when: manual
   variables:
     DEPLOY_IMAGE: $CI_REGISTRY_IMAGE
@@ -285,7 +284,7 @@ hyku.production:
     - kubernetes
 
 hyku.production.stop:
-  stage: staging
+  stage: stop
   extends:
     - .deploy
   environment:
@@ -293,6 +292,10 @@ hyku.production.stop:
     url: http://adl-hyku-production.notch8.cloud
     action: stop
   when: manual
+  only:
+    refs:
+      - main
+      - production
   allow_failure: true
   script:
     - export KUBECONFIG=$KUBECONFIG_ADVENTIST
