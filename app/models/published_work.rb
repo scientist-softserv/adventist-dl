@@ -5,6 +5,7 @@
 class PublishedWork < DogBiscuits::PublishedWork
   include ::Hyrax::WorkBehavior
   include SlugBug
+  include DogBiscuits::BibliographicCitation
   include DogBiscuits::DateIssued
   include DogBiscuits::Geo
   include DogBiscuits::Extent
