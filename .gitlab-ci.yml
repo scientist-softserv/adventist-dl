@@ -178,10 +178,6 @@ hyku.dev:
   stage: go
   extends:
     - .deploy
-  environment:
-    name: hyku.dev
-    url: http://adl-hyku-dev.notch8.cloud
-    on_stop: hyku.dev.stop
   only:
     refs:
       - main
@@ -199,30 +195,10 @@ hyku.dev:
   tags:
     - kubernetes
 
-hyku.dev.stop:
-  stage: stop
-  extends:
-    - .deploy
-  environment:
-    name: hyku.dev
-    url: http://adl-hyku-dev.notch8.cloud
-    action: stop
-  when: manual
-  allow_failure: true
-  script:
-    - export KUBECONFIG=$KUBECONFIG_ADVENTIST
-    - .//bin/helm_delete hyku-dev dev
-  tags:
-    - kubernetes
-
 hyku.staging:
   stage: go
   extends:
     - .deploy
-  environment:
-    name: hyku.staging
-    url: http://adl-hyku-staging.notch8.cloud
-    on_stop: hyku.staging.stop
   only:
     refs:
       - main
@@ -240,30 +216,10 @@ hyku.staging:
   tags:
     - kubernetes
 
-hyku.staging.stop:
-  stage: stop
-  extends:
-    - .deploy
-  environment:
-    name: hyku.staging
-    url: http://adlhyku-staging.$KUBE_INGRESS_BASE_DOMAIN
-    action: stop
-  when: manual
-  allow_failure: true
-  script:
-    - export KUBECONFIG=$KUBECONFIG_R2
-    - .//bin/helm_delete hyku-staging adl-staging
-  tags:
-    - kubernetes
-
 hyku.production:
   stage: go
   extends:
     - .deploy
-  environment:
-    name: hyku.production
-    url: http://adl-hyku-production.notch8.cloud
-    on_stop: hyku.production.stop
   only:
     refs:
       - main
@@ -280,26 +236,6 @@ hyku.production:
     - export KUBECONFIG=$KUBECONFIG_ADVENTIST
     - envsubst < ops/production-deploy.tmpl.yaml > ops/production-deploy.yaml
     - ./bin/helm_deploy hyku-production production
-  tags:
-    - kubernetes
-
-hyku.production.stop:
-  stage: stop
-  extends:
-    - .deploy
-  environment:
-    name: hyku.production
-    url: http://adl-hyku-production.notch8.cloud
-    action: stop
-  when: manual
-  only:
-    refs:
-      - main
-      - production
-  allow_failure: true
-  script:
-    - export KUBECONFIG=$KUBECONFIG_ADVENTIST
-    - .//bin/helm_delete hyku-production production
   tags:
     - kubernetes
 
