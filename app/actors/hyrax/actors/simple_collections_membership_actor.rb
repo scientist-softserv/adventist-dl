@@ -99,6 +99,15 @@ module Hyrax
           true
         end
 
+        def valid_membership?(env, collection_ids:)
+          multiple_memberships = Hyrax::MultipleMembershipChecker.new(item: env.curation_concern).check(collection_ids: collection_ids)
+          if multiple_memberships
+            env.curation_concern.errors.add(:collections, multiple_memberships)
+            return false
+          end
+          true
+        end
+
         ##
         # @deprecated supports old :member_of_collection_ids arguments
         def collections_without_edit_access(env)
