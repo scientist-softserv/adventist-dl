@@ -16,6 +16,6 @@ RSpec.describe "The splash page", multitenant: true do
       expect(page).to have_link 'Administrator login'
     end
 
-    expect(page).to have_content("© Adventist Digital Library, 2021")
+    expect(page).to have_content("© Adventist Digital Library 2021")
   end
 end
