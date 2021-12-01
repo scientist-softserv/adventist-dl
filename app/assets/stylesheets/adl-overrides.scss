@@ -945,10 +945,23 @@ body.public-facing.splash-index {
   }
 }
 
-//fix the collection image thumbnails in the dashboard so they don't overlap with the collection title & so they are square
 .dashboard {
+  //fix the collection image thumbnails in the dashboard so they don't overlap with the collection title & so they are square
   .collections-wrapper .thumbnail-title-wrapper .thumbnail-wrapper > img {
     width: 30px;
     object-fit: cover;
+  }
+
+  //make the background of dashboard navbar white
+  .navbar.navbar-inverse.navbar-static-top {
+    background-color: #ffffff;
+    .navbar-nav > li > a:hover {
+      color: #000000;
+    }
+    //hide the user utility links in dashboard as in defult hyku
+    #user_utility_links,
+    .navbar-toggle {
+      display: none;
+    }
   }
 }
