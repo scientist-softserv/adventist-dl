@@ -19,10 +19,6 @@ hyku.build:
     - docker-compose build worker
     - docker-compose push web
     - docker-compose push worker
-  only:
-    refs:
-      - merge_requests
-      - main
   tags:
     - local
 
@@ -39,9 +35,6 @@ lint:
     - bundle check || bundle
     - bundle exec pronto run -f gitlab -c origin/main
     - cd /app/samvera/hyrax-webapp && bundle exec rubocop -P
-  only:
-    refs:
-      - merge_requests
   tags:
     - kubernetes
 
@@ -114,10 +107,6 @@ test:
   after_script:
     - test -e /home/app/webapp/tmp/capybara && cp -r /home/app/webapp/tmp/capybara $CI_PROJECT_DIR/capybara
     - test -e /home/app/webapp/rspec.xml && cp /home/app/webapp/rspec.xml $CI_PROJECT_DIR/rspec.xml
-  only:
-    refs:
-      - merge_requests
-      - main
   artifacts:
     when: always
     paths:
