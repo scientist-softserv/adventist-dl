@@ -33,7 +33,9 @@ module AdventistMetadata
     property :based_near, predicate: ::RDF::Vocab::FOAF.based_near, class_name: Hyrax::ControlledVocabularies::Location
     property :related_url, predicate: ::RDF::RDFS.seeAlso
     property :bibliographic_citation, predicate: ::RDF::Vocab::DC.bibliographicCitation
-    property :source, predicate: ::RDF::Vocab::DC.source
+    property :source, predicate: ::RDF::Vocab::DC.source do |index|
+      index.as :stored_searchable, :facetable
+    end
 
     id_blank = proc { |attributes| attributes[:id].blank? }
 
