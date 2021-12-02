@@ -262,6 +262,7 @@ DogBiscuits.config do |config|
     extent
     date_issued
     alt
+    bibliographic_citation
   ]
   config.published_work_properties_required = Hyrax::GenericWorkForm.required_fields
 
