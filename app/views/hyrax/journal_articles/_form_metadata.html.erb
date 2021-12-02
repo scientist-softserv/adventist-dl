@@ -13,9 +13,9 @@
       'aria-controls'=> "extended-terms" %>
   <div id="extended-terms" class='collapse'>
     <%= render 'form_media', f: f %>
-    <%= f.object.secondary_terms.inspect %>
     <% f.object.secondary_terms.each do |term| %>
-      <%# OVERRIDE for JournalArticle so that the "Part of" label shows "Periodical" instead %>
+      <%# OVERRIDE of app/views/hyrax/base/_form_metadata.html.erb for JournalArticle
+          so that the "Part of" label shows "Periodical" instead %>
       <% if (f.object.multiple? term) && term == :part_of %>
         <%= f.input term, label: 'Periodical', as: :multi_value, input_html: { class: 'form-control' }, required: f.object.required?(term) %>
       <% elsif f.object.multiple? term %>
