@@ -21,6 +21,7 @@ en:
       creator: Author
       date: Date
       date_accepted: Date accepted
+      date_available: Date available
       date_created: Date created
       date_collected: Date collected
       date_copyrighted: Date copyrighted
@@ -123,7 +124,7 @@ en:
         related_url: A link to a website or other specific content (audio, video, PDF document) related to the work. An example is the URL of a research project from which the work was derived.
         resource_type: Pre-defined categories to describe the type of content being uploaded, such as &quot;article&quot; or &quot;dataset.&quot;  More than one type may be selected.
         subject: Headings or index terms describing what the work is about; these do need to conform to an existing vocabulary.
-        title: A name to aid in identifying a work. 
+        title: A name to aid in identifying a work.
     labels:
       defaults:
         abstract: Abstract
@@ -241,7 +242,7 @@ en:
           refereed_sim: Peer reviewed?
           publication_status_sim: Publication status
           packaged_by_titles_sim: In package
-          
+
         index:
           title_tesim: Title
           creator_tesim: Author
