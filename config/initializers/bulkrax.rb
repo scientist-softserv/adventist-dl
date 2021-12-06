@@ -72,7 +72,7 @@ if Settings.bulkrax.enabled
         'alt' => { from: ['geocode'] },
         'model' => { from: ['work_type'] },
         'thumbnail_url' => { from: ['thumbnail_url'], default_thumbnail: true, parsed: true },
-        'official_url' => { from: ['remote_url'] }
+        'official_url' => { from: ['remote_url'], split: ';' }
       }
     }
     # Lambda to set the default field mapping
