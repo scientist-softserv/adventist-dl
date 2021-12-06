@@ -36,7 +36,7 @@ RSpec.describe Hyrax::ImageForm do
           visibility_during_lease lease_expiration_date visibility_after_lease
           visibility ordered_member_ids source in_works_ids member_of_collection_ids
           admin_set_id resource_type extent aark_id part_of place_of_publication
-          date_issued alt
+          date_issued alt bibliographic_citation
         ]
       )
     end
