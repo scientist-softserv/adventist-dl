@@ -12,6 +12,8 @@ module Hyrax
       # @return [Boolean] true if create was successful
       def create(env)
         apply_authorities(env)
+        env.curation_concern.reindex_extent = Hyrax::Adapters::NestingIndexAdapter::LIMITED_REINDEX
+
         super
       end
 
