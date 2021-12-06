@@ -196,9 +196,3 @@ Qa::Authorities::Local.register_subauthority('genres', 'Qa::Authorities::Local::
 if Settings.bulkrax.enabled && Bulkrax.default_work_type.blank?
   Bulkrax.default_work_type = Hyrax.config.curation_concerns.first.to_s
 end
-
-
-Hyrax::CurationConcern.actor_factory.delete Hyrax::Actors::TransactionalRequest
-#Hyrax::CurationConcern.actor_factory.delete Hyrax::Actors::CreateWithRemoteFilesActor
-#Hyrax::CurationConcern.actor_factory.delete Hyrax::Actors::CreateWithFilesActor
-Hyrax::CurationConcern.actor_factory.swap Hyrax::Actors::CollectionsMembershipActor, Hyrax::Actors::SimpleCollectionsMembershipActor
