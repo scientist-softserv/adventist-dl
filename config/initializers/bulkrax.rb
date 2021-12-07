@@ -66,7 +66,6 @@ if Settings.bulkrax.enabled
       'place_of_publication' => { from: ['place_of_publication'] },
       'publisher' => { from: ['publisher'] },
       'remote_files' => { from: ['related_url'], split: ';', parsed: true },
-      'remote_url' => { from: ['remote_url'], split: ';' },
       'resource_type' => { from: ['resource_type'] },
       'rights_statement' => { from: ['rights_statement'] },
       'source' => { from: ['source'] },
