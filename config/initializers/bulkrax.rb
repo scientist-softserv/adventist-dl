@@ -60,7 +60,7 @@ if Settings.bulkrax.enabled
       'issue_number' => { from: ['issue_number'] },
       'language' => { from: ['language'] },
       'model' => { from: ['work_type'] },
-      'official_url' => { from: ['remote_url'], split: ';' }
+      'official_url' => { from: ['remote_url'], split: ';' },
       'pagination' => { from: ['pagination'] },
       'part_of' => { from: ['part_of'] },
       'place_of_publication' => { from: ['place_of_publication'] },
