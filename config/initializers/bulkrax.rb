@@ -17,6 +17,14 @@ if Settings.bulkrax.enabled
       { name: "XML", class_name: "Bulkrax::XmlParser", partial: "xml_fields" }
     ]
 
+    # Should Bulkrax make up source identifiers for you? This allow round tripping
+    # and download errored entries to still work, but does mean if you upload the
+    # same source record in two different files you WILL get duplicates.
+    # It is given two aruguments, self at the time of call and the index of the reocrd
+    #    config.fill_in_blank_source_identifiers = ->(parser, index) { "b-#{parser.importer.id}-#{index}"}
+    # or use a uuid
+    #    config.fill_in_blank_source_identifiers = ->(parser, index) { SecureRandom.uuid }
+
     # Field mappings
     # Create a completely new set of mappings by replacing the whole set as follows
     #   config.field_mappings = {
@@ -35,46 +43,38 @@ if Settings.bulkrax.enabled
     #   config.field_mappings["Bulkrax::OaiOmekaParser"] = {}
     #   config.field_mappings["Bulkrax::OaiDcParser"].each {|key,value| config.field_mappings["Bulkrax::OaiOmekaParser"][key] = value }
 
-    # Should Bulkrax make up source identifiers for you? This allow round tripping
-    # and download errored entries to still work, but does mean if you upload the
-    # same source record in two different files you WILL get duplicates.
-    # It is given two aruguments, self at the time of call and the index of the reocrd
-    #    config.fill_in_blank_source_identifiers = ->(parser, index) { "b-#{parser.importer.id}-#{index}"}
-    # or use a uuid
-    #    config.fill_in_blank_source_identifiers = ->(parser, index) { SecureRandom.uuid }
-    config.field_mappings = {
-      'Bulkrax::OaiAdventistQdcParser' => {
-        'abstract' => { from: ['abstract'] },
-        'aark_id' => { from: ['aark_id'] },
-        'identifier' => { from: ['identifier'], source_identifier: true },
-        'bibliographic_citation' => { from: ['bibliographic_citation'] },
-        'creator' => { from: ['creator'] },
-        'contributor' => { from: ['contributor'] },
-        'edition' => { from: ['edition'] },
-        'alternative_title' => { from: ['alternative_title'] },
-        'resource_type' => { from: ['resource_type'] },
-        'issue_number' => { from: ['issue_number'] },
-        'language' => { from: ['language'] },
-        'description' => { from: ['description'] },
-        'pagination' => { from: ['pagination'] },
-        'extent' => { from: ['extent'] },
-        'source' => { from: ['source'] },
-        'date_issued' => { from: ['date_issued'] },
-        'place_of_publication' => { from: ['place_of_publication'] },
-        'publisher' => { from: ['publisher'] },
-        'rights_statement' => { from: ['rights_statement'] },
-        'part_of' => { from: ['part_of'] },
-        'date_created' => { from: ['date_created'] },
-        'title' => { from: ['title'] },
-        'subject' => { from: ['subject'], split: ';' },
-        'remote_files' => { from: ['related_url'], split: ';', parsed: true },
-        'volume_number' => { from: ['volume_number'] },
-        'alt' => { from: ['geocode'] },
-        'model' => { from: ['work_type'] },
-        'thumbnail_url' => { from: ['thumbnail_url'], default_thumbnail: true, parsed: true },
-        'official_url' => { from: ['remote_url'], split: ';' }
-      }
+    config.field_mappings['Bulkrax::OaiAdventistQdcParser'] = {
+      'aark_id' => { from: ['aark_id'] },
+      'abstract' => { from: ['abstract'] },
+      'alt' => { from: ['geocode'] },
+      'alternative_title' => { from: ['alternative_title'] },
+      'bibliographic_citation' => { from: ['bibliographic_citation'] },
+      'contributor' => { from: ['contributor'] },
+      'creator' => { from: ['creator'] },
+      'date_created' => { from: ['date_created'] },
+      'date_issued' => { from: ['date_issued'] },
+      'description' => { from: ['description'] },
+      'edition' => { from: ['edition'] },
+      'extent' => { from: ['extent'] },
+      'identifier' => { from: ['identifier'], source_identifier: true },
+      'issue_number' => { from: ['issue_number'] },
+      'language' => { from: ['language'] },
+      'model' => { from: ['work_type'] },
+      'official_url' => { from: ['remote_url'], split: ';' },
+      'pagination' => { from: ['pagination'] },
+      'part_of' => { from: ['part_of'] },
+      'place_of_publication' => { from: ['place_of_publication'] },
+      'publisher' => { from: ['publisher'] },
+      'remote_files' => { from: ['related_url'], split: ';', parsed: true },
+      'resource_type' => { from: ['resource_type'] },
+      'rights_statement' => { from: ['rights_statement'] },
+      'source' => { from: ['source'] },
+      'subject' => { from: ['subject'], split: ';' },
+      'thumbnail_url' => { from: ['thumbnail_url'], default_thumbnail: true, parsed: true },
+      'title' => { from: ['title'] },
+      'volume_number' => { from: ['volume_number'] }
     }
+
     # Lambda to set the default field mapping
     config.default_field_mapping = lambda do |field|
       return if field.blank?
@@ -90,6 +90,7 @@ if Settings.bulkrax.enabled
         }
       }
     end
+
     # WorkType to use as the default if none is specified in the import
     # Default is the first returned by Hyrax.config.curation_concerns
     # config.default_work_type = MyWork
