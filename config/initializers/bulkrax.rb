@@ -66,13 +66,14 @@ if Settings.bulkrax.enabled
       'place_of_publication' => { from: ['place_of_publication'] },
       'publisher' => { from: ['publisher'] },
       'remote_files' => { from: ['related_url'], split: ';', parsed: true },
+      'remote_url' => { from: ['remote_url'], split: ';' },
       'resource_type' => { from: ['resource_type'] },
       'rights_statement' => { from: ['rights_statement'] },
       'source' => { from: ['source'] },
       'subject' => { from: ['subject'], split: ';' },
       'thumbnail_url' => { from: ['thumbnail_url'], default_thumbnail: true, parsed: true },
       'title' => { from: ['title'] },
-      'volume_number' => { from: ['volume_number'] },
+      'volume_number' => { from: ['volume_number'] }
     }
 
     # Lambda to set the default field mapping
