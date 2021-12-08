@@ -36,6 +36,10 @@ class SolrDocument
   attribute :bibliographic_citation, Solr::String, solr_name('bibliographic_citation')
   attribute :alt, Solr::String, solr_name('alt')
 
+  def remote_url
+    self[Solrizer.solr_name('remote_url')]
+  end
+
   field_semantics.merge!(
     contributor: 'contributor_tesim',
     creator: 'creator_tesim',

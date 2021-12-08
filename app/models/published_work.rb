@@ -9,6 +9,7 @@ class PublishedWork < DogBiscuits::PublishedWork
   include DogBiscuits::DateIssued
   include DogBiscuits::Geo
   include DogBiscuits::Extent
+  include DogBiscuits::RemoteUrl
 
   self.indexer = ::PublishedWorkIndexer
   # Change this to restrict which works can be added as a child.

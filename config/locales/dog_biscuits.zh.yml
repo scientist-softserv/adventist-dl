@@ -122,6 +122,7 @@ zh:
       qualification_name: 资质名称
       refereed: 同行评审？
       related_url: 相关网址
+      remote_url: 远程网址
       resource_type: 资源类型
       resource_type_general: 一般资源类型
       rights_statement: 权利声明
@@ -335,6 +336,7 @@ zh:
         qualification_name: 资格名称
         refereed: 同行评论？
         related_url: 相关网址
+        remote_url: 远程网址
         resource_type: 资源类型
         resource_type_general: 一般资源类型
         rights_statement: 权利声明

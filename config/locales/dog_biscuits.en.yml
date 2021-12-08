@@ -84,6 +84,7 @@ en:
       qualification_name: Qualification name
       refereed: Peer reviewed?
       related_url: Related URL
+      remote_url: Remote URL
       resource_type: Resource type
       resource_type_general: General resource type
       rights_statement: Rights statement
@@ -208,6 +209,7 @@ en:
         qualification_name: Qualification name
         refereed: Peer reviewed?
         related_url: Related URL
+        remote_url: Remote URL
         resource_type: Resource type
         resource_type_general: General resource type
         rights_statement: Rights statement

@@ -122,6 +122,7 @@ de:
       qualification_name: Qualifikationsname
       refereed: Peer-reviewed?
       related_url: Verwandte URL
+      remote_url: Remote-URL
       resource_type: Ressourcentyp
       resource_type_general: Allgemeiner Ressourcentyp
       rights_statement: Rechteerklärung
@@ -335,6 +336,7 @@ de:
         qualification_name: Name der Qualifikation
         refereed: Peer-Review?
         related_url: Verwandte URL
+        remote_url: Remote-URL
         resource_type: Ressourcentyp
         resource_type_general: Allgemeiner Ressourcentyp
         rights_statement: Rechteerklärung
