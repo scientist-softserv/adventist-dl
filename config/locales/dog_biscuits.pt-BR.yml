@@ -122,6 +122,7 @@ pt-BR:
       qualification_name: Nome de qualificação
       refereed: Revisado por pares?
       related_url: URL relacionado
+      remote_url: URL remoto
       resource_type: Tipo de recurso
       resource_type_general: Tipo de recurso geral
       rights_statement: Declaração de direitos
@@ -335,6 +336,7 @@ pt-BR:
         qualification_name: Nome da qualificação
         refereed: Peer reviewed?
         related_url: URL relacionado
+        remote_url: URL remoto
         resource_type: Tipo de recurso
         resource_type_general: Tipo de recurso geral
         rights_statement: Declaração de direitos

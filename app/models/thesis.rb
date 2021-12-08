@@ -11,6 +11,7 @@ class Thesis < DogBiscuits::Thesis
   include DogBiscuits::Geo
   include DogBiscuits::PartOf
   include DogBiscuits::PlaceOfPublication
+  include DogBiscuits::RemoteUrl
 
   self.indexer = ::ThesisIndexer
   # Change this to restrict which works can be added as a child.
