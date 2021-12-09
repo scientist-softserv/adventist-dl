@@ -22,7 +22,6 @@ module Bulkrax
       add_collections
       add_local
 
-      parsed_metadata
       self.parsed_metadata
     end
   end
