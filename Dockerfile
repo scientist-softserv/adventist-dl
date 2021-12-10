@@ -45,4 +45,4 @@ RUN RAILS_ENV=production SECRET_KEY_BASE=`bin/rake secret` DB_ADAPTER=nulldb DAT
 
 FROM hyku-base as hyku-worker
 ENV MALLOC_ARENA_MAX=2
-CMD bundle exec sidekiq
+CMD DATABASE_URL=`echo $DATABASE_URL | sed 's/pool=5/pool=30/'` bundle exec sidekiq
