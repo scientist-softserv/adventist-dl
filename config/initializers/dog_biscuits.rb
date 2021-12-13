@@ -48,7 +48,7 @@ DogBiscuits.config do |config|
   #   The ordering of the field names is the order of the display
   #   The properties must have been indexed as facetable
   #   Add values as symbols (eg. :creator)
-  config.facet_properties += [:rights_statement] # add to the end of the current list
+  config.facet_properties += [:source] # add to the end of the current list
   config.facet_only_properties -= [:contributor_type] # remove from the current list
   # config.facet_properties = [] # replace the current list
 
