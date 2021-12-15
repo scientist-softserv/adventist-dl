@@ -36,8 +36,6 @@ module Hyrax
         # @param env [Hyrax::Actors::Enviornment]
         # @return [Boolean]
         #
-        # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
-        # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
         def assign_nested_attributes_for_collection(env)
           attributes_collection = env.attributes.delete(:member_of_collections_attributes)
 
@@ -45,8 +43,9 @@ module Hyrax
 
           emit_deprecation if env.attributes.delete(:member_of_collection_ids)
           # OVERRIDE Hyrax 2.9
+          collection_id_map = attributes_collection.map { |_, attributes| attributes['id'] }
           return false unless env.importing ||
-            valid_membership?(env, collection_ids: attributes_collection.map { |_, attributes| attributes['id'] })
+                              valid_membership?(env, collection_ids: collection_id_map)
 
           attributes_collection = attributes_collection.sort_by { |i, _| i.to_i }.map { |_, attributes| attributes }
           # checking for existing works to avoid rewriting/loading works that are already attached
@@ -165,7 +164,8 @@ module Hyrax
         end
 
         def valid_membership?(env, collection_ids:)
-          multiple_memberships = Hyrax::MultipleMembershipChecker.new(item: env.curation_concern).check(collection_ids: collection_ids)
+          multiple_memberships = Hyrax::MultipleMembershipChecker.new(item: env.curation_concern)
+          multiple_memberships = multiple_memberships.check(collection_ids: collection_ids)
           if multiple_memberships
             env.curation_concern.errors.add(:collections, multiple_memberships)
             return false

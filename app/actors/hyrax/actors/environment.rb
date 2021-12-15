@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # OVERRIDE Hyrax 2.9 to add in import flag
 module Hyrax
   module Actors
