@@ -69,3 +69,4 @@ docker/local-docker-compose-2.yml
 .dory.yml
 docker-compose.override.yml
 docker-compose.override.disabled.yml
+solr_db_initialized
