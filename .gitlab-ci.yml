@@ -41,7 +41,7 @@ lint:
 test:
   stage: go
   image: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
-  allow_failure: false
+  allow_failure: true
   variables:
     ALLOW_ANONYMOUS_LOGIN: "yes"
     CONFDIR: "/app/samvera/hyrax-webapp/solr/config"
