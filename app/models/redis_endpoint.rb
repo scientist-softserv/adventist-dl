@@ -36,7 +36,8 @@ class RedisEndpoint < Endpoint
   end
 
   def switch_sidekiq(namespace)
-    config = YAML.load(ERB.new(IO.read(Rails.root + 'config' + 'redis.yml')).result)[Rails.env].with_indifferent_access
+    yaml = YAML.safe_load(ERB.new(IO.read(Rails.root + 'config' + 'redis.yml')).result)
+    config = yaml[Rails.env].with_indifferent_access
     redis_config = config.merge(thread_safe: true)
     redis_config = redis_config.merge(namespace: namespace) if namespace
 
