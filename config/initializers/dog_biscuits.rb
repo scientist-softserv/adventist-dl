@@ -301,7 +301,6 @@ DogBiscuits.config do |config|
   config.thesis_properties_required = Hyrax::GenericWorkForm.required_fields
 
   # PROPERTY MAPPINGS
-
   config.property_mappings[:bibliographic_citation] = { label: 'Bibliographic Citation' }
   # All properties should be included in property_mappings. This is used by generators for building
   #   schema_org, locales, catalog_controller and attribute_rows. Adding info here and using
