@@ -7,7 +7,7 @@ class AccountElevator < Apartment::Elevators::Generic
   # @return [String] The tenant to switch to
   def parse_tenant_name(request)
     account = Account.from_request(request)
-
+    account || Account.new.reset! # reset everything if no account is present
     account&.tenant
   end
 end

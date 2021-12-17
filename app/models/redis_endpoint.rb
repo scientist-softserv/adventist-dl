@@ -23,6 +23,8 @@ class RedisEndpoint < Endpoint
     Sidekiq.configure_client do |s|
       s.redis = redis_config
     end
+    Sidekiq::Web.app_url = "https://#{Site.instance&.account&.cname || Account.admin_host}"
+    Sidekiq::Web.redis_pool = Sidekiq.redis_pool
   end
 
   def switch!
