@@ -122,6 +122,7 @@ fr:
       qualification_name: Nom de la qualification
       refereed: Évalués par les pairs?
       related_url: URL associée
+      remote_url: URL distante
       resource_type: Type de ressource
       resource_type_general: Type de ressource général
       rights_statement: Déclaration des droits
@@ -335,6 +336,7 @@ fr:
         qualification_name: Nom de qualification
         refereed: Peer examiné?
         related_url: URL associée
+        remote_url: URL distante
         resource_type: Type de ressource
         resource_type_general: Type de ressource générale
         rights_statement: Déclaration de droits

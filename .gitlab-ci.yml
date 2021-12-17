@@ -1,10 +1,9 @@
 ---
 stages:
   - build
-  - lint
-  - test
+  - go
+  - stop
   - review
-  - staging
 
 before_script:
   - export TAG=${CI_COMMIT_SHORT_SHA}
@@ -20,15 +19,11 @@ hyku.build:
     - docker-compose build worker
     - docker-compose push web
     - docker-compose push worker
-  only:
-    refs:
-      - merge_requests
-      - main
   tags:
     - local
 
 lint:
-  stage: lint
+  stage: go
   image: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
   variables:
     PRONTO_GITLAB_API_ENDPOINT: "https://gitlab.com/api/v4"
@@ -40,14 +35,11 @@ lint:
     - bundle check || bundle
     - bundle exec pronto run -f gitlab -c origin/main
     - cd /app/samvera/hyrax-webapp && bundle exec rubocop -P
-  only:
-    refs:
-      - merge_requests
   tags:
-    - kubernetes
+    - docker
 
 test:
-  stage: test
+  stage: go
   image: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
   allow_failure: true
   variables:
@@ -115,10 +107,6 @@ test:
   after_script:
     - test -e /home/app/webapp/tmp/capybara && cp -r /home/app/webapp/tmp/capybara $CI_PROJECT_DIR/capybara
     - test -e /home/app/webapp/rspec.xml && cp /home/app/webapp/rspec.xml $CI_PROJECT_DIR/rspec.xml
-  only:
-    refs:
-      - merge_requests
-      - main
   artifacts:
     when: always
     paths:
@@ -127,7 +115,7 @@ test:
     reports:
       junit: rspec.xml
   tags:
-    - kubernetes
+    - docker
 
 # hyku.review:
 #   stage: review
@@ -176,13 +164,9 @@ test:
 #     - kubernetes
 
 hyku.dev:
-  stage: staging
+  stage: go
   extends:
     - .deploy
-  environment:
-    name: hyku.dev
-    url: http://adl-hyku-dev.notch8.cloud
-    on_stop: hyku.dev.stop
   only:
     refs:
       - main
@@ -200,30 +184,10 @@ hyku.dev:
   tags:
     - kubernetes
 
-hyku.dev.stop:
-  stage: staging
-  extends:
-    - .deploy
-  environment:
-    name: hyku.dev
-    url: http://adl-hyku-dev.notch8.cloud
-    action: stop
-  when: manual
-  allow_failure: true
-  script:
-    - export KUBECONFIG=$KUBECONFIG_ADVENTIST
-    - .//bin/helm_delete hyku-dev dev
-  tags:
-    - kubernetes
-
 hyku.staging:
-  stage: staging
+  stage: go
   extends:
     - .deploy
-  environment:
-    name: hyku.staging
-    url: http://adl-hyku-staging.notch8.cloud
-    on_stop: hyku.staging.stop
   only:
     refs:
       - main
@@ -241,33 +205,14 @@ hyku.staging:
   tags:
     - kubernetes
 
-hyku.staging.stop:
-  stage: staging
-  extends:
-    - .deploy
-  environment:
-    name: hyku.staging
-    url: http://adlhyku-staging.$KUBE_INGRESS_BASE_DOMAIN
-    action: stop
-  when: manual
-  allow_failure: true
-  script:
-    - export KUBECONFIG=$KUBECONFIG_R2
-    - .//bin/helm_delete hyku-staging adl-staging
-  tags:
-    - kubernetes
-
 hyku.production:
-  stage: staging
+  stage: go
   extends:
     - .deploy
-  environment:
-    name: hyku.production
-    url: http://adl-hyku-production.notch8.cloud
-    on_stop: hyku.production.stop
   only:
     refs:
       - main
+      - production
   when: manual
   variables:
     DEPLOY_IMAGE: $CI_REGISTRY_IMAGE
@@ -280,22 +225,6 @@ hyku.production:
     - export KUBECONFIG=$KUBECONFIG_ADVENTIST
     - envsubst < ops/production-deploy.tmpl.yaml > ops/production-deploy.yaml
     - ./bin/helm_deploy hyku-production production
-  tags:
-    - kubernetes
-
-hyku.production.stop:
-  stage: staging
-  extends:
-    - .deploy
-  environment:
-    name: hyku.production
-    url: http://adl-hyku-production.notch8.cloud
-    action: stop
-  when: manual
-  allow_failure: true
-  script:
-    - export KUBECONFIG=$KUBECONFIG_ADVENTIST
-    - .//bin/helm_delete hyku-production production
   tags:
     - kubernetes
 

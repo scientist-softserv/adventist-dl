@@ -3,13 +3,31 @@
 class RedisEndpoint < Endpoint
   store :options, accessors: [:namespace]
 
-  def switch!
-    Hyrax.config.redis_namespace = switchable_options[:namespace]
-  end
-
   # Reset the Redis namespace back to the default value
   def self.reset!
     Hyrax.config.redis_namespace = Settings.redis.default_namespace
+    # Sidekiq does not set namespace by default
+    switch_sidekiq(nil)
+  end
+
+  def self.switch_sidekiq(namespace)
+    yaml = YAML.safe_load(ERB.new(IO.read(Rails.root + 'config' + 'redis.yml')).result)
+    config = yaml[Rails.env].with_indifferent_access
+    redis_config = config.merge(thread_safe: true)
+    redis_config = redis_config.merge(namespace: namespace) if namespace
+
+    Sidekiq.configure_server do |s|
+      s.redis = redis_config
+    end
+
+    Sidekiq.configure_client do |s|
+      s.redis = redis_config
+    end
+  end
+
+  def switch!
+    Hyrax.config.redis_namespace = switchable_options[:namespace]
+    RedisEndpoint.switch_sidekiq(switchable_options[:namespace])
   end
 
   def ping

@@ -122,6 +122,7 @@ it:
       qualification_name: Nome della qualifica
       refereed: Revisione paritaria?
       related_url: URL correlato
+      remote_url: URL remoto
       resource_type: Tipo di risorsa
       resource_type_general: Tipo di risorsa generale
       rights_statement: Dichiarazione dei diritti
@@ -335,6 +336,7 @@ it:
         qualification_name: Nome di qualifica
         refereed: Peer recensione?
         related_url: URL correlato
+        remote_url: URL remoto
         resource_type: Tipo di risorsa
         resource_type_general: Tipo di risorsa generale
         rights_statement: Dichiarazione dei diritti

@@ -9,6 +9,7 @@ class JournalArticle < DogBiscuits::JournalArticle
   include DogBiscuits::DateIssued
   include DogBiscuits::Geo
   include DogBiscuits::PlaceOfPublication
+  include DogBiscuits::RemoteUrl
 
   self.indexer = ::JournalArticleIndexer
   # Change this to restrict which works can be added as a child.

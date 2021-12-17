@@ -112,8 +112,6 @@ services:
       - VIRTUAL_PORT=3000
       - VIRTUAL_HOST=.hyku.test
     depends_on:
-      initialize_app:
-        condition: service_healthy
       db:
         condition: service_started
       solr:
@@ -149,6 +147,7 @@ services:
     image: registry.gitlab.com/notch8/adventist-dl/worker:${TAG:-latest}
     depends_on:
       check_volumes:
+        condition: service_completed_successfully
       db:
         condition: service_started
       solr:
@@ -185,14 +184,18 @@ services:
     entrypoint: ["sh", "-c"]
     command:
       - >
-        solrcloud-upload-configset.sh /app/samvera/hyrax-webapp/solr/config &&
-        solrcloud-assign-configset.sh &&
-        SOLR_COLLECTION_NAME=hydra-test solrcloud-assign-configset.sh &&
-        db-migrate-seed.sh
+        if [ ! -f "/app/samvera/hyrax-webapp/solr_db_initialized" ]; then
+          solrcloud-upload-configset.sh /app/samvera/hyrax-webapp/solr/config &&
+          solrcloud-assign-configset.sh &&
+          SOLR_COLLECTION_NAME=hydra-test solrcloud-assign-configset.sh &&
+          db-migrate-seed.sh &&
+          touch /app/samvera/hyrax-webapp/solr_db_initialized
+        fi
     depends_on:
       - db
       - solr
       - fcrepo
+      - redis
 
   redis:
     image: redis:5

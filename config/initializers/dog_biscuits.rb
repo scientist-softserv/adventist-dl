@@ -128,7 +128,6 @@ DogBiscuits.config do |config|
     refereed
     pagination
     doi
-    official_url
     related_url
     identifier
     subject
@@ -211,7 +210,7 @@ DogBiscuits.config do |config|
     date_available
     date_published
     doi
-    official_url
+    remote_url
     identifier
     contributor
     publisher
@@ -252,7 +251,7 @@ DogBiscuits.config do |config|
     based_near
     isbn
     doi
-    official_url
+    remote_url
     identifier
     related_url
     license
@@ -281,6 +280,7 @@ DogBiscuits.config do |config|
     publisher
     funder
     doi
+    remote_url
     identifier
     subject
     keyword
@@ -301,7 +301,6 @@ DogBiscuits.config do |config|
   config.thesis_properties_required = Hyrax::GenericWorkForm.required_fields
 
   # PROPERTY MAPPINGS
-
   config.property_mappings[:bibliographic_citation] = { label: 'Bibliographic Citation' }
   # All properties should be included in property_mappings. This is used by generators for building
   #   schema_org, locales, catalog_controller and attribute_rows. Adding info here and using
