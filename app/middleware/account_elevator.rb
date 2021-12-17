@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'apartment/elevators/generic'
 # Apartment middleware for switching tenants based on the
 # CNAME entry for an account.
