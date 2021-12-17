@@ -1,5 +1,6 @@
 require 'sidekiq/web'
 Sidekiq::Web.set :session_secret, Rails.application.secrets[:secret_key_base]
+Sidekiq::Web.use AccountElevator
 
 Rails.application.routes.draw do
   concern :range_searchable, BlacklightRangeLimit::Routes::RangeSearchable.new
@@ -7,7 +8,7 @@ Rails.application.routes.draw do
 
   mount Riiif::Engine => 'images', as: :riiif if Hyrax.config.iiif_image_server?
 
-  authenticate :user, lambda { |u| u.is_superadmin } do
+  authenticate :user, lambda { |u| u.is_superadmin || u.is_admin } do
     mount Sidekiq::Web => '/sidekiq'
   end
 
