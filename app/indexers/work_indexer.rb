@@ -8,7 +8,6 @@ class WorkIndexer < Hyrax::WorkIndexer
   # Fetch remote labels for based_near. You can remove this if you don't want
   # this behavior
   include Hyrax::IndexesLinkedMetadata
-  include DogBiscuits::IndexesCommon
 
   # Uncomment this block if you want to add custom indexing behavior:
   def generate_solr_document
