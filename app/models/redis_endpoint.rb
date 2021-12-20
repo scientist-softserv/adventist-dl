@@ -29,6 +29,7 @@ class RedisEndpoint < Endpoint
 
   def switch!
     Hyrax.config.redis_namespace = switchable_options[:namespace]
+    sidekiq_namespace = ENV.fetch("SIDEKIQ_SPLIT_TENANTS", nil) ? nil : switchable_options[:namespace]
     RedisEndpoint.switch_sidekiq(switchable_options[:namespace])
   end
 
