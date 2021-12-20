@@ -8,7 +8,7 @@ class WorkIndexer < Hyrax::WorkIndexer
   # Fetch remote labels for based_near. You can remove this if you don't want
   # this behavior
   include Hyrax::IndexesLinkedMetadata
-  # include DogBiscuits::IndexesCommon
+  include DogBiscuits::IndexesCommon
 
   # Uncomment this block if you want to add custom indexing behavior:
   def generate_solr_document
@@ -18,7 +18,7 @@ class WorkIndexer < Hyrax::WorkIndexer
       solr_doc['title_ssi'] = object.title.first.titlecase if object.title.present?
       solr_doc['fedora_id_ssi'] = object.id
       solr_doc[ActiveFedora.id_field.to_sym] = object.to_param
-      # solr_doc['source_sim'] = solr_doc['source_tesim']
+      solr_doc['source_sim'] = solr_doc['source_tesim']
 
       if object.date_created.present?
         # rubocop:disable Metrics/LineLength
