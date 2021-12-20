@@ -3,6 +3,7 @@
 # Generated via
 #  `rails generate dog_biscuits:work JournalArticle`
 class JournalArticleIndexer < WorkIndexer
+  include DogBiscuits::IndexesCommon
   # This indexes the default metadata. You can remove it if you want to
   # provide your own metadata and indexing.
   # include Hyrax::IndexesBasicMetadata
