@@ -29,7 +29,8 @@ class RedisEndpoint < Endpoint
 
   def switch!
     Hyrax.config.redis_namespace = switchable_options[:namespace]
-    RedisEndpoint.switch_sidekiq(switchable_options[:namespace])
+    sidekiq_namespace = ENV.fetch("SIDEKIQ_SPLIT_TENANTS", nil) ? switchable_options[:namespace] : nil
+    RedisEndpoint.switch_sidekiq(sidekiq_namespace)
   end
 
   def ping

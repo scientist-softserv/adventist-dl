@@ -149,9 +149,11 @@ extraEnvVars: &envVars
     value: plain
   - name: SENTRY_DSN
     value: $SENTRY_DSN
+  - name: SIDEKIQ_SPLIT_TENANTS
+    value: 'true'
 
 worker:
-  replicaCount: 5
+  replicaCount: 1
   podSecurityContext:
     runAsUser: 1001
     runAsGroup: 101
