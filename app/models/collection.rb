@@ -8,7 +8,4 @@ class Collection < ActiveFedora::Base
   include AdventistMetadata
   self.indexer = CollectionIndexer
 
-  def after_update_nested_collection_relationship_indices
-    Rails.logger.error "skipping extra indexing for faster import"
-  end
 end
