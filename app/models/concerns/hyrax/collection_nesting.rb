@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # OVERRIDE Hyrax 2.9.5 to skip nesting indexer
 
 module Hyrax
@@ -46,9 +48,11 @@ module Hyrax
       _run_update_index_callbacks { super }
     end
 
+    # rubocop:disable Metrics/LineLength
     def find_children_of(destroyed_id:)
       ActiveFedora::SolrService.query(ActiveFedora::SolrQueryBuilder.construct_query(member_of_collection_ids_ssim: destroyed_id))
     end
+    # rubocop:enable Metrics/LineLength
 
     # Only models which include Hyrax::CollectionNesting will respond to this method.
     # Used to determine whether a model gets reindexed via Samvera::NestingIndexer during full repository reindexing,
