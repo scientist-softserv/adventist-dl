@@ -2,20 +2,24 @@
 
 # Fix PDF tripple issue
 
-module Hydra::Derivatives::Processors
-  module ImageDecorator
+module Hydra
+  module Derivatives
+    module Processors
+      module ImageDecorator
+        protected
 
-    protected
-    # When resizing images, it is necessary to flatten any layers, otherwise the background
-    # may be completely black. This happens especially with PDFs. See #110
-    def create_resized_image
-      create_image do |xfrm|
-        if size
-          xfrm.combine_options do |i|
-            i.flatten
-            i.resize(size)
+          # When resizing images, it is necessary to flatten any layers, otherwise the background
+          # may be completely black. This happens especially with PDFs. See #110
+          def create_resized_image
+            create_image do |xfrm|
+              if size
+                xfrm.combine_options do |i|
+                  i.flatten
+                  i.resize(size)
+                end
+              end
+            end
           end
-        end
       end
     end
   end
