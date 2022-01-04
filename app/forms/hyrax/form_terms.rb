@@ -7,7 +7,7 @@ module Hyrax
     # to display 'license' in the 'base-terms' div on the user dashboard "Add New Work" description
     # by getting iterated over in hyrax/app/views/hyrax/base/_form_metadata.html.erb
     def primary_terms
-      super + %i[license]
+      super + %i[creator keyword license]
     end
   end
 end
