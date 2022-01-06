@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class ContentBlock < ActiveRecord::Base
   # The keys in this registry are "public" names for collaborator
   # objects, and the values are reserved names of ContentBlock
