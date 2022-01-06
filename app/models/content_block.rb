@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class ContentBlock < ActiveRecord::Base
   # The keys in this registry are "public" names for collaborator
   # objects, and the values are reserved names of ContentBlock
@@ -76,7 +77,6 @@ class ContentBlock < ActiveRecord::Base
     def resources_page=(value)
       resources_page.update(value: value)
     end
-
 
     def help_page
       find_or_create_by(name: 'help_page')
