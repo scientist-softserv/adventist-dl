@@ -92,4 +92,6 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  get 'resources' => 'hyrax/pages#show', key: 'resources'
 end
