@@ -692,6 +692,16 @@ body.public-facing {
     padding: 1em;
   }
 
+  .hyc-metadata div {
+    dt {
+      min-width: 30%;
+      flex-basis: auto;
+    }
+    dd {
+      word-break: break-all;
+    }
+  }
+
   .hyc-blacklight {
     padding: 0;
   }
