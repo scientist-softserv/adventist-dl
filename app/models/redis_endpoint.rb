@@ -10,11 +10,11 @@ class RedisEndpoint < Endpoint
     switch_sidekiq(nil)
   end
 
-  def self.switch_sidekiq(namespace)
+  def self.switch_sidekiq(sidekiq_namespace)
     yaml = YAML.safe_load(ERB.new(IO.read(Rails.root + 'config' + 'redis.yml')).result)
     config = yaml[Rails.env].with_indifferent_access
     redis_config = config.merge(thread_safe: true)
-    redis_config = redis_config.merge(namespace: namespace) if namespace
+    redis_config = redis_config.merge(namespace: sidekiq_namespace) if sidekiq_namespace
 
     Sidekiq.configure_server do |s|
       s.redis = redis_config
@@ -23,7 +23,10 @@ class RedisEndpoint < Endpoint
     Sidekiq.configure_client do |s|
       s.redis = redis_config
     end
-    Sidekiq::Web.app_url = "https://#{Site.instance&.account&.cname || Account.admin_host}"
+    # Site.instance can fail when creating a new tenant
+    app_url = Site.instance&.account&.cname if sidekiq_namespace rescue nil
+    app_url ||= Account.admin_host
+    Sidekiq::Web.app_url = "https://#{app_url}"
     Sidekiq::Web.redis_pool = Sidekiq.redis_pool
   end
 
