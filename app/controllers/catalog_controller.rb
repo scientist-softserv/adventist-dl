@@ -409,8 +409,8 @@ class CatalogController < ApplicationController
         ],
         use_custom_prefix: "oai_hyku",
         custom_fields: [
-          { label: 'abstract', solr_field: 'abstract_tesim'},
-          { label: 'ark_id', solr_field: 'aark_id_tesim'},
+          { label: 'abstract', solr_field: 'abstract_tesim' },
+          { label: 'ark_id', solr_field: 'aark_id_tesim' },
           { label: 'identifier', solr_field: 'identifier_tesim' },
           { label: 'bibliographic_citation', solr_field: 'bibliographic_citation_tesim' },
           { label: 'creator', solr_field: 'creator_tesim' },
@@ -426,7 +426,7 @@ class CatalogController < ApplicationController
           { label: 'source', solr_field: 'source_tesim' },
           { label: 'date_issued', solr_field: 'date_issued_tesim' },
           { label: 'geocode', solr_field: 'alt_tesim' },
-          { label: 'place_of_publication', solr_field: 'place_of_publication_tesim'},
+          { label: 'place_of_publication', solr_field: 'place_of_publication_tesim' },
           { label: 'publisher', solr_field: 'publisher_tesim' },
           { label: 'rights', solr_field: 'rights_statement_tesim' },
           { label: 'part_of', solr_field: 'part_of_tesim' },
@@ -440,7 +440,7 @@ class CatalogController < ApplicationController
           { label: 'license', solr_field: 'license_tesim' },
           { label: 'location', solr_field: 'based_near_label_tesim' },
           { label: 'date_accepted', solr_field: 'date_uploaded_dtsi' },
-          { label: 'modified', solr_field: 'date_modified_dtsi' },
+          { label: 'modified', solr_field: 'date_modified_dtsi' }
         ]
       }
     }

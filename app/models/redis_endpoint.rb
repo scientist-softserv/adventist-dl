@@ -24,7 +24,11 @@ class RedisEndpoint < Endpoint
       s.redis = redis_config
     end
     # Site.instance can fail when creating a new tenant
-    app_url = Site.instance&.account&.cname if sidekiq_namespace rescue nil
+    begin
+      app_url = Site.instance&.account&.cname if sidekiq_namespace
+    rescue StandardError
+      nil
+    end
     app_url ||= Account.admin_host
     Sidekiq::Web.app_url = "https://#{app_url}"
     Sidekiq::Web.redis_pool = Sidekiq.redis_pool
