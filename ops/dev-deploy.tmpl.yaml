@@ -44,6 +44,18 @@ ingress:
     - host: "*.s2.adventistdigitallibrary.org"
       paths:
         - path: /
+  annotations: {
+    kubernetes.io/ingress.class: "nginx",
+    nginx.ingress.kubernetes.io/proxy-body-size: "0",
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  }
+  tls:
+    - hosts:
+      - adl.s2.adventistdigitallibrary.org
+      - sdapi.s2.adventistdigitallibrary.org
+      - s2.adventistdigitallibrary.org
+      secretName: adventist-dev-tls
+
 
 extraEnvVars:
   - name: SETTINGS__MULTITENANCY__ADMIN_HOST
