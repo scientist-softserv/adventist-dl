@@ -38,9 +38,15 @@ ingress:
     - host: adl-hyku-staging.notch8.cloud
       paths:
         - path: /
-    - host: "*.adl-hyku-staging.notch8.cloud"
-      paths:
-        - path: /
+  annotations: {
+      kubernetes.io/ingress.class: "nginx",
+      nginx.ingress.kubernetes.io/proxy-body-size: "0",
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+    }
+    tls:
+      - hosts: 
+          - adl-hyku-staging.notch8.cloud
+        secretName: notch8cloud
 
 extraEnvVars:
   - name: SETTINGS__MULTITENANCY__ADMIN_HOST
