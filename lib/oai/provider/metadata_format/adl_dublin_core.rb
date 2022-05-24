@@ -10,7 +10,26 @@ module OAI
 
           # Dublin Core Terms Fields
           # For new fields, add here first then add to oai_qdc_map
-          @fields = [:abstract, :alternativeTitle, :arkId, :bibliographicCitation, :contributor, :created, :creator, :date, :dateAccepted, :dateIssued, :description, :edition, :extent, :geocode, :hasPart, :identifier, :isPartOf, :isVersionOf, :issueNumber, :language, :license, :location, :modified, :pagination, :partOf, :placeOfPublication, :publisher, :relation, :remoteUrl, :resourceType, :rights, :source, :subject, :title, :volumeNumber]
+          @fields = [:abstract, :alternative_title, :aark_id, :bibliographic_citation, :contributor, :created, :creator, :date, :date_accepted, :date_issued, :description, :edition, :extent, :geocode, :has_part, :identifier, :issue_number, :language, :license, :location, :modified, :pagination, :part_of, :place_of_publication, :publisher, :related_url, :relation, :remote_url, :resource_type, :rights_statement, :source, :subject, :title, :thumbnail_url, :volume_number, :work_type]
+        end
+
+        # Override to strip namespace and header out
+        def encode(model, record)
+          xml = Builder::XmlMarkup.new
+          map = model.respond_to?("map_#{prefix}") ? model.send("map_#{prefix}") : {}
+          xml.tag!("#{prefix}") do
+            fields.each do |field|
+              values = value_for(field, record, map)
+              if values.respond_to?(:each)
+                values.each do |value|
+                  xml.tag! "#{field}", value
+                end
+              else
+                xml.tag! "#{field}", values
+              end
+            end
+          end
+          xml.target!
         end
 
         def header_specification

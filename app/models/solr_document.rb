@@ -32,13 +32,15 @@ class SolrDocument
   attribute :rendering_ids, Solr::Array, solr_name('hasFormat', :symbol)
   attribute :slug, Solr::String, solr_name('slug')
   attribute :fedora_id, Solr::String, 'fedora_id_ssi'
-  attribute :aark_id, Solr::String, 'aark_id_ssi'
+  attribute :aark_id, Solr::String, 'aark_id_tesim'
   attribute :bibliographic_citation, Solr::String, solr_name('bibliographic_citation')
   attribute :alt, Solr::String, solr_name('alt')
+  attribute :file_set_ids, Solr::Array, 'file_set_ids_ssim'
 
   def remote_url
     self[Solrizer.solr_name('remote_url')]
   end
+
 
   field_semantics.merge!(
     contributor: 'contributor_tesim',
@@ -57,5 +59,15 @@ class SolrDocument
 
   def to_param
     slug || id
+  end
+
+  def thumbnail_url
+    Addressable::URI.parse("https://#{Site.account.cname}#{thumbnail_path}").to_s
+  end
+
+  def related_url
+    self.file_set_ids.map do |fs_id|
+      Hyrax::Engine.routes.url_helpers.download_path(fs_id)
+    end
   end
 end
