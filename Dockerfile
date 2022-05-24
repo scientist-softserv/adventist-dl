@@ -15,11 +15,13 @@ RUN apk --no-cache upgrade && \
     libxml2-dev \
     imagemagick \
     mediainfo \
+    nodejs \
     openjdk11-jre \
     perl \
     postgresql-client \
     rsync \
-    vim
+    vim \
+    yarn
 
 USER app
 
@@ -45,6 +47,7 @@ COPY --chown=1001:101 $APP_PATH /app/samvera/hyrax-webapp
 
 ARG SETTINGS__BULKRAX__ENABLED="false"
 RUN mkdir -p /app/samvera/branding && ln -s /app/samvera/branding /app/samvera/hyrax-webapp/public/branding && \
+  yarn install && \
   RAILS_ENV=production SECRET_KEY_BASE=`bin/rake secret` DB_ADAPTER=nulldb DATABASE_URL='postgresql://fake' bundle exec rake assets:precompile
 
 FROM hyku-base as hyku-worker

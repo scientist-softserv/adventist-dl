@@ -22,6 +22,7 @@ Jump In: [![Slack Status](http://slack.samvera.org/badge.svg)](http://slack.samv
     * [With Docker](#with-docker)
     * [With Vagrant](#with-vagrant)
     * [With Kubernetes](#with-kubernetes)
+  * [Universal Viewer Manifest](#universal-viewer-manifest)
   * [Single Tenant Mode](#single-tenancy)
   * [Switching accounts](#switching-accounts)
   * [Development dependencies](#development-dependencies)
@@ -120,6 +121,9 @@ The [samvera-vagrant project](https://github.com/samvera-labs/samvera-vagrant) p
 ### With Kubernetes
 
 Hyku relies on the helm charts provided by Hyrax. See [Deployment Info](https://github.com/samvera/hyrax/blob/main/CONTAINERS.md#deploying-to-production) for more information. We also provide a basic helm [deployment script](bin/helm_deploy). Hyku currently needs some additional volumes and ENV vars over the base Hyrax. See (ops/review-deploy.tmpl.yaml) for an example of what that might look like.
+
+## Universal Viewer Manifest
+The univeral viewer manifest has been altered to only allow files that have `OBJ.jpg` in the filename. If you are testing the UV in local devlopment, the images you upload must be named accordingly.
 
 ## Single Tenant Mode
 
