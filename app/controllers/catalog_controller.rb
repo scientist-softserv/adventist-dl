@@ -406,41 +406,6 @@ class CatalogController < ApplicationController
         limit: 25, # number of records returned with each request, default: 15
         set_fields: [ # ability to define ListSets, optional, default: nil
           { label: 'collection', solr_field: 'isPartOf_ssim' }
-        ],
-        use_custom_prefix: "oai_hyku",
-        custom_fields: [
-          { label: 'abstract', solr_field: 'abstract_tesim' },
-          { label: 'ark_id', solr_field: 'aark_id_tesim' },
-          { label: 'identifier', solr_field: 'identifier_tesim' },
-          { label: 'bibliographic_citation', solr_field: 'bibliographic_citation_tesim' },
-          { label: 'creator', solr_field: 'creator_tesim' },
-          { label: 'contributor', solr_field: 'contributor_tesim' },
-          { label: 'edition', solr_field: 'edition_tesim' },
-          { label: 'alternative_title', solr_field: 'alternative_title_tesim' },
-          { label: 'resource_type', solr_field: 'resource_type_tesim' },
-          { label: 'issue_number', solr_field: 'issue_number_tesim' },
-          { label: 'language', solr_field: 'language_tesim' },
-          { label: 'description', solr_field: 'description_tesim' },
-          { label: 'pagination', solr_field: 'pagination_tesim' },
-          { label: 'extent', solr_field: 'extent_tesim' },
-          { label: 'source', solr_field: 'source_tesim' },
-          { label: 'date_issued', solr_field: 'date_issued_tesim' },
-          { label: 'geocode', solr_field: 'alt_tesim' },
-          { label: 'place_of_publication', solr_field: 'place_of_publication_tesim' },
-          { label: 'publisher', solr_field: 'publisher_tesim' },
-          { label: 'rights', solr_field: 'rights_statement_tesim' },
-          { label: 'part_of', solr_field: 'part_of_tesim' },
-          { label: 'date', solr_field: 'date_created_tesim' },
-          { label: 'title', solr_field: 'title_tesim' },
-          { label: 'subject', solr_field: 'subject_tesim' },
-          { label: 'relation', solr_field: 'related_url_tesim' },
-          { label: 'volume_number', solr_field: 'volume_number_tesim' },
-          { label: 'remote_url', solr_field: 'remote_url_tesim' },
-          { label: 'keyword', solr_field: 'keyword_tesim' },
-          { label: 'license', solr_field: 'license_tesim' },
-          { label: 'location', solr_field: 'based_near_label_tesim' },
-          { label: 'date_accepted', solr_field: 'date_uploaded_dtsi' },
-          { label: 'modified', solr_field: 'date_modified_dtsi' }
         ]
       }
     }

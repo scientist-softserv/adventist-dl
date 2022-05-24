@@ -70,3 +70,4 @@ docker/local-docker-compose-2.yml
 docker-compose.override.yml
 docker-compose.override.disabled.yml
 solr_db_initialized
+*~undo-tree~
