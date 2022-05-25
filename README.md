@@ -23,6 +23,7 @@ Jump In: [![Slack Status](http://slack.samvera.org/badge.svg)](http://slack.samv
     * [With Vagrant](#with-vagrant)
     * [With Kubernetes](#with-kubernetes)
   * [Universal Viewer Manifest](#universal-viewer-manifest)
+  * [New Tenants](#new-tenants)
   * [Single Tenant Mode](#single-tenancy)
   * [Switching accounts](#switching-accounts)
   * [Development dependencies](#development-dependencies)
@@ -124,6 +125,9 @@ Hyku relies on the helm charts provided by Hyrax. See [Deployment Info](https://
 
 ## Universal Viewer Manifest
 The univeral viewer manifest has been altered to only allow files that have `OBJ.jpg` in the filename. If you are testing the UV in local devlopment, the images you upload must be named accordingly.
+
+## New Tenants
+New tenants on the Dev or Production servers will need to be assigned an ingress as well an SSL cert manually before the tenant is created. Software Services does not have access to the DNS servers, so a wildcard cert is not possible. Before a tenant is created, a developer will need to add the domain to the dev-deploy.tmpl.yaml or production-deploy.tmpl.yaml under the ingress.host field && ingress.tls.hosts field.
 
 ## Single Tenant Mode
 
