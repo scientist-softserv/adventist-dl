@@ -55,7 +55,7 @@ if Settings.bulkrax.enabled
       'date_issued' => { from: ['date_issued'] },
       'description' => { from: ['description'] },
       'edition' => { from: ['edition'] },
-      'extent' => { from: ['extent'] },
+      'extent' => { from: ['extent'], split: ';' },
       'identifier' => { from: ['identifier'], source_identifier: true },
       'issue_number' => { from: ['issue_number'] },
       'language' => { from: ['language'] },
