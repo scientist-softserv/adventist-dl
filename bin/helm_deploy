@@ -28,6 +28,9 @@ WORKER_TAG="${WORKER_TAG:-$DEPLOY_TAG}"
 helm chart pull ghcr.io/samvera/hyrax/hyrax-helm:$CHART_VERSION
 helm chart export ghcr.io/samvera/hyrax/hyrax-helm:$CHART_VERSION
 
+envsubst < ops/gitlab-token.tmpl.yaml > ops/gitlab-token.yaml
+kubectl apply -f ops/gitlab-token.yaml
+
 helm repo update
 
 helm upgrade \
