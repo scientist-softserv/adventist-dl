@@ -31,7 +31,11 @@ module OAI
           :hasPart => :has_part,
           :isVersionOf => :is_version_of,
           :extent => :extent,
-          :format => :format
+          :format => :format,
+          :keyword => :keyword,
+          :location => :location,
+          :part => :part,
+          :volume => :volume
         }
       end
 
@@ -73,7 +77,11 @@ module OAI
           :thumbnail_url => :thumbnail_url,
           :title => :title,
           :volume_number => :volume_number,
-          :work_type => :human_readable_type
+          :work_type => :human_readable_type,
+          :keyword => :keyword,
+          :location => :location,
+          :part => :part,
+          :volume => :volume
         }
       end
     end
