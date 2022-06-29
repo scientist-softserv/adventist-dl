@@ -2,11 +2,11 @@ replicaCount: 2
 
 resources:
   requests:
-    memory: "256Mi"
-    cpu: "100m"
+    memory: "1Gi"
+    cpu: "250m"
   limits:
-    memory: "512Mi"
-    cpu: "500m"
+    memory: "2Gi"
+    cpu: "1000m"
 
 livenessProbe:
   enabled: false
@@ -166,11 +166,11 @@ worker:
   replicaCount: 1
   resources:
     requests:
-      memory: "256Mi"
-      cpu: "100m"
+      memory: "1Gi"
+      cpu: "250m"
     limits:
-      memory: "512Mi"
-      cpu: "500m"
+      memory: "2Gi"
+      cpu: "1000m"
   podSecurityContext:
     runAsUser: 1001
     runAsGroup: 101
