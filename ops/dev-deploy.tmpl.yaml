@@ -40,6 +40,9 @@ extraVolumeMounts:
 ingress:
   enabled: true
   hosts:
+    - host: new-tenant-test.s2.adventistdigitallibrary.org
+      paths:
+        - path: /
     - host: s2.adventistdigitallibrary.org
       paths:
         - path: /
@@ -62,6 +65,7 @@ ingress:
       - adl.s2.adventistdigitallibrary.org
       - sdapi.s2.adventistdigitallibrary.org
       - s2.adventistdigitallibrary.org
+      - new-tenant-test.s2.adventistdigitallibrary.org
       secretName: adventist-dev-tls
 
 
