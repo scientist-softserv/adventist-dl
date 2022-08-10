@@ -62,12 +62,11 @@ ingress:
   }
   tls:
     - hosts:
-      - adl.s2.adventistdigitallibrary.org
-      - sdapi.s2.adventistdigitallibrary.org
-      - s2.adventistdigitallibrary.org
-      - new-tenant-test.s2.adventistdigitallibrary.org
-      secretName: adventist-dev-tls
-
+        - adl.s2.adventistdigitallibrary.org
+        - sdapi.s2.adventistdigitallibrary.org
+        - s2.adventistdigitallibrary.org
+        - new-tenant-test.s2.adventistdigitallibrary.org
+      secretName: adventist-dev-tls-1
 
 extraEnvVars:
   - name: SETTINGS__MULTITENANCY__ADMIN_HOST
