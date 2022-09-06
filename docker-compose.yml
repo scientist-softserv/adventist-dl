@@ -11,40 +11,40 @@ x-app: &app
     - .env
   # NOTE: all common env variables moved to .env
   volumes:
-    - uploads:/app/samvera/hyrax-webapp/public/uploads
-    - assets:/app/samvera/hyrax-webapp/public/assets
-    - cache:/app/samvera/hyrax-webapp/tmp/cache
+    - uploads:/app/samvera/hyrax-webapp/public/uploads:cached
+    - assets:/app/samvera/hyrax-webapp/public/assets:cached
+    - cache:/app/samvera/hyrax-webapp/tmp/cache:cached
     - .:/app/samvera/hyrax-webapp
   networks:
     internal:
 
 volumes:
-  fcrepo:
-  solr:
-  db:
-  redis:
-  zk:
-  uploads:
   assets:
   cache:
+  db:
+  fcrepo:
+  redis:
+  solr:
+  uploads:
+  zk:
+  zoo:
 
 networks:
   internal:
 
 services:
   zoo:
-    image: bitnami/zookeeper:3.6
+    image: zookeeper:3.6.2
+    ports:
+      - 2181:2181
+      - 7001:7000
     environment:
-      - ALLOW_ANONYMOUS_LOGIN=yes
-      - ZOO_4LW_COMMANDS_WHITELIST=mntr, srvr, ruok
-      - ZOO_SERVER_ID=1
-      - ZOO_SERVERS=zoo:2888:3888
-    expose:
-      - 2181
-      - 2888
-      - 3888
+      - ZOO_MY_ID=1
+      - ZOO_4LW_COMMANDS_WHITELIST=mntr,srvr,ruok,conf
+      - ZOO_SERVERS=server.1=zoo:2888:3888;2181
     volumes:
-      - zk:/bitnami/zookeeper
+      - zoo:/data
+      - zk:/datalog
     networks:
       internal:
     healthcheck:
@@ -52,34 +52,36 @@ services:
       interval: "10s"
       timeout: "8s"
   solr:
-    image: bitnami/solr:8
+    image: hyku/solr:8
+    build:
+      context: solr
+      dockerfile: Dockerfile
+    env_file:
+      - .env
     environment:
       - OOM=script
-      - SOLR_ADMIN_USERNAME=admin
-      - SOLR_ADMIN_PASSWORD=admin
-      - SOLR_COLLECTION=hydra-development
-      - SOLR_CLOUD_BOOTSTRAP=yes
-      - SOLR_ENABLE_CLOUD_MODE=yes
-      - SOLR_ENABLE_AUTHENTICATION=yes
-      - SOLR_PORT_NUMBER=8983
-      - SOLR_ZK_HOSTS=zoo
       - VIRTUAL_PORT=8983
       - VIRTUAL_HOST=solr.hyku.test
-    depends_on:
-      zoo:
-        condition: service_healthy
+    user: root
+    command: bash -c "
+      chown -R 8983:8983 /var/solr
+      && ./bin/solr zk cp file:/var/solr/data/security.json zk:/security.json
+      && runuser -u solr -- solr-foreground"
     expose:
       - 8983
     volumes:
-      - solr:/bitnami
+      - solr:/var/solr
     networks:
       internal:
     healthcheck:
-      test: curl -sf http://$$SOLR_ADMIN_USERNAME:$$SOLR_ADMIN_PASSWORD@localhost:8983/solr/$$SOLR_COLLECTION/admin/ping?wt=json\&distrib=true || exit 1
-      start_period: 30s
-      interval: 20s
+      test: curl -sf http://$$SOLR_ADMIN_USER:$$SOLR_ADMIN_PASSWORD@solr:8983/solr/admin/cores?action=STATUS || exit 1
+      start_period: 3s
+      interval: 5s
       timeout: 5s
-      retries: 3
+      retries: 6
+    depends_on:
+      zoo:
+        condition: service_healthy
 
   fcrepo:
     image: ghcr.io/samvera/fcrepo4:4.7.5
@@ -87,12 +89,11 @@ services:
       - fcrepo:/data:cached
     env_file:
       - .env
-    environment:
-      - VIRTUAL_PORT=8080
-      - VIRTUAL_HOST=fcrepo.hyku.test
     expose:
       - 8080
     environment:
+      - VIRTUAL_PORT=8080
+      - VIRTUAL_HOST=fcrepo.hyku.test
       - JAVA_OPTS=${JAVA_OPTS} -Dfcrepo.modeshape.configuration="classpath:/config/file-simple/repository.json" -Dfcrepo.object.directory="/data/objects" -Dfcrepo.binary.directory="/data/binaries"
     networks:
       internal:
@@ -153,8 +154,6 @@ services:
         - registry.gitlab.com/notch8/adventist-dl/worker:${TAG:-latest}
     image: registry.gitlab.com/notch8/adventist-dl/worker:${TAG:-latest}
     depends_on:
-      check_volumes:
-        condition: service_completed_successfully
       db:
         condition: service_started
       solr:
@@ -166,7 +165,7 @@ services:
       zoo:
         condition: service_started
       check_volumes:
-        condition: service_started
+        condition: service_completed_successfully
       initialize_app:
         condition: service_completed_successfully
 
