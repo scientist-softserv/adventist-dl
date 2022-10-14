@@ -58,7 +58,7 @@ class SolrDocument
   )
 
   def to_param
-    id
+    slug || id
   end
 
   def thumbnail_url
