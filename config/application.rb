@@ -38,6 +38,13 @@ module Hyku
       # authenticity token errors.
       Hyrax::Admin::AppearancesController.form_class = AppearanceForm
 
+      # See https://gitlab.com/notch8/adventist-dl/-/issues/147
+      #
+      # By default plain text files are not processed for text extraction.  In adding
+      # Adventist::TextFileTextExtractionService to the beginning of the services array we are
+      # enabling text extraction from plain text files.
+      Hyrax::DerivativeService.services.unshift(Adventist::TextFileTextExtractionService)
+
       # Allows us to use decorator files
       Dir.glob(File.join(File.dirname(__FILE__), "../app/**/*_decorator*.rb")).sort.each do |c|
         Rails.configuration.cache_classes ? require(c) : load(c)
