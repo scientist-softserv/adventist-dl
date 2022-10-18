@@ -9,9 +9,6 @@ module Adventist
     attr_reader :file_set
     delegate :mime_type, :uri, to: :file_set
     def initialize(file_set)
-      # require "byebug"; byebug
-      # require "debug"; binding.break
-
       @file_set = file_set
     end
 
