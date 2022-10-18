@@ -3,7 +3,6 @@
 class AdvSearchBuilder < Hyrax::CatalogSearchBuilder
   include Blacklight::Solr::SearchBuilderBehavior
   include BlacklightAdvancedSearch::AdvancedSearchBuilder
-  self.default_processor_chain += %i[add_advanced_parse_q_to_solr add_advanced_search_to_solr]
 
   # A Solr param filter that is NOT included by default in the chain,
   # but is appended by AdvancedController#index, to do a search
