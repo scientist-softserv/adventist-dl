@@ -34,7 +34,7 @@ unless Settings.multitenancy.enabled
   puts "\n== Creating permission template"
   begin
     permission_template = admin_set.permission_template
-    # If the permission template is missing we will need to run the creete service
+    # If the permission template is missing we will need to run the create service
   rescue
     Hyrax::AdminSetCreateService.new(admin_set: admin_set, creating_user: nil).create
   end

@@ -8,25 +8,6 @@ GIT
       rubyzip (>= 1.0.0)
 
 GIT
-  remote: https://github.com/samvera-labs/bulkrax.git
-  revision: 23efea3fd9d8d98746b73e570e0dc214ff764271
-  branch: main
-  specs:
-    bulkrax (1.0.2)
-      bagit (~> 0.4)
-      coderay
-      iso8601 (~> 0.9.0)
-      kaminari
-      language_list (~> 1.2, >= 1.2.1)
-      libxml-ruby (~> 3.1.0)
-      loofah (>= 2.2.3)
-      oai (>= 0.4, < 2.x)
-      rack (>= 2.0.6)
-      rails (>= 5.1.6)
-      rdf (>= 2.0.2, < 4.0)
-      simple_form
-
-GIT
   remote: https://github.com/samvera-labs/dog_biscuits.git
   revision: 56b3dc7099069b05d3441069910a91ae5726e77c
   specs:
@@ -206,6 +187,20 @@ GEM
       signet (~> 0.8)
       typhoeus
     builder (3.2.4)
+    bulkrax (4.3.0)
+      bagit (~> 0.4)
+      coderay
+      iso8601 (~> 0.9.0)
+      kaminari
+      language_list (~> 1.2, >= 1.2.1)
+      libxml-ruby (~> 3.1.0)
+      loofah (>= 2.2.3)
+      oai (>= 0.4, < 2.x)
+      rack (>= 2.0.6)
+      rails (>= 5.1.6)
+      rdf (>= 2.0.2, < 4.0)
+      rubyzip
+      simple_form
     byebug (11.1.3)
     cancancan (1.17.0)
     capybara (3.33.0)
@@ -1104,7 +1099,7 @@ DEPENDENCIES
   blacklight_oai_provider (~> 6.1, >= 6.1.1)
   blacklight_range_limit (= 6.5.0)
   bootstrap-datepicker-rails
-  bulkrax!
+  bulkrax
   byebug
   capybara
   carrierwave-aws (~> 1.3)
