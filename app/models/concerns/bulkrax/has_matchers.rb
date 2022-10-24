@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 # OVERRIDE Bulkrax 1.0.2 to override default_thumbnail
+# rubocop:disable Metrics/ModuleLength
 module Bulkrax
   module HasMatchers
     extend ActiveSupport::Concern
@@ -55,11 +56,18 @@ module Bulkrax
                   single_metadata(node_content)
                 end
 
-        set_parsed_data(object_multiple, object_name, name, index, value)
+        object_name.present? ? set_parsed_object_data(object_multiple, object_name, name, index, value) : set_parsed_data(name, value)
       end
     end
 
-    def set_parsed_data(object_multiple, object_name, name, index, value)
+    def set_parsed_data(name, value)
+      return parsed_metadata[name] = value unless multiple?(name)
+
+      parsed_metadata[name] ||= []
+      parsed_metadata[name] += Array.wrap(value).flatten
+    end
+
+    def set_parsed_object_data(object_multiple, object_name, name, index, value)
       if object_multiple
         index ||= 0
         parsed_metadata[object_name][index] ||= {}
@@ -69,19 +77,12 @@ module Bulkrax
         else
           parsed_metadata[object_name][index][name] = value
         end
-      elsif object_name
+      else
         parsed_metadata[object_name][name] ||= []
         if value.is_a?(Array)
           parsed_metadata[object_name][name] += value
         else
           parsed_metadata[object_name][name] = value
-        end
-      else
-        parsed_metadata[name] ||= []
-        if value.is_a?(Array)
-          parsed_metadata[name] += value
-        else
-          parsed_metadata[name] = value
         end
       end
     end
@@ -130,12 +131,40 @@ module Bulkrax
       field = field.gsub('_attributes', '')
 
       return false if excluded?(field)
-      return true if %W[id file remote_files model extent source delete thumbnail_url #{parser.collection_field_mapping}].include?(field)
+      return true if supported_bulkrax_fields.include?(field)
       return factory_class.method_defined?(field) && factory_class.properties[field].present?
     end
 
+    def supported_bulkrax_fields
+      @supported_bulkrax_fields ||=
+          %W[
+          id
+          file
+          remote_files
+          model
+          extent
+          source
+          delete
+          thumbnail_url
+          visibility
+          delete
+          #{related_parents_parsed_mapping}
+          #{related_children_parsed_mapping}
+          ]
+    end
+
     def multiple?(field)
-      return true if %W[file remote_files extent source #{parser.collection_field_mapping}].include?(field)
+      @multiple_bulkrax_fields ||=
+          %W[
+          file
+          remote_files
+          extent
+          source
+          #{related_parents_parsed_mapping}
+          #{related_children_parsed_mapping}
+          ]
+
+      return true if @multiple_bulkrax_fields.include?(field)
       return false if field == 'model'
 
       field_supported?(field) && factory_class&.properties&.[](field)&.[]('multiple')
@@ -170,3 +199,4 @@ module Bulkrax
     end
   end
 end
+# rubocop:enable Metrics/ModuleLength

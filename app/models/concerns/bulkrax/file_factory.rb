@@ -49,6 +49,8 @@ module Bulkrax
     end
 
     def new_remote_files
+      return if object.is_a? FileSet
+
       @new_remote_files ||= if object.present? && object.file_sets.present?
                               parsed_remote_files.select do |file|
                                 # is the url valid?
@@ -105,7 +107,12 @@ module Bulkrax
     end
 
     def local_file_sets
-      @local_file_sets ||= object&.ordered_file_sets
+      @local_file_sets ||= ordered_file_sets
+    end
+
+    def ordered_file_sets
+      # OVERRIDE Hydra-works 1.2.0 - this method was deprecated in v1.0
+      object&.ordered_members.to_a.select(&:file_set?)
     end
 
     def import_files
