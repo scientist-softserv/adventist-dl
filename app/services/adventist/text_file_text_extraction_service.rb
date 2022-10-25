@@ -5,6 +5,30 @@ module Adventist
   #
   # @see https://github.com/samvera/hyrax/blob/cff1ddd18764e4d14a2404d61d20ae776ea62916/app/services/hyrax/derivative_service.rb#L1 v2.9.5 implementation of Hyrax::DerivativeService
   class TextFileTextExtractionService
+    # @param file_set [FileSet]
+    # @param text [String] the text of the original_file_name
+    # @param original_file_name [String] the base name of the original file (e.g. no pathing)
+    #
+    # @raise [ActiveFedora::RecordInvalid] when the file_set is not valid
+    def self.assign_extracted_text(file_set:, text:, original_file_name:)
+      file_set.build_extracted_text.tap do |extracted_text|
+        # In testing, we encountered errors with the file's character encoding
+        # (e.g. `Encoding::UndefinedConversionError`).  The following will force the encoding to
+        # UTF-8 and replace any invalid or undefined characters from the original encoding with a
+        # "?".
+        #
+        # Given that we still have the original, and this is a derivative, the forced encoding
+        # should be acceptable.
+        extracted_text.content = text.encode(
+          Encoding.find('UTF-8'),
+          { invalid: :replace, undef: :replace, replace: "?" }
+        )
+        extracted_text.mime_type = file_set.mime_type
+        extracted_text.original_name = original_file_name
+      end
+      file_set.save!
+    end
+
     VALID_MIME_TYPES = ["text/plain"]
     attr_reader :file_set
     delegate :mime_type, :uri, to: :file_set
@@ -30,12 +54,11 @@ module Adventist
     #
     # @see https://github.com/samvera/hyrax/blob/cff1ddd18764e4d14a2404d61d20ae776ea62916/app/services/hyrax/file_set_derivatives_service.rb#L99-L107 Hyrax::FileSetDerivatives#extract_full_text
     def create_derivatives(filename)
-      file_set.build_extracted_text.tap do |extracted_text|
-        extracted_text.content = File.read(filename)
-        extracted_text.mime_type = mime_type
-        extracted_text.original_name = filename
-      end
-      file_set.save
+      self.class.assign_extracted_text(
+        file_set: file_set,
+        text: File.read(filename),
+        original_file_name: filename
+      )
     end
 
     # @note This is not does not appear to be a necessary method for the interface.
