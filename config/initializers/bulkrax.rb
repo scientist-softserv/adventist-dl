@@ -3,18 +3,10 @@
 if Settings.bulkrax.enabled
 
   Bulkrax.setup do |config|
-    # Add local parsers
-    config.parsers += [
-      { name: "OAI - Adventist Digital Library", class_name: "Bulkrax::OaiAdventistQdcParser", partial: "oai_adventist_fields" }
-    ]
-
-    # disable parsers
-    config.parsers -= [
-      { name: "OAI - Qualified Dublin Core", class_name: "Bulkrax::OaiQualifiedDcParser", partial: "oai_fields" },
-      { name: "OAI - Dublin Core", class_name: "Bulkrax::OaiDcParser", partial: "oai_fields" },
+    # Setting the available parsers for Adventist.
+    config.parsers = [
+      { name: "OAI - Adventist Digital Library", class_name: "Bulkrax::OaiAdventistQdcParser", partial: "oai_adventist_fields" },
       { name: "CSV - Comma Separated Values", class_name: "Bulkrax::CsvParser", partial: "csv_fields" },
-      { name: "Bagit", class_name: "Bulkrax::BagitParser", partial: "bagit_fields" },
-      { name: "XML", class_name: "Bulkrax::XmlParser", partial: "xml_fields" }
     ]
 
     # Should Bulkrax make up source identifiers for you? This allow round tripping
@@ -43,7 +35,7 @@ if Settings.bulkrax.enabled
     #   config.field_mappings["Bulkrax::OaiOmekaParser"] = {}
     #   config.field_mappings["Bulkrax::OaiDcParser"].each {|key,value| config.field_mappings["Bulkrax::OaiOmekaParser"][key] = value }
 
-    config.field_mappings['Bulkrax::OaiAdventistQdcParser'] = {
+    shared_parser_mappings = {
       'aark_id' => { from: ['aark_id'] },
       'abstract' => { from: ['abstract'] },
       'alt' => { from: ['geocode'] },
@@ -77,6 +69,9 @@ if Settings.bulkrax.enabled
       'title' => { from: ['title'] },
       'volume_number' => { from: ['volume_number'] }
     }
+
+    config.field_mappings['Bulkrax::OaiAdventistQdcParser'] = shared_parser_mappings
+    config.field_mappings['Bulkrax::CsvParser'] = shared_parser_mappings
 
     # Lambda to set the default field mapping
     config.default_field_mapping = lambda do |field|
