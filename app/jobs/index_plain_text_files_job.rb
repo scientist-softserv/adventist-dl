@@ -31,7 +31,7 @@ class IndexPlainTextFilesJob < ApplicationJob
       FileSet.where(mime_type_ssi: 'text/plain').find_each do |file_set|
         next if file_set.extracted_text.present?
 
-        One.perform(file_set.id)
+        One.perform_now(file_set.id)
       end
     end
   end
