@@ -17,6 +17,10 @@ class IndexPlainTextFilesJob < ApplicationJob
       file_set = FileSet.find(file_set_id)
       file = file_set.original_file
 
+      unless file
+        raise RuntimeError, "FileSet ID=\"#{file_set_id}\" expected to have an original_file; however it was missing"
+      end
+
       Adventist::TextFileTextExtractionService.assign_extracted_text(
         file_set: file_set,
         text: file.content,
@@ -31,7 +35,7 @@ class IndexPlainTextFilesJob < ApplicationJob
       FileSet.where(mime_type_ssi: 'text/plain').find_each do |file_set|
         next if file_set.extracted_text.present?
 
-        One.perform_now(file_set.id)
+        One.perform_later(file_set.id)
       end
     end
   end
