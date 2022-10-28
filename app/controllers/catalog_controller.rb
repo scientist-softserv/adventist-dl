@@ -69,9 +69,6 @@ class CatalogController < ApplicationController
     config.index.display_type_field = solr_name("has_model", :symbol)
     config.index.thumbnail_field = 'thumbnail_path_ss'
 
-    facet_props = DogBiscuits.config.facet_properties
-    add_facet_field config, facet_props
-
     # Add the date_range facet if configured
     # if DogBiscuits.config.date_range == true
     #   config.add_facet_field solr_name('date_range', :facetable), label: default_label(:date_range), range: true
@@ -79,24 +76,27 @@ class CatalogController < ApplicationController
 
     # solr fields that will be treated as facets by the blacklight application
     #   The ordering of the field names is the order of the display
-    # config.add_facet_field solr_name("human_readable_type", :facetable), label: "Type", limit: 5
-    # config.add_facet_field solr_name("resource_type", :facetable), label: "Resource Type", limit: 5
-    # config.add_facet_field solr_name("creator", :facetable), label: "Author", limit: 5
-    # config.add_facet_field solr_name("contributor", :facetable), label: "Contributor", limit: 5
-    # config.add_facet_field solr_name("keyword", :facetable), limit: 5
-    # config.add_facet_field solr_name("subject", :facetable), limit: 5
-    # config.add_facet_field solr_name("language", :facetable), limit: 5
-    # config.add_facet_field solr_name("based_near_label", :facetable), limit: 5
-    # config.add_facet_field solr_name("publisher", :facetable), limit: 5
-    # config.add_facet_field solr_name("file_format", :facetable), limit: 5
-    # config.add_facet_field solr_name('member_of_collections', :symbol), limit: 5, label: 'Collections'
+    config.add_facet_field solr_name("human_readable_type", :facetable), label: "Type", limit: 5, collapse: false
     config.add_facet_field 'sorted_year_isi',
-                           label: 'Date Created',
-                           range: {
-                             num_segments: 5,
-                             segments: true,
-                             maxlength: 4
-                           }
+      label: 'Date Created',
+      range: {
+        num_segments: 5,
+        segments: true,
+        maxlength: 4
+      },
+      collapse: false
+    config.add_facet_field solr_name("resource_type", :facetable), label: "Resource Type", limit: 5
+    config.add_facet_field solr_name("creator", :facetable), label: "Author", limit: 5
+    config.add_facet_field solr_name("publisher", :facetable), limit: 5
+    config.add_facet_field solr_name("keyword", :facetable), limit: 5
+    config.add_facet_field solr_name("subject", :facetable), limit: 5
+    config.add_facet_field solr_name("language", :facetable), limit: 5
+    config.add_facet_field solr_name("based_near_label", :facetable), limit: 5
+    config.add_facet_field solr_name("source", :facetable), label: "Source", limit: 5, collapse: false
+    config.add_facet_field solr_name("part_of", :facetable), limit: 5
+    # config.add_facet_field solr_name("file_format", :facetable), limit: 5
+    # config.add_facet_field solr_name("contributor", :facetable), label: "Contributor", limit: 5
+    config.add_facet_field solr_name('member_of_collections', :symbol), limit: 5, label: 'Collections'
 
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request

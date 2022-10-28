@@ -48,8 +48,8 @@ DogBiscuits.config do |config|
   #   The ordering of the field names is the order of the display
   #   The properties must have been indexed as facetable
   #   Add values as symbols (eg. :creator)
-  config.facet_properties += [:source] # add to the end of the current list
-  config.facet_only_properties -= [:contributor_type] # remove from the current list
+  # config.index_properties = [] # replace the current list
+  # config.facet_only_properties -= [:contributor_type] # remove from the current list
   # config.facet_properties = [] # replace the current list
 
   # Solr fields to be displayed in the index (search results) view
@@ -302,6 +302,8 @@ DogBiscuits.config do |config|
 
   # PROPERTY MAPPINGS
   config.property_mappings[:bibliographic_citation] = { label: 'Bibliographic Citation' }
+  # config.property_mappings[:human_readable_type] = { collapse: false }
+  # config.property_mappings[:sorted_year] = { collapse: false }
   # All properties should be included in property_mappings. This is used by generators for building
   #   schema_org, locales, catalog_controller and attribute_rows. Adding info here and using
   #   generators saves on a lot of manual editing.
