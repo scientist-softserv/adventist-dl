@@ -74,9 +74,9 @@ services:
     networks:
       internal:
     healthcheck:
-      test: "true"
-      start_period: 3s
-      interval: 5s
+      test: curl -sf http://$$SOLR_ADMIN_USER:$$SOLR_ADMIN_PASSWORD@solr:8983/solr/admin/cores?action=STATUS || exit 1
+      start_period: 30s
+      interval: 20s
       timeout: 5s
       retries: 6
     depends_on:
