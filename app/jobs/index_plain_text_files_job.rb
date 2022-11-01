@@ -13,7 +13,7 @@ class IndexPlainTextFilesJob < ApplicationJob
   # @see https://docs.ruby-lang.org/en/2.7.0/String.html#method-i-encode
   class One < ApplicationJob
     # @param file_set_id [String]
-    def perform(account, file_set_id, time_to_live = 3, logger: default_logger)
+    def perform(account, file_set_id, time_to_live = 3, logger: IndexPlainTextFilesJob.default_logger)
       account.switch do
         file_set = FileSet.find(file_set_id)
         file = file_set.original_file
@@ -41,20 +41,24 @@ class IndexPlainTextFilesJob < ApplicationJob
         return false
       end
     end
-
-    def default_logger
-      @default_logger ||= ActiveSupport::Logger.new(Rails.root.join("log/index_plain_text_files_job_log.log"))
-    end
   end
 
   # @param account [Account]
-  def perform(account)
+  def perform(account, logger: self.class.default_logger)
+    logger.info("INFO: Begin processing file sets for #{account.cname}")
     account.switch do
       FileSet.where(mime_type_ssi: 'text/plain').find_each do |file_set|
-        next if file_set.extracted_text.present?
-
-        One.perform_later(account, file_set.id)
+        if file_set.extracted_text.present?
+          logger.info("INFO: FileSet ID=\"#{file_set.id}\" (in #{account.cname}) has extracted text; moving on.")
+        else
+          logger.info("INFO: FileSet ID=\"#{file_set.id}\" (in #{account.cname}) enquing to extract text.")
+          One.perform_later(account, file_set.id)
+        end
       end
     end
+  end
+
+  def self.default_logger
+    ::Logger.new(Rails.root.join("log/index_plain_text_files_job_log.log").to_s)
   end
 end
