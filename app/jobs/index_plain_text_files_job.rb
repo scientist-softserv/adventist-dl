@@ -13,13 +13,14 @@ class IndexPlainTextFilesJob < ApplicationJob
   # @see https://docs.ruby-lang.org/en/2.7.0/String.html#method-i-encode
   class One < ApplicationJob
     # @param file_set_id [String]
-    def perform(account, file_set_id)
+    def perform(account, file_set_id, time_to_live = 3, logger: default_logger)
       account.switch do
         file_set = FileSet.find(file_set_id)
         file = file_set.original_file
 
         unless file
-          raise RuntimeError, "FileSet ID=\"#{file_set_id}\" expected to have an original_file; however it was missing"
+          logger.error("ERROR: FileSet ID=\"#{file_set_id}\" expected to have an original_file; however it was missing.")
+          return false
         end
 
         Adventist::TextFileTextExtractionService.assign_extracted_text(
@@ -27,7 +28,22 @@ class IndexPlainTextFilesJob < ApplicationJob
           text: file.content,
           original_file_name: Array(file.file_name).first
         )
+        logger.info("INFO: FileSet ID=\"#{file_set_id}\" text extracted from plain text file.")
+        return true
+      rescue => e
+        if time_to_live > 0
+          # It's possible we can recover from this, so we'll give it another go.
+          logger.warning("WARNING: FileSet ID=\"#{file_set_id}\" error for #{self.class}: #{e}.  Retries remaining #{time_to_live - 1}.")
+          One.perform_later(account, file_set_id, time_to_live - 1)
+        else
+          logger.error("ERROR: FileSet ID=\"#{file_set_id}\" error for #{self.class}: #{e}.  No retries remaining.  Backtrace: #{e.backtrace}")
+        end
+        return false
       end
+    end
+
+    def default_logger
+      @default_logger ||= ActiveSupport::Logger.new(Rails.root.join("log/index_plain_text_files_job_log.log"))
     end
   end
 
