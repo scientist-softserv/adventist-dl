@@ -33,7 +33,7 @@ class IndexPlainTextFilesJob < ApplicationJob
       rescue => e
         if time_to_live > 0
           # It's possible we can recover from this, so we'll give it another go.
-          logger.warning("WARNING: FileSet ID=\"#{file_set_id}\" error for #{self.class}: #{e}.  Retries remaining #{time_to_live - 1}.")
+          logger.warn("WARNING: FileSet ID=\"#{file_set_id}\" error for #{self.class}: #{e}.  Retries remaining #{time_to_live - 1}.")
           One.perform_later(account, file_set_id, time_to_live - 1)
         else
           logger.error("ERROR: FileSet ID=\"#{file_set_id}\" error for #{self.class}: #{e}.  No retries remaining.  Backtrace: #{e.backtrace}")
