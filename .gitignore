@@ -75,4 +75,7 @@ solr_db_initialized
 node_modules
 /public/uv
 
+# Ignore Hyrax helm chart download
+hyrax
+
 *~undo-tree~

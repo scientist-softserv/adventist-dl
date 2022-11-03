@@ -6,7 +6,7 @@ x-app: &app
     target: hyku-base
     args:
       - SETTINGS__BULKRAX__ENABLED=true
-  image: registry.gitlab.com/notch8/adventist-dl:${TAG:-latest}
+  image: ghcr.io/scientist-softserv/adventist-dl:${TAG:-latest}
   env_file:
     - .env
   # NOTE: all common env variables moved to .env
@@ -150,9 +150,9 @@ services:
       args:
         - SETTINGS__BULKRAX__ENABLED=true
       cache_from:
-        - registry.gitlab.com/notch8/adventist-dl:${TAG:-latest}
-        - registry.gitlab.com/notch8/adventist-dl/worker:${TAG:-latest}
-    image: registry.gitlab.com/notch8/adventist-dl/worker:${TAG:-latest}
+        - ghcr.io/scientist-softserv/adventist-dl:${TAG:-latest}
+        - ghcr.io/scientist-softserv/adventist-dl/worker:${TAG:-latest}
+    image: ghcr.io/scientist-softserv/adventist-dl/worker:${TAG:-latest}
     depends_on:
       db:
         condition: service_started
