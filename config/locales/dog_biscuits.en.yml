@@ -1,6 +1,7 @@
 en:
   dog_biscuits:
     fields:
+      aark_id: AARK Identifier
       abstract: Abstract
       access_provided_by: Access provided by
       advisor: Advisor / supervisor
