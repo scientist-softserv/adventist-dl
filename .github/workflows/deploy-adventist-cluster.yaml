@@ -1,0 +1,25 @@
+name: "Deploy adventist cluster"
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deploy to Environment'
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+          - dev
+          - production
+      debug_enabled:
+        type: boolean
+        description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
+        required: false
+        default: false
+
+jobs:
+  call-workflow:
+    uses: scientist-softserv/deploy-action/.github/workflows/deploy.yaml@main
+    with:
+      k8s-release-name: hyku-${{ inputs.environment }}
+      k8s-namespace: ${{ inputs.environment }}
+    secrets: inherit
