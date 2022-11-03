@@ -125,7 +125,7 @@ extraEnvVars: &envVars
     value: "true"
   - name: SETTINGS__CONTACT_EMAIL
     value: donotreply@adventistdigitallibrary.org
-  - name: SETTINGS__PRODUCTIONISE__INVITATION_FROM_EMAIL
+  - name: SETTINGS__DEVISE__INVITATION_FROM_EMAIL
     value: donotreply@adventistdigitallibrary.org
   - name: SETTINGS__FITS_PATH
     value: /app/fits/fits.sh
@@ -164,7 +164,7 @@ extraEnvVars: &envVars
   - name: SMTP_DOMAIN
     value: adventistdigitallibrary.org
   - name: SMTP_PORT
-    value: "465"
+    value: "587"
   - name: SMTP_TYPE
     value: plain
   - name: SENTRY_DSN
