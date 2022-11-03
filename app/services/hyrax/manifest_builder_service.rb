@@ -23,8 +23,12 @@ Hyrax::ManifestBuilderService.class_eval do
 
     hash['sequences']&.each do |sequence|
       # OVERRIDE Hyrax 2.9.5 filter canvases to display "OBJ.jpg" files only
-      sequence['canvases'] = sequence['canvases']&.select do |canvas|
-        sanitize_value(canvas['label']).include?('OBJ.jpg')
+      filtered_canvas_list = sequence['canvases']&.select do |canvas|
+        sanitize_value(canvas['label']).downcase.include?('.obj.')
+      end
+
+      if filtered_canvas_list.count > 0 
+        sequence['canvases'] = filtered_canvas_list
       end
 
       sequence['canvases'].each do |canvas|
