@@ -41,7 +41,6 @@ class SolrDocument
     self[Solrizer.solr_name('remote_url')]
   end
 
-
   field_semantics.merge!(
     contributor: 'contributor_tesim',
     creator: 'creator_tesim',
@@ -66,7 +65,7 @@ class SolrDocument
   end
 
   def related_url
-    self.file_set_ids.map do |fs_id|
+    file_set_ids.map do |fs_id|
       Hyrax::Engine.routes.url_helpers.download_path(fs_id)
     end
   end

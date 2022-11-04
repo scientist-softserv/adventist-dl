@@ -19,7 +19,6 @@ RSpec.describe RemoveAccountRelationshipsJob do
 
   describe "ForImporterJob" do
     describe "#perform" do
-
       it "calls Bulkrax::RemoveAccountRelationshipsJob.break_relationships_for!" do
         expect(Bulkrax::RemoveRelationshipsForImporter).to receive(:break_relationships_for!)
           .with(importer: importer, with_progress_bar: false)

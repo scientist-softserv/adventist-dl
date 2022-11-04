@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 # OVERRIDE Bulkrax 1.0.2 to override default_thumbnail
-# rubocop:disable Metrics/ModuleLength
 module Bulkrax
   module HasMatchers
     extend ActiveSupport::Concern
@@ -137,7 +136,7 @@ module Bulkrax
 
     def supported_bulkrax_fields
       @supported_bulkrax_fields ||=
-          %W[
+        %W[
           id
           file
           remote_files
@@ -150,19 +149,19 @@ module Bulkrax
           delete
           #{related_parents_parsed_mapping}
           #{related_children_parsed_mapping}
-          ]
+        ]
     end
 
     def multiple?(field)
       @multiple_bulkrax_fields ||=
-          %W[
+        %W[
           file
           remote_files
           extent
           source
           #{related_parents_parsed_mapping}
           #{related_children_parsed_mapping}
-          ]
+        ]
 
       return true if @multiple_bulkrax_fields.include?(field)
       return false if field == 'model'

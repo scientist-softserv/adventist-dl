@@ -2,10 +2,10 @@
 
 class CatalogController < ApplicationController
   include BlacklightAdvancedSearch::Controller
+  include BlacklightRangeLimit::ControllerOverride
   include Hydra::Catalog
   include Hydra::Controller::ControllerBehavior
   include BlacklightOaiProvider::Controller
-  include BlacklightRangeLimit::ControllerOverride
   include DogBiscuits::Blacklight::Commands
 
   # These before_action filters apply the hydra access controls
@@ -77,14 +77,19 @@ class CatalogController < ApplicationController
     # solr fields that will be treated as facets by the blacklight application
     #   The ordering of the field names is the order of the display
     config.add_facet_field solr_name("human_readable_type", :facetable), label: "Type", limit: 5, collapse: false
-    config.add_facet_field 'sorted_year_isi',
-      label: 'Date Created',
+    config.add_facet_field(
+      'sorted_year_isi',
+      label: 'Date Range',
       range: {
-        num_segments: 5,
-        segments: true,
+        facet_field_label: 'Date Range',
+        num_segments: 10,
+        assumed_boundaries: [1100, Time.zone.year + 2],
+        segments: false,
+        slider_js: false,
         maxlength: 4
       },
-      collapse: false
+      facet_field_label: 'Date Range'
+    )
     config.add_facet_field solr_name("resource_type", :facetable), label: "Resource Type", limit: 5
     config.add_facet_field solr_name("creator", :facetable), label: "Author", limit: 5
     config.add_facet_field solr_name("publisher", :facetable), limit: 5
@@ -103,15 +108,15 @@ class CatalogController < ApplicationController
     # handler defaults, or have no facets.
     config.add_facet_fields_to_solr_request!
 
-    index_props = DogBiscuits.config.index_properties.collect do |prop|
-      { prop => index_options(prop, DogBiscuits.config.property_mappings[prop]) }
-    end
-    add_index_field config, index_props
+    # index_props = DogBiscuits.config.index_properties.collect do |prop|
+    #   { prop => index_options(prop, DogBiscuits.config.property_mappings[prop]) }
+    # end
+    # add_index_field config, index_props
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
-    show_props = DogBiscuits.config.all_properties
-    add_show_field config, show_props
+    # show_props = DogBiscuits.config.all_properties
+    # add_show_field config, show_props
 
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display

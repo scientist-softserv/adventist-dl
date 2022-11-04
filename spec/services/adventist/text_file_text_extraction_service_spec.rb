@@ -1,10 +1,13 @@
 # frozen_string_literal: true
+
 require "rails_helper"
 
 # From Hyrax
 require "hyrax/specs/shared_specs/derivative_service"
 
 RSpec.describe Adventist::TextFileTextExtractionService do
+  subject { described_class.new(valid_file_set) }
+
   let(:valid_file_set) do
     FileSet.new.tap do |f|
       allow(f).to receive(:mime_type).and_return(described_class::VALID_MIME_TYPES.first)
@@ -24,6 +27,7 @@ RSpec.describe Adventist::TextFileTextExtractionService do
   describe '#valid?' do
     context 'when given a non-text format' do
       subject { described_class.new(invalid_file_set) }
+
       it { is_expected.not_to be_valid }
     end
   end

@@ -21,7 +21,7 @@ module Adventist
         # should be acceptable.
         extracted_text.content = text.encode(
           Encoding.find('UTF-8'),
-          { invalid: :replace, undef: :replace, replace: "?" }
+          invalid: :replace, undef: :replace, replace: "?"
         )
         extracted_text.mime_type = file_set.mime_type
         extracted_text.original_name = original_file_name
@@ -29,7 +29,7 @@ module Adventist
       file_set.save!
     end
 
-    VALID_MIME_TYPES = ["text/plain"]
+    VALID_MIME_TYPES = ["text/plain"].freeze
     attr_reader :file_set
     delegate :mime_type, :uri, to: :file_set
     def initialize(file_set)

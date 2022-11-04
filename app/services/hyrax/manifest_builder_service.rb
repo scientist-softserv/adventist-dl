@@ -27,9 +27,7 @@ Hyrax::ManifestBuilderService.class_eval do
         sanitize_value(canvas['label']).downcase.include?('.obj.')
       end
 
-      if filtered_canvas_list.count > 0 
-        sequence['canvases'] = filtered_canvas_list
-      end
+      sequence['canvases'] = filtered_canvas_list if filtered_canvas_list.count > 0
 
       sequence['canvases'].each do |canvas|
         canvas['label'] = sanitize_value(canvas['label'])

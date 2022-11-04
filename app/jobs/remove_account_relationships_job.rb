@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # @api private
 #
 # This job is quite destructive; you'll want to read up on Bulkrax::RemoveAccountRelationshipsJob.

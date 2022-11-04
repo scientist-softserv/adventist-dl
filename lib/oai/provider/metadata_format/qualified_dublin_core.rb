@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OAI
   module Provider
     module MetadataFormat
@@ -10,10 +12,10 @@ module OAI
 
           # Dublin Core Terms Fields
           # For new fields, add here first then add to oai_qdc_map
-          @fields = [:title, :alternative, :description, :abstract, :identifier, :date, :created, :issued,
-            :creator, :contributor, :subject, :type, :rights, :rightsHolder, :license, :publisher, :provenance,
-            :spatial, :language, :isPartOf, :tableOfContents, :temporal, :bibliographicCitation, :relation,
-            :isReferencedBy, :hasPart, :isVersionOf, :extent, :format]
+          @fields = %i[title alternative description abstract identifier date created issued
+                       creator contributor subject type rights rightsHolder license publisher provenance
+                       spatial language isPartOf tableOfContents temporal bibliographicCitation relation
+                       isReferencedBy hasPart isVersionOf extent format]
         end
 
         def header_specification
@@ -26,7 +28,6 @@ module OAI
             'xsi:schemaLocation' => "http://dublincore.org/schemas/xmls/qdc/dcterms.xsd"
           }
         end
-
       end
     end
   end
