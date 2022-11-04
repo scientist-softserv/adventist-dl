@@ -3,7 +3,8 @@
 module Adventist
   # This class conforms to the interface of a Hyrax::DerivativeService
   #
-  # @see https://github.com/samvera/hyrax/blob/cff1ddd18764e4d14a2404d61d20ae776ea62916/app/services/hyrax/derivative_service.rb#L1 v2.9.5 implementation of Hyrax::DerivativeService
+  # @see https://github.com/samvera/hyrax/blob/cff1ddd18764e4d14a2404d61d20ae776ea62916/app/services/hyrax/derivative_service.rb#L1
+  #      v2.9.5 implementation of Hyrax::DerivativeService
   class TextFileTextExtractionService
     # @param file_set [FileSet]
     # @param text [String] the text of the original_file_name
@@ -52,7 +53,8 @@ module Adventist
     #
     # But avoids the trip to Solr for the extracted text.
     #
-    # @see https://github.com/samvera/hyrax/blob/cff1ddd18764e4d14a2404d61d20ae776ea62916/app/services/hyrax/file_set_derivatives_service.rb#L99-L107 Hyrax::FileSetDerivatives#extract_full_text
+    # @see https://github.com/samvera/hyrax/blob/cff1ddd18764e4d14a2404d61d20ae776ea62916/app/services/hyrax/file_set_derivatives_service.rb#L99-L107
+    #      Hyrax::FileSetDerivatives#extract_full_text
     def create_derivatives(filename)
       self.class.assign_extracted_text(
         file_set: file_set,

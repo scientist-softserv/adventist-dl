@@ -12,7 +12,12 @@ module OAI
 
           # Dublin Core Terms Fields
           # For new fields, add here first then add to oai_qdc_map
-          @fields = %i[abstract alternative_title aark_id bibliographic_citation contributor created creator date date_accepted date_issued description edition extent geocode has_part identifier issue_number language license location modified pagination part_of place_of_publication publisher related_url relation remote_url resource_type rights_statement source subject title thumbnail_url volume_number work_type]
+          @fields = %i[abstract alternative_title aark_id bibliographic_citation contributor created
+                       creator date date_accepted date_issued description edition extent geocode
+                       has_part identifier issue_number language license location modified
+                       pagination part_of place_of_publication publisher related_url relation
+                       remote_url resource_type rights_statement source subject title thumbnail_url
+                       volume_number work_type]
         end
 
         # Override to strip namespace and header out

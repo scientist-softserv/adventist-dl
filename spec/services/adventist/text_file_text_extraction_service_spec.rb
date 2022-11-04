@@ -20,8 +20,6 @@ RSpec.describe Adventist::TextFileTextExtractionService do
     end
   end
 
-  subject { described_class.new(valid_file_set) }
-
   it_behaves_like "a Hyrax::DerivativeService"
 
   describe '#valid?' do

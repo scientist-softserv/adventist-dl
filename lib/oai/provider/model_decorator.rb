@@ -40,6 +40,7 @@ module OAI
           volume: :volume }
       end
 
+      # rubocop:disable Metrics/MethodLength
       def map_oai_adl
         {
           abstract: :abstract,
@@ -80,11 +81,11 @@ module OAI
           volume_number: :volume_number,
           work_type: :human_readable_type,
           keyword: :keyword,
-          location: :location,
           part: :part,
           volume: :volume
         }
       end
+      # rubocop:enable Metrics/MethodLength
     end
   end
 end
