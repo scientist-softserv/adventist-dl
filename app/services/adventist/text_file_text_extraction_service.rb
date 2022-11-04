@@ -3,7 +3,8 @@
 module Adventist
   # This class conforms to the interface of a Hyrax::DerivativeService
   #
-  # @see https://github.com/samvera/hyrax/blob/cff1ddd18764e4d14a2404d61d20ae776ea62916/app/services/hyrax/derivative_service.rb#L1 v2.9.5 implementation of Hyrax::DerivativeService
+  # @see https://github.com/samvera/hyrax/blob/cff1ddd18764e4d14a2404d61d20ae776ea62916/app/services/hyrax/derivative_service.rb#L1
+  #      v2.9.5 implementation of Hyrax::DerivativeService
   class TextFileTextExtractionService
     # @param file_set [FileSet]
     # @param text [String] the text of the original_file_name
@@ -21,7 +22,7 @@ module Adventist
         # should be acceptable.
         extracted_text.content = text.encode(
           Encoding.find('UTF-8'),
-          { invalid: :replace, undef: :replace, replace: "?" }
+          invalid: :replace, undef: :replace, replace: "?"
         )
         extracted_text.mime_type = file_set.mime_type
         extracted_text.original_name = original_file_name
@@ -29,7 +30,7 @@ module Adventist
       file_set.save!
     end
 
-    VALID_MIME_TYPES = ["text/plain"]
+    VALID_MIME_TYPES = ["text/plain"].freeze
     attr_reader :file_set
     delegate :mime_type, :uri, to: :file_set
     def initialize(file_set)
@@ -52,7 +53,8 @@ module Adventist
     #
     # But avoids the trip to Solr for the extracted text.
     #
-    # @see https://github.com/samvera/hyrax/blob/cff1ddd18764e4d14a2404d61d20ae776ea62916/app/services/hyrax/file_set_derivatives_service.rb#L99-L107 Hyrax::FileSetDerivatives#extract_full_text
+    # @see https://github.com/samvera/hyrax/blob/cff1ddd18764e4d14a2404d61d20ae776ea62916/app/services/hyrax/file_set_derivatives_service.rb#L99-L107
+    #      Hyrax::FileSetDerivatives#extract_full_text
     def create_derivatives(filename)
       self.class.assign_extracted_text(
         file_set: file_set,

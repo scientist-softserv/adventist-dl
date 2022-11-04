@@ -77,7 +77,19 @@ class CatalogController < ApplicationController
     # solr fields that will be treated as facets by the blacklight application
     #   The ordering of the field names is the order of the display
     config.add_facet_field solr_name("human_readable_type", :facetable), label: "Type", limit: 5, collapse: false
-    config.add_facet_field  'sorted_year_isi', label: 'Date Range', range: { facet_field_label: 'Date Range', num_segments: 10, assumed_boundaries: [1100, Time.now.year + 2], segments: false, slider_js: false, maxlength: 4 }, facet_field_label: 'Date Range'
+    config.add_facet_field(
+      'sorted_year_isi',
+      label: 'Date Range',
+      range: {
+        facet_field_label: 'Date Range',
+        num_segments: 10,
+        assumed_boundaries: [1100, Time.zone.year + 2],
+        segments: false,
+        slider_js: false,
+        maxlength: 4
+      },
+      facet_field_label: 'Date Range'
+    )
     config.add_facet_field solr_name("resource_type", :facetable), label: "Resource Type", limit: 5
     config.add_facet_field solr_name("creator", :facetable), label: "Author", limit: 5
     config.add_facet_field solr_name("publisher", :facetable), limit: 5

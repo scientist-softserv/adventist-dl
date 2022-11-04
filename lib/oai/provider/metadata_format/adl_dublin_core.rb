@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OAI
   module Provider
     module MetadataFormat
@@ -10,22 +12,27 @@ module OAI
 
           # Dublin Core Terms Fields
           # For new fields, add here first then add to oai_qdc_map
-          @fields = [:abstract, :alternative_title, :aark_id, :bibliographic_citation, :contributor, :created, :creator, :date, :date_accepted, :date_issued, :description, :edition, :extent, :geocode, :has_part, :identifier, :issue_number, :language, :license, :location, :modified, :pagination, :part_of, :place_of_publication, :publisher, :related_url, :relation, :remote_url, :resource_type, :rights_statement, :source, :subject, :title, :thumbnail_url, :volume_number, :work_type]
+          @fields = %i[abstract alternative_title aark_id bibliographic_citation contributor created
+                       creator date date_accepted date_issued description edition extent geocode
+                       has_part identifier issue_number language license location modified
+                       pagination part_of place_of_publication publisher related_url relation
+                       remote_url resource_type rights_statement source subject title thumbnail_url
+                       volume_number work_type]
         end
 
         # Override to strip namespace and header out
         def encode(model, record)
           xml = Builder::XmlMarkup.new
           map = model.respond_to?("map_#{prefix}") ? model.send("map_#{prefix}") : {}
-          xml.tag!("#{prefix}") do
+          xml.tag!(prefix.to_s) do
             fields.each do |field|
               values = value_for(field, record, map)
               if values.respond_to?(:each)
                 values.each do |value|
-                  xml.tag! "#{field}", value
+                  xml.tag! field.to_s, value
                 end
               else
-                xml.tag! "#{field}", values
+                xml.tag! field.to_s, values
               end
             end
           end
@@ -43,7 +50,6 @@ module OAI
             'xsi:schemaLocation' => "http://dublincore.org/schemas/xmls/qdc/dcterms.xsd"
           }
         end
-
       end
     end
   end

@@ -6,7 +6,13 @@ RSpec.describe RemoveAccountRelationshipsJob do
   let(:account) { FactoryBot.create(:account) }
   let(:importer) do
     importer = nil
-    account.switch { importer = Bulkrax::Importer.create!(name: "hello", admin_set_id: "fake", parser_klass: "Bulkrax::CsvParser") }
+    account.switch do
+      importer = Bulkrax::Importer.create!(
+        name: "hello",
+        admin_set_id: "fake",
+        parser_klass: "Bulkrax::CsvParser"
+      )
+    end
     importer
   end
 
@@ -19,7 +25,6 @@ RSpec.describe RemoveAccountRelationshipsJob do
 
   describe "ForImporterJob" do
     describe "#perform" do
-
       it "calls Bulkrax::RemoveAccountRelationshipsJob.break_relationships_for!" do
         expect(Bulkrax::RemoveRelationshipsForImporter).to receive(:break_relationships_for!)
           .with(importer: importer, with_progress_bar: false)
