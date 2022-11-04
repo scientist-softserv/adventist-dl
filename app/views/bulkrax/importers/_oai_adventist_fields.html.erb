@@ -1,9 +1,9 @@
 <%# override to remove the thumbnail_url field %>
-<div class='oai_fields'>
+<div class='oai_adventist_fields'>
   <%= fi.input :base_url, as: :string, input_html: { value: importer.parser_fields['base_url'] } %>
-  
+
   <%= fi.input :metadata_prefix, as: :string, hint: 'Such as oai_dc, dcterms or oai_qdc', input_html: { value: importer.parser_fields['metadata_prefix'] } %>
-  
+
   <%= fi.input :set, collection: [importer.parser_fields['set']], label: 'Set (source)', selected: importer.parser_fields['set'] %>
   <button type="button" class="btn btn-default refresh-set-source">Refresh Sets</button>
 
