@@ -15,10 +15,11 @@ module Bulkrax
           add_metadata(node.name, node.content)
         end
       end
-      #add file sets to 'children' in parsed md
+
       add_visibility
       add_rights_statement
       add_admin_set_id
+      add_collection_ids_from_set
       add_collections
       add_local
 
