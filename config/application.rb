@@ -82,6 +82,5 @@ module Hyku
 
     # copies tinymce assets directly into public/assets
     config.tinymce.install = :copy
-
   end
 end
