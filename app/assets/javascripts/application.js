@@ -51,5 +51,4 @@
 //= require bootstrap-slider
 //= require jquery.flot.js
 
-// attempt to fix tinymce assets bug
 //= require tinymce
