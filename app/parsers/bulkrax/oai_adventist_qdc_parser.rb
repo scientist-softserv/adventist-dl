@@ -95,7 +95,7 @@ module Bulkrax
         @file_sets = @file_sets.flatten.compact.uniq
         @works = @works.flatten.compact.uniq
       else # if no model is specified, assume all records are works
-      @works = records.flatten.compact.uniq
+        @works = records.flatten.compact.uniq
       end
 
       true
