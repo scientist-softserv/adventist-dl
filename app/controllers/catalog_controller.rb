@@ -83,7 +83,7 @@ class CatalogController < ApplicationController
       range: {
         facet_field_label: 'Date Range',
         num_segments: 10,
-        assumed_boundaries: [1100, Time.zone.year + 2],
+        assumed_boundaries: [1100, Time.zone.now.year + 2],
         segments: false,
         slider_js: false,
         maxlength: 4
