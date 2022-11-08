@@ -14,6 +14,12 @@ module Bulkrax
       end
     end
 
+    def add_collection_ids_from_set
+      sets = record.header.set_spec.map(&:content)
+      self.collection_ids += sets.map { |set| importerexporter.unique_collection_identifier(set) }
+      self.collection_ids = self.collection_ids.uniq
+    end
+
     def add_set_collections
       sets = record.header.set_spec.map(&:content)
       aark_ids = sets.select { |s| s.match(/^\d+$/) }
@@ -31,7 +37,7 @@ module Bulkrax
     end
 
     def add_collection_to_work(collection)
-      self.parsed_metadata['member_of_collections_attributes'] || {}
+      self.parsed_metadata['member_of_collections_attributes'] ||= {}
       top_key = self.parsed_metadata['member_of_collections_attributes'].keys.map { |k| k.to_i }.sort.last || -1
       self.parsed_metadata['member_of_collections_attributes'][(top_key + 1).to_s] = { id: collection.id }
     end
