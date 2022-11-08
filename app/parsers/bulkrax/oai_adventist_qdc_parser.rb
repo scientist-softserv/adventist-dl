@@ -14,8 +14,16 @@ module Bulkrax
       RdfFileSetEntry
     end
 
+    def create_collections
+      create_objects(['collection'])
+    end
+
     def create_file_sets
       create_objects(['file_set'])
+    end
+
+    def create_relationships
+      ScheduleRelationshipsJob.set(wait: 5.minutes).perform_later(importer_id: importerexporter.id)
     end
 
     def create_objects(types_array = nil)
@@ -41,6 +49,18 @@ module Bulkrax
       status_info(e)
     end
 
+    def create_entry_and_job(current_record, type)
+      new_entry = find_or_create_entry(send("#{type}_entry_class"),
+                                       current_record[source_identifier],
+                                       'Bulkrax::Importer',
+                                       current_record.to_h)
+      if current_record[:delete].present?
+        "Bulkrax::Delete#{type.camelize}Job".constantize.send(perform_method, new_entry, current_run)
+      else
+        "Bulkrax::Import#{type.camelize}Job".constantize.send(perform_method, new_entry.id, current_run.id)
+      end
+    end
+
     def model_field_mappings
       model_mappings = Bulkrax.field_mappings[self.class.to_s]&.dig('model', :from) || []
       model_mappings ||= ['model']
@@ -54,12 +74,13 @@ module Bulkrax
       @file_sets = []
 
       if model_field_mappings.map { |mfm| records.first.metadata.find("//#{mfm}").first }.any?
+
         records.map do |r|
           model_field_mappings.each do |model_mapping|
             next unless r.metadata.find("//#{model_mapping}").first
 
-            if r.metadata.find("//#{model_mapping}").first.content.casecmp('collection').zero?
-              @collections << r
+            if r.header.set_spec.present?
+              generate_collection r.header.set_spec
             elsif r.metadata.find("//#{model_mapping}").first.content.casecmp('fileset').zero?
               @file_sets << r
             else
@@ -73,8 +94,14 @@ module Bulkrax
       else # if no model is specified, assume all records are works
         @works = records.flatten.compact.uniq
       end
-
       true
+    end
+
+    def generate_collection(set_spec)
+      set_spec.each do |set|
+        @collections << { source_identifier => [importerexporter.unique_collection_identifier(set.content)],
+                          'title' => [importerexporter.unique_collection_identifier(set.content)] }
+      end
     end
 
     def works

@@ -19,6 +19,7 @@ module Bulkrax
       add_visibility
       add_rights_statement
       add_admin_set_id
+      add_collection_ids_from_set
       add_collections
       add_local
 
