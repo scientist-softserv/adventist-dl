@@ -80,10 +80,7 @@ module Bulkrax
             next unless r.metadata.find("//#{model_mapping}").first
 
             if r.header.set_spec.present?
-              r.header.set_spec.each do |set|
-                @collections << { source_identifier => [importerexporter.unique_collection_identifier(set.content)],
-                                  'title' => [importerexporter.unique_collection_identifier(set.content)] }
-              end
+              generate_collection r.header.set_spec
             elsif r.metadata.find("//#{model_mapping}").first.content.casecmp('fileset').zero?
               @file_sets << r
             else
@@ -97,8 +94,14 @@ module Bulkrax
       else # if no model is specified, assume all records are works
         @works = records.flatten.compact.uniq
       end
-
       true
+    end
+
+    def generate_collection(set_spec)
+      set_spec.each do |set|
+        @collections << { source_identifier => [importerexporter.unique_collection_identifier(set.content)],
+                          'title' => [importerexporter.unique_collection_identifier(set.content)] }
+      end
     end
 
     def works
