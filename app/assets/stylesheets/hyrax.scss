@@ -3,7 +3,7 @@
  *= require select2
  *= require_self
 */
-@import "variables";
+
 @import "bootstrap-default-overrides";
 @import "bootstrap-sprockets";
 @import "bootstrap";
@@ -13,7 +13,6 @@
 @import "hyku";
 @import "accounts";
 @import "viewer";
-@import "adl-overrides";
 
 @import "blacklight_gallery/gallery";
 @import "blacklight_gallery/masonry";

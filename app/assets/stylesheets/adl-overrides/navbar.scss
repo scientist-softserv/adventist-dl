@@ -1,0 +1,133 @@
+body.public-facing {
+  // MAIN NAV
+
+  #masthead {
+
+    &.navbar.navbar-inverse.navbar-static-top {
+      background: linear-gradient(rgb(206, 140, 0), rgb(255, 255, 255), rgb(255, 255, 255, .8), rgb(255, 255, 255, 0));
+      height: 290px;
+
+      .container-fluid {
+        padding-right: 0;
+        padding-left: 0;
+      }
+
+      .navbar-link,
+      .navbar-nav > li > a,
+      .navbar-text,
+      .navbar-brand {
+        color: $white;
+        &:hover {
+          color: $lightyellow;
+          background-color: transparent;
+        }
+      }
+
+      .navbar-nav .open {
+        a, a:hover, a:focus {
+          background-color: $black;
+        }
+      }
+
+      #logo img {
+        padding: 10px;
+        max-height: 104px;
+      }
+    
+      @media (max-width: 553px) {
+        #logo img {
+          max-width: 75%;
+        }
+      }
+
+      a#logo {
+        align-self: center;
+      }
+
+      .home-share-work a.btn.btn-primary.btn-lg {
+        float: right;
+        position: relative;
+        margin-bottom: 20px;
+        margin-right: 12px;
+      }
+
+      .nav {
+        padding-left: 30px;
+      }
+      
+      .container-fluid.row {
+        padding: 0;
+        margin: 0;
+      }
+      
+      ul#user_utility_links {
+        padding-top: 30px;
+      }
+      
+      .dropdown-menu {
+        background-color: $white;
+      }
+      
+      .container > .navbar-header,
+      .container > .navbar-collapse,
+      .container > #facet-panel-collapse,
+      .container-fluid > .navbar-header {
+        margin: 0;
+      }
+    }
+    
+    // MOBILE NAV
+    
+    .navbar-header {
+      min-height: 85px;
+      display: flex;
+    }
+    .navbar-toggle {
+      position: absolute;
+      align-self: center;
+      right: 0;
+      padding: 15px;
+    }
+    
+    @media (max-width: 430px) {
+      .navbar-toggle {
+        right: 0;
+      }
+    }
+    
+    .facets-toggle {
+      position: relative;
+      top: 0;
+      right: -5px;
+      padding: 15px;
+    }
+    
+    @media (max-width: 1251px) {
+      #masthead .navbar-right {
+        margin: 0;
+      }
+    
+      ul#user_utility_links {
+        padding: 0;
+        margin: 0;
+        padding-top: 0;
+      }
+    
+      div#top-navbar-collapse {
+        padding: 0;
+        margin: 0;
+      }
+    
+      .nav > li {
+        text-align: center;
+      }
+    
+      .nav > li:hover {
+        background-color: $lightgrey;
+      }
+    }
+    
+  }
+}
+
+  

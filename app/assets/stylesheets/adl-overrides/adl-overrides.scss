@@ -1,0 +1,600 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap");
+
+body.public-facing {
+  font-family: "Source Sans Pro" !important;
+  font-size: 17px;
+  background-color: $lightgrey !important;
+  color: $black !important;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Source Sans Pro" !important;
+    font-weight: bold;
+    color: $black !important;
+  }
+
+  p {
+    color: $black !important;
+  }
+
+  //reusable padding styles
+  .lh-40 {
+    line-height: 40px;
+  }
+
+  .home_marketing_text h1,
+  .home_marketing_text h2 {
+    color: $white !important;
+    text-align: left !important;
+    padding-top: 40px;
+  }
+
+  h6.custom-nav-text {
+    margin: 5.5% 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 14px;
+  }
+
+  @media (max-width: 767px) {
+    h6.custom-nav-text {
+      text-align: center;
+      margin: 2.5% 15px;
+    }
+  }
+
+  @media (min-width: 1120px) {
+    h6.custom-nav-text {
+      margin: 4% 15px;
+      font-size: 16px;
+    }
+  }
+
+  /* LINK COLORS */
+
+  a {
+    color: $darkyellow !important;
+    transition: 0.2s;
+  }
+
+  a:hover,
+  a:focus {
+    color: $darkyellow !important;
+  }
+
+  p.terms-of-use a {
+    color: $black !important;
+  }
+
+  //style all inputs to dark mode
+  input {
+    background-color: $lightgrey;
+    border-radius: 4px;
+  }
+
+  /* HOME PAGE NAV-PILL TABS */
+
+  .nav-pills > li > a {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding-left: 0;
+  }
+
+  .nav-pills > li.active > a,
+  .nav-pills > li.active > a:hover,
+  .nav-pills > li.active > a:focus {
+    background-color: transparent !important ;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .nav > li > a:hover,
+  .nav > li > a:focus {
+    background-color: transparent !important;
+  }
+
+  ul.nav.nav-pills {
+    padding: 0;
+    float: none;
+  }
+
+  .btn-primary {
+    background-color: $mediumyellow !important;
+    border-color: transparent !important;
+    border: 2px solid transparent !important;
+  }
+
+  .btn:focus,
+  .facets-toggle:focus,
+  td.toggle input[type="submit"]:focus,
+  .btn.focus,
+  .focus.facets-toggle,
+  td.toggle input.focus[type="submit"],
+  .btn:active:focus,
+  .facets-toggle:active:focus,
+  td.toggle input[type="submit"]:active:focus,
+  .btn:active.focus,
+  .facets-toggle:active.focus,
+  td.toggle input[type="submit"]:active.focus,
+  .btn.active:focus,
+  .active.facets-toggle:focus,
+  td.toggle input.active[type="submit"]:focus,
+  .btn.active.focus,
+  .active.focus.facets-toggle,
+  td.toggle input.active.focus[type="submit"] {
+    outline: 0;
+  }
+
+  a.btn.btn-primary {
+    color: $black !important;
+  }
+
+  .btn-primary:focus,
+  .btn-primary.focus {
+    background-color: $mediumyellow !important;
+    border-color: $darkyellow !important;
+    border: 2px solid $darkyellow !important;
+    outline: 0 !important;
+    color: $black !important;
+  }
+
+  .btn-primary:hover {
+    background-color: $mediumyellow !important;
+    border-color: $darkyellow !important;
+    border: 2px solid $darkyellow !important;
+    outline: 0 !important;
+    color: $black !important;
+  }
+
+  .btn-primary:active,
+  .btn-primary.active {
+    background-color: $mediumyellow !important;
+    border-color: $darkyellow !important;
+    border: 2px solid $darkyellow !important;
+    outline: 0 !important;
+    color: $black !important;
+  }
+
+  .btn-primary:active:hover,
+  .btn-primary:active:focus,
+  .btn-primary:active.focus,
+  .btn-primary.active:hover,
+  .btn-primary.active:focus,
+  .btn-primary.active.focus {
+    background-color: $mediumyellow !important;
+    border-color: $darkyellow !important;
+    border: 2px solid $darkyellow !important;
+    outline: 0 !important;
+    color: $black !important;
+  }
+
+  .btn-primary.disabled:hover,
+  .btn-primary.disabled:focus,
+  .btn-primary.disabled.focus,
+  .btn-primary[disabled]:hover,
+  .btn-primary[disabled]:focus,
+  .btn-primary[disabled].focus {
+    background-color: $mediumyellow !important;
+    border-color: $darkyellow !important;
+    color: grey !important;
+    border: 2px solid $darkyellow !important;
+    outline: 0 !important;
+  }
+
+  /* DEFAULT BUTTON STYLES */
+
+  .btn-link {
+    color: $darkyellow !important;
+  }
+
+  .btn-default {
+    background-color: transparent !important;
+    color: $black !important;
+    outline: 0 !important;
+    border: 2px solid $lightgrey !important;
+  }
+
+  .btn-default:focus,
+  .btn-default.focus {
+    outline: 0 !important;
+    border: 2px solid $lightgrey !important;
+  }
+
+  .btn-default:hover {
+    outline: 0 !important;
+    border: 2px solid $darkyellow;
+  }
+
+  .btn-default:active,
+  .btn-default.active {
+    outline: 0 !important;
+    border: 2px solid $darkyellow;
+  }
+
+  .btn-default:active:hover,
+  .btn-default:active:focus,
+  .btn-default:active.focus,
+  .btn-default.active:hover,
+  .btn-default.active:focus,
+  .btn-default.active.focus {
+    outline: 0 !important;
+    border: 2px solid $darkyellow;
+  }
+
+  .btn-default.disabled:hover,
+  .btn-default.disabled:focus,
+  .btn-default.disabled.focus,
+  .btn-default[disabled]:hover,
+  .btn-default[disabled]:focus,
+  .btn-default[disabled].focus {
+    outline: 0 !important;
+    border: 2px solid $lightgrey;
+    color: grey !important;
+  }
+
+  a.btn.btn-danger {
+    color: black !important;
+  }
+
+  // Breadcrumbs
+  .breadcrumb {
+    border: 0 solid $white;
+    background-color: $white;
+    border-radius: 4px !important;
+  }
+
+  nav.breadcrumb {
+    margin-top: 50px;
+  }
+
+  // /* FACET PANEL STYLES */
+
+  .panel-default > .panel-heading {
+    color: $black !important;
+    background-color: $white !important;
+    border-color: transparent !important;
+  }
+
+  #facets .top-panel-heading {
+    border: 1px solid #ccc;
+    margin-bottom: 1em;
+  }
+
+  .panel-default {
+    border-color: transparent !important;
+    border: 0 solid transparent !important;
+  }
+
+  .panel-heading.collapse-toggle .panel-title:after {
+    color: $black;
+  }
+
+  .panel.panel-default.permissions-confirm {
+    background-color: $white;
+  }
+  .form-actions.panel-footer {
+    border-top: 1px solid $lightgrey;
+  }
+
+  // /*MODALS */
+
+  .modal-header {
+    border-bottom: 1px solid $white;
+  }
+
+  .select-worktype {
+    border-top: 0 solid transparent;
+  }
+
+  .select-work-icon {
+    color: $black !important;
+  }
+
+  .close {
+    color: $black;
+    text-shadow: none;
+    opacity: 0.6;
+  }
+
+  .modal-footer {
+    border-top: 1px solid $white;
+  }
+
+  //WORK-SHOW PAGE
+
+  .select-work-icon {
+    color: $black !important;
+  }
+
+  ul.tabular {
+    font-weight: 300;
+  }
+
+  .metadata-group ul.tabular {
+    margin-bottom: 0;
+  }
+
+  dl.work-show {
+    font-weight: 500;
+  }
+
+  .close {
+    color: $black;
+    text-shadow: none;
+    opacity: 0.6;
+  }
+
+  .work-show.metadata-block {
+    .metadata-group {
+      display: flex;
+      padding: 10px;
+      border-bottom: 1px solid $darkgrey;
+    }
+  }
+
+  .metadata-group {
+    dt {
+      width: 30%;
+    }
+
+    dd {
+      width: 70%;
+    }
+
+    a {
+      color: $darkyellow !important;
+    }
+  }
+
+  .modal-footer {
+    border-top: 1px solid $white;
+  }
+
+  img.representative-media {
+    margin: 0 auto;
+  }
+
+  table.related-files td.thumbnail {
+    margin-bottom: 0;
+    background-color: transparent;
+    border: 0;
+  }
+
+  // SEARCH RESULTS PAGE
+  .constraints-container {
+    border-radius: 4px;
+    background-color: $lightgrey;
+  }
+
+  // ALERTS
+  .alert-info {
+    color: $black;
+    background-color: $lightgrey;
+    border-color: transparent;
+    border: 0 solid transparent;
+  }
+  .alert-success {
+    color: $white;
+    background-color: $darkyellow;
+    border-color: transparent;
+    border: 0 solid transparent;
+  }
+  .alert-warning {
+    color: $black;
+    background-color: $darkyellow;
+    border-color: transparent;
+    border: 0 solid transparent;
+  }
+
+  .legend {
+    color: $black !important;
+  }
+
+  //changes the colors of icons in the dashboard
+  .dashboard .main-header h1 .fa {
+    color: $darkyellow;
+  }
+
+  //COLLECTION-SHOW PAGE
+
+  .hyc-metadata,
+  .hyc-description {
+    padding: 1em;
+  }
+
+  .hyc-metadata div {
+    dt {
+      min-width: 30%;
+      flex-basis: auto;
+    }
+    dd {
+      word-break: break-all;
+    }
+  }
+
+  .hyc-whitelight {
+    padding: 0;
+  }
+
+  input#collection_search {
+    padding: 18px;
+  }
+
+  .hyc-container {
+    padding: 1em;
+  }
+
+  div.collection-list legend {
+    color: $black;
+  }
+
+  span#select2-chosen-1 {
+    color: $darkgrey;
+  }
+
+  .dropdown-btn {
+    color: $black;
+    background-color: $white;
+    border: 0;
+  }
+  
+  .dropdown-btn:hover,
+  li.dropdown-item:hover {
+    color: $darkyellow;
+  }
+
+  li.dropdown-item {
+    padding: 10px;
+    width: 200px;
+  }
+
+  // FORMS
+
+  .form-control,
+  .form-control[readonly] {
+    color: black;
+    background-color: $lightgrey;
+    border: 0;
+  }
+  
+  .form-control {
+    transition: border ease-in-out 0.2s, box-shadow ease-in-out 0.15s;
+  }
+  
+  .form-control:focus {
+    -webkit-box-shadow: inset 0px 0px 0px 2px $mediumyellow;
+    box-shadow: inset 0px 0px 0px 2px $mediumyellow;
+    border: 0;
+  }
+
+  // Breadcrumbs
+  .breadcrumb {
+    border: 0 solid $white !important;
+    background-color: $white !important;
+    border-radius: 4px !important;
+  }
+  
+  nav.breadcrumb {
+    margin-top: 50px;
+  }
+
+  //LABELS
+  .label-success {
+    background-color: $mediumyellow;
+  }
+  
+  .label-info {
+    background-color: $darkyellow;
+  }
+  
+  .label-primary {
+    background-color: $darkyellow;
+  }
+
+  //hides the visibility badge on top of work show page & hides the "user collection" labels in search results
+  .panel-default .panel-heading small span.label,
+  .search-results-title-row span.label,
+  .hyc-title span.label {
+    display: none;
+  }
+
+  //HOME PAGE CONTENT SECTIONS
+
+  .panel-body {
+    padding: 15px;
+    background-color: $white !important;
+  }
+
+  .list-group-item {
+    background-color: $darkgrey;
+    border: 1px solid $lightgrey;
+  }
+
+  .table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: $lightgrey;
+  }
+
+  .table-striped > tbody > tr:nth-of-type(even) {
+    background-color: $white;
+  }
+
+  .table > tbody > tr > td,
+  .table > tfoot > tr > th,
+  .table > tfoot > tr > td {
+    border-top: 0 solid transparent;
+    border-radius: 4px !important;
+  }
+
+  ol.list-group.list-group-striped li:nth-of-type(odd) {
+    background-color: $lightgrey;
+    border-radius: 4px;
+  }
+
+  ol.list-group.list-group-striped li:nth-of-type(even) {
+    background-color: $white;
+    border-radius: 4px;
+  }
+
+  .recent-item,
+  .featured-item {
+    border-top: 0 solid transparent;
+    padding: 20px;
+  }
+
+  .recent-item .recent-label,
+  .featured-item .featured-label {
+    color: $black !important;
+  }
+
+  .dd3-content.panel.panel-default {
+    background: transparent;
+  }
+
+  select {
+    background-color: $lightgrey;
+    border-radius: 4px;
+  }
+  
+  .sidebar .sidebar-toggle {
+    background-color: $white;
+  }
+
+  .pagination > .disabled > a {
+    background-color: $lightgrey;
+  }
+
+  .collection-highlights img,
+  .featured-item img,
+  .recent-item img {
+    border: 0;
+    margin-right: 15px;
+    height: 90px;
+  }
+
+  //ADD WORK PAGE
+
+  .dashboard .panel {
+    border: 2px solid $lightgrey !important;
+  }
+
+  .panel-footer {
+    background-color: transparent !important;
+  }
+
+  .legend {
+    color: $black;
+  }
+
+}
+
+.dashboard {
+  //fix the collection image thumbnails in the dashboard so they don't overlap with the collection title & so they are square
+  .collections-wrapper .thumbnail-title-wrapper .thumbnail-wrapper > img {
+    width: 30px;
+    object-fit: cover;
+  }
+}
