@@ -78,6 +78,7 @@
               flex: 1;
               border-top: 1px solid $lightgrey2;
               border-top-right-radius: 0;
+              flex-wrap: wrap;
               .btn.masthead-search-button {
                 flex: 1;
                 &#search-submit-header {
@@ -85,6 +86,15 @@
                 }
                 &.dropdown-toggle {
                   border-top-right-radius: 0;
+                }
+              }
+              @media (max-width: 395px) {
+                .dropdown-toggle {
+                  border-top: 1px solid $lightgrey2;
+                  border-bottom-left-radius: 4px;
+                }
+                #advanced-top-button {
+                  border-right: 0;
                 }
               }
             }
