@@ -8,14 +8,15 @@ module Hyrax
     self.model_class = ::GenericWork
     include HydraEditor::Form::Permissions
     self.terms += %i[
-      resource_type
       aark_id
-      part_of
-      place_of_publication
-      date_issued
+      abstract
       alt
       bibliographic_citation
+      date_issued
+      part_of
+      place_of_publication
       remote_url
+      resource_type
     ]
   end
 end

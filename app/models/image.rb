@@ -5,6 +5,7 @@
 class Image < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
   include SlugBug
+  include DogBiscuits::Abstract
   include DogBiscuits::BibliographicCitation
   include DogBiscuits::DateIssued
   include DogBiscuits::Geo
