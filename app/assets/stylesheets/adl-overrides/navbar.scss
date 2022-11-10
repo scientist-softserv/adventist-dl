@@ -22,6 +22,12 @@ body.public-facing {
       .navbar-nav {
         li {
           transition: .2s ease-in-out;
+          a {
+            border-bottom: 1px solid transparent;
+            &:hover {
+                border-bottom: 1px solid $darkgrey;
+              }
+          }
         }
         .navbar-link,
         li > a,
@@ -33,19 +39,23 @@ body.public-facing {
           font-weight: 600;
           font-size: 15px;
           transition: .2s ease-in-out;
+          text-decoration: none;
+          border-bottom: 1px solid transparent;
           &:hover {
             color: $mediumgrey;
             background-color: transparent;
           }
         }
-        .open {
-          a, a:hover, a:focus {
-            background-color: $white;
-          }
-        }
         .active {
           a, a:hover, a:focus {
             background-color: transparent;
+            border-bottom: 1px solid $darkgrey;
+          }
+        }
+        .open {
+          a, a:hover, a:focus {
+            background-color: $white;
+            border-bottom: 1px solid $darkgrey;
           }
         }
       }

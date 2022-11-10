@@ -388,8 +388,8 @@ body.public-facing {
   .form-control {
     transition: border ease-in-out 0.2s, box-shadow ease-in-out 0.15s;
     &:focus {
-      -webkit-box-shadow: inset 0px 0px 0px 5px $lightgrey2;
-      box-shadow: inset 0px 0px 0px 5px $lightgrey2;
+      -webkit-box-shadow: inset 0 0 7px 5px $lightgrey2;
+      box-shadow: inset 0 0 7px 5px $lightgrey;
       border: 0;
     }
   }
