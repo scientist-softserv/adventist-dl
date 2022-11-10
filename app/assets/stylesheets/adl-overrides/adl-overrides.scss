@@ -4,7 +4,7 @@ body.public-facing {
   font-family: "Source Sans Pro" !important;
   font-size: 17px;
   background-color: $lightgrey !important;
-  color: $black !important;
+  color: $darkgrey;
 
   h1,
   h2,
@@ -14,98 +14,97 @@ body.public-facing {
   h6 {
     font-family: "Source Sans Pro" !important;
     font-weight: bold;
-    color: $black !important;
   }
 
   p {
-    color: $black !important;
+    color: $darkgrey;
   }
-
-  //reusable padding styles
+  
   .lh-40 {
     line-height: 40px;
-  }
-
-  .home_marketing_text h1,
-  .home_marketing_text h2 {
-    color: $white !important;
-    text-align: left !important;
-    padding-top: 40px;
-  }
-
-  h6.custom-nav-text {
-    margin: 5.5% 15px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 14px;
-  }
-
-  @media (max-width: 767px) {
-    h6.custom-nav-text {
-      text-align: center;
-      margin: 2.5% 15px;
-    }
-  }
-
-  @media (min-width: 1120px) {
-    h6.custom-nav-text {
-      margin: 4% 15px;
-      font-size: 16px;
-    }
   }
 
   /* LINK COLORS */
 
   a {
-    color: $darkyellow !important;
-    transition: 0.2s;
-  }
-
-  a:hover,
-  a:focus {
-    color: $darkyellow !important;
+    color: $darkyellow;
+    text-decoration: none;
+    transition: 0.2s ease-in-out;
+    &:hover, &:focus {
+      text-decoration: underline;
+    }
   }
 
   p.terms-of-use a {
-    color: $black !important;
+    color: $black;
   }
 
-  //style all inputs to dark mode
-  input {
-    background-color: $lightgrey;
-    border-radius: 4px;
+  .btn.btn-primary {
+    background-color: $white;
+    border-color: $mediumyellow;
+    border: 1px solid $mediumyellow;
+    color: $darkyellow;
+    outline: 0;
+    &:hover, 
+    &:focus,
+    &.focus, 
+    &:active, 
+    &.active, 
+    &.active:hover,
+    &.active:focus,
+    &:active:hover,
+    &:active:focus, 
+    &:active.focus, 
+    &.active.focus {
+      border-color: $darkyellow;
+      border: 1px solid $darkyellow;
+      color: $darkyellow;
+      background-color: rbga(255, 255, 255, .8);
+      &a {
+        text-decoration: none;
+      }
+    }
   }
 
-  /* HOME PAGE NAV-PILL TABS */
-
-  .nav-pills > li > a {
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    padding-left: 0;
+  .btn.btn-default {
+    background-color: $white;
+    border-color: $mediumyellow;
+    border: 1px solid $mediumyellow;
+    color: $mediumyellow;
+    outline: 0;
+    &:hover, 
+    &:focus,
+    &.focus, 
+    &:active, 
+    &.active, 
+    &.active:hover,
+    &.active:focus,
+    &:active:hover,
+    &:active:focus, 
+    &:active.focus, 
+    &.active.focus {
+      border-color: $mediumgrey;
+      border: 1px solid $mediumgrey;
+      color: $black;
+      background-color: rbga(255, 255, 255, .8);
+      &a {
+        text-decoration: none;
+      }
+    }
   }
 
-  .nav-pills > li.active > a,
-  .nav-pills > li.active > a:hover,
-  .nav-pills > li.active > a:focus {
-    background-color: transparent !important ;
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  .nav > li > a:hover,
-  .nav > li > a:focus {
-    background-color: transparent !important;
-  }
-
-  ul.nav.nav-pills {
-    padding: 0;
-    float: none;
-  }
-
-  .btn-primary {
-    background-color: $mediumyellow !important;
-    border-color: transparent !important;
-    border: 2px solid transparent !important;
+  .btn.btn-primary, .btn.btn-default {
+    &.disabled:hover,
+    &.disabled:hover,
+    &.disabled:focus,
+    &.disabled.focus,
+    &[disabled]:hover,
+    &[disabled]:focus,
+    &[disabled].focus {
+      border-color: $lightgrey2;
+      border: 1px solid $lightgrey2;
+      color: $lightgrey2;
+    }
   }
 
   .btn:focus,
@@ -129,111 +128,10 @@ body.public-facing {
     outline: 0;
   }
 
-  a.btn.btn-primary {
-    color: $black !important;
-  }
-
-  .btn-primary:focus,
-  .btn-primary.focus {
-    background-color: $mediumyellow !important;
-    border-color: $darkyellow !important;
-    border: 2px solid $darkyellow !important;
-    outline: 0 !important;
-    color: $black !important;
-  }
-
-  .btn-primary:hover {
-    background-color: $mediumyellow !important;
-    border-color: $darkyellow !important;
-    border: 2px solid $darkyellow !important;
-    outline: 0 !important;
-    color: $black !important;
-  }
-
-  .btn-primary:active,
-  .btn-primary.active {
-    background-color: $mediumyellow !important;
-    border-color: $darkyellow !important;
-    border: 2px solid $darkyellow !important;
-    outline: 0 !important;
-    color: $black !important;
-  }
-
-  .btn-primary:active:hover,
-  .btn-primary:active:focus,
-  .btn-primary:active.focus,
-  .btn-primary.active:hover,
-  .btn-primary.active:focus,
-  .btn-primary.active.focus {
-    background-color: $mediumyellow !important;
-    border-color: $darkyellow !important;
-    border: 2px solid $darkyellow !important;
-    outline: 0 !important;
-    color: $black !important;
-  }
-
-  .btn-primary.disabled:hover,
-  .btn-primary.disabled:focus,
-  .btn-primary.disabled.focus,
-  .btn-primary[disabled]:hover,
-  .btn-primary[disabled]:focus,
-  .btn-primary[disabled].focus {
-    background-color: $mediumyellow !important;
-    border-color: $darkyellow !important;
-    color: grey !important;
-    border: 2px solid $darkyellow !important;
-    outline: 0 !important;
-  }
-
   /* DEFAULT BUTTON STYLES */
 
   .btn-link {
     color: $darkyellow !important;
-  }
-
-  .btn-default {
-    background-color: transparent !important;
-    color: $black !important;
-    outline: 0 !important;
-    border: 2px solid $lightgrey !important;
-  }
-
-  .btn-default:focus,
-  .btn-default.focus {
-    outline: 0 !important;
-    border: 2px solid $lightgrey !important;
-  }
-
-  .btn-default:hover {
-    outline: 0 !important;
-    border: 2px solid $darkyellow;
-  }
-
-  .btn-default:active,
-  .btn-default.active {
-    outline: 0 !important;
-    border: 2px solid $darkyellow;
-  }
-
-  .btn-default:active:hover,
-  .btn-default:active:focus,
-  .btn-default:active.focus,
-  .btn-default.active:hover,
-  .btn-default.active:focus,
-  .btn-default.active.focus {
-    outline: 0 !important;
-    border: 2px solid $darkyellow;
-  }
-
-  .btn-default.disabled:hover,
-  .btn-default.disabled:focus,
-  .btn-default.disabled.focus,
-  .btn-default[disabled]:hover,
-  .btn-default[disabled]:focus,
-  .btn-default[disabled].focus {
-    outline: 0 !important;
-    border: 2px solid $lightgrey;
-    color: grey !important;
   }
 
   a.btn.btn-danger {
@@ -241,14 +139,40 @@ body.public-facing {
   }
 
   // Breadcrumbs
-  .breadcrumb {
+  nav.breadcrumb {
     border: 0 solid $white;
     background-color: $white;
     border-radius: 4px !important;
+    margin-top: 50px;
   }
 
-  nav.breadcrumb {
-    margin-top: 50px;
+  // Inputs
+
+  input {
+    background-color: $lightgrey;
+    border-radius: 4px;
+  }
+
+  /* Nav Pills */
+
+  ul.nav.nav-pills{
+    padding: 0;
+    float: none;
+    li {
+      a {
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding-left: 0;
+      }
+      &.active {
+        a, a:hover, a:focus {
+          background-color: transparent !important ;
+          font-weight: 600;
+          text-decoration: none;
+          color: $darkyellow;
+        }
+      }
+    }
   }
 
   // /* FACET PANEL STYLES */
@@ -463,12 +387,11 @@ body.public-facing {
   
   .form-control {
     transition: border ease-in-out 0.2s, box-shadow ease-in-out 0.15s;
-  }
-  
-  .form-control:focus {
-    -webkit-box-shadow: inset 0px 0px 0px 2px $mediumyellow;
-    box-shadow: inset 0px 0px 0px 2px $mediumyellow;
-    border: 0;
+    &:focus {
+      -webkit-box-shadow: inset 0px 0px 0px 5px $lightgrey2;
+      box-shadow: inset 0px 0px 0px 5px $lightgrey2;
+      border: 0;
+    }
   }
 
   // Breadcrumbs
