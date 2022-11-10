@@ -6,6 +6,6 @@ module Hyrax
   class ImagePresenter < Hyku::WorkShowPresenter
     # We do not use this generated ImagePresenter. Instead we use the
     # WorkShowPresenter
-    delegate :date_issued, :alt, :part_of, :place_of_publication, :remote_url, to: :solr_document
+    delegate :abstract, :date_issued, :alt, :part_of, :place_of_publication, :remote_url, to: :solr_document
   end
 end

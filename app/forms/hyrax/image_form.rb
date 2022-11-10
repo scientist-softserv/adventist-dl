@@ -7,15 +7,16 @@ module Hyrax
     include Hyrax::FormTerms
     self.model_class = ::Image
     self.terms += %i[
-      resource_type
-      extent
       aark_id
-      part_of
-      place_of_publication
-      date_issued
+      abstract
       alt
       bibliographic_citation
+      date_issued
+      extent
+      part_of
+      place_of_publication
       remote_url
+      resource_type
     ]
   end
 end

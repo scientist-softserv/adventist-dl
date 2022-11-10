@@ -4,6 +4,6 @@
 #  `rails generate hyrax:work GenericWork`
 module Hyrax
   class GenericWorkPresenter < Hyku::WorkShowPresenter
-    delegate :date_issued, :alt, :part_of, :place_of_publication, :remote_url, to: :solr_document
+    delegate :abstract, :date_issued, :alt, :part_of, :place_of_publication, :remote_url, to: :solr_document
   end
 end

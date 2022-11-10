@@ -2,6 +2,7 @@
 
 class GenericWork < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
+  include DogBiscuits::Abstract
   include DogBiscuits::BibliographicCitation
   include DogBiscuits::DateIssued
   include DogBiscuits::Geo
