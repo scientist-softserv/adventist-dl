@@ -54,13 +54,19 @@ class IndexPlainTextFilesJob < ApplicationJob
   def perform(account, logger: self.class.default_logger)
     logger.warn("#{self.class}: Begin processing file sets for #{account.cname}")
     account.switch do
-      FileSet.where(mime_type_ssi: 'text/plain').find_each do |file_set|
-        if file_set.extracted_text.present?
-          logger.warn("#{self.class}: FileSet ID=\"#{file_set.id}\" (in #{account.cname}) has extracted text; "\
-                      "moving on.")
-        else
-          logger.warn("#{self.class}: FileSet ID=\"#{file_set.id}\" (in #{account.cname}) enquing to extract text.")
-          One.perform_later(account, file_set.id)
+      # rubocop:disable Style/BracesAroundHashParameters
+      #
+      # Because there are two hashes as parameters, I want to be explicit about which one is which.
+      FileSet.search_in_batches({ mime_type_ssi: 'text/plain' }, { batch_size: 25 }) do |group|
+        # rubocop:enable Style/BracesAroundHashParameters
+        group.each do |file_set|
+          if file_set.extracted_text.present?
+            logger.warn("#{self.class}: FileSet ID=\"#{file_set.id}\" (in #{account.cname}) has extracted text; "\
+                        "moving on.")
+          else
+            logger.warn("#{self.class}: FileSet ID=\"#{file_set.id}\" (in #{account.cname}) enquing to extract text.")
+            One.perform_later(account, file_set.id)
+          end
         end
       end
     end
