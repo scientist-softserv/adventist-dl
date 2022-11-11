@@ -1,4 +1,6 @@
 ## Override from hyrax to fix file upload in logo and banner
+## OVERRIDE: Hyrax 2.9 to use work titles for collection thumbnail select & to add an option to reset to the default thumbnail
+
 module Hyrax
   module Dashboard
     ## Shows a list of all collections to the admins
@@ -81,6 +83,18 @@ module Hyrax
 
       def edit
         form
+        # Gets original filename of an uploaded thumbnail. See #update
+        if ::SolrDocument.find(@collection.id).thumbnail_path.include? "uploaded_collection_thumbnails" and uploaded_thumbnail?
+          @thumbnail_filename = File.basename(uploaded_thumbnail_files.reject { |f| File.basename(f).include? @collection.id }.first)
+        end
+      end
+  
+      def uploaded_thumbnail?
+        uploaded_thumbnail_files.any?
+      end
+
+      def uploaded_thumbnail_files
+        Dir["#{UploadedCollectionThumbnailPathService.upload_dir(@collection)}/*"]
       end
 
       def after_create
@@ -145,6 +159,9 @@ module Hyrax
           process_logo_input
         end
 
+        # Save the thumbnail image in the proper dimensions to public folder
+        process_uploaded_thumbnail(params[:collection][:thumbnail_upload]) if params[:collection][:thumbnail_upload]
+
         process_member_changes
         @collection.visibility = Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE unless @collection.discoverable?
         # we don't have to reindex the full graph when updating collection
@@ -153,6 +170,18 @@ module Hyrax
           after_update
         else
           after_update_error
+        end
+      end
+
+      # Deletes any previous thumbnails. The thumbnail indexer (see services/hyrax/indexes_thumbnails)
+      # checks if an uploaded thumbnail exists in the public folder before indexing the thumbnail path.
+      def delete_uploaded_thumbnail
+        FileUtils.rm_rf(uploaded_thumbnail_files)
+        @collection.update_index
+
+        respond_to do |format|
+          format.html
+          format.js # renders delete_uploaded_thumbnail.js.erb, which updates _current_thumbnail.html.erb
         end
       end
 
@@ -203,6 +232,26 @@ module Hyrax
       end
 
       private
+
+        def process_uploaded_thumbnail(uploaded_file)
+          dir_name = UploadedCollectionThumbnailPathService.upload_dir(@collection)
+          saved_file = Rails.root.join(dir_name, uploaded_file.original_filename)
+          # Create directory if it doesn't already exist
+          unless File.directory?(dir_name)
+            FileUtils.mkdir_p(dir_name)
+          else # clear contents
+          delete_uploaded_thumbnail
+          end
+          File.open(saved_file, 'wb') do |file|
+            file.write(uploaded_file.read)
+          end
+          image = MiniMagick::Image.open(saved_file)
+          # Save two versions of the image: one for homepage feature cards and one for regular thumbnail
+          image.resize('500x900').format("jpg").write("#{dir_name}/#{@collection.id}_card.jpg")
+          image.resize('150x300').format("jpg").write("#{dir_name}/#{@collection.id}_thumbnail.jpg")
+          File.chmod(0664,"#{dir_name}/#{@collection.id}_thumbnail.jpg")
+          File.chmod(0664,"#{dir_name}/#{@collection.id}_card.jpg")
+        end
 
         def default_collection_type
           Hyrax::CollectionType.find_or_create_default_collection_type
