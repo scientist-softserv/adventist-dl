@@ -1,7 +1,7 @@
 <%# OVERRIDE: remove nav controls & add share-work button . hyrax VERSION 2.9.1 %> 
 
 <div class="search-banner-wrapper mx-auto px-5 py-5">
-    <% if controller_name == 'homepage' && (display_content_block? @marketing_text).present? %>
+  <% if controller_name == 'homepage' && (display_content_block? @marketing_text).present? %>
     <%= displayable_content_block @marketing_text, class: 'banner-text text-center' %>
   <% end %>
 <%# OVERRIDE here to remove the nav links from the controls/search bar%>
