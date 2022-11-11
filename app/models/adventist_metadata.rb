@@ -36,6 +36,12 @@ module AdventistMetadata
     property :language, predicate: ::RDF::Vocab::DC11.language
     property :identifier, predicate: ::RDF::Vocab::DC.identifier
     property :based_near, predicate: ::RDF::Vocab::FOAF.based_near, class_name: Hyrax::ControlledVocabularies::Location
+
+    # Due to the mappings for Bulkrax the "related_url" is not exposed as a field we can "import
+    # into".  What do I mean by that?  For importers we map the related_url to "remote_files" then
+    # ingest those files.  However, we do also expose a means of assigning a "related_url" via the
+    # UI.  In that case we don't map that input to "remote_files" and instead write to the
+    # "related_url" property.
     property :related_url, predicate: ::RDF::RDFS.seeAlso
     property :bibliographic_citation, predicate: ::RDF::Vocab::DC.bibliographicCitation
     property :source, predicate: ::RDF::Vocab::DC.source do |index|
