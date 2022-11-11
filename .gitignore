@@ -76,6 +76,6 @@ node_modules
 /public/uv
 
 # Ignore Hyrax helm chart download
-hyrax
+/hyrax
 
 *~undo-tree~
