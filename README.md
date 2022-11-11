@@ -123,9 +123,6 @@ The [samvera-vagrant project](https://github.com/samvera-labs/samvera-vagrant) p
 
 Hyku relies on the helm charts provided by Hyrax. See [Deployment Info](https://github.com/samvera/hyrax/blob/main/CONTAINERS.md#deploying-to-production) for more information. We also provide a basic helm [deployment script](bin/helm_deploy). Hyku currently needs some additional volumes and ENV vars over the base Hyrax. See (ops/review-deploy.tmpl.yaml) for an example of what that might look like.
 
-## Universal Viewer Manifest
-The univeral viewer manifest has been altered to only allow files that have `OBJ.jpg` in the filename. If you are testing the UV in local devlopment, the images you upload must be named accordingly.
-
 ## New Tenants
 New tenants on the Dev or Production servers will need to be assigned an ingress as well an SSL cert manually before the tenant is created. Software Services does not have access to the DNS servers, so a wildcard cert is not possible. Before a tenant is created, a developer will need to add the domain to the dev-deploy.tmpl.yaml or production-deploy.tmpl.yaml under the ingress.host field && ingress.tls.hosts field.
 
