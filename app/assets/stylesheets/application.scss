@@ -10,17 +10,19 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+
+ *= require bulkrax/application
+ *= require fontselect
+ *= require codemirror
+ *= require codemirror-theme
+ *= require hyrax
+ *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+ *= require bootstrap-datepicker
+ *= require_self
+ *= require blacklight_advanced_search
+ * Used by blacklight_range_limit
+ *= require  'blacklight_range_limit'
 */
 
 @import "variables";
-@import "bulkrax/application";
-@import "fontselect";
-@import "codemirror";
-@import "codemirror-theme";
-@import "hyrax";
-@import "dataTables/bootstrap/3/jquery.dataTables.bootstrap";
-@import "bootstrap-datepicker";
-@import "blacklight_advanced_search";
-// used by blacklight_range_limit dependency
-@import  'blacklight_range_limit';
 @import "adl-overrides/*";
