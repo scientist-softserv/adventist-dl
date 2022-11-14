@@ -94,4 +94,7 @@ Rails.application.routes.draw do
   end
 
   get 'resources' => 'hyrax/pages#show', key: 'resources'
+
+  # Upload a collection thumbnail
+  post "/dashboard/collections/:id/delete_uploaded_thumbnail", to: "hyrax/dashboard/collections#delete_uploaded_thumbnail", as: :delete_uploaded_thumbnail
 end
