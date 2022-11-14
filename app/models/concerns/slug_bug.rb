@@ -9,11 +9,8 @@ module SlugBug
     after_update :remove_index_and_reindex
   end
 
-  class_methods do
-  end
-
   def to_param
-    slug || id
+    slug_for_upgrade || slug || id
   end
 
   def set_slug
@@ -22,15 +19,14 @@ module SlugBug
                 else
                   id
                 end
+    self.slug_for_upgrade = slug
   end
 
   private
 
     # Cribbed from https://gitlab.com/notch8/louisville-hyku/-/blob/main/app/models/custom_slugs/slug_behavior.rb#L14
     def remove_index_and_reindex
-      # rubocop:disable Rails/Blank
-      return unless slug.present?
-      # rubocop:enable Rails/Blank
+      return unless slug.present? || slug_for_upgrade.present?
 
       # if we have a slug with an existing record, previous indexes would have a different id,
       # resulting extraneous solr indexes remaining (one fedora object with two solr indexes to it)

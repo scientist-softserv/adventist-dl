@@ -50,6 +50,7 @@ class SolrDocument
     language: 'language_tesim',
     publisher: 'publisher_tesim',
     relation: 'nesting_collection__pathnames_ssim',
+    related_url: 'related_url_tesim',
     rights: 'rights_statement_tesim',
     subject: 'subject_tesim',
     title: 'title_tesim',
@@ -64,9 +65,18 @@ class SolrDocument
     Addressable::URI.parse("https://#{Site.account.cname}#{thumbnail_path}").to_s
   end
 
-  def related_url
-    file_set_ids.map do |fs_id|
-      Hyrax::Engine.routes.url_helpers.download_path(fs_id)
-    end
-  end
+  # @note This commented out method is supplanted by adding the `related_url: 'related_url_tesim`
+  #       field semantics.
+  # @note I'm commenting this out because in Bulkrax the source `related_url` (e.g. from the CSV or
+  #       OAI ADL import) maps to `remote_files`.  The importers fetch the `remote_files` and attach
+  #       them as FileSets.  They do not write to `related_url`.  However, there is also the ability
+  #       to add a `related_url` via the UI.
+  #
+  # @see https://github.com/scientist-softserv/adventist-dl/issues/87
+  # @see # https://github.com/scientist-softserv/adventist-dl/blob/96cbb01f1bd858ec0b472fb89ce033e180dba4b1/config/initializers/bulkrax.rb#L62
+  # def related_url
+  #   file_set_ids.map do |fs_id|
+  #     Hyrax::Engine.routes.url_helpers.download_path(fs_id)
+  #   end
+  # end
 end
