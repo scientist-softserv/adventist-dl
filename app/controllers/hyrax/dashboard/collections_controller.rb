@@ -81,6 +81,7 @@ module Hyrax
         query_collection_members
       end
 
+      # OVERRIDE HERE to enable collection thumbnail uploads
       def edit
         form
         # Gets original filename of an uploaded thumbnail. See #update
@@ -96,6 +97,7 @@ module Hyrax
       def uploaded_thumbnail_files
         Dir["#{UploadedCollectionThumbnailPathService.upload_dir(@collection)}/*"]
       end
+      # end OVERRIDE to enable collection thumbnail uploads
 
       def after_create
         form
@@ -173,6 +175,7 @@ module Hyrax
         end
       end
 
+      # OVERRIDE HERE to enable removing collection thumbnail uploads
       # Deletes any previous thumbnails. The thumbnail indexer (see services/hyrax/indexes_thumbnails)
       # checks if an uploaded thumbnail exists in the public folder before indexing the thumbnail path.
       def delete_uploaded_thumbnail
@@ -184,6 +187,7 @@ module Hyrax
           format.js # renders delete_uploaded_thumbnail.js.erb, which updates _current_thumbnail.html.erb
         end
       end
+      # END override
 
       def after_destroy(_id)
         # leaving id to avoid changing the method's parameters prior to release
@@ -233,6 +237,7 @@ module Hyrax
 
       private
 
+        # OVERRIDE HERE to enable collection thumbnail uploads
         def process_uploaded_thumbnail(uploaded_file)
           dir_name = UploadedCollectionThumbnailPathService.upload_dir(@collection)
           saved_file = Rails.root.join(dir_name, uploaded_file.original_filename)
@@ -252,6 +257,7 @@ module Hyrax
           File.chmod(0664,"#{dir_name}/#{@collection.id}_thumbnail.jpg")
           File.chmod(0664,"#{dir_name}/#{@collection.id}_card.jpg")
         end
+        # end OVERRIDE
 
         def default_collection_type
           Hyrax::CollectionType.find_or_create_default_collection_type

@@ -25,6 +25,7 @@ module Hyrax
     end
 
     # Returns the value for the thumbnail path to put into the solr document
+    # OVERRIDE HERE to enable collection thumbnail uploads
     def thumbnail_path
       if object.class == Collection && UploadedCollectionThumbnailPathService.uploaded_thumbnail?(object)
         UploadedCollectionThumbnailPathService.call(object)
@@ -32,6 +33,7 @@ module Hyrax
         self.class.thumbnail_path_service.call(object)
       end
     end
+    # end OVERRIDE
   end
 end
 
