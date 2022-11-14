@@ -43,11 +43,11 @@
                 Uploading an image here will replace a thumbnail selected from the above dropdown. For best results, use an image at least 500(width) x 900(height) px. If you would like to use an image from the dropdown above, click the "Clear upload" button below.
               </p>
               <%# raise 'hell' %>
-              <div id="uploaded-thumbnail mb-20">
+              <div id="uploaded-thumbnail mb-2">
                 <%= render "current_thumbnail" %>
               </div>
               <%= f.file_field :thumbnail_upload, class: "thumbnail-upload" %>
-              <%= link_to("Clear upload", main_app.delete_uploaded_thumbnail_path, method: :post, remote: :true, class: "btn btn-danger mb-40 mt-20", id: "clear-upload") %>
+              <%= link_to("Clear upload", main_app.delete_uploaded_thumbnail_path, method: :post, remote: :true, class: "btn btn-danger mb-4 mt-2", id: "clear-upload") %>
             <% end %>
           </div>
           <% if f.object.display_additional_fields? %>
