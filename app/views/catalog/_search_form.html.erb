@@ -8,9 +8,9 @@
       <%= text_field_tag :q, current_search_parameters , class: "q form-control", id: "search-field-header", placeholder: t("hyrax.search.form.q.placeholder") %>
 
       <div class="input-group-btn">
-        <a type="submit" class="btn masthead-search-button" id="search-submit-header">
+        <button type="submit" class="btn masthead-search-button" id="search-submit-header">
           <%= t('hyrax.search.button.html') %>
-        </a>
+        </button>
         <%= link_to "Advanced", "/advanced", class: 'btn masthead-search-button', id: 'advanced-top-button' %>
         <% if current_user %>
           <a class="dropdown-toggle btn masthead-search-button" type="button" data-toggle="dropdown" aria-expanded="false">
