@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# OVERRIDE Hyrax 2.9.1 to change featured worked from 5 to 6
+# OVERRIDE Hyrax 2.9.1 to change featured works from 5 to 6
 
 class FeaturedWork < ApplicationRecord
   FEATURE_LIMIT = 6
