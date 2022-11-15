@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # OVERRIDE Hyrax 2.9.0 to make collection thumbnails uploadable
 
 module Hyrax
@@ -36,4 +38,3 @@ module Hyrax
     # end OVERRIDE
   end
 end
-

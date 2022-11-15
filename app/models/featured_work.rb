@@ -1,6 +1,8 @@
-#OVERRIDE Hyrax 2.9.1 to change featured worked from 5 to 6
+# frozen_string_literal: true
 
-class FeaturedWork < ActiveRecord::Base
+# OVERRIDE Hyrax 2.9.1 to change featured worked from 5 to 6
+
+class FeaturedWork < ApplicationRecord
   FEATURE_LIMIT = 6
   validate :count_within_limit, on: :create
   validates :order, inclusion: { in: proc { 0..FEATURE_LIMIT } }

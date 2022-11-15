@@ -25,7 +25,7 @@ body.public-facing {
 
   .secondary-footer {
       min-height: 200px;
-      background-color: $white;
+      background-color: $lightgrey;
       padding: 40px 10px;
       position: absolute;
       bottom: 37px;
@@ -35,13 +35,11 @@ body.public-facing {
       left: 0 !important;
       margin-right: 0 !important;
       margin-left: 0 !important;
+      @media (max-width: 1251px) {
+            bottom: 75px;
+      }
     }
 
-  @media (max-width: 1251px) {
-    .secondary-footer {
-        bottom: 75px;
-    }
-  }
 
   .footer-logo {
     height: 120px;

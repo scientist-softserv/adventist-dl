@@ -12,7 +12,7 @@ body.public-facing {
   h5,
   h6 {
     font-family: "Source Sans Pro" !important;
-    font-weight: bold;
+    font-weight: 600;
   }
 
   p {
@@ -67,10 +67,14 @@ body.public-facing {
 
   .btn.btn-default {
     background-color: $white;
-    border-color: $mediumyellow;
-    border: 1px solid $mediumyellow;
-    color: $mediumyellow;
+    border-color: $darkyellow;
+    border: 2px solid $darkyellow;
+    color: $darkyellow;
     outline: 0;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: small;
     &:hover, 
     &:focus,
     &.focus, 
@@ -83,8 +87,8 @@ body.public-facing {
     &:active.focus, 
     &.active.focus {
       border-color: $mediumgrey;
-      border: 1px solid $mediumgrey;
-      color: $black;
+      border: 2px solid $mediumgrey;
+      color: $darkgrey;
       background-color: rbga(255, 255, 255, .8);
       &a {
         text-decoration: none;
@@ -101,7 +105,7 @@ body.public-facing {
     &[disabled]:focus,
     &[disabled].focus {
       border-color: $lightgrey2;
-      border: 1px solid $lightgrey2;
+      border: 2px solid $lightgrey2;
       color: $lightgrey2;
     }
   }
