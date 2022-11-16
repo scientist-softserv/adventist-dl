@@ -294,10 +294,14 @@ body.public-facing {
 
   .alert-success, .alert-info, .alert-warning {
     color: $darkgrey;
-    background-color: $lightgrey;
-    border-color: transparent;
+    background: linear-gradient(#efefef, $white, $white, #efefef);
+    border-color: $lightgreyborder;
     margin-right: 0;
     margin-left: 0;
+    @media (max-width: $sm-max) {
+      margin-right: 15px;
+      margin-left: 15px;
+    }
   }
 
   .legend {
