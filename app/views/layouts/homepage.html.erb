@@ -1,11 +1,9 @@
 <%# OVERRIDE HYRAX VERSION 2.9.1 - add share your work button & change inline bootstrap styles%>
+<%= render 'hyrax/homepage/announcement' if controller_name == 'homepage' %>
 <% content_for(:navbar) do %>
   <div class="image-masthead custom-masthead" style="background-image: url('<%= banner_image %>')">
     <%= render '/controls' %>
   </div>
-<% end %>
-<% content_for(:precontainer_content) do %>
-  <%= render 'hyrax/homepage/announcement' if controller_name == 'homepage' %>
 <% end %>
 <%= render template: 'layouts/hyrax' %>
 

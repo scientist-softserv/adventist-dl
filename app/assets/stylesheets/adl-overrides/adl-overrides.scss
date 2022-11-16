@@ -275,6 +275,21 @@ body.public-facing {
     background-color: $lightgrey;
   }
 
+  // Announcement Content Block
+
+  div#announcement {
+    color: $darkgrey;
+    font-size: 15px;
+    background-color: $white;
+    border: 2px solid $mediumgrey;
+    padding-top: 0;
+    border-radius: 0;
+    p {
+      margin-top: 10px;
+      font-weight: 600;
+    }
+}
+
   // ALERTS
   .alert-info {
     color: $black;
