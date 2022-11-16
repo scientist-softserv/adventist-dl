@@ -18,6 +18,13 @@ class IndexPlainTextFilesJob < ApplicationJob
       account.switch do
         begin
           file_set = FileSet.find(file_set_id)
+
+          if file_set.extracted_text.present?
+            logger.warn("#{self.class}: FileSet ID=\"#{file_set.id}\" (in #{account.cname}) has extracted text; "\
+                        "moving on.")
+            return true
+          end
+
           file = file_set.original_file
 
           unless file
@@ -60,13 +67,8 @@ class IndexPlainTextFilesJob < ApplicationJob
       FileSet.search_in_batches({ mime_type_ssi: 'text/plain' }, { batch_size: 25 }) do |group|
         # rubocop:enable Style/BracesAroundHashParameters
         group.each do |file_set|
-          if file_set.extracted_text.present?
-            logger.warn("#{self.class}: FileSet ID=\"#{file_set.id}\" (in #{account.cname}) has extracted text; "\
-                        "moving on.")
-          else
-            logger.warn("#{self.class}: FileSet ID=\"#{file_set.id}\" (in #{account.cname}) enquing to extract text.")
-            One.perform_later(account, file_set.id)
-          end
+          logger.warn("#{self.class}: FileSet ID=\"#{file_set['id']}\" (in #{account.cname}) enquing to extract text.")
+          One.perform_later(account, file_set['id'])
         end
       end
     end
