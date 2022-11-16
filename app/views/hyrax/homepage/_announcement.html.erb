@@ -1,0 +1,6 @@
+<%# OVERRIDE Hyrax 2.9.1 to remove unnecessary classes %>
+<% if display_content_block? @announcement_text %>
+  <div id="announcement">
+    <%= displayable_content_block @announcement_text%>
+  </div>
+<% end %>

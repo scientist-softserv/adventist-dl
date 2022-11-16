@@ -275,26 +275,46 @@ body.public-facing {
     background-color: $lightgrey;
   }
 
-  // ALERTS
-  .alert-info {
-    color: $black;
-    background-color: $lightgrey;
-    border-color: transparent;
-    border: 0 solid transparent;
-  }
-  .alert-success {
-    color: $white;
-    background-color: $darkyellow;
-    border-color: transparent;
-    border: 0 solid transparent;
-  }
-  .alert-warning {
-    color: $black;
-    background-color: $darkyellow;
-    border-color: transparent;
-    border: 0 solid transparent;
-  }
+  // Announcement Content Block
 
+  div#announcement {
+    color: $darkgrey;
+    font-size: 15px;
+    background-color: $white;
+    border: 2px solid $mediumgrey;
+    padding-top: 0;
+    border-radius: 0;
+    p {
+      margin-top: 10px;
+      font-weight: 600;
+    }
+}
+
+  // ALERTS
+
+  .alert {
+    color: $darkgrey;
+    background: linear-gradient(#efefef, $white, $white, #efefef);
+    border-color: $lightgreyborder;
+    margin-right: 0;
+    margin-left: 0;
+    @media (max-width: $sm-max) {
+      margin-right: 15px;
+      margin-left: 15px;
+    }
+    &.alert-success {
+      background: linear-gradient(#efefef, $white, $white, #efefef);
+    }
+    
+    &.alert-info {
+      background: linear-gradient(#dde5ee, #f7f7f7, $white, #f7f7f7, #dde5ee);
+    }
+    
+    &.alert-warning {
+      background: linear-gradient(#fff7db, #f7f7f7, $white, #f7f7f7, #fff7db);
+    }
+  }
+  
   .legend {
     color: $black !important;
   }
