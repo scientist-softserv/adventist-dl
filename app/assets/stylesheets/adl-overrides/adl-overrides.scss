@@ -291,23 +291,13 @@ body.public-facing {
 }
 
   // ALERTS
-  .alert-info {
-    color: $black;
+
+  .alert-success, .alert-info, .alert-warning {
+    color: $darkgrey;
     background-color: $lightgrey;
     border-color: transparent;
-    border: 0 solid transparent;
-  }
-  .alert-success {
-    color: $white;
-    background-color: $darkyellow;
-    border-color: transparent;
-    border: 0 solid transparent;
-  }
-  .alert-warning {
-    color: $black;
-    background-color: $darkyellow;
-    border-color: transparent;
-    border: 0 solid transparent;
+    margin-right: 0;
+    margin-left: 0;
   }
 
   .legend {
