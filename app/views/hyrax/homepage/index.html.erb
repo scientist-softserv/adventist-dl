@@ -2,11 +2,11 @@
 
 <% provide :page_title, application_name %>
 
-<%# OVERRIDE placement of SHARE YOUR WORK BUTTON  %>
-
+<%# OVERRIDE remove share work button and add custom partials  %>
 
 <div class="row home-content">
-  <%= render 'home_content' %>
+  <%= render '/adl/featured_collections' %>
+  <%= render '/adl/featured_works' %>
 </div>
 
 <%= render '/shared/select_work_type_modal', create_work_presenter: @presenter.create_work_presenter if @presenter.draw_select_work_modal? %>

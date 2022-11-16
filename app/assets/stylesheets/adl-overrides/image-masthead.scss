@@ -9,6 +9,7 @@ body.public-facing {
     background-position: center;
     display: flex;
     align-items: center;
+    margin-bottom: 0;
     .navbar .active > a,
     .navbar .active > a:hover,
     .navbar .active > a:focus {
@@ -29,9 +30,9 @@ body.public-facing {
         position: relative;
       }
       .banner-text {
-        font-size: 30px;
+        font-size: 36px;
         font-weight: 600;
-        line-height: 1.2;
+        line-height: 1;
       }
     }
   }
@@ -75,6 +76,9 @@ body.public-facing {
         }
         &:last-of-type, &:last-child {
           border-right: 0;
+          &#search-submit-header {
+            border-right: 1px solid $lightgrey2;
+          }
         }
       }
       // media query for input-group

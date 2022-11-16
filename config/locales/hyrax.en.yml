@@ -820,6 +820,7 @@ en:
           keyword_label: Keywords
           keyword_missing: no keywords specified
           title_label: Title
+        link: View all works
         drag: Drag
         no_works: No works have been featured
         tab_label: Featured Works
