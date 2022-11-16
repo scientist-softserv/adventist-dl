@@ -1,24 +1,25 @@
 body.public-facing {
 
   /* prevents footer from covering bottom of page */
-
   #content-wrapper {
-      margin-bottom: 320px;
-  }
-
-  @media (max-width: 991px) {
-    #content-wrapper {
-    margin-bottom: 350px;
+    margin-bottom: 320px;
+    @media (max-width: $md-max) {
+      margin-bottom: 350px;
     }
   }
 
   .navbar.navbar-inverse.site-footer {
-    background-color: $mediumyellow !important;
+    font-weight: 600;
+    font-size: smaller;
+    background: linear-gradient($lightgrey, $mediumyellow);
     border: none;
     padding: inherit;
     height: auto;
     right: 0;
     left: 0;
+    .navbar-text {
+      margin: 0;
+    }
   }
 
   //SECONDARY FOOTER
@@ -31,45 +32,42 @@ body.public-facing {
       bottom: 37px;
       display: block;
       width: 100%;
-      right: 0 !important;
-      left: 0 !important;
-      margin-right: 0 !important;
-      margin-left: 0 !important;
-      @media (max-width: 1251px) {
-            bottom: 75px;
+      right: 0;
+      left: 0;
+      @media (max-width: $lg-max) {
+            bottom: 70px;
+      }
+      .footer-row {
+        @media (max-width: $sm-max) {
+          flex-direction: column;
+        }
+      }
+      .footer-link-col {
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        @media (max-width: $sm-max) {
+          order: 1;
+        }
+      }
+      .footer-logo {
+        height: 120px;
+        overflow: hidden;
+        img {
+          object-fit: contain;
+          width: 100%;
+          height: 100%;
+          @media (min-width: $md-min) {
+                object-position: right;
+          }
+        }
+      }
+      .footer-navlink {
+        margin-top: 20px;
       }
     }
 
-
-  .footer-logo {
-    height: 120px;
-    overflow: hidden;
-  }
-
-  .footer-logo img {
-    object-fit: contain;
-    width: 100%;
-    height: 100%;
-  }
-
-  @media (min-width: 992px) {
-    .footer-logo img {
-        object-position: right;
-    }
-  }
-
-  footer .navbar-text {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-
-  //HIDES THE FOOTER NAVLINKS SO THEY DON'T SHOW FOR NOW
-  .footer-navlink {
-    margin-top: 20px;
-    display: none;
-  }
-
-  @media (max-width: 768px) {
+  @media (max-width: $sm-max) {
     body {
         margin-bottom: 145px;
     }
