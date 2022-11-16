@@ -1,6 +1,6 @@
 <div class="secondary-footer">
-  <div class="row d-flex footer-row footer-link-col my-auto">
-    <div class="col-xs-12 col-sm-6">
+  <div class="row d-flex footer-row my-auto">
+    <div class="col-xs-12 col-sm-6 footer-link-col">
       <div class="col-xs-6 py-3 <%= "active" if current_page?(hyrax.root_path) %>">
         <%= link_to t(:'hyrax.controls.home'), hyrax.root_path, aria: current_page?(hyrax.root_path) ? {current: 'page'} : nil %>
       </div>
