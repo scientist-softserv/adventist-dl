@@ -292,7 +292,7 @@ body.public-facing {
 
   // ALERTS
 
-  .alert-success, .alert-info, .alert-warning {
+  .alert {
     color: $darkgrey;
     background: linear-gradient(#efefef, $white, $white, #efefef);
     border-color: $lightgreyborder;
@@ -302,8 +302,19 @@ body.public-facing {
       margin-right: 15px;
       margin-left: 15px;
     }
+    &.alert-success {
+      background: linear-gradient(#efefef, $white, $white, #efefef);
+    }
+    
+    &.alert-info {
+      background: linear-gradient(#efefef, $white, $white, #efefef);
+    }
+    
+    &.alert-warning {
+      background: linear-gradient(#fff7db, #f7f7f7, $white, #f7f7f7, #fff7db);
+    }
   }
-
+  
   .legend {
     color: $black !important;
   }
