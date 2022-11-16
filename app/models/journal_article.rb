@@ -20,6 +20,8 @@ class JournalArticle < DogBiscuits::JournalArticle
   # schema (by adding accepts_nested_attributes)
   # include ::Hyrax::BasicMetadata
   include SlugMetadata
+  include OrderedMetadata
+
   include DogBiscuits::JournalArticleMetadata
   before_save :combine_dates
 end

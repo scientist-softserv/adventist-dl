@@ -22,6 +22,7 @@ class Thesis < DogBiscuits::Thesis
   # schema (by adding accepts_nested_attributes)
   # include ::Hyrax::BasicMetadata
   include SlugMetadata
+  include OrderedMetadata
   include DogBiscuits::ThesisMetadata
   before_save :combine_dates
 end

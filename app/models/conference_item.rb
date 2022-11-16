@@ -15,6 +15,7 @@ class ConferenceItem < DogBiscuits::ConferenceItem
   # schema (by adding accepts_nested_attributes)
   # include ::Hyrax::BasicMetadata
   include SlugMetadata
+  include OrderedMetadata
   include DogBiscuits::ConferenceItemMetadata
   before_save :combine_dates
 end

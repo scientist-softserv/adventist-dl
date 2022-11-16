@@ -15,6 +15,7 @@ class ExamPaper < DogBiscuits::ExamPaper
   # schema (by adding accepts_nested_attributes)
   # include ::Hyrax::BasicMetadata
   include SlugMetadata
+  include OrderedMetadata
   include DogBiscuits::ExamPaperMetadata
   before_save :combine_dates
 end

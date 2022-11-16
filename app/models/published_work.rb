@@ -20,6 +20,7 @@ class PublishedWork < DogBiscuits::PublishedWork
   # schema (by adding accepts_nested_attributes)
   # include ::Hyrax::BasicMetadata
   include SlugMetadata
+  include OrderedMetadata
   include DogBiscuits::PublishedWorkMetadata
   before_save :combine_dates
 end

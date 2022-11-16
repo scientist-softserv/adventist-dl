@@ -19,6 +19,7 @@ class Image < ActiveFedora::Base
   # This must come after the properties because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
   include SlugMetadata
+  include OrderedMetadata
   include AdventistMetadata
 
   self.indexer = WorkIndexer
