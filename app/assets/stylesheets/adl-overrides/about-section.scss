@@ -17,9 +17,14 @@ body.public-facing {
   .about-section {
     background-color: $lightgrey;
 
-    h3, 
-    .h3 {
+    h4, 
+    .h4 {
       text-transform: uppercase;
+    }
+
+    .h2 {
+      margin-top: 0;
+      padding-top: 6rem;
     }
 
     .news-widget-wrapper {
