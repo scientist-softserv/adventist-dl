@@ -7,4 +7,6 @@ class Collection < ActiveFedora::Base
   include SlugMetadata
   include AdventistMetadata
   self.indexer = CollectionIndexer
+
+  prepend OrderAlready.for(:creator)
 end

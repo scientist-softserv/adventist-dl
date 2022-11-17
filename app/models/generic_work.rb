@@ -16,4 +16,6 @@ class GenericWork < ActiveFedora::Base
 
   self.indexer = WorkIndexer
   self.human_readable_type = 'Work'
+
+  prepend OrderAlready.for(:creator)
 end

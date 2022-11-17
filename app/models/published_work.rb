@@ -22,4 +22,6 @@ class PublishedWork < DogBiscuits::PublishedWork
   include SlugMetadata
   include DogBiscuits::PublishedWorkMetadata
   before_save :combine_dates
+
+  prepend OrderAlready.for(:creator)
 end

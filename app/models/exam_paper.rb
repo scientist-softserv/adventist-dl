@@ -17,4 +17,6 @@ class ExamPaper < DogBiscuits::ExamPaper
   include SlugMetadata
   include DogBiscuits::ExamPaperMetadata
   before_save :combine_dates
+
+  prepend OrderAlready.for(:creator)
 end
