@@ -17,4 +17,6 @@ class ConferenceItem < DogBiscuits::ConferenceItem
   include SlugMetadata
   include DogBiscuits::ConferenceItemMetadata
   before_save :combine_dates
+
+  prepend OrderAlready.for(:creator)
 end

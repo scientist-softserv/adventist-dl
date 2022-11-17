@@ -22,4 +22,6 @@ class JournalArticle < DogBiscuits::JournalArticle
   include SlugMetadata
   include DogBiscuits::JournalArticleMetadata
   before_save :combine_dates
+
+  prepend OrderAlready.for(:creator)
 end
