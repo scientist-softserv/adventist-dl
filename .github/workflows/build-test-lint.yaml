@@ -6,7 +6,29 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      debug_enabled:
+        type: boolean
+        description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
+        required: false
+        default: false
 
 jobs:
-  call-workflow:
-    uses: scientist-softserv/build-lint-test-action/.github/workflows/build-test-lint.yaml@v0.0.1
+  build:
+    uses: scientist-softserv/actions/.github/workflows/build.yaml@v0.0.4
+    secrets: inherit
+    with:
+      target: hyku-base
+      worker: true
+      workerTarget: hyku-worker
+  test:
+    needs: build
+    uses: scientist-softserv/actions/.github/workflows/test.yaml@v0.0.4
+    with:
+      worker: true
+  lint:
+    needs: build
+    uses: scientist-softserv/actions/.github/workflows/lint.yaml@v0.0.4
+    with:
+      worker: true
