@@ -4,7 +4,6 @@
       <%= displayable_content_block @homepage_about_section_heading, class: 'h2' %>
     <% end %>
     <div class="row pb-5">
-    <%# raise 'hell' %>
       <div class="about-col col-xs-12 py-5 <%= current_account.name == "adl" ? "col-sm-4" : "" %>">
         <% if (display_content_block? @homepage_about_section_content).present? %>
           <%= displayable_content_block @homepage_about_section_content, class: '' %>
