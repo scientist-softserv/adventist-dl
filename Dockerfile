@@ -4,7 +4,7 @@ FROM ghcr.io/samvera/hyku/hyku-base:$HYRAX_IMAGE_VERSION as hyku-base
 USER root
 
 RUN apk --no-cache upgrade && \
-  apk --no-cache add \
+    apk --no-cache add \
     bash \
     cmake \
     ffmpeg \
@@ -49,6 +49,8 @@ ARG SETTINGS__BULKRAX__ENABLED="true"
 RUN mkdir -p /app/samvera/branding && ln -s /app/samvera/branding /app/samvera/hyrax-webapp/public/branding && \
   yarn install && \
   RAILS_ENV=production SECRET_KEY_BASE=`bin/rake secret` DB_ADAPTER=nulldb DATABASE_URL='postgresql://fake' bundle exec rake assets:precompile
+
+RUN ln -sf /app/samvera/branding /app/samvera/hyrax-webapp/public/branding
 
 FROM hyku-base as hyku-worker
 ENV MALLOC_ARENA_MAX=2
