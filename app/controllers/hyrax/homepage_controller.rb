@@ -18,6 +18,8 @@ class Hyrax::HomepageController < ApplicationController
     @marketing_text = ContentBlock.for(:marketing)
     @featured_work_list = FeaturedWorkList.new
     @announcement_text = ContentBlock.for(:announcement)
+    @homepage_about_section_heading = ContentBlock.for(:homepage_about_section_heading)
+    @homepage_about_section_content = ContentBlock.for(:homepage_about_section_content)
     recent
   end
 

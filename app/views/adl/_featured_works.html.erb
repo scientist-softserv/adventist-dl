@@ -18,10 +18,10 @@
       <%= render partial: '/adl/featured', collection: @featured_work_list.featured_works %>
     </div>
   <% end %>
-    <div class="d-flex">
-      <%= link_to main_app.search_catalog_path, class: 'btn btn-default mt-4 ml-auto' do %>
-        <%= t('hyrax.homepage.featured_works.link') %>
-        <span class="fa fa-caret-right"></span> 
+  <div class="d-flex">
+    <%= link_to main_app.search_catalog_path, class: 'btn btn-default mt-4 ml-auto' do %>
+      <%= t('hyrax.homepage.featured_works.link') %>
+      <span class="fa fa-caret-right"></span> 
     <% end %>
   </div>
 </div>

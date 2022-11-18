@@ -26,6 +26,9 @@ body.public-facing {
       width: 70%;
       border-radius: 5px;
       margin-top: 50px;
+      @media (min-width: $lg-min) {
+        width: 60%;
+      }
       .home-share-work .btn-primary {
         position: relative;
       }

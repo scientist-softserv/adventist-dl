@@ -486,9 +486,13 @@ en:
         announcement_text: Announcement Text
         featured_researcher: Featured Researcher
         marketing_text: Banner Text
+        homepage_about_section_heading: Homepage About Section Heading
+        homepage_about_section_content: Homepage About Section Content
       instructions:
         announcement_instructions: Announcement Text displays on the homepage. It is for important or timely messages to be made prominently visible to all home page visitors. It would be appropriate to enter an announcement here, for example, to notify users about an upcoming planned maintenance outage of the system.
         featured_researcher_instructions: Featured Researcher is a space to enter information and on the home page reserved for highlighting repository users.
+        homepage_about_section_heading_instructions: This text will display as a heading at the top of the homepage about/news widget section. We recommend no more than approximately 30 characters or spaces in this text area.
+        homepage_about_section_content_instructions: This text will display as a block of content in the homepage about section. If the news widget is enabled for your tenant, we recommend an h4 styled heading of no more than approximately 30 characters, followed by a paragraph of no more than approximately 650 characters or spaces in this text area. Otherwise, there is room to put longer text or images depending on your needs.
         marketing_instructions: Banner Text refers to the text that is displayed over banner image on the homepage. We recommend no more than approximately 30 characters or spaces in this text area.
       updated: Content blocks updated.
     controls:
@@ -813,6 +817,8 @@ en:
         missing: No researchers have been featured.
         tab_label: Featured Researcher
         title: Featured Researcher
+      about_section:
+        link: Learn More
       featured_works:
         document:
           depositor_label: Depositor

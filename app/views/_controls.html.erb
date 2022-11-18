@@ -4,6 +4,7 @@
   <% if controller_name == 'homepage' && (display_content_block? @marketing_text).present? %>
     <%= displayable_content_block @marketing_text, class: 'banner-text text-center' %>
   <% end %>
+
 <%# OVERRIDE here to remove the nav links from the controls/search bar%>
   <%= render partial: 'catalog/search_form' %>
   <%# BEGIN placement of SHARE YOUR WORK BUTTON  %>
