@@ -1,9 +1,13 @@
+// Set the nav background color OUTSIDE of the body tag so that it can be overridden by appearance styles
+.public-facing #masthead.navbar.navbar-inverse.navbar-static-top {
+  background: linear-gradient($mediumyellow, rgb(255, 255, 255), $transparentwhite, rgba(255, 255, 255, 0));
+}
+
 body.public-facing {
   // MAIN NAV
 
   #masthead {
     &.navbar.navbar-inverse.navbar-static-top {
-      background: linear-gradient(rgb(206, 140, 0), rgb(255, 255, 255), $transparentwhite, rgba(255, 255, 255, 0));
       height: 150px;
       display: flex;
       width: 100%;
