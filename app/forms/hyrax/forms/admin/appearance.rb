@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # OVERRIDE here to add Adventist's custom color for their header & footer
 
 # rubocop:disable Metrics/ClassLength
