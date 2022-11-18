@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+# OVERRIDE here to add Adventist's custom color for their header & footer
 
 # rubocop:disable Metrics/ClassLength
 module Hyrax
@@ -14,6 +15,7 @@ module Hyrax
           'headline_font' => 'Helvetica Neue, Helvetica, Arial, sans-serif;'
         }.freeze
 
+        # OVERRIDE here to add custom_adl_header_footer_color
         DEFAULT_COLORS = {
           'header_background_color'          => '#000000',
           'header_text_color'                => '#FFFFFF',
@@ -31,7 +33,8 @@ module Hyrax
           'default_button_text_color'        => '#FFFFFF',
           'active_tabs_background_color'     => '#FFFFFF',
           'facet_panel_background_color'     => '#000000',
-          'facet_panel_text_color'           => '#FFFFFF'
+          'facet_panel_text_color'           => '#FFFFFF',
+          'custom_adl_header_footer_color'   => '#CE8C00'
         }.freeze
 
         DEFAULT_VALUES = DEFAULT_FONTS.merge(DEFAULT_COLORS).freeze
@@ -259,7 +262,13 @@ module Hyrax
           end
         end
 
+        # OVERRIDE here to add adventist's custom header & footer
+        def custom_adl_header_footer_color
+          block_for('custom_adl_header_footer_color')
+        end
+
         # A list of parameters that are related to customizations
+        # OVERRIDE here to add custom_adl_header_footer_color
         def self.customization_params
           %i[
             body_font
@@ -282,6 +291,7 @@ module Hyrax
             searchbar_text_color
             searchbar_text_hover_color
             custom_css_block
+            custom_adl_header_footer_color
           ]
         end
 

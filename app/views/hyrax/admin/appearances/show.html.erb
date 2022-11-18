@@ -1,3 +1,4 @@
+<%# OVERRIDE to add custom ADL header/footer color to appearance styles %>
 <% provide :page_header do %>
   <h1><span class="fa fa-paint-brush"></span> <%= t('.header') %></h1>
 <% end %>
@@ -133,15 +134,16 @@
               <div class="panel-body defaultable-colors">
                 <% dc = @form.class::DEFAULT_COLORS %>
 
+                <%# OVERRIDE here to add custom ADL header/footer color to appearance styles %>
                 <div class='row'>
                   <div class='col-lg-10'>
-                    <%= f.input :header_background_color, required: false, input_html: { type: 'color', data: { default_value: dc['header_background_color'] } } %>
+                    <%= f.input :custom_adl_header_footer_color, label: "Custom ADL Header & Footer Color", required: false, input_html: { type: 'color', data: { default_value: dc['custom_adl_header_footer_color'] } }  %>
                   </div>
                   <div class='col-lg-2'>
-                    <%= link_to 'Restore Default', '#color', class: 'btn btn-default restore-default-color', data: { default_target: 'header_background_color' } %>
+                    <%= link_to 'Restore Default', '#color', class: 'btn btn-default restore-default-color', data: { default_target: 'custom_adl_header_footer_color' } %>
                   </div>
                 </div>
-
+                <%# OVERRIDE here to remove "header color" to avoid confusion given there is a custom color set up for it %>
                 <div class='row'>
                   <div class='col-lg-10'>
                     <%= f.input :header_text_color, required: false, input_html: { type: 'color', data: { default_value: dc['header_text_color'] } }  %>
