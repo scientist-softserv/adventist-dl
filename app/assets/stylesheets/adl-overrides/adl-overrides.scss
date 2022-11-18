@@ -144,7 +144,7 @@ body.public-facing {
   }
 
   a.btn.btn-danger {
-    color: black !important;
+    color: $black !important;
   }
 
   // Breadcrumbs
@@ -279,6 +279,21 @@ body.public-facing {
   .constraints-container {
     border-radius: 4px;
     background-color: $lightgrey;
+  }
+
+  .search-widgets, #sort-dropdown, #per_page-dropdown {
+    .btn.btn-default {
+      &.view-type-gallery, &.view-type-list, &.view-type-masonry, &.view-type-slideshow, &.dropdown-toggle {
+        border-color: $lightgreyborder;
+        color: $darkgrey;
+      }
+    }
+  }
+
+  .pagination .active span {
+    background-color: $lightgrey;
+    border-color: $lightgreyborder;
+    color: $darkgrey
   }
 
   // Announcement Content Block
