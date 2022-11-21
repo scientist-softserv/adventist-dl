@@ -32,6 +32,9 @@ module Bulkrax
         if type.eql?('relationship')
           ScheduleRelationshipsJob.set(wait: 5.minutes).perform_later(importer_id: importerexporter.id)
           next
+        elsif type.eql?('work')
+          create_works
+          next
         end
         send(type.pluralize).each do |current_record|
           next unless record_has_source_identifier(current_record, index)
@@ -79,8 +82,9 @@ module Bulkrax
           model_field_mappings.each do |model_mapping|
             next unless r.metadata.find("//#{model_mapping}").first
 
-            if r.header.set_spec.present?
-              generate_collection r.header.set_spec
+            generate_collection r.header.set_spec if r.header.set_spec.present?
+            if r.metadata.find("//#{model_mapping}").first.content.casecmp('collection').zero?
+              @collections << r
             elsif r.metadata.find("//#{model_mapping}").first.content.casecmp('fileset').zero?
               @file_sets << r
             else
