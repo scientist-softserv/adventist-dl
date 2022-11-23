@@ -14,7 +14,9 @@ class ContentBlock < ApplicationRecord
     help: :help_page,
     terms: :terms_page,
     agreement: :agreement_page,
-    resources: :resources_page
+    resources: :resources_page,
+    homepage_about_section_heading: :homepage_about_section_heading,
+    homepage_about_section_content: :homepage_about_section_content
   }.freeze
 
   # NOTE: method defined outside the metaclass wrapper below because
@@ -52,6 +54,22 @@ class ContentBlock < ApplicationRecord
 
     def featured_researcher=(value)
       featured_researcher.update(value: value)
+    end
+
+    def homepage_about_section_heading
+      find_or_create_by(name: 'homepage_about_section_heading')
+    end
+
+    def homepage_about_section_heading=(value)
+      homepage_about_section_heading.update(value: value)
+    end
+
+    def homepage_about_section_content
+      find_or_create_by(name: 'homepage_about_section_content')
+    end
+
+    def homepage_about_section_content=(value)
+      homepage_about_section_content.update(value: value)
     end
 
     def about_page

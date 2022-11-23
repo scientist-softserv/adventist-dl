@@ -486,9 +486,13 @@ en:
         announcement_text: Announcement Text
         featured_researcher: Featured Researcher
         marketing_text: Banner Text
+        homepage_about_section_heading: Homepage About Section Heading
+        homepage_about_section_content: Homepage About Section Content
       instructions:
         announcement_instructions: Announcement Text displays on the homepage. It is for important or timely messages to be made prominently visible to all home page visitors. It would be appropriate to enter an announcement here, for example, to notify users about an upcoming planned maintenance outage of the system.
         featured_researcher_instructions: Featured Researcher is a space to enter information and on the home page reserved for highlighting repository users.
+        homepage_about_section_heading_instructions: This text will display as a heading at the top of the homepage about/news widget section. We recommend no more than approximately 30 characters or spaces in this text area.
+        homepage_about_section_content_instructions: This text will display as a block of content in the homepage about section. If the news widget is enabled for your tenant, we recommend an h4 styled heading of no more than approximately 30 characters, followed by a paragraph of no more than approximately 650 characters or spaces in this text area. Otherwise, there is room to put longer text or images depending on your needs.
         marketing_instructions: Banner Text refers to the text that is displayed over banner image on the homepage. We recommend no more than approximately 30 characters or spaces in this text area.
       updated: Content blocks updated.
     controls:
@@ -540,6 +544,9 @@ en:
           logo:
             description: One or more images to be displayed at the top of the collection page.  For best results, upload an image (JPG, GIF or PNG) that is 40 pixels in height.  Larger images will be resized to 40 pixels in height.
             label: Logo
+          thumbnail:
+            description: An image to be displayed in the search results and on the homepage if you decide to feature this collection. Image will be cropped and resized in various ways throughout the app, but for best results use an image (JPG, GIF or PNG) with a landscape orientation.
+            label: Thumbnail
         form_discovery:
           para1: These settings determine who is able to discover and view this collection's landing page; they do not affect the visibility of items in the collection.
           para2: If you chose not to make this collection open access, you can still share the collection with specific users and groups using the Sharing tab.
@@ -810,6 +817,8 @@ en:
         missing: No researchers have been featured.
         tab_label: Featured Researcher
         title: Featured Researcher
+      about_section:
+        link: Learn More
       featured_works:
         document:
           depositor_label: Depositor
@@ -817,6 +826,7 @@ en:
           keyword_label: Keywords
           keyword_missing: no keywords specified
           title_label: Title
+        link: View all works
         drag: Drag
         no_works: No works have been featured
         tab_label: Featured Works

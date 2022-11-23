@@ -24,4 +24,6 @@ class Thesis < DogBiscuits::Thesis
   include SlugMetadata
   include DogBiscuits::ThesisMetadata
   before_save :combine_dates
+
+  prepend OrderAlready.for(:creator)
 end

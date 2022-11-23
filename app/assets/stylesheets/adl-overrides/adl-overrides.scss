@@ -3,7 +3,6 @@
 body.public-facing {
   font-family: "Source Sans Pro" !important;
   font-size: 17px;
-  background-color: $lightgrey !important;
   color: $darkgrey;
 
   h1,
@@ -11,9 +10,15 @@ body.public-facing {
   h3,
   h4,
   h5,
-  h6 {
+  h6,
+  .h1,
+  .h2,
+  .h3,
+  .h4,
+  .h5,
+  .h6 {
     font-family: "Source Sans Pro" !important;
-    font-weight: bold;
+    font-weight: 600;
   }
 
   p {
@@ -68,10 +73,14 @@ body.public-facing {
 
   .btn.btn-default {
     background-color: $white;
-    border-color: $mediumyellow;
-    border: 1px solid $mediumyellow;
-    color: $mediumyellow;
+    border-color: $darkyellow;
+    border: 2px solid $darkyellow;
+    color: $darkyellow;
     outline: 0;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: small;
     &:hover, 
     &:focus,
     &.focus, 
@@ -84,8 +93,8 @@ body.public-facing {
     &:active.focus, 
     &.active.focus {
       border-color: $mediumgrey;
-      border: 1px solid $mediumgrey;
-      color: $black;
+      border: 2px solid $mediumgrey;
+      color: $darkgrey;
       background-color: rbga(255, 255, 255, .8);
       &a {
         text-decoration: none;
@@ -102,7 +111,7 @@ body.public-facing {
     &[disabled]:focus,
     &[disabled].focus {
       border-color: $lightgrey2;
-      border: 1px solid $lightgrey2;
+      border: 2px solid $lightgrey2;
       color: $lightgrey2;
     }
   }
@@ -135,7 +144,7 @@ body.public-facing {
   }
 
   a.btn.btn-danger {
-    color: black !important;
+    color: $black !important;
   }
 
   // Breadcrumbs
@@ -151,28 +160,6 @@ body.public-facing {
   input {
     background-color: $lightgrey;
     border-radius: 4px;
-  }
-
-  /* Nav Pills */
-
-  ul.nav.nav-pills{
-    padding: 0;
-    float: none;
-    li {
-      a {
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        padding-left: 0;
-      }
-      &.active {
-        a, a:hover, a:focus {
-          background-color: transparent !important ;
-          font-weight: 600;
-          text-decoration: none;
-          color: $darkyellow;
-        }
-      }
-    }
   }
 
   // /* FACET PANEL STYLES */
@@ -294,26 +281,61 @@ body.public-facing {
     background-color: $lightgrey;
   }
 
-  // ALERTS
-  .alert-info {
-    color: $black;
-    background-color: $lightgrey;
-    border-color: transparent;
-    border: 0 solid transparent;
-  }
-  .alert-success {
-    color: $white;
-    background-color: $darkyellow;
-    border-color: transparent;
-    border: 0 solid transparent;
-  }
-  .alert-warning {
-    color: $black;
-    background-color: $darkyellow;
-    border-color: transparent;
-    border: 0 solid transparent;
+  .search-widgets, #sort-dropdown, #per_page-dropdown {
+    .btn.btn-default {
+      &.view-type-gallery, &.view-type-list, &.view-type-masonry, &.view-type-slideshow, &.dropdown-toggle {
+        border-color: $lightgreyborder;
+        color: $darkgrey;
+      }
+    }
   }
 
+  .pagination .active span {
+    background-color: $lightgrey;
+    border-color: $lightgreyborder;
+    color: $darkgrey
+  }
+
+  // Announcement Content Block
+
+  div#announcement {
+    color: $darkgrey;
+    font-size: 15px;
+    background-color: $white;
+    border: 2px solid $mediumgrey;
+    padding-top: 0;
+    border-radius: 0;
+    p {
+      margin-top: 10px;
+      font-weight: 600;
+    }
+}
+
+  // ALERTS
+
+  .alert {
+    color: $darkgrey;
+    background: linear-gradient(#efefef, $white, $white, #efefef);
+    border-color: $lightgreyborder;
+    margin-right: 0;
+    margin-left: 0;
+    @media (max-width: $sm-max) {
+      margin-right: 15px;
+      margin-left: 15px;
+    }
+    &.alert-success {
+      background: linear-gradient(#efefef, $white, $white, #efefef);
+    }
+    
+    &.alert-info {
+      background: linear-gradient(#dde5ee, #f7f7f7, $white, #f7f7f7, #dde5ee);
+    }
+    
+    &.alert-warning {
+      background: linear-gradient(#fff7db, #f7f7f7, $white, #f7f7f7, #fff7db);
+    }
+  }
+  
   .legend {
     color: $black !important;
   }
@@ -423,79 +445,6 @@ body.public-facing {
   .search-results-title-row span.label,
   .hyc-title span.label {
     display: none;
-  }
-
-  //HOME PAGE CONTENT SECTIONS
-
-  .panel-body {
-    padding: 15px;
-    background-color: $white !important;
-  }
-
-  .list-group-item {
-    background-color: $darkgrey;
-    border: 1px solid $lightgrey;
-  }
-
-  .table-striped > tbody > tr:nth-of-type(odd) {
-    background-color: $lightgrey;
-  }
-
-  .table-striped > tbody > tr:nth-of-type(even) {
-    background-color: $white;
-  }
-
-  .table > tbody > tr > td,
-  .table > tfoot > tr > th,
-  .table > tfoot > tr > td {
-    border-top: 0 solid transparent;
-    border-radius: 4px !important;
-  }
-
-  ol.list-group.list-group-striped li:nth-of-type(odd) {
-    background-color: $lightgrey;
-    border-radius: 4px;
-  }
-
-  ol.list-group.list-group-striped li:nth-of-type(even) {
-    background-color: $white;
-    border-radius: 4px;
-  }
-
-  .recent-item,
-  .featured-item {
-    border-top: 0 solid transparent;
-    padding: 20px;
-  }
-
-  .recent-item .recent-label,
-  .featured-item .featured-label {
-    color: $black !important;
-  }
-
-  .dd3-content.panel.panel-default {
-    background: transparent;
-  }
-
-  select {
-    background-color: $lightgrey;
-    border-radius: 4px;
-  }
-  
-  .sidebar .sidebar-toggle {
-    background-color: $white;
-  }
-
-  .pagination > .disabled > a {
-    background-color: $lightgrey;
-  }
-
-  .collection-highlights img,
-  .featured-item img,
-  .recent-item img {
-    border: 0;
-    margin-right: 15px;
-    height: 90px;
   }
 
   //ADD WORK PAGE

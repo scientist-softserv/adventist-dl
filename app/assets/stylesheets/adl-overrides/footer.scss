@@ -1,77 +1,87 @@
+// Set the nav background color OUTSIDE of the body tag so that it can be overridden by appearance styles
+.public-facing .navbar.navbar-inverse.site-footer {
+  background: linear-gradient($lightgrey, $mediumyellow);
+}
+
 body.public-facing {
 
   /* prevents footer from covering bottom of page */
-
   #content-wrapper {
-      margin-bottom: 320px;
-  }
-
-  @media (max-width: 991px) {
-    #content-wrapper {
-    margin-bottom: 350px;
+    margin-bottom: 320px;
+    @media (max-width: $md-max) {
+      margin-bottom: 350px;
     }
   }
 
   .navbar.navbar-inverse.site-footer {
-    background-color: $mediumyellow !important;
+    font-weight: 600;
+    font-size: smaller;
     border: none;
     padding: inherit;
     height: auto;
     right: 0;
     left: 0;
+    .navbar-text {
+      margin: 0;
+    }
+    @media (min-width: $sm-min){
+      .navbar-right {
+        float: right !important;
+        margin: 0;
+      }
+      .navbar-text {
+        float: left !important;
+      }
+    }
   }
 
   //SECONDARY FOOTER
 
   .secondary-footer {
       min-height: 200px;
-      background-color: $white;
+      background-color: $lightgrey;
       padding: 40px 10px;
       position: absolute;
       bottom: 37px;
       display: block;
       width: 100%;
-      right: 0 !important;
-      left: 0 !important;
-      margin-right: 0 !important;
-      margin-left: 0 !important;
+      right: 0;
+      left: 0;
+      @media (max-width: $sm-max) {
+            bottom: 70px;
+      }
+      .footer-row {
+        @media (max-width: $sm-max) {
+          flex-direction: column;
+        }
+      }
+      .footer-link-col {
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        @media (max-width: $sm-max) {
+          order: 1;
+          text-align: center;
+        }
+      }
+      .footer-logo {
+        height: 120px;
+        overflow: hidden;
+        img {
+          object-fit: contain;
+          width: 100%;
+          height: 100%;
+          @media (min-width: $md-min) {
+                object-position: right;
+          }
+        }
+      }
+      .footer-navlink {
+        margin-top: 20px;
+      }
     }
 
-  @media (max-width: 1251px) {
-    .secondary-footer {
-        bottom: 75px;
-    }
-  }
-
-  .footer-logo {
-    height: 120px;
-    overflow: hidden;
-  }
-
-  .footer-logo img {
-    object-fit: contain;
-    width: 100%;
-    height: 100%;
-  }
-
-  @media (min-width: 992px) {
-    .footer-logo img {
-        object-position: right;
-    }
-  }
-
-  footer .navbar-text {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-
-  //HIDES THE FOOTER NAVLINKS SO THEY DON'T SHOW FOR NOW
-  .footer-navlink {
-    margin-top: 20px;
-    display: none;
-  }
-
-  @media (max-width: 768px) {
+  @media (max-width: $sm-max) {
     body {
         margin-bottom: 145px;
     }

@@ -29,6 +29,7 @@
     <div class="skip-to-content">
       <%= link_to "Skip to Content", "#skip-to-content" %>
     </div>
+    <%= render 'hyrax/homepage/announcement' if controller_name == 'homepage' %>
     <%= render '/masthead' %>
     <%= content_for(:navbar) %>
     <%= content_for(:precontainer_content) %>

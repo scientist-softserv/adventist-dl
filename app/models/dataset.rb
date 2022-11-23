@@ -17,4 +17,6 @@ class Dataset < DogBiscuits::Dataset
   include SlugMetadata
   include DogBiscuits::DatasetMetadata
   before_save :combine_dates
+
+  prepend OrderAlready.for(:creator)
 end

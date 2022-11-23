@@ -27,4 +27,6 @@ class Image < ActiveFedora::Base
   validates :title, presence: { message: 'Your work must have a title.' }
 
   self.human_readable_type = 'Image'
+
+  prepend OrderAlready.for(:creator)
 end
