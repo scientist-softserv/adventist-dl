@@ -1,6 +1,5 @@
 <%# OVERRIDE: remove nav controls & add share-work button . hyrax VERSION 2.9.1 %> 
 
-
 <div class="mx-auto px-5 py-5 <%= controller_name == 'homepage' ? 'homepage-search-banner-wrapper' : 'search-form-banner-wrapper container' %> ">
   <% if controller_name == 'homepage' && (display_content_block? @marketing_text).present? %>
     <%= displayable_content_block @marketing_text, class: 'banner-text text-center' %>
