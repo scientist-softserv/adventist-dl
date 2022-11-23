@@ -947,7 +947,7 @@ en:
     select_type:
       description: General purpose worktype
       name: Work
-    share_button: Contribute
+    share_button: Share Your Work
     single_use_links:
       button: Single-Use Link to File
       copy:
