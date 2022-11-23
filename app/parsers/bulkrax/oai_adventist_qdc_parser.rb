@@ -75,9 +75,7 @@ module Bulkrax
       @collections = []
       @works = []
       @file_sets = []
-
       if model_field_mappings.map { |mfm| records.first.metadata.find("//#{mfm}").first }.any?
-
         records.map do |r|
           model_field_mappings.each do |model_mapping|
             next unless r.metadata.find("//#{model_mapping}").first
@@ -92,13 +90,17 @@ module Bulkrax
             end
           end
         end
-        @collections = @collections.flatten.compact.uniq
-        @file_sets = @file_sets.flatten.compact.uniq
-        @works = @works.flatten.compact.uniq
+        flatten_arrays(%w[@collections @file_sets @works])
       else # if no model is specified, assume all records are works
-        @works = records.flatten.compact.uniq
+        flatten_arrays(%w[@works])
       end
       true
+    end
+
+    def flatten_arrays(record_arrays)
+      record_arrays.each do |a|
+        instance_variable_set(a, instance_variable_get(a).flatten.compact.uniq)
+      end
     end
 
     def generate_collection(set_spec)
