@@ -70,7 +70,7 @@ if Settings.bulkrax.enabled
     config.field_mappings['Bulkrax::CsvParser'] = {
         'abstract' => { from:  ['description.abstract'] },
         'aark_id' => { from:  ['identifier.ark'] },
-        'identifier' => { from:  ['identifier'], source_identifier: true   },
+        'identifier' => { from:  ['identifier'], source_identifier: true },
         'bibliographic_citation' => { from:  ['identifier.bibliographicCitation'] },
         'creator' => { from:  ['creator'] },
         'contributor' => { from:  ['contributor'] },
