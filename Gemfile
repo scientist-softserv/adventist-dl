@@ -91,7 +91,7 @@ end
 
 # Bulkrax
 group :bulkrax do
-  gem 'bulkrax', git: 'https://github.com/samvera-labs/bulkrax.git', ref: '1f47d49b27371cfa5ba94c7aa1fc6ced56aff316'
+  gem 'bulkrax', git: 'https://github.com/samvera-labs/bulkrax.git', ref: '89d80df59172a051bef583b812b66e3d57cd70cb'
   gem 'willow_sword', git: 'https://github.com/notch8/willow_sword.git'
 end
 
