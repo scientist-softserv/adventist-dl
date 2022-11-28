@@ -169,8 +169,6 @@ extraEnvVars: &envVars
     value: plain
   - name: SENTRY_DSN
     value: https://5ee54fb1e8cd448a9e709c846635ec49@o1008683.ingest.sentry.io/6745020
-  - name: SIDEKIQ_SPLIT_TENANTS
-    value: 'true'
 
 worker:
   replicaCount: 1
