@@ -92,7 +92,7 @@ module Bulkrax
         end
         flatten_arrays(%w[@collections @file_sets @works])
       else # if no model is specified, assume all records are works
-        flatten_arrays(%w[@works])
+        @works = records.flatten.compact.uniq
       end
       true
     end
