@@ -32,9 +32,6 @@ module Bulkrax
         if type.eql?('relationship')
           ScheduleRelationshipsJob.set(wait: 5.minutes).perform_later(importer_id: importerexporter.id)
           next
-        elsif type.eql?('work')
-          create_works
-          next
         end
         send(type.pluralize).each do |current_record|
           next unless record_has_source_identifier(current_record, index)
@@ -75,14 +72,15 @@ module Bulkrax
       @collections = []
       @works = []
       @file_sets = []
+
       if model_field_mappings.map { |mfm| records.first.metadata.find("//#{mfm}").first }.any?
+
         records.map do |r|
           model_field_mappings.each do |model_mapping|
             next unless r.metadata.find("//#{model_mapping}").first
 
-            generate_collection r.header.set_spec if r.header.set_spec.present?
-            if r.metadata.find("//#{model_mapping}").first.content.casecmp('collection').zero?
-              @collections << r
+            if r.header.set_spec.present?
+              generate_collection r.header.set_spec
             elsif r.metadata.find("//#{model_mapping}").first.content.casecmp('fileset').zero?
               @file_sets << r
             else
@@ -90,17 +88,13 @@ module Bulkrax
             end
           end
         end
-        flatten_arrays(%w[@collections @file_sets @works])
+        @collections = @collections.flatten.compact.uniq
+        @file_sets = @file_sets.flatten.compact.uniq
+        @works = @works.flatten.compact.uniq
       else # if no model is specified, assume all records are works
-        flatten_arrays(%w[@works])
+        @works = records.flatten.compact.uniq
       end
       true
-    end
-
-    def flatten_arrays(record_arrays)
-      record_arrays.each do |a|
-        instance_variable_set(a, instance_variable_get(a).flatten.compact.uniq)
-      end
     end
 
     def generate_collection(set_spec)
