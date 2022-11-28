@@ -9,8 +9,8 @@ GIT
 
 GIT
   remote: https://github.com/samvera-labs/bulkrax.git
-  revision: 1f47d49b27371cfa5ba94c7aa1fc6ced56aff316
-  ref: 1f47d49b27371cfa5ba94c7aa1fc6ced56aff316
+  revision: 89d80df59172a051bef583b812b66e3d57cd70cb
+  ref: 89d80df59172a051bef583b812b66e3d57cd70cb
   specs:
     bulkrax (4.3.0)
       bagit (~> 0.4)
@@ -715,7 +715,7 @@ GEM
       sawyer (~> 0.8.0, >= 0.5.3)
     openseadragon (0.6.0)
       rails (> 3.2.0)
-    order_already (0.2.1)
+    order_already (0.1.0)
       rails-html-sanitizer (~> 1.4)
     orm_adapter (0.5.0)
     os (1.1.1)
