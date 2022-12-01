@@ -92,6 +92,7 @@ module Bulkrax
         end
         flatten_arrays(%w[@collections @file_sets @works])
       else # if no model is specified, assume all records are works
+        @works = records
         flatten_arrays(%w[@works])
       end
       true
