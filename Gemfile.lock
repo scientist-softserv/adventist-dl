@@ -530,6 +530,9 @@ GEM
       signet
       solrizer (>= 3.4, < 5)
       tinymce-rails (~> 4.1)
+    hyrax-v2_graph_indexer (0.1.0)
+      hyrax (~> 2.9)
+      railties
     i18n (1.8.11)
       concurrent-ruby (~> 1.0)
     i18n-debug (1.2.0)
@@ -1127,6 +1130,7 @@ DEPENDENCIES
   flipflop (~> 2.3)
   flutie
   hyrax (~> 2.9, >= 2.9.1)
+  hyrax-v2_graph_indexer
   i18n-debug
   i18n-tasks
   is_it_working
