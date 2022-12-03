@@ -9,4 +9,4 @@ on:
 
 jobs:
   call-workflow:
-    uses: scientist-softserv/build-lint-test-action/.github/workflows/build-test-lint.yaml@v0.0.1
+    uses: scientist-softserv/actions/.github/workflows/build.yaml@v005-but-on-github-runners
