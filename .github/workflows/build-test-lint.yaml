@@ -1,4 +1,4 @@
-name: "Build Test Lint"
+name: "Build Lint Test"
 on:
   push:
     branches:
@@ -6,7 +6,42 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      debug_enabled:
+        type: boolean
+        description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
+        required: false
+        default: false
 
 jobs:
-  call-workflow:
-    uses: scientist-softserv/build-lint-test-action/.github/workflows/build-test-lint.yaml@v0.0.1
+  build-web:
+    uses: scientist-softserv/actions/.github/workflows/build-web.yaml@arm-wrestle
+    secrets: inherit
+    with:
+      target: hyku-base
+  build-web-arm64:
+    uses: scientist-softserv/actions/.github/workflows/build-web-arm64.yaml@arm-wrestle
+    secrets: inherit
+    with:
+      target: hyku-base
+  build-worker:
+    uses: scientist-softserv/actions/.github/workflows/build-worker.yaml@arm-wrestle
+    secrets: inherit
+    with:
+      target: hyku-worker
+  build-worker-arm64:
+    uses: scientist-softserv/actions/.github/workflows/build-worker-arm64.yaml@arm-wrestle
+    secrets: inherit
+    with:
+      target: hyku-worker
+  test:
+    needs: build-web
+    uses: scientist-softserv/actions/.github/workflows/test.yaml@v0.0.5
+    with:
+      worker: true
+  lint:
+    needs: build-web
+    uses: scientist-softserv/actions/.github/workflows/lint.yaml@v0.0.5
+    with:
+      worker: true
