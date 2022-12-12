@@ -15,7 +15,7 @@ on:
         default: false
 
 jobs:
-    build:
+  build:
     uses: scientist-softserv/actions/.github/workflows/build.yaml@v3plus5
     secrets: inherit
     with:
