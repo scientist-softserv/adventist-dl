@@ -75,7 +75,7 @@ module Bulkrax
       @collections = []
       @works = []
       @file_sets = []
-      if model_field_mappings.map { |mfm| records.first.metadata.find("//#{mfm}").first }.any?
+      if model_field_mappings.map { |mfm| records.first&.metadata&.find("//#{mfm}")&.first }.any?
         records.map do |r|
           model_field_mappings.each do |model_mapping|
             next unless r.metadata.find("//#{model_mapping}").first
