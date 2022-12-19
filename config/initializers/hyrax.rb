@@ -18,6 +18,10 @@ Hyrax.config do |config|
   # Email recipient of messages sent via the contact form
   config.contact_email = Settings.contact_email
 
+  # See https://github.com/scientist-softserv/adventist-dl/issues/183
+  # Also, we will continue to extract txt file's text using Adventist::TextFileTextExtractionService
+  config.extract_full_text = false
+
   # Text prefacing the subject entered in the contact form
   # config.subject_prefix = "Contact form:"
 
