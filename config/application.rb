@@ -10,6 +10,30 @@ groups += ['bulkrax'] if ENV['SETTINGS__BULKRAX__ENABLED'] == 'true' # Settings 
 Bundler.require(*groups)
 
 module Hyku
+  # Providing a common method to ensure consistent UTF-8 encoding.  Also removing the tricksy Byte
+  # Order Marker character which is an invisible 0 space character.
+  #
+  # @note In testing, we encountered errors with the file's character encoding
+  #       (e.g. `Encoding::UndefinedConversionError`).  The following will force the encoding to
+  #       UTF-8 and replace any invalid or undefined characters from the original encoding with a
+  #       "?".
+  #
+  #       Given that we still have the original, and this is a derivative, the forced encoding
+  #       should be acceptable.
+  #
+  # @param [String]
+  # @return [String]
+  #
+  # @see https://sentry.io/organizations/scientist-inc/issues/3773392603/?project=6745020&query=is%3Aunresolved&referrer=issue-stream
+  # @see https://github.com/samvera-labs/bulkrax/pull/689
+  # @see https://github.com/samvera-labs/bulkrax/issues/688
+  # @see https://github.com/scientist-softserv/adventist-dl/issues/179
+  def self.utf_8_encode(string)
+    string
+      .encode(Encoding.find('UTF-8'), invalid: :replace, undef: :replace, replace: "?")
+      .delete("\xEF\xBB\xBF")
+  end
+
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

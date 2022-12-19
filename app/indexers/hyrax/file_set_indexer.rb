@@ -16,7 +16,7 @@ module Hyrax
         solr_doc['file_format_tesim'] = file_format
         solr_doc['file_format_sim']   = file_format
         solr_doc['file_size_lts'] = object.file_size[0]
-        solr_doc['all_text_timv'] = object.extracted_text.content if object.extracted_text.present?
+        solr_doc['all_text_timv'] = Hyku.utf_8_encode(object.extracted_text.content) if object.extracted_text.present?
         solr_doc['height_is'] = Integer(object.height.first) if object.height.present?
         solr_doc['width_is']  = Integer(object.width.first) if object.width.present?
         solr_doc['visibility_ssi'] = object.visibility
