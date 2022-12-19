@@ -20,10 +20,7 @@ module Adventist
         #
         # Given that we still have the original, and this is a derivative, the forced encoding
         # should be acceptable.
-        extracted_text.content = text.encode(
-          Encoding.find('UTF-8'),
-          invalid: :replace, undef: :replace, replace: "?"
-        )
+        extracted_text.content = Hyku.utf_8_encode(text)
         extracted_text.mime_type = file_set.mime_type
         extracted_text.original_name = original_file_name
       end
