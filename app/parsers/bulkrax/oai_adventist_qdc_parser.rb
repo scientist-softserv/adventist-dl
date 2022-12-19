@@ -92,7 +92,12 @@ module Bulkrax
         end
         flatten_arrays(%w[@collections @file_sets @works])
       else # if no model is specified, assume all records are works
-        @works = records
+        # @see https://github.com/scientist-softserv/adventist-dl/issues/208
+        #
+        # In this case `records` is a "OAI::ListRecordsResponse" object which is an Enumerable but
+        # does not respond to flatten.  By using Array() we convert the records object into an actual
+        # array.
+        @works = Array(records)
         flatten_arrays(%w[@works])
       end
       true
