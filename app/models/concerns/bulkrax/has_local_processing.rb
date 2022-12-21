@@ -6,18 +6,12 @@ module Bulkrax
     # add any special processing here, for example to reset a metadata property
     # to add a custom property from outside of the import data
     def add_local
-      if self.parsed_metadata['model'] == 'Collection'
+      if self.parsed_metadata['model'] == 'Collection' || factory_class == Collection
         add_collection_nesting
       else
         add_part_of_collections if self.parsed_metadata['part_of'].present?
-        add_set_collections if self.parsed_metadata['resource_type']&.include?('Issue')
+        add_set_collections
       end
-    end
-
-    def add_collection_ids_from_set
-      sets = record.header.set_spec.map(&:content)
-      self.collection_ids += sets.map { |set| importerexporter.unique_collection_identifier(set) }
-      self.collection_ids = self.collection_ids.uniq
     end
 
     def add_set_collections
