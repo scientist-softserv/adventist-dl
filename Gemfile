@@ -91,10 +91,10 @@ end
 
 # Bulkrax
 group :bulkrax do
-  # Until f48623384d312db4758a36a4dff61dca2e609119 is in a major release, use this ref or a ref
+  # Until d36cf3606545ea30da8d8082f1b67b96d9aaf8c1 is in a major release, use this ref or a ref
   # who's ancestors include this ref.
   # rubocop:disable Metrics/LineLength
-  gem 'bulkrax', "~> 4.4", git: "https://github.com/samvera-labs/bulkrax.git", ref: "f48623384d312db4758a36a4dff61dca2e609119"
+  gem 'bulkrax', "~> 4.4", git: "https://github.com/samvera-labs/bulkrax.git", ref: "d36cf3606545ea30da8d8082f1b67b96d9aaf8c1"
   # rubocop:enable Metrics/LineLength
   gem 'willow_sword', git: 'https://github.com/notch8/willow_sword.git'
 end
