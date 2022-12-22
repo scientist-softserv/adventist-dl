@@ -65,10 +65,7 @@ module Bulkrax
     end
 
     def model_field_mappings
-      model_mappings = Bulkrax.field_mappings[self.class.to_s]&.dig('model', :from) || []
-      model_mappings ||= ['model']
-
-      model_mappings
+      @model_field_mappings ||= Bulkrax.field_mappings[self.class.to_s]&.dig('model', :from) || ["model"]
     end
 
     def build_records
