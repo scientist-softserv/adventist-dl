@@ -71,6 +71,8 @@ module Bulkrax
       model_mappings
     end
 
+    # Don't worry rubocop, I'm angling to refactor this to mind our ABCs
+    # rubocop:disable Metrics/AbcSize
     def build_records
       @collections = []
       @works = []
@@ -80,7 +82,7 @@ module Bulkrax
           model_field_mappings.each do |model_mapping|
             next unless r.metadata.find("//#{model_mapping}").first
 
-            generate_collection r.header.set_spec if r.header.set_spec.present?
+            capture_set_specs_for_collections r.header.set_spec if r.header.set_spec.present?
             if r.metadata.find("//#{model_mapping}").first.content.casecmp('collection').zero?
               @collections << r
             elsif r.metadata.find("//#{model_mapping}").first.content.casecmp('fileset').zero?
@@ -90,26 +92,22 @@ module Bulkrax
             end
           end
         end
-        flatten_arrays(%w[@collections @file_sets @works])
+        @collections = @collections.flatten.compact.uniq
+        @file_sets = @file_sets.flatten.compact.uniq
+        @works = @works.flatten.compact.uniq
       else # if no model is specified, assume all records are works
         # @see https://github.com/scientist-softserv/adventist-dl/issues/208
         #
         # In this case `records` is a "OAI::ListRecordsResponse" object which is an Enumerable but
         # does not respond to flatten.  By using Array() we convert the records object into an actual
         # array.
-        @works = Array(records)
-        flatten_arrays(%w[@works])
+        @works = Array(@works).flatten.compact.uniq
       end
       true
     end
+    # rubocop:enable Metrics/AbcSize
 
-    def flatten_arrays(record_arrays)
-      record_arrays.each do |a|
-        instance_variable_set(a, instance_variable_get(a).flatten.compact.uniq)
-      end
-    end
-
-    def generate_collection(set_spec)
+    def capture_set_specs_for_collections(set_spec)
       set_spec.each do |set|
         @collections << { source_identifier => [importerexporter.unique_collection_identifier(set.content)],
                           'title' => [importerexporter.unique_collection_identifier(set.content)] }
