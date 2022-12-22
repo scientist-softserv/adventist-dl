@@ -98,7 +98,7 @@ module Bulkrax
         # In this case `records` is a "OAI::ListRecordsResponse" object which is an Enumerable but
         # does not respond to flatten.  By using Array() we convert the records object into an actual
         # array.
-        @works = Array(@works).flatten.compact.uniq
+        @works = Array(records).flatten.compact.uniq
       end
       true
     end
