@@ -103,7 +103,7 @@ module Bulkrax
     def dispatch_creating_of_work_objects
       return true if @repository_objects_were_dispatched
 
-      # The records.full call ensures that we leverage the pagination/resumption mechanisms of OIA
+      # The records.full call ensures that we leverage the pagination/resumption mechanisms of OAI
       # (via Ruby's OAI gem).  We choose #each so that we only load in memory each page's records.
       # Were we to choose #map, we would load all records into memory.
       records.full.each_with_index do |record, index|
