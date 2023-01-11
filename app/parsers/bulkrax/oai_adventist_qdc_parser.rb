@@ -37,10 +37,7 @@ module Bulkrax
       super
       @count_towards_limit = 0
       @counters = { file_set: 0, collection: 0, work: 0 }
-      @model_field_mappings = Bulkrax.field_mappings[self.class.to_s]&.dig('model', :from) || ["model"]
     end
-
-    attr_reader :model_field_mappings
 
     # @see #initialize
     #
@@ -51,7 +48,7 @@ module Bulkrax
 
     # @see #initialize
     attr_accessor :count_towards_limit
-    private :counters, :counters=, :count_towards_limit, :count_towards_limit=, :model_field_mappings
+    private :counters, :counters=, :count_towards_limit, :count_towards_limit=
 
     # @note Included for previous API compatibility.
     def create_collections
