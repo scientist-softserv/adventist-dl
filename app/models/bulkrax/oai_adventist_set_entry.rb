@@ -2,7 +2,6 @@
 
 module Bulkrax
   class OaiAdventistSetEntry < OaiSetEntry
-    # override to swap out the thumbnail_url
     def build_metadata
       self.parsed_metadata = {}
       # rubocop:disable Style/RedundantSelf
@@ -18,6 +17,13 @@ module Bulkrax
           add_metadata(node.name, node.content)
         end
       end
+
+      # Note: as of the time of writing this comment, the Bulkrax::OaiSetEntry does not handle
+      # metadata nor does it do anything with visibility, rights statements, or admin sets.  This is
+      # added as an override that I'd love to see "removed"
+      add_visibility
+      add_rights_statement
+      add_admin_set_id
 
       # see app/models/concerns/bulkrax/has_local_processing.rb
       add_local
