@@ -83,10 +83,10 @@ group :development do
   gem 'pronto-rails_schema', require: false
   gem 'pronto-rubocop', require: false
 
-  gem 'spring', '~> 1.7'
-  gem 'spring-watcher-listen', '~> 2.0.0'
-
   gem 'scss_lint', require: false
+  gem 'spring', '~> 1.7'
+  gem 'spring-commands-rspec'
+  gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
 # Bulkrax
