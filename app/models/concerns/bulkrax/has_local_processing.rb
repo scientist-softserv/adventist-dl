@@ -15,6 +15,8 @@ module Bulkrax
     end
 
     def add_set_collections
+      # The #header method is for OAI records
+      return unless record.respond_to?(:header)
       sets = record.header.set_spec.map(&:content)
       aark_ids = sets.select { |s| s.match(/^\d+$/) }
       aark_ids.each do |aark|
