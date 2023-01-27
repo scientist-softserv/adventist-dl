@@ -3,7 +3,7 @@ version: '3.8'
 x-app: &app
   build:
     context: .
-    target: hyku-base
+    target: hyku-web
     args:
       - SETTINGS__BULKRAX__ENABLED=true
   image: ghcr.io/scientist-softserv/adventist-dl:${TAG:-latest}
@@ -11,6 +11,7 @@ x-app: &app
     - .env
   # NOTE: all common env variables moved to .env
   volumes:
+    - node_modules:/app/samvera/hyrax-webapp/node_modules:cached  
     - uploads:/app/samvera/hyrax-webapp/public/uploads:cached
     - assets:/app/samvera/hyrax-webapp/public/assets:cached
     - cache:/app/samvera/hyrax-webapp/tmp/cache:cached
@@ -23,6 +24,7 @@ volumes:
   cache:
   db:
   fcrepo:
+  node_modules:
   redis:
   solr:
   uploads:
@@ -112,6 +114,14 @@ services:
       - db:/var/lib/postgresql/data
     networks:
       internal:
+
+  # Used exclusively for building and caching the base image to reduce build times
+  base:
+    <<: *app
+    image: ghcr.io/scientist-softserv/adventist-dl/base:${TAG:-latest}
+    build:
+      context: .
+      target: hyku-base
 
   web:
     <<: *app
