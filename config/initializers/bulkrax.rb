@@ -55,7 +55,7 @@ if Settings.bulkrax.enabled
         'alt' => { from:  ['geocode'] },
         'publisher' => { from:  ['publisher'] },
         'rights_statement' => { from:  ['rights_statement'] },
-        'part' => { from:  ['part_of', 'title'] },
+        'part' => { from:  ['part_of'] },
         'date_created' => { from:  ['date_created'] },
         'title' => { from:  ['title'] },
         'subject' => { from:  ['subject'] },
