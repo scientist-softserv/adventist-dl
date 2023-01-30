@@ -7,7 +7,7 @@ class CatalogController < ApplicationController
   include Hydra::Controller::ControllerBehavior
   include BlacklightOaiProvider::Controller
   include DogBiscuits::Blacklight::Commands
-
+  
   # These before_action filters apply the hydra access controls
   before_action :enforce_show_permissions, only: :show
 
@@ -107,7 +107,12 @@ class CatalogController < ApplicationController
     # previously. Simply remove these lines if you'd rather use Solr request
     # handler defaults, or have no facets.
     config.add_facet_fields_to_solr_request!
-
+   
+    #Prior to this change, the applications specific translations were not loaded. Dogbiscuits were assuming the translations were already loaded.
+    Rails.root.glob("config/locales/*.yml").each do | path |
+      I18n.load_path << path.to_s
+    end
+    I18n.backend.reload!
     index_props = DogBiscuits.config.index_properties.collect do |prop|
       { prop => index_options(prop, DogBiscuits.config.property_mappings[prop]) }
     end
