@@ -1,5 +1,5 @@
-ARG HYRAX_IMAGE_VERSION=v4.0.0.beta2
-FROM ghcr.io/samvera/hyrax/hyrax-base:$HYRAX_IMAGE_VERSION as hyku-base
+ARG HYRAX_IMAGE_VERSION=3.1.0
+FROM ghcr.io/samvera/hyku/hyku-base:$HYRAX_IMAGE_VERSION as hyku-base
 
 USER root
 
@@ -87,8 +87,7 @@ COPY --chown=1001:101 $APP_PATH/Gemfile* /app/samvera/hyrax-webapp/
 RUN sh -l -c " \
   bundle install --jobs "$(nproc)" && \
   sed -i '/require .enumerator./d' /usr/local/bundle/gems/oai-1.1.0/lib/oai/provider/resumption_token.rb && \
-  sed -i '/require .enumerator./d' /usr/local/bundle/gems/edtf-3.0.7/lib/edtf.rb && \
-  sed -i '/require .enumerator./d' /usr/local/bundle/gems/csl-1.6.0/lib/csl.rb"
+  sed -i '/require .enumerator./d' /usr/local/bundle/gems/edtf-3.0.7/lib/edtf.rb" 
 COPY --chown=1001:101 $APP_PATH/bin/db-migrate-seed.sh /app/samvera/
 COPY --chown=1001:101 $APP_PATH /app/samvera/hyrax-webapp
 
