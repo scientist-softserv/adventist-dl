@@ -1,5 +1,6 @@
 replicaCount: 2
 
+# This is for the web-container
 resources:
   requests:
     memory: "1Gi"
@@ -190,6 +191,13 @@ imagePullSecrets:
 
 fcrepo:
   enabled: false
+  resources:
+    limits:
+      memory: "4Gi"
+      cpu: "2"
+    requests:
+      memory: "2Gi"
+      cpu: "1"
 postgresql:
   enabled: false
 redis:
