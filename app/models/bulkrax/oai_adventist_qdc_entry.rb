@@ -23,7 +23,7 @@ module Bulkrax
           self.collection_ids << c.id if c.present? && !self.collection_ids.include?(c.id)
         end
       end
-      return self.collection_ids
+      self.collection_ids
     end
   end
 end
