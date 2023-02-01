@@ -7,5 +7,8 @@ module Bulkrax
     def add_thumbnail_url
       true
     end
+
+    # @note Adding this to make testing easier.  This is something to push up into Bulkrax default.
+    attr_writer :raw_record
   end
 end
