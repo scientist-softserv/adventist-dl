@@ -29,7 +29,7 @@ module Bulkrax
       # We've completed our expensive queries, now let's make sure we don't need to do this again.
       @found_collection_ids = true
 
-      return self.collection_ids
+      self.collection_ids
     end
   end
 end
