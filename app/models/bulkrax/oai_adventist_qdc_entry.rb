@@ -13,7 +13,9 @@ module Bulkrax
     end
 
     def find_collection_ids
-      return self.collection_ids if collections_created?
+      # Using memoization to cache what could be expensive queries.
+      return self.collection_ids if defined?(@found_collection_ids)
+
       if sets.blank? || parser.collection_name != 'all'
         collection = find_collection(importerexporter.unique_collection_identifier(parser.collection_name))
         self.collection_ids << collection.id if collection.present? && !self.collection_ids.include?(collection.id)
@@ -23,7 +25,11 @@ module Bulkrax
           self.collection_ids << c.id if c.present? && !self.collection_ids.include?(c.id)
         end
       end
-      self.collection_ids
+
+      # We've completed our expensive queries, now let's make sure we don't need to do this again.
+      @found_collection_ids = true
+
+      return self.collection_ids
     end
   end
 end
