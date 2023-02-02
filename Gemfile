@@ -94,7 +94,6 @@ end
 # rubocop:disable Metrics/LineLength
 gem 'bulkrax', "~> 4.4", git: "https://github.com/samvera-labs/bulkrax.git", ref: "35970cee7b1e48d00c3fc838d2ca5790c09e2c9c"
 # rubocop:enable Metrics/LineLength
-gem 'willow_sword', git: 'https://github.com/notch8/willow_sword.git'
 
 gem 'blacklight', '~> 6.7'
 gem 'blacklight_oai_provider', '~> 6.1', '>= 6.1.1'
