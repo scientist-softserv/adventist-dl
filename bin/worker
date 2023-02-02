@@ -1,4 +1,7 @@
 #!/usr/local/bin/ruby
+if ENV['GOOGLE_OAUTH_PRIVATE_KEY_VALUE'] && !ENV['GOOGLE_OAUTH_PRIVATE_KEY_VALUE'].empty?
+  %x{echo "$GOOGLE_OAUTH_PRIVATE_KEY_VALUE" | base64 -d > prod-cred.p12}
+end
 
 if ENV['DATABASE_URL'] && !ENV['DATABASE_URL'].empty?
   ENV['DATABASE_URL'] = ENV['DATABASE_URL'].gsub('pool=5', 'pool=30')
