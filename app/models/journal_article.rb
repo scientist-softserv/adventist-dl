@@ -8,7 +8,6 @@ class JournalArticle < DogBiscuits::JournalArticle
   include DogBiscuits::BibliographicCitation
   include DogBiscuits::DateIssued
   include DogBiscuits::Geo
-  include DogBiscuits::Part
   include DogBiscuits::PlaceOfPublication
   include DogBiscuits::RemoteUrl
 
