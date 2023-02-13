@@ -20,6 +20,14 @@ RSpec.describe Adventist::TextFileTextExtractionService do
     end
   end
 
+  describe 'position in the array of Hyrax::DerivativeService.services' do
+    it "is in the first position" do
+      expect(Hyrax::DerivativeService.services).to match_array(
+        [Adventist::TextFileTextExtractionService, Hyrax::FileSetDerivativesService]
+      )
+    end
+  end
+
   it_behaves_like "a Hyrax::DerivativeService"
 
   describe '#valid?' do
