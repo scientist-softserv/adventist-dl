@@ -47,8 +47,7 @@ COPY --chown=1001:101 $APP_PATH /app/samvera/hyrax-webapp
 
 ARG SETTINGS__BULKRAX__ENABLED="true"
 RUN mkdir -p /app/samvera/branding && ln -s /app/samvera/branding /app/samvera/hyrax-webapp/public/branding && \
-  yarn install && \
-  RAILS_ENV=production SECRET_KEY_BASE=`bin/rake secret` DB_ADAPTER=nulldb DATABASE_URL='postgresql://fake' bundle exec rake assets:precompile
+  RAILS_ENV=production SECRET_KEY_BASE=`bin/rake secret` DB_ADAPTER=nulldb DATABASE_URL='postgresql://fake' bundle exec rake assets:precompile && yarn install
 
 FROM hyku-base as hyku-worker
 ENV MALLOC_ARENA_MAX=2
