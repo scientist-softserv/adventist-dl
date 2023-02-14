@@ -88,8 +88,6 @@ group :development do
   gem 'spring-commands-rspec'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
-
-# rubocop:disable Metrics/LineLength
 gem 'bulkrax', git: "https://github.com/samvera-labs/bulkrax.git", branch: 'main'
 # rubocop:enable Metrics/LineLength
 
