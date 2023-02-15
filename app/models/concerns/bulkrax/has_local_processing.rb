@@ -53,7 +53,12 @@ module Bulkrax
     end
 
     def find_or_create_collection(collection_title)
-      Collection.where(title_sim: collection_title).first || Collection.create(title: [collection_title], collection_type: Hyrax::CollectionType.find_by(title: 'User Collection'))
+      Collection.where(title_sim: collection_title).first ||
+        Collection.create(title: [collection_title], collection_type: Bulkrax::HasLocalProcessing.default_collection_type)
+    end
+
+    def self.default_collection_type
+      Hyrax::CollectionType.find_or_create_by(title: 'User Collection')
     end
   end
 end
