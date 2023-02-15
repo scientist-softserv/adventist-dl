@@ -46,8 +46,8 @@ module Bulkrax
       if self.parsed_metadata['part_of'].present?
         self.parsed_metadata['part_of'].each do |collection_title|
           collection = find_or_create_collection(collection_title)
-          self.parsed_metadata['collection'] ||= []
-          self.parsed_metadata['collection'] << collection.id
+          self.parsed_metadata[parser.related_parents_parsed_mapping] ||= []
+          self.parsed_metadata[parser.related_parents_parsed_mapping] << collection.id
         end
       end
     end
