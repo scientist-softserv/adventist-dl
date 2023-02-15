@@ -71,6 +71,8 @@ module Adventist
         # "text/plain;charset=UTF-8" to be a valid type.
         valid_mime_type.start_with?(mime_type)
       end
+    rescue TypeError => e
+      raise "Expected #{file_set.class} (ID=#{file_set.id}) to have a string-like :mime_type.  Had #{mime_type.inspect}"
     end
   end
 end
