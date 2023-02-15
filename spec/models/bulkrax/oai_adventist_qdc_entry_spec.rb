@@ -96,7 +96,7 @@ RSpec.describe Bulkrax::OaiAdventistQdcEntry do
                   <geocode>42.323991, -85.190425</geocode>
                   <place_of_publication>Battle Creek, Michigan, USA</place_of_publication>
                   <part_of>John N. Andrews Library Collection</part_of>
-                  <publisher>Steam Press of the Seventh-Day Adventist Publishing Association</publisher>
+                  <publisher>Steam Press of the Seventh-Day Adventist Publishing Association; Other Publisher</publisher>
                   <rights_statement>No Copyright – United States</rights_statement>
                   <subject>Charity -- Dress Reform -- Spiritualism; Civil War, 1861-1865 -- Slavery; History; Visions -- Censures; White, Ellen Gould Harmon, 1827-1915</subject>
                   <work_type>PublishedWork</work_type>
@@ -114,6 +114,17 @@ RSpec.describe Bulkrax::OaiAdventistQdcEntry do
       expect(entry.factory_class).to eq(PublishedWork)
       expect(entry.parsed_metadata.fetch('title')).to eq(["Testimony for the Church: Number 7"])
       expect(entry.parsed_metadata.fetch('part')).to eq(["John N. Andrews Library Collection"])
+      expect(entry.parsed_metadata.fetch('publisher')).to eq(
+        ["Steam Press of the Seventh-Day Adventist Publishing Association", "Other Publisher"]
+      )
+      expect(entry.parsed_metadata.fetch('subject')).to eq(
+        [
+          "Charity -- Dress Reform -- Spiritualism",
+          "Civil War, 1861-1865 -- Slavery",
+          "History", "Visions -- Censures",
+          "White, Ellen Gould Harmon, 1827-1915"
+        ]
+      )
     end
   end
 end
