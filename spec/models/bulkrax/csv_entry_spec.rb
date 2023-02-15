@@ -66,12 +66,13 @@ RSpec.describe Bulkrax::CsvEntry do
         "date.other".to_sym => %(1930),
         "format.extent".to_sym => %(Photograph: b&w 7.7x10 cm),
         "type".to_sym => %(Image),
-        "subject".to_sym => %(Andrews, John Nevins 1891-1980),
+        "subject".to_sym => %(Andrews, John Nevins 1891-1980; Smith, John),
         "language".to_sym => "",
         "source".to_sym => %(Center for Adventist Research),
         "relation.isPartOf".to_sym => %(Center for Adventist Research Photograph Collection),
         "rights".to_sym => %(http://rightsstatements.org/vocab/NoC-US/1.0/),
-        "coverage.spatial".to_sym => ""
+        "coverage.spatial".to_sym => "",
+        "publisher".to_sym => %(First Publisher; Second Publisher)
       }
     end
 
@@ -80,6 +81,8 @@ RSpec.describe Bulkrax::CsvEntry do
       # Yes, based on the present parser, we're expecting this to be GenericWork.  However, there's
       # an outstanding question with the client as to whether that is the correct assumption.
       expect(entry.factory_class).to eq(GenericWork)
+      expect(entry.parsed_metadata.fetch('subject')).to eq ["Andrews, John Nevins 1891-1980", "Smith, John"]
+      expect(entry.parsed_metadata.fetch('publisher')).to eq ["First Publisher", "Second Publisher"]
     end
   end
 end
