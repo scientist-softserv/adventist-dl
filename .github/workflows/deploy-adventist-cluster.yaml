@@ -1,5 +1,5 @@
 name: "Deploy adventist cluster"
-run-name: Deploy (${{ github.ref_name }} -> ${{ inputs.environment }}) by @${{ github.actor }}
+run-name: Deploy ${{ inputs.environment }} ${{ github.ref_name }}@${{ github.sha }} by @${{ github.actor }}
 on:
   workflow_dispatch:
     inputs:
