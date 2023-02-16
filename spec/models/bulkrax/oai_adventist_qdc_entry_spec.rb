@@ -1,69 +1,19 @@
 # frozen_string_literal: true
 
 require "spec_helper"
-require "xml/libxml" # Because that's what we use for the OAI gem
-
-module Bulkrax
-  module SpecHelper
-    ##
-    # @api private
-    #
-    # A spec helper method for building Bulrax::Entry instances in downstream bulkrax applications.
-    #
-    # @params identifier [#to_s] The identifier of this object
-    # @params data [String] The "data" value for the #raw_metadata of the {Bulkrax::Entry}.
-    # @params parser_class_name [String] One of the the named parsers of {Bulkrax.parsers}
-    # @params entry_class [Class<Bulkrax::Entry>]
-    #
-    # @return [Bulkrax::Entry]
-    #
-    # @todo Extract this method back into a Bulkrax::SpecHelper module.
-    # @todo This could replace some of the factories in Bulkrax's spec suite.
-    # @note This presently assumes an OAI oriented format
-    #
-    def self.build_oai_entry_for(identifier:, data:, parser_class_name:, entry_class:)
-      importer = Bulkrax::Importer.new(
-        name: "Test importer for identifier #{identifier}",
-        admin_set_id: "admin_set/default",
-        user: User.new(email: "hello@world.com"),
-        limit: 1,
-        parser_klass: parser_class_name,
-        field_mapping: Bulkrax.field_mappings.fetch(parser_class_name),
-        parser_fields: {
-          "base_url" => "http://oai.adventistdigitallibrary.org/OAI-script"
-        }
-      )
-
-      # The raw record assumes we take the XML data, parse it and then send that to the
-      # OAI::GetRecordResponse object.
-      parser = XML::Parser.string(data)
-      raw_record = OAI::GetRecordResponse.new(parser.parse)
-
-      raw_metadata = {
-        importer.parser.source_identifier.to_s => identifier,
-        "data" => data,
-        "collection" => [],
-        "children" => []
-      }
-
-      entry_class.new(
-        raw_record: raw_record,
-        importerexporter: importer,
-        identifier: identifier,
-        raw_metadata: raw_metadata
-      )
-    end
-  end
-end
+require "bulkrax/entry_spec_helper"
 
 RSpec.describe Bulkrax::OaiAdventistQdcEntry do
   describe "#build_metadata" do
     subject(:entry) do
-      Bulkrax::SpecHelper.build_oai_entry_for(
+      Bulkrax::EntrySpecHelper.entry_for(
         entry_class: described_class,
         identifier: identifier,
         data: data,
-        parser_class_name: "Bulkrax::OaiAdventistQdcParser"
+        parser_class_name: "Bulkrax::OaiAdventistQdcParser",
+        parser_fields: {
+          "base_url" => "http://oai.adventistdigitallibrary.org/OAI-script"
+        }
       )
     end
 
