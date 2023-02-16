@@ -88,6 +88,7 @@ if Settings.bulkrax.enabled
         'publisher' => { from:  ['publisher'], split: ';' },
         'rights_statement' => { from:  ['rights'] },
         'part_of' => { from:  ['relation.isPartOf'] },
+        'part' => { from:  ['relation.isPartOf'] },
         'date_created' => { from:  ['date.other'] },
         'title' => { from:  ['title'] },
         'subject' => { from:  ['subject'], split: ';' },
