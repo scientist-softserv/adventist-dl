@@ -107,11 +107,13 @@ module Bulkrax
       # (via Ruby's OAI gem).  We choose #each so that we only load in memory each page's records.
       # Were we to choose #map, we would load all records into memory.
       records.full.each_with_index do |record, index|
+        Rails.logger.error("🐮🐮🐮 #dispatch_creating_of_work_objects records.full #{index} Object Count #{ObjectSpace.each_object(Object).count}")
         break if limit_reached?(limit, count_towards_limit)
         handle_creation_of(record: record, index: index)
         self.count_towards_limit += 1
       end
 
+      Rails.logger.error("🌴🌴🌴 #dispatch_creating_of_work_objects")
       @repository_objects_were_dispatched = true
     end
 
@@ -137,8 +139,12 @@ module Bulkrax
       # - What's the counter to increment
       entry_class_type = entry_class_type_for(record: record)
 
-      entry_class = send("#{entry_class_type}_entry_class")
-
+      begin
+        entry_class = send("#{entry_class_type}_entry_class")
+      rescue => e
+        byebug
+        Rails.logger.error("💜💜💜 record.header.identifier: #{record.header.identifier}")
+      end
       # We want to find or create the entry based on non-volatile information.  Then we want to
       # capture the raw metadata for the record; capturing the raw metadata helps in debugging the
       # object.
@@ -190,12 +196,26 @@ module Bulkrax
       false
     end
 
-    # @param record [Oai::Record]
-    # @return [Symbol] either :collection, :file_set, or :work
+    WORK_TYPE_TO_ENTRY_CLASS_MAP = {
+      "FileSet" => :file_set,
+      "Collection" => :collection,
+      "GenericWork" => :work,
+      "Image" => :work,
+      "ConferenceItem" => :work,
+      "Dataset" => :work,
+      "ExamPaper" => :work,
+      "JournalArticle" =>  :work,
+      "PublishedWork" => :work,
+      "Thesis" => :work
+    }.freeze
+
     def entry_class_type_for(record:)
       entry_class_type = nil
+
       model_field_mappings.each do |model_mapping|
-        record_entry_class_type = record.metadata.find("//#{model_mapping}").first&.content || ""
+        record_entry_class_type = record.metadata.find("//#{model_mapping}").first&.content
+        next if record_entry_class_type.blank?
+
         if record_entry_class_type.casecmp('collection').zero?
           entry_class_type = :collection
           break
@@ -205,9 +225,18 @@ module Bulkrax
         elsif record_entry_class_type.casecmp('file_set').zero?
           entry_class_type = :file_set
           break
+        else
+          entry_class_type = WORK_TYPE_TO_ENTRY_CLASS_MAP.fetch(record_entry_class_type)
+          break
         end
       end
-      entry_class_type || :work
+
+      if record.header.identifier.to_s == '20000080'
+        Rails.logger.error("🐬🐬🐬 entry_class_type: #{entry_class_type}")
+      end
+      entry_class_type
+    rescue KeyError => e
+      raise "🎈🎈🎈 Record ID=#{record.header.identifier} encountered #{e}, model_field_mappings: #{model_field_mappings.inspect}"
     end
   end
 end

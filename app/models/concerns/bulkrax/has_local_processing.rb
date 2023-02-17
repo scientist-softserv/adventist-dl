@@ -36,12 +36,16 @@ module Bulkrax
       self.parsed_metadata['member_of_collections_attributes'] ||= {}
       top_key = self.parsed_metadata['member_of_collections_attributes'].keys.map { |k| k.to_i }.sort.last || -1
       self.parsed_metadata['member_of_collections_attributes'][(top_key + 1).to_s] = { id: collection.id }
+      self.parsed_metadata[parser.related_parents_parsed_mapping] ||= []
+      self.parsed_metadata[parser.related_parents_parsed_mapping] << collection.identifier.first
     end
 
     def add_collection_nesting
       self.parsed_metadata.delete('admin_set_id')
       nested_collections = self.parsed_metadata.delete('member_of_collections_attributes')
-      self.parsed_metadata['collection'] = nested_collections.map { |k, v| v[:id] } if nested_collections.is_a?(Hash)
+      if nested_collections.is_a?(Hash)
+        self.parsed_metadata[parser.related_parents_parsed_mapping] = nested_collections.map { |k, v| v[:id] }
+      end
 
       if self.parsed_metadata['part_of'].present?
         self.parsed_metadata['part_of'].each do |collection_title|
