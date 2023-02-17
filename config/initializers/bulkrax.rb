@@ -87,6 +87,7 @@ if Settings.bulkrax.enabled
         'alt' => { from:  ['coverage.spatial'] },
         'publisher' => { from:  ['publisher'], split: ';' },
         'rights_statement' => { from:  ['rights'] },
+        'part_of' => { from:  ['relation.isPartOf'] },
         'part' => { from:  ['relation.isPartOf'] },
         'date_created' => { from:  ['date.other'] },
         'title' => { from:  ['title'] },

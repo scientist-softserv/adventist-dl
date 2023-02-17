@@ -83,6 +83,7 @@ RSpec.describe Bulkrax::CsvEntry do
       expect(entry.factory_class).to eq(GenericWork)
       expect(entry.parsed_metadata.fetch('subject')).to eq ["Andrews, John Nevins 1891-1980", "Smith, John"]
       expect(entry.parsed_metadata.fetch('publisher')).to eq ["First Publisher", "Second Publisher"]
+      expect(entry.parsed_metadata.fetch('part_of')).to eq ["Center for Adventist Research Photograph Collection"]
     end
   end
 end
