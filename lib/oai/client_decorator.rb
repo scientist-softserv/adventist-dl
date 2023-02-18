@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# rubocop:disable Naming/VariableName
+# rubocop:disable Naming/PredicateName
 module OAI
   # The purpose of this module is to work around the OAI implementation of Adventist; namely
   # the fact that after we pass make a resumption request, we loose our metadata_prefix context.
@@ -16,7 +20,7 @@ module OAI
         # This block is the &resumption_token that we pass to the below
         # `OAI::ResponseDecorator#initialize` method call.
         responseClass.new(
-          do_request(verb, original_options.merge(:resumption_token => response.resumption_token))
+          do_request(verb, original_options.merge(resumption_token: response.resumption_token))
         )
       end
     end
@@ -70,6 +74,8 @@ module OAI
     end
   end
 end
+# rubocop:enable Naming/VariableName
+# rubocop:enable Naming/PredicateName
 
 OAI::Client.prepend(OAI::ClientDecorator)
 OAI::Response.prepend(OAI::ResponseDecorator)
