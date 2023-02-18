@@ -13,6 +13,8 @@ module OAI
       #       and updated.  This allows us to preserve
       original_options = opts.clone
       responseClass.new(do_request(verb, opts)) do |response|
+        # This block is the &resumption_token that we pass to the below
+        # `OAI::ResponseDecorator#initialize` method call.
         responseClass.new(
           do_request(verb, original_options.merge(:resumption_token => response.resumption_token))
         )
@@ -27,6 +29,48 @@ module OAI
       false
     end
   end
+
+  # This module is responsible for determining the completeListSize that's part of the
+  # `resumptionToken` XML node.  And implementation detail of Adventist is that the OAI XML page's
+  # that have records will have a `resumptionToken` with a `completeListSize` attribute.  And when
+  # we are on the "last page" of the list of records we will still encounter a `resumptionToken`
+  # (that acts looks like it's an incrementing page number).
+  #
+  # When we request the URL for that `resumptionToken` we will get another `resumptionToken` but it
+  # will not have a `completeListSize`.
+  module ResponseDecorator
+    attr_reader :complete_list_size
+    # @note Override
+    #
+    # @param doc [Object] Some tree/parser representation of an XML string.
+    # @yieldparam resumption_token [Proc] This is the block from the above
+    #             {OIA::ClientDecorator#do_resumable}
+    def initialize(doc, &resumption_token)
+      # The resumptionToken XML node looks as follows; we need to get the completeListSize attribute.
+      #
+      #   <resumptionToken expirationDate="2023-02-23T15:48:00Z" completeListSize="153" cursor="25">
+      #     adl:periodical|2
+      #   </resumptionToken>
+      @complete_list_size = get_attribute(xpath_first(doc, './/resumptionToken'), "completeListSize").to_i
+      super
+    end
+  end
+
+  module Resumable
+    module ResumptionWrapperDecorator
+      # @note Override
+      #
+      # @see OAI::ResponseDecorator
+      def resumable?
+        return super unless @response.respond_to?(:complete_list_size)
+        return false if @response.complete_list_size.nil?
+        return false if @response.complete_list_size.zero?
+        super
+      end
+    end
+  end
 end
 
 OAI::Client.prepend(OAI::ClientDecorator)
+OAI::Response.prepend(OAI::ResponseDecorator)
+OAI::Resumable::ResumptionWrapper.prepend(OAI::Resumable::ResumptionWrapperDecorator)
