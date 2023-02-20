@@ -144,3 +144,4 @@ gem 'dog_biscuits', git: 'https://github.com/samvera-labs/dog_biscuits.git'
 gem 'order_already'
 
 gem 'hyrax-v2_graph_indexer'
+gem 'iiif_print', git: 'https://github.com/scientist-softserv/iiif_print.git', branch: 'main' 
