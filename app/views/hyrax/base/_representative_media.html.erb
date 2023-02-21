@@ -1,16 +1,15 @@
-<%# OVERRIDE Hyrax 2.9.5 to add bootstrap classes %>
+<%# OVERRIDE IiifPrint to add bootstrap classes %>
 
-
-<% if presenter.representative_id.present? && presenter.representative_presenter.present? %>
+<% if presenter.iiif_viewer? %>
   <% if defined?(viewer) && viewer %>
     <div class="center-block">
       <%= iiif_viewer_display presenter %>
     </div>
   <% else %>
     <div class="center-block">
-      <%= media_display presenter.representative_presenter %>
+      <%= render media_display_partial(presenter.representative_presenter), file_set: presenter.representative_presenter %>
     </div>
   <% end %>
 <% else %>
-  <%= image_tag 'default.png', class: "canonical-image center-block" %>
+  <%= image_tag 'default.png', class: "canonical-image center-block", alt: 'default representative image' %>
 <% end %>
