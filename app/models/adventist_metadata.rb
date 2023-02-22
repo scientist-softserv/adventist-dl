@@ -1,5 +1,12 @@
 # frozen_string_literal: true
 
+# used for :is_child property
+module RDF
+  class CustomIsChildTerm < Vocabulary('http://id.loc.gov/vocabulary/identifiers/')
+    property 'is_child'
+  end
+end
+
 ##
 # metadata copied from hyrax/app/models/concerns/hyrax/basic_metadata.rb as of
 # v3.0.0, then altered to override date created to accept scalar data from the
@@ -47,6 +54,11 @@ module AdventistMetadata
     property :source, predicate: ::RDF::Vocab::DC.source do |index|
       index.as :stored_searchable, :facetable
     end
+
+    property :is_child, predicate: ::RDF::CustomIsChildTerm.is_child,
+      multiple: false do |index|
+        index.as :stored_searchable
+      end
 
     id_blank = proc { |attributes| attributes[:id].blank? }
 
