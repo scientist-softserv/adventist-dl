@@ -37,12 +37,12 @@ class CatalogController < ApplicationController
   configure_blacklight do |config|
 
     # IiifPrint index fields
-    config.add_index_field 'all_text_tsimv', highlight: true, helper_method: :render_ocr_snippets
+    config.add_index_field 'all_text_timv', highlight: true, helper_method: :render_ocr_snippets
 
 
     # configuration for Blacklight IIIF Content Search
     config.iiif_search = {
-      full_text_field: 'all_text_tsimv',
+      full_text_field: 'all_text_timv',
       object_relation_field: 'is_page_of_ssim',
       supported_params: %w[q page],
       autocomplete_handler: 'iiif_suggest',
@@ -74,7 +74,7 @@ class CatalogController < ApplicationController
     config.default_solr_params = {
       qt: "search",
       rows: 10,
-      qf: "title_tesim description_tesim creator_tesim keyword_tesim"
+      qf: "title_tesim description_tesim creator_tesim keyword_tesim all_text_timv"
     }
 
     # Specify which field to use in the tag cloud on the homepage.
@@ -207,7 +207,7 @@ class CatalogController < ApplicationController
                    DogBiscuits.config.all_properties.map { |p| "#{p}_tesim" }).uniq.join(" ")
       title_name = solr_name("title", :stored_searchable)
       field.solr_parameters = {
-        qf: "#{all_names} file_format_tesim all_text_tsimv",
+        qf: "#{all_names} file_format_tesim all_text_timv",
         pf: title_name.to_s
       }
     end
