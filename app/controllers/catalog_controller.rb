@@ -35,10 +35,8 @@ class CatalogController < ApplicationController
   include BlacklightIiifSearch::Controller
 
   configure_blacklight do |config|
-
     # IiifPrint index fields
     config.add_index_field 'all_text_timv', highlight: true, helper_method: :render_ocr_snippets
-
 
     # configuration for Blacklight IIIF Content Search
     config.iiif_search = {
