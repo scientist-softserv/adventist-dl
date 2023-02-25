@@ -27,7 +27,7 @@ GIT
 
 GIT
   remote: https://github.com/scientist-softserv/iiif_print.git
-  revision: 574628587b3b5cf62d5cf8f47414fe9674dd02c6
+  revision: 7825aba75c6ae32988a8f221826d11bb902c935f
   branch: main
   specs:
     iiif_print (0.0.1)
@@ -704,9 +704,11 @@ GEM
     noid (0.9.0)
     noid-rails (3.0.3)
       actionpack (>= 5.0.0, < 7)
-      noid (~> 0.9)
-    nokogiri (1.14.2)
       mini_portile2 (~> 2.8.0)
+      noid (~> 0.9)
+      nokogiri (= 1.14.2)
+      racc (~> 1.4)
+    nokogiri (1.14.2-aarch64-linux)
       racc (~> 1.4)
     nokogumbo (2.0.5)
       nokogiri (~> 1.8, >= 1.8.4)

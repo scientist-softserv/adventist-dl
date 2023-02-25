@@ -89,7 +89,6 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 gem 'bulkrax', git: "https://github.com/samvera-labs/bulkrax.git", branch: 'main'
-# rubocop:enable Metrics/LineLength
 
 gem 'blacklight', '~> 6.7'
 gem 'blacklight_oai_provider', '~> 6.1', '>= 6.1.1'
@@ -144,4 +143,4 @@ gem 'dog_biscuits', git: 'https://github.com/samvera-labs/dog_biscuits.git'
 gem 'order_already'
 
 gem 'hyrax-v2_graph_indexer'
-gem 'iiif_print', git: 'https://github.com/scientist-softserv/iiif_print.git', branch: 'main' 
+gem 'iiif_print', git: 'https://github.com/scientist-softserv/iiif_print.git', branch: 'main'
