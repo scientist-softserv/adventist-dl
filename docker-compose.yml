@@ -57,10 +57,12 @@ services:
       interval: "10s"
       timeout: "8s"
   solr:
-    image: ghcr.io/scientist-softserv/adventist-dl/solr${TAG:-latest}
+    image: ghcr.io/scientist-softserv/adventist-dl/solr:${TAG:-latest}
     build:
       context: ./solr
       target: hyku-solr
+      cache_from:
+        - ghcr.io/scientist-softserv/adventist-dl/solr:${TAG:-latest}
     env_file:
       - .env
     environment:
