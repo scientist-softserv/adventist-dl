@@ -259,7 +259,6 @@ services:
       internal:
 
   chrome:
-    platform: linux/x86_64/v8
     image: selenium/standalone-chrome:3.141
     networks:
       internal:
