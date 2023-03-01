@@ -57,7 +57,7 @@ services:
       interval: "10s"
       timeout: "8s"
   solr:
-    image: hyku/solr:8
+    image: ghcr.io/scientist-softserv/adventist-dl/solr${TAG:-latest}
     build:
       context: ./solr
       target: hyku-solr

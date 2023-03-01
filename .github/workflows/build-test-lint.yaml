@@ -28,10 +28,10 @@ jobs:
   #   needs: build
   #   uses: scientist-softserv/actions/.github/workflows/test.yaml@adl-update-build
   #   with:
-  #     solr: true
+  #     confidir: "/app/samvera/hyrax-webapp/solr/config"
+  #     solr: true # need to check if these are setup in the actions
   #     web: true
   #     worker: true
-  #     confidir: "/app/samvera/hyrax-webapp/solr/config"
   # lint:
   #   needs: build
   #   uses: scientist-softserv/actions/.github/workflows/lint.yaml@adl-update-build
