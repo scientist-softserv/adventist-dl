@@ -21,7 +21,6 @@ jobs:
     secrets: inherit
     with:
       platforms: "linux/amd64"
-      solrTarget: hyku-solr
       webTarget: hyku-web
       workerTarget: hyku-worker
   # test:

@@ -1,4 +1,4 @@
-name: "Build Base"
+name: "Build Solr"
 on:
   workflow_dispatch:
     inputs:
@@ -13,5 +13,5 @@ jobs:
     uses: scientist-softserv/actions/.github/workflows/build.yaml@adl-update-build
     secrets: inherit
     with:
-      baseTarget: hyku-base
       platforms: "linux/amd64"
+      solrTarget: hyku-solr
