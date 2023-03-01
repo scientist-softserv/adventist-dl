@@ -23,18 +23,20 @@ jobs:
       platforms: "linux/amd64"
       webTarget: hyku-web
       workerTarget: hyku-worker
-  # test:
-  #   needs: build
-  #   uses: scientist-softserv/actions/.github/workflows/test.yaml@adl-update-build
-  #   with:
-  #     confidir: "/app/samvera/hyrax-webapp/solr/config"
-  #     solr: true # need to check if these are setup in the actions
-  #     web: true
-  #     worker: true
-  # lint:
-  #   needs: build
-  #   uses: scientist-softserv/actions/.github/workflows/lint.yaml@adl-update-build
-  #   with:
-  #     solr: true
-  #     web: true
-  #     worker: true
+  test:
+    needs: build
+    uses: scientist-softserv/actions/.github/workflows/test.yaml@adl-update-build
+    with:
+      base: true
+      confidir: "/app/samvera/hyrax-webapp/solr/config"
+      solr: true
+      web: true
+      worker: true
+  lint:
+    needs: build
+    uses: scientist-softserv/actions/.github/workflows/lint.yaml@adl-update-build
+    with:
+      base: true
+      solr: true
+      web: true
+      worker: true
