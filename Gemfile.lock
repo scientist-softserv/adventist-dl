@@ -27,8 +27,8 @@ GIT
 
 GIT
   remote: https://github.com/scientist-softserv/iiif_print.git
-  revision: 4f6b67276b57bf4648866408eb136905ca644e34
-  branch: main
+  revision: e94a2f8ff821d0c902456d74ee8c38d26765c8dd
+  branch: hotfix-for-ADL-issue-2
   specs:
     iiif_print (0.0.1)
       blacklight_iiif_search (~> 1.0)
