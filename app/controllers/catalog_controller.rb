@@ -31,7 +31,22 @@ class CatalogController < ApplicationController
     solr_name('system_create', :stored_sortable, type: :date)
   end
 
+  # CatalogController-scope behavior and configuration for BlacklightIiifSearch
+  include BlacklightIiifSearch::Controller
+
   configure_blacklight do |config|
+    # IiifPrint index fields
+    config.add_index_field 'all_text_timv', highlight: true, helper_method: :render_ocr_snippets
+
+    # configuration for Blacklight IIIF Content Search
+    config.iiif_search = {
+      full_text_field: 'all_text_tsimv',
+      object_relation_field: 'is_page_of_ssim',
+      supported_params: %w[q page],
+      autocomplete_handler: 'iiif_suggest',
+      suggester_name: 'iiifSuggester'
+    }
+
     config.view.gallery.partials = %i[index_header index]
     config.view.masonry.partials = [:index]
     config.view.slideshow.partials = [:index]
@@ -57,7 +72,7 @@ class CatalogController < ApplicationController
     config.default_solr_params = {
       qt: "search",
       rows: 10,
-      qf: "title_tesim description_tesim creator_tesim keyword_tesim"
+      qf: "title_tesim description_tesim creator_tesim keyword_tesim all_text_timv"
     }
 
     # Specify which field to use in the tag cloud on the homepage.
@@ -185,7 +200,7 @@ class CatalogController < ApplicationController
     # This one uses all the defaults set by the solr request handler. Which
     # solr request handler? The one set in config[:default_solr_parameters][:qt],
     # since we aren't specifying it otherwise.
-    config.add_search_field('all_fields', label: 'All Fields', include_in_advanced_search: false) do |field|
+    config.add_search_field('all_fields', label: 'All Fields', include_in_advanced_search: false, advanced_parse: false) do |field|
       all_names = (config.show_fields.values.map { |v| v.field.to_s } +
                    DogBiscuits.config.all_properties.map { |p| "#{p}_tesim" }).uniq.join(" ")
       title_name = solr_name("title", :stored_searchable)

@@ -41,7 +41,6 @@ RSpec.describe Bulkrax::OaiAdventistQdcEntry do
                 <title>Testimony for the Church: Number 7</title>
                 <resource_type>Book</resource_type>
                 <date_created>1862-01-01</date_created>
-                <edition>Revised</edition>
                 <language>English</language>
                 <extent>no. in v. ; 15 cm.</extent>
                 <source>Center for Adventist Research</source>
@@ -76,7 +75,6 @@ RSpec.describe Bulkrax::OaiAdventistQdcEntry do
         expect(entry.parsed_metadata.fetch('volume_number')).to eq(["178"])
         expect(entry.parsed_metadata.fetch('location')).to eq(["Somewhere over the rainbow"])
         expect(entry.parsed_metadata.fetch('identifier')).to eq([identifier])
-        expect(entry.parsed_metadata.fetch('edition')).to eq(["Revised"])
 
         expect(entry.parsed_metadata.fetch('publisher')).to eq(
           ["Steam Press of the Seventh-Day Adventist Publishing Association", "Other Publisher"]

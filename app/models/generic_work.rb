@@ -11,6 +11,9 @@ class GenericWork < ActiveFedora::Base
   include SlugMetadata
   include AdventistMetadata
   include SlugBug
+  include IiifPrint.model_configuration(
+    pdf_split_child_model: GenericWork
+  )
 
   validates :title, presence: { message: 'Your work must have a title.' }
 
