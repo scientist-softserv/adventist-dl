@@ -3,6 +3,8 @@ Sidekiq::Web.set :session_secret, Rails.application.secrets[:secret_key_base]
 Sidekiq::Web.use AccountElevator
 
 Rails.application.routes.draw do
+
+  concern :iiif_search, BlacklightIiifSearch::Routes.new
   concern :range_searchable, BlacklightRangeLimit::Routes::RangeSearchable.new
   concern :oai_provider, BlacklightOaiProvider::Routes.new
 
@@ -65,6 +67,7 @@ Rails.application.routes.draw do
 
   resources :solr_documents, only: [:show], path: '/catalog', controller: 'catalog' do
     concerns :exportable
+    concerns :iiif_search
   end
 
   resources :bookmarks do

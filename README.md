@@ -177,7 +177,7 @@ bundle exec rails db:migrate
 
 ## Compatibility
 
-* Ruby 2.4 or the latest 2.3 version is recommended.  Later versions may also work.
+* Ruby 2.7+ is recommended.  Later versions may also work.
 * Rails 5 is required. We recommend the latest Rails 5.1 release.
 
 ### Product Owner
