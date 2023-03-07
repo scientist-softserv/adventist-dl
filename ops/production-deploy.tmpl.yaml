@@ -169,16 +169,18 @@ extraEnvVars: &envVars
     value: plain
   - name: SENTRY_DSN
     value: https://5ee54fb1e8cd448a9e709c846635ec49@o1008683.ingest.sentry.io/6745020
+  - name: OMP_THREAD_LIMIT
+    value: "1"
 
 worker:
   replicaCount: 1
   resources:
     requests:
-      memory: "1Gi"
-      cpu: "250m"
-    limits:
-      memory: "2Gi"
+      memory: "4Gi"
       cpu: "1000m"
+    limits:
+      memory: "4Gi"
+      cpu: "2000m"
   podSecurityContext:
     runAsUser: 1001
     runAsGroup: 101
