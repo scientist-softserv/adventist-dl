@@ -11,7 +11,9 @@ class Image < ActiveFedora::Base
   include DogBiscuits::Geo
   include DogBiscuits::PartOf
   include DogBiscuits::PlaceOfPublication
-  include IiifPrint.model_configuration
+  include IiifPrint.model_configuration(
+    pdf_split_child_model: self
+  )
 
   property :extent, predicate: ::RDF::Vocab::DC.extent, multiple: true do |index|
     index.as :stored_searchable
