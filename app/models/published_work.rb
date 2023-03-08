@@ -24,4 +24,7 @@ class PublishedWork < DogBiscuits::PublishedWork
   before_save :combine_dates
 
   prepend OrderAlready.for(:creator)
+  include IiifPrint.model_configuration(
+    pdf_split_child_model: self
+  )
 end
