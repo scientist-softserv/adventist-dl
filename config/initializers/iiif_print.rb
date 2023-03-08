@@ -19,4 +19,9 @@ IiifPrint.config do |config|
   # but a different model property may be desired such as :date_published
   # @example
   #   config.sort_iiif_manifest_canvases_by = :date_published
+
+  # NOTE: As part of the docker build, we install an "eng_best".  And based on
+  #       conversations with the client, we are using --psm 1 (e.g. "Automatic
+  #       page segmentation with OSD.")
+  config.additional_tessearct_options = "-l eng_best --psm 1"
 end
