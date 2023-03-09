@@ -79,3 +79,4 @@ node_modules
 /hyrax
 
 *~undo-tree~
+.vscode/settings.json
