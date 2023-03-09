@@ -25,6 +25,7 @@ class PublishedWork < DogBiscuits::PublishedWork
 
   prepend OrderAlready.for(:creator)
   include IiifPrint.model_configuration(
-    pdf_split_child_model: self
+    pdf_split_child_model: self,
+    pdf_splitter_service: IiifPrint::SplitPdfs::PagesToPngsSplitter
   )
 end
