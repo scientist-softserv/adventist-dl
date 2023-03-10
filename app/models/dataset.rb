@@ -21,6 +21,11 @@ class Dataset < DogBiscuits::Dataset
   prepend OrderAlready.for(:creator)
   include IiifPrint.model_configuration(
     pdf_split_child_model: self,
-    pdf_splitter_service: IiifPrint::SplitPdfs::PagesToPngsSplitter
+    pdf_splitter_service: IiifPrint::SplitPdfs::PagesToPngsSplitter,
+    derivative_service_plugins: [
+      IiifPrint::JP2DerivativeService,
+      IiifPrint::PDFDerivativeService,
+      IiifPrint::TextExtractionDerivativeService
+    ]
   )
 end
