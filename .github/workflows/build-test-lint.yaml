@@ -28,11 +28,11 @@ jobs:
     uses: scientist-softserv/actions/.github/workflows/test.yaml@adl-update-build
     with:
       confdir: "/app/samvera/hyrax-webapp/solr/config"
-      web: true
-      worker: true
+      webTarget: true
+      workerTarget: true
   lint:
     needs: build
     uses: scientist-softserv/actions/.github/workflows/lint.yaml@adl-update-build
     with:
-      web: true
-      worker: true
+      webTarget: true
+      workerTarget: true
