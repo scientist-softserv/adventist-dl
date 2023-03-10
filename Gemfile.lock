@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/samvera-labs/bulkrax.git
-  revision: fd10a57a26f00936c11b0576eda21effdd8a5304
-  ref: fd10a57a26f00936c11b0576eda21effdd8a5304
+  revision: e7d58e6171173d30cf4b6272c124078936882e37
+  ref: e7d58e6171173d30cf4b6272c124078936882e37
   specs:
     bulkrax (5.1.0)
       bagit (~> 0.4)
@@ -27,10 +27,10 @@ GIT
 
 GIT
   remote: https://github.com/scientist-softserv/iiif_print.git
-  revision: bce83fe49b81b4862ed02e183a3ff240c8e7a5dc
-  branch: main
+  revision: 4d2bb726e03335cfce62309ecdcdc3de39982808
+  ref: 4d2bb726e03335cfce62309ecdcdc3de39982808
   specs:
-    iiif_print (0.0.1)
+    iiif_print (1.0.0)
       blacklight_iiif_search (~> 1.0)
       dry-monads (~> 1.4.0)
       hyrax (>= 2.5, < 4.0)
@@ -779,8 +779,6 @@ GEM
       rdf
     racc (1.6.2)
     rack (2.2.3)
-    rack-protection (2.0.8.1)
-      rack
     rack-test (0.7.0)
       rack (>= 1.0, < 3)
     rails (5.2.6)
@@ -994,10 +992,9 @@ GEM
       rdf-xsd (~> 3.1)
       sparql (~> 3.1)
       sxp (~> 1.1)
-    sidekiq (6.1.2)
+    sidekiq (6.5.1)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
-      rack-protection (>= 2.0.0)
       redis (>= 4.2.0)
     signet (0.15.0)
       addressable (~> 2.3)
@@ -1148,7 +1145,7 @@ DEPENDENCIES
   hyrax-v2_graph_indexer
   i18n-debug
   i18n-tasks
-  iiif_print!
+  iiif_print (~> 1.0)!
   is_it_working
   jbuilder (~> 2.5)
   jquery-rails

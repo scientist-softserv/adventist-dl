@@ -23,7 +23,6 @@ module Bulkrax
       # added as an override that I'd love to see "removed"
       add_visibility
       add_rights_statement
-      add_admin_set_id
 
       # see app/models/concerns/bulkrax/has_local_processing.rb
       add_local

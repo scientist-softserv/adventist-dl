@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AdvSearchBuilder < Hyrax::CatalogSearchBuilder
+class AdvSearchBuilder < IiifPrint::CatalogSearchBuilder
   include Blacklight::Solr::SearchBuilderBehavior
   include BlacklightAdvancedSearch::AdvancedSearchBuilder
 

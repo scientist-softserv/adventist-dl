@@ -302,6 +302,8 @@ DogBiscuits.config do |config|
 
   # PROPERTY MAPPINGS
   config.property_mappings[:bibliographic_citation] = { label: 'Bibliographic Citation' }
+  config.property_mappings[:part] = { label: 'Part', render_as: :faceted }
+  config.property_mappings[:part_of] = { label: 'Part of', render_as: :faceted }
   # config.property_mappings[:human_readable_type] = { collapse: false }
   # config.property_mappings[:sorted_year] = { collapse: false }
   # All properties should be included in property_mappings. This is used by generators for building
