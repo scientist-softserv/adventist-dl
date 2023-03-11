@@ -23,5 +23,5 @@ jobs:
     with:
       k8s-release-name: hyku-${{ inputs.environment }}
       k8s-namespace: ${{ inputs.environment }}
-      solrTarget: true
+      deploy-solr-image: false
     secrets: inherit
