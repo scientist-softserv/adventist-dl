@@ -19,7 +19,7 @@ on:
 
 jobs:
   call-workflow:
-    uses: scientist-softserv/actions/.github/workflows/deploy.yaml@adl-update-build
+    uses: scientist-softserv/actions/.github/workflows/deploy.yaml@v0.0.14
     with:
       k8s-release-name: hyku-${{ inputs.environment }}
       k8s-namespace: ${{ inputs.environment }}
