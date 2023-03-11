@@ -17,20 +17,22 @@ on:
 
 jobs:
   build:
-    uses: scientist-softserv/actions/.github/workflows/build.yaml@v0.0.6
+    uses: scientist-softserv/actions/.github/workflows/build.yaml@adl-update-build
     secrets: inherit
     with:
       platforms: "linux/amd64"
-      target: hyku-web
-      worker: true
+      webTarget: hyku-web
       workerTarget: hyku-worker
   test:
     needs: build
-    uses: scientist-softserv/actions/.github/workflows/test.yaml@v0.0.6
+    uses: scientist-softserv/actions/.github/workflows/test.yaml@adl-update-build
     with:
-      worker: true
+      confdir: "/app/samvera/hyrax-webapp/solr/config"
+      webTarget: true
+      workerTarget: true
   lint:
     needs: build
-    uses: scientist-softserv/actions/.github/workflows/lint.yaml@v0.0.6
+    uses: scientist-softserv/actions/.github/workflows/lint.yaml@adl-update-build
     with:
-      worker: true
+      webTarget: true
+      workerTarget: true

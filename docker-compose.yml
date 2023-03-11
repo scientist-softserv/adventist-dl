@@ -1,15 +1,15 @@
 version: '3.8'
 
 x-app: &app
+  image: ghcr.io/scientist-softserv/adventist-dl:${TAG:-latest}
   build:
     context: .
     target: hyku-web
     args:
       - SETTINGS__BULKRAX__ENABLED=true
     cache_from:
-      - ghcr.io/scientist-softserv/adventist-dl/base:latest
-      - ghcr.io/scientist-softserv/adventist-dl/web:latest
-  image: ghcr.io/scientist-softserv/adventist-dl:${TAG:-latest}
+      - ghcr.io/scientist-softserv/adventist-dl/base:${TAG:-latest}
+      - ghcr.io/scientist-softserv/adventist-dl:${TAG:-latest}
   env_file:
     - .env
   # NOTE: all common env variables moved to .env
@@ -57,10 +57,12 @@ services:
       interval: "10s"
       timeout: "8s"
   solr:
-    image: hyku/solr:8
+    image: ghcr.io/scientist-softserv/adventist-dl/solr:${TAG:-latest}
     build:
-      context: solr
-      dockerfile: Dockerfile
+      context: ./solr
+      target: hyku-solr
+      cache_from:
+        - ghcr.io/scientist-softserv/adventist-dl/solr:${TAG:-latest}
     env_file:
       - .env
     environment:
@@ -118,7 +120,10 @@ services:
     networks:
       internal:
 
-  # Used exclusively for building and caching the base image to reduce build times
+  # Used exclusively for building and caching the
+  # base image to reduce build times, if running
+  # docker-compose up this container will exit with
+  # code 127, as expected.
   base:
     <<: *app
     image: ghcr.io/scientist-softserv/adventist-dl/base:${TAG:-latest}
@@ -168,7 +173,6 @@ services:
         condition: service_started
       initialize_app:
         condition: service_completed_successfully
-
     expose:
       - 3000
 
@@ -196,6 +200,7 @@ services:
       args:
         - SETTINGS__BULKRAX__ENABLED=true
       cache_from:
+        - ghcr.io/scientist-softserv/adventist-dl/base:${TAG:-latest}
         - ghcr.io/scientist-softserv/adventist-dl:${TAG:-latest}
         - ghcr.io/scientist-softserv/adventist-dl/worker:${TAG:-latest}
     image: ghcr.io/scientist-softserv/adventist-dl/worker:${TAG:-latest}
@@ -214,8 +219,6 @@ services:
         condition: service_completed_successfully
       initialize_app:
         condition: service_completed_successfully
-
-
 
   # Do not recurse through all of tmp. derivitives will make booting
   # very slow and eventually just time out as data grows
