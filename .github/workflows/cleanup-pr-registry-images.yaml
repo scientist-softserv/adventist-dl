@@ -1,12 +1,17 @@
 name: "Cleanup PR Registry Images"
 run-name: Pruned ${{ github.event.pull_request.head.sha }}
 on:
+  push:
+    branches:
+      - main
   pull_request:
+    branches:
+      - main
     types:
       - closed
 
 jobs:
-  build:
+  delete-image:
     uses: scientist-softserv/actions/.github/workflows/cleanup-pr-registry-images.yaml@add-prune-ghcr-images-after-merge-to-main
     secrets: inherit
     with:
