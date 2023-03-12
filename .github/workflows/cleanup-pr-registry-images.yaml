@@ -1,0 +1,30 @@
+name: "Cleanup PR Registry Images"
+run-name: Pruned ${{ github.event.pull_request.head.sha }}
+on:
+  pull_request:
+    types:
+      - closed
+  inputs:
+    image_name:
+      description: "Docker image name part. Fills in ghcr.io/IMAGE_NAME. Typically this is the `repo_name`, but in some projects it might be `repo_name/sub_name`"
+      required: true
+      type: string
+    tag:
+      required: true
+      type: string
+    webImage:
+      description: "Delete the web container registry image"
+      required: true
+      type: boolean
+    workerImage:
+      description: "Delete the worker container registry image"
+      required: true
+      type: boolean
+
+jobs:
+  build:
+    uses: scientist-softserv/actions/.github/workflows/cleanup-pr-registry-images.yaml@add-prune-ghcr-images-after-merge-to-main
+    secrets: inherit
+    with:
+      webImage: true
+      workerImage: true
