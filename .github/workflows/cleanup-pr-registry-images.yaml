@@ -4,22 +4,22 @@ on:
   pull_request:
     types:
       - closed
-  inputs:
-    image_name:
-      description: "Docker image name part. Fills in ghcr.io/IMAGE_NAME. Typically this is the `repo_name`, but in some projects it might be `repo_name/sub_name`"
-      required: false
-      type: string
-    tag:
-      required: false
-      type: string
-    webImage:
-      description: "Delete the web container registry image"
-      required: true
-      type: boolean
-    workerImage:
-      description: "Delete the worker container registry image"
-      required: true
-      type: boolean
+    inputs:
+      image_name:
+        description: "Docker image name part. Fills in ghcr.io/IMAGE_NAME. Typically this is the `repo_name`, but in some projects it might be `repo_name/sub_name`"
+        required: false
+        type: string
+      tag:
+        required: false
+        type: string
+      webImage:
+        description: "Delete the web container registry image"
+        required: true
+        type: boolean
+      workerImage:
+        description: "Delete the worker container registry image"
+        required: true
+        type: boolean
 
 jobs:
   build:
