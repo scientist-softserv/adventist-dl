@@ -1,14 +1,23 @@
 name: "Cleanup PR Registry Images"
 run-name: Pruned ${{ github.event.pull_request.head.sha }}
 on:
-  push:
-    branches:
-      - main
+  pull_request:
+    types: [closed]
+
+env:
+  REGISTRY: ghcr.io
 
 jobs:
-  delete-image:
-    uses: scientist-softserv/actions/.github/workflows/cleanup-pr-registry-images.yaml@add-prune-ghcr-images-after-merge-to-main
-    secrets: inherit
-    with:
-      webImage: true
-      workerImage: true
+  purge-image:
+    name: Delete image(s) from ghcr.io
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete web image
+        uses: bots-house/ghcr-delete-image-action@v1.1.0
+        with:
+          # NOTE: at now only orgs is supported
+          owner: scientist-softserv
+          name: adventist-dl
+          # NOTE: using Personal Access Token
+          token: ${{ secrets.CHECKOUT_TOKEN || secrets.GITHUB_TOKEN }}
+          tag: ${{ env.TAG }}
