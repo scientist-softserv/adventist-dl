@@ -1,6 +1,6 @@
 name: "Build Lint Test"
 # run-name: Build Test Lint of ${{ github.ref_name }} by @${{ github.actor }}
-run-name: Testing SHA# ${{ github.event.release.tag_name }}
+run-name: Testing SHA# echo ${HEAD_TAG::8}
 on:
   push:
     branches:
