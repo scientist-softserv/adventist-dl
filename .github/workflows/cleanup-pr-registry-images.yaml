@@ -19,5 +19,6 @@ jobs:
     uses: scientist-softserv/actions/.github/workflows/cleanup-pr-registry-images.yaml@add-prune-ghcr-images-after-merge-to-main
     secrets: inherit
     with:
+      image_name: adventist-dl
       webImage: true
       workerImage: true
