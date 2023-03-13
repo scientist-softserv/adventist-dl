@@ -1,5 +1,4 @@
 name: "Build Base"
-run-name: TEST ${{ inputs.environment }} ${{ env.TAG }}@${{ github.ref_name }} by @${{ github.actor }}
 on:
   workflow_dispatch:
     inputs:
