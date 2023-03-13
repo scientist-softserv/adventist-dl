@@ -16,11 +16,16 @@ on:
         default: false
 
 jobs:
+  my_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Name with 8 digit SHA
+        id: my_step
+        run-name: "SHA ${{ github.sha.substr(0, 8) }}"
   build:
     uses: scientist-softserv/actions/.github/workflows/build.yaml@adl-update-build
     secrets: inherit
     with:
-      run-name: "Testing SHA# ${{ github.sha.substr(0, 8) }}"
       platforms: "linux/amd64"
       webTarget: hyku-web
       workerTarget: hyku-worker
