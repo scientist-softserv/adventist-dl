@@ -18,9 +18,11 @@ on:
 jobs:
   my_job:
     runs-on: ubuntu-latest
+    uses: scientist-softserv/actions/.github/workflows/build.yaml@adl-update-build
     steps:
       - name: Run Name with 8 digit SHA
         id: my_step
+
         run-name: "SHA ${{ github.sha.substr(0, 8) }}"
   build:
     uses: scientist-softserv/actions/.github/workflows/build.yaml@adl-update-build
