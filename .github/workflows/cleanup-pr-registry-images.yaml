@@ -1,5 +1,5 @@
 name: "Cleanup PR Registry Images"
-run-name: Pruned ${{ github.event.pull_request.head.sha }}
+run-name: Pruned Image ${{ github.event.pull_request.head.sha }}
 on:
   push:
     branches:
@@ -16,7 +16,7 @@ on:
 
 jobs:
   purge-image:
-    uses: scientist-softserv/actions/.github/workflows/cleanup-pr-registry-images.yaml@add-prune-ghcr-images-after-merge-to-main
+    uses: scientist-softserv/actions/.github/workflows/cleanup-pr-registry-images.yaml@v0.0.14
     secrets: inherit
     with:
       image_name: adventist-dl
