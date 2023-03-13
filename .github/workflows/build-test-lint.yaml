@@ -1,6 +1,6 @@
 name: "Build Lint Test"
 # run-name: Build Test Lint of ${{ github.ref_name }} by @${{ github.actor }}
-run-name: Testing SHA# ${{ github.sha:0:8 }}
+run-name: "Testing SHA# ${{ github.sha.substr(0, 8) }}"
 on:
   push:
     branches:
