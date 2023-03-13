@@ -1,6 +1,5 @@
 name: "Build Lint Test"
 # run-name: Build Test Lint of ${{ github.ref_name }} by @${{ github.actor }}
-run-name: "Testing SHA# ${{ github.sha.substr(0, 8) }}"
 on:
   push:
     branches:
@@ -21,6 +20,7 @@ jobs:
     uses: scientist-softserv/actions/.github/workflows/build.yaml@adl-update-build
     secrets: inherit
     with:
+      run-name: "Testing SHA# ${{ github.sha.substr(0, 8) }}"
       platforms: "linux/amd64"
       webTarget: hyku-web
       workerTarget: hyku-worker
