@@ -15,8 +15,6 @@ class GenericWork < ActiveFedora::Base
     pdf_split_child_model: self,
     pdf_splitter_service: IiifPrint::SplitPdfs::PagesToJpgsSplitter,
     derivative_service_plugins: [
-      IiifPrint::JP2DerivativeService,
-      IiifPrint::PDFDerivativeService,
       IiifPrint::TextExtractionDerivativeService
     ]
   )
