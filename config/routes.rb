@@ -1,5 +1,4 @@
 require 'sidekiq/web'
-Sidekiq::Web.set :session_secret, Rails.application.secrets[:secret_key_base]
 Sidekiq::Web.use AccountElevator
 
 Rails.application.routes.draw do
