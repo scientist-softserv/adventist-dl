@@ -58,7 +58,6 @@ RSpec.describe 'Create a Image', js: true do
       end
       click_link "Descriptions" # switch tab
       fill_in('Title', with: 'My Test Work')
-      fill_in('Author', with: 'Doe, Jane')
       fill_in('Keyword', with: 'testing')
       select('In Copyright', from: 'Rights statement')
 
