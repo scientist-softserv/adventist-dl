@@ -25,3 +25,5 @@ IiifPrint.config do |config|
   #       page segmentation with OSD.")
   config.additional_tessearct_options = "-l eng_best --psm 1"
 end
+
+require "iiif_print/split_pdfs/adventist_pages_to_jpgs_splitter"
