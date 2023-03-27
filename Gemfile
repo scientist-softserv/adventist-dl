@@ -91,7 +91,7 @@ end
 
 # rubocop:disable Metrics/LineLength
 # Bulkrax :: While we technically don't need a version when we tag on the branch, this helps us have a quick scan of what version we're assuming/working with.
-gem 'bulkrax', "~> 5.1.0", git: 'https://github.com/samvera-labs/bulkrax.git', ref: '2bb4b6170a211a8cc5aa5999386b5efcea762277'
+gem 'bulkrax', "~> 5.1.0", git: 'https://github.com/samvera-labs/bulkrax.git', ref: '0b3b5c99a454f99a61ea9d81422eb1972fc5674b'
 # rubocop:enable Metrics/LineLength
 
 gem 'blacklight', '~> 6.7'
