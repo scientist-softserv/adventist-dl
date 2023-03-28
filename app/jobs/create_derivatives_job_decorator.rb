@@ -11,13 +11,13 @@ module CreateDerivativesJobDecorator
 
   # @see https://github.com/scientist-softserv/adventist-dl/issues/311 for discussion on structure
   #      of non-Archival PDF.
-  NON_ARCHIVAL_PDF_SUFFIX = ".reader.pdf"
+  NON_ARCHIVAL_PDF_SUFFICES = [".reader.pdf", ".pdf-r.pdf"]
 
   def self.create_derivative_for?(file_set:)
     # Our options appear to be `file_set.label` or `file_set.original_file.original_name`; in
     # favoring `#label` we are avoiding a call to Fedora.  Is the label likely to be the original
     # file name?  I hope so.
-    return false if file_set.label.downcase.end_with?(NON_ARCHIVAL_PDF_SUFFIX)
+    return false if NON_ARCHIVAL_PDF_SUFFICES.include?(file_set.label.downcase)
 
     true
   end
