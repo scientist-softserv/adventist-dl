@@ -1,12 +1,5 @@
 # frozen_string_literal: true
 
-gem 'oai'
-gem 'byebug'
-require 'byebug'
-require 'oai'
-require 'csv'
-require 'libxml'
-
 # OAI client setup
 client = OAI::Client.new(
   "http://oai.adventistdigitallibrary.org/OAI-script",
@@ -43,15 +36,15 @@ CSV.open('csv_from_oai.csv', 'wb') do |csv|
       creator = r.metadata.children.first.find('creator').first.content
       title = r.metadata.children.first.find('title').first.content
       resource_type = r.metadata.first.find('resource_type').first.content
-      # date_created = r.metadata.children.first.find('date_created').first.content
+      date_created = r.metadata.children.first.find('date_created').first.to_s
       language = r.metadata.children.first.find('language').first.content
       extent = r.metadata.children.first.find('extent').first.content
       source = r.metadata.children.first.find('source').first.content
-      geocode = r.metadata.children.first.find('geocode').first.content
-      # place_of_publication = r.metadata.children.first.find('place_of_publication').first.content
+      geocode = r.metadata.children.first.find('geocode').first.to_s
+      place_of_publication = r.metadata.children.first.find('place_of_publication').first.to_s
       publisher = r.metadata.children.first.find('publisher').first.to_s
       rights_statement = r.metadata.children.first.find('rights_statement').first
-      # subject = r.metadata.children.first.find('subject').first.content
+      subject = r.metadata.children.first.find('subject').first.to_s
       related_url = r.metadata.children.first.find('related_url').first.content
       thumbnail_url = r.metadata.children.first.find('thumbnail_url').first.content
       work_type = r.metadata.children.first.find('work_type').first.content
@@ -63,9 +56,9 @@ CSV.open('csv_from_oai.csv', 'wb') do |csv|
 
       # # Write the data to the CSV file
       csv << [aark_id, identifier, creator,
-              title, resource_type, language,
-              extent, source, geocode,
-              place_of_publication, publisher, rights_statement,
+              title, resource_type, date_created,
+              language, extent, source, geocode, place_of_publication,
+              publisher, rights_statement, subject,
               related_url, thumbnail_url, work_type]
     end
   end
