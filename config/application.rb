@@ -34,6 +34,10 @@ module Hyku
   end
 
   class Application < Rails::Application
+    # Add this line to load the lib folder first because we need
+    # IiifPrint::SplitPdfs::AdventistPagesToJpgsSplitter
+    config.autoload_paths.unshift("#{Rails.root}/lib")
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

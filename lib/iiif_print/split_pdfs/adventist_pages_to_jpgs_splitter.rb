@@ -17,13 +17,10 @@ module IiifPrint
       #
       # @see https://github.com/scientist-softserv/iiif_print/blob/a23706453f23e0f54c9d50bbf0ddf9311d82a0b9/lib/iiif_print/jobs/child_works_from_pdf_job.rb#L39-L63
       # rubocop:disable Metrics/LineLength
-      def self.new(path, *args, splitter: PagesToJpgsSplitter, suffix: CreateDerivativesJobDecorator::NON_ARCHIVAL_PDF_SUFFIX)
-        if path.downcase.end_with?(suffix)
-          # The public interface of a Splitter is something that responds to #to_a / #each.
-          []
-        else
-          splitter.new(path, *args)
-        end
+      def self.new(path, *args, splitter: PagesToJpgsSplitter, suffixes: CreateDerivativesJobDecorator::NON_ARCHIVAL_PDF_SUFFIXES)
+        return [] if suffixes.any? { |suffix| path.downcase.end_with?(suffix) }
+
+        splitter.new(path, *args)
       end
       # rubocop:enable Metrics/LineLength
     end
