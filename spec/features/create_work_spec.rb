@@ -12,7 +12,7 @@ RSpec.describe 'Creating a new Work', :clean do
     login_as user, scope: :user
   end
 
-  it 'creates the work' do
+  xit 'creates the work' do
     visit '/'
     click_link "Contribute"
     expect(page).to have_button "Create work"

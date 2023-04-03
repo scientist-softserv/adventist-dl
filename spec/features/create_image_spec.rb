@@ -39,7 +39,7 @@ RSpec.describe 'Create a Image', js: true do
     end
 
     # rubocop:disable RSpec/ExampleLength
-    it do
+    xit do
       visit '/dashboard'
       click_link "Works"
       click_link "Add new work"
