@@ -25,9 +25,9 @@ RSpec.describe Hyrax::GenericWorkForm do
 
   describe '.terms' do
     it 'returns an array of inherited and custom terms' do
-      expect(described_class.terms).to eq(
+      expect(described_class.terms.sort).to eq(
         %i[
-          title creator contributor description keyword
+          title creator contributor description keyword abstract
           license rights_statement publisher date_created
           subject language identifier based_near related_url
           representative_id thumbnail_id rendering_ids files
@@ -36,7 +36,7 @@ RSpec.describe Hyrax::GenericWorkForm do
           visibility ordered_member_ids source in_works_ids member_of_collection_ids
           admin_set_id resource_type aark_id part_of place_of_publication
           date_issued alt bibliographic_citation remote_url
-        ]
+        ].sort
       )
     end
   end

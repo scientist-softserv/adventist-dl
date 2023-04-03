@@ -17,7 +17,7 @@ module CreateDerivativesJobDecorator
     # Our options appear to be `file_set.label` or `file_set.original_file.original_name`; in
     # favoring `#label` we are avoiding a call to Fedora.  Is the label likely to be the original
     # file name?  I hope so.
-    return false if NON_ARCHIVAL_PDF_SUFFIXES.include?(file_set.label.downcase)
+    return false if NON_ARCHIVAL_PDF_SUFFIXES.any? { |suffix| file_set.label.downcase.end_with?(suffix) }
 
     true
   end
