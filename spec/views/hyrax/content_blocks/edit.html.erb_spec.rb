@@ -28,7 +28,7 @@ RSpec.describe "hyrax/content_blocks/edit", type: :view do
   end
 
   it "renders the instruction blocks" do
-    expect(rendered).to have_xpath('//p[@class="content-block-instructions" ]', count: 3)
+    expect(rendered).to have_xpath('//p[@class="content-block-instructions" ]', count: 5)
   end
 
   # TODO: These next 3 tests are tightly coupled with the implimentation,
