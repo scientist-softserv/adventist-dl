@@ -2,6 +2,8 @@
 
 require 'spec_helper'
 
+# rubocop:disable Metrics/LineLength
+# rubocop:disable RSpec/FilePath
 RSpec.describe IiifPrint::IiifManifestPresenterBehavior do
   let(:presenter) { double(Hyrax::IiifManifestPresenter) }
 
@@ -167,3 +169,5 @@ RSpec.describe IiifPrint::IiifManifestPresenterBehavior do
     end
   end
 end
+# rubocop:enable RSpec/FilePath
+# rubocop:enable Metrics/LineLength
