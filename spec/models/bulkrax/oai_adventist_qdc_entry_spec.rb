@@ -96,8 +96,6 @@ RSpec.describe Bulkrax::OaiAdventistQdcEntry do
     context 'for a Journal Article' do
       let(:work_type) { JournalArticle }
 
-      before { Bulkrax::HasLocalProcessing.default_collection_type }
-
       it "parses the metadata" do
         entry.build_metadata
 

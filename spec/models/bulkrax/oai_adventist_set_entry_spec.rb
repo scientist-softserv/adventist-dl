@@ -36,17 +36,14 @@ RSpec.describe Bulkrax::OaiAdventistSetEntry do
     end
 
     # rubocop:enable Metrics/LineLength
-    it "sets a pending relationship for the part_of collection" do
+    it "does not set a pending relationship for the part_of collection" do
       # This needs to be persisted for saving the entry
       entry.importer.save!
       entry.importer.importer_runs.create!
       entry.save!
 
-      expect { entry.build }.to change(Bulkrax::PendingRelationship, :count).by(1)
-
-      relationship = Bulkrax::PendingRelationship.last
-      relationship.child_id = identifier
-      expect(Collection.find(relationship.parent_id).title).to eq([collection_title])
+      # We have disabled
+      expect { entry.build }.not_to change(Bulkrax::PendingRelationship, :count)
     end
   end
 end
