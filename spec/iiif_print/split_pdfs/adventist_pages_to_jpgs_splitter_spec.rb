@@ -4,7 +4,7 @@ require 'spec_helper'
 
 RSpec.describe IiifPrint::SplitPdfs::AdventistPagesToJpgsSplitter do
   describe '.new' do
-    subject { described_class.new(path, suffix: "spec.rb", splitter: splitter) }
+    subject { described_class.new(path, suffixes: ["spec.rb"], splitter: splitter) }
 
     let(:splitter) { Class.new { def initialize(path); end } }
 
