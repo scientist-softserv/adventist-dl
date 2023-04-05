@@ -21,9 +21,8 @@ IiifPrint.config do |config|
   #   config.sort_iiif_manifest_canvases_by = :date_published
 
   # NOTE: As part of the docker build, we install an "eng_best".  And based on
-  #       conversations with the client, we are using --psm 1 (e.g. "Automatic
-  #       page segmentation with OSD.")
-  config.additional_tessearct_options = "-l eng_best --psm 1"
+  #       conversations with the client)
+  config.additional_tessearct_options = "-l eng_best"
 end
 
 require "iiif_print/split_pdfs/adventist_pages_to_jpgs_splitter"
