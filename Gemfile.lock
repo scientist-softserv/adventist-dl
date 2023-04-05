@@ -27,8 +27,8 @@ GIT
 
 GIT
   remote: https://github.com/scientist-softserv/iiif_print.git
-  revision: 97be189e30ac002c1beb829f0cb5388a22a38523
-  ref: 97be189
+  revision: 68bcc27db0f464e04db79f244e5552bd001cc735
+  ref: 68bcc27db0f464e04db79f244e5552bd001cc735
   specs:
     iiif_print (1.0.0)
       blacklight_iiif_search (~> 1.0)
@@ -1142,7 +1142,7 @@ DEPENDENCIES
   flipflop (~> 2.3)
   flutie
   hyrax (~> 2.9, >= 2.9.1)
-  hyrax-v2_graph_indexer (~> 0.3)
+  hyrax-v2_graph_indexer
   i18n-debug
   i18n-tasks
   iiif_print (~> 1.0)!
