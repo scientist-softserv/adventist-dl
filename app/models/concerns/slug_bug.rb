@@ -41,3 +41,5 @@ module SlugBug
       update_index
     end
 end
+
+IiifPrint.config.ancestory_identifier_function = ->(work) { work.to_param }
