@@ -1,4 +1,4 @@
-# OVERRIDE Hyrax 2.9.5 to override default_thumbnail
+# OVERRIDE Hyrax 2.9.5 to override default_thumbnail and displaying human-readable titles on UV
 
 module Hyrax
   class FileSetIndexer < ActiveFedora::IndexingService
@@ -34,6 +34,8 @@ module Hyrax
         solr_doc['original_file_id_ssi']    = original_file_id
         # OVERRIDE Hyrax 2.9.5 to override default_thumbnail
         solr_doc['override_default_thumbnail_ssi'] = object.override_default_thumbnail
+        # OVERRIDE Hyrax 2.9.5 to index the file set's parent work's title for displaying in the UV
+        solr_doc['parent_title_tesim'] = object.parent.title.first
       end
     end
 
