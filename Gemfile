@@ -128,7 +128,7 @@ end
 # Sentry-raven for error handling
 gem "sentry-raven"
 
-gem 'sidekiq'
+gem 'good_job'
 
 gem 'secure_headers'
 

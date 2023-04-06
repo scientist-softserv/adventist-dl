@@ -9,4 +9,4 @@ else
   puts 'DATABASE_URL not set, no pool change needed'
 end
 
-exec "echo $DATABASE_URL && bundle exec sidekiq"
+exec "echo $DATABASE_URL && bundle exec good_job start"
