@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 namespace :db do
   desc 'Also create shared_extensions Schema'
-  task :extensions => :environment  do
+  task extensions: :environment do
     # Create Schema
     ActiveRecord::Base.connection.execute 'CREATE SCHEMA IF NOT EXISTS shared_extensions;'
     # Enable Hstore
