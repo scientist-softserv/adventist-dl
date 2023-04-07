@@ -68,9 +68,14 @@ module Hyrax
       def human_readable_label_name(parent)
         return unless parent
 
+        parent_title = parent.title.first
+        page_number = parent_title[/Page \d+/]
+        return parent_title unless page_number
+
         work_title = parent.member_of.first&.title&.first
-        page_number = parent.title.first.match(/Page \d+/)&.[](0)
-        work_title && page_number ? "#{work_title} - #{page_number}" : parent.title.first
+        return parent_title unless work_title
+
+        "#{work_title} - #{page_number}"
       end
   end
 end
