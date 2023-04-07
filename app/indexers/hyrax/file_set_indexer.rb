@@ -35,7 +35,7 @@ module Hyrax
         # OVERRIDE Hyrax 2.9.5 to override default_thumbnail
         solr_doc['override_default_thumbnail_ssi'] = object.override_default_thumbnail
         # OVERRIDE Hyrax 2.9.5 to index the file set's parent work's title for displaying in the UV
-        solr_doc['parent_title_tesim'] = object.parent.title.first
+        solr_doc['parent_title_tesim'] = human_readable_label_name(object.parent)
       end
     end
 
@@ -63,6 +63,14 @@ module Hyrax
         elsif object.format_label.present?
           object.format_label
         end
+      end
+
+      def human_readable_label_name(parent)
+        return unless parent
+
+        work_title = parent.member_of.first&.title&.first
+        page_number = parent.title.first.match(/Page \d+/)&.[](0)
+        work_title && page_number ? "#{work_title} - #{page_number}" : parent.title.first
       end
   end
 end
