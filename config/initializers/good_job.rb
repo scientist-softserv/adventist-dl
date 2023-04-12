@@ -13,15 +13,17 @@ Rails.application.configure do
 end
 
 # baseline of 0, higher is sooner
+Bulkrax::ScheduleRelationshipsJob.priority = 50
+CreateDerivativesJob.priority = 40
+CharacterizeJob.priority = 30
+Hyrax::GrantEditToMembersJob.priority = 10
+ImportUrlJob.priority = 10
+IngestJob.priority = 10
 ApplicationJob.priority = 0
 AttachFilesToWorkJob.priority = -1
 Bulkrax::ImportWorkJob.priority = -5
-Bulkrax::ImporterJob.priority = -20
 Bulkrax::CreateRelationshipsJob.priority = -10
-CharacterizeJob.priority = 30
+Bulkrax::ImportFileSetJob.priority = -15
+Bulkrax::ImporterJob.priority = -20
 ContentDepositEventJob.priority = -50
 ContentUpdateEventJob.priority = -50
-CreateDerivativesJob.priority = 40
-Bulkrax::ScheduleRelationshipsJob.priority = 50
-Hyrax::GrantEditToMembersJob.priority = 10
-IngestJob.priority = 10
