@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 # OAI client setup
+puts "Enter your email address:"
+email = gets.chomp
 client = OAI::Client.new(
   "http://oai.adventistdigitallibrary.org/OAI-script",
-  headers: { from: "jeremy@scientist.com" },
+  headers: { from: email },
   parser: 'libxml'
 )
 
@@ -50,9 +52,6 @@ CSV.open('csv_from_oai.csv', 'wb') do |csv|
       work_type = r.metadata.children.first.find('work_type').first.content
       # volume_number = r.metadata.children.first.find('volume_number').first.content
       # issue_number = r.metadata.children.first.find('issue_number').first.content
-
-      # @jeremyf For the ones that are commented out, I kept getting undefined method for find or content.
-      # I am however getting the results I want on the output csv.
 
       # # Write the data to the CSV file
       csv << [aark_id, identifier, creator,
