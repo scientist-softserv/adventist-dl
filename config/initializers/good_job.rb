@@ -11,3 +11,19 @@ Rails.application.configure do
   # config.good_job.enable_cron = true
   # config.good_job.cron = { example: { cron: '0 * * * *', class: 'ExampleJob'  } }
 end
+
+# baseline of 0, higher is sooner
+Bulkrax::ScheduleRelationshipsJob.priority = 50
+CreateDerivativesJob.priority = 40
+CharacterizeJob.priority = 30
+Hyrax::GrantEditToMembersJob.priority = 10
+ImportUrlJob.priority = 10
+IngestJob.priority = 10
+ApplicationJob.priority = 0
+AttachFilesToWorkJob.priority = -1
+Bulkrax::ImportWorkJob.priority = -5
+Bulkrax::CreateRelationshipsJob.priority = -10
+Bulkrax::ImportFileSetJob.priority = -15
+Bulkrax::ImporterJob.priority = -20
+ContentDepositEventJob.priority = -50
+ContentUpdateEventJob.priority = -50
