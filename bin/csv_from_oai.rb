@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 require 'csv'
 require 'oai'
 require 'byebug'
@@ -35,22 +34,33 @@ CSV.open('csv_from_oai.csv', 'wb') do |csv|
     records = client.list_records(opts.merge(set: set))
     records.each do |r|
       identifier = r.header.identifier
-      thumbnail_url = r.metadata.first.find('thumbnail_url').first&.content
-      related_url = r.metadata.first.find('related_url').first&.content
+      thumbnail_urls = r.metadata.first.find('thumbnail_url').map(&:content)
+      related_urls = r.metadata.first.find('related_url').map(&:content)
 
-      # Split thumbnail_url and extract file type
-      thumbnail_file_type = thumbnail_url.split('.').last if thumbnail_url
-      # Split related_url and extract file type
-      related_file_type = related_url.split('.').last if related_url
-
-      # Write thumbnail URL to CSV
-      if thumbnail_url
-        csv << [set, identifier, thumbnail_file_type, thumbnail_url]
+      thumbnail_urls.each do |thumbnail_url|
+        # Split thumbnail_url and extract file type
+        thumbnail_file_type = thumbnail_url.split('.').last
+        if thumbnail_file_type == 'pdf'
+          thumbnail_url = thumbnail_url.split('?').first
+          derivative_type = 'unknown'
+        else
+          derivative_type = thumbnail_file_type
+        end
+        # Split thumbnail URL if it contains a semicolon
+        thumbnail_url.split(';').each do |url|
+          # Write thumbnail URL to CSV
+          csv << [set, identifier, derivative_type, url]
+        end
       end
 
-      # Write related URL to CSV
-      if related_url
-        csv << [set, identifier, related_file_type, related_url]
+      related_urls.each do |related_url|
+        # Split related_url and extract file type
+        related_file_type = related_url.split('.').last
+        # Split related URL if it contains a semicolon
+        related_url.split(';').each do |url|
+          # Write related URL to CSV
+          csv << [set, identifier, related_file_type, url]
+        end
       end
     end
   end
