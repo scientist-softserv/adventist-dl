@@ -39,28 +39,41 @@ CSV.open('csv_from_oai.csv', 'wb') do |csv|
 
       thumbnail_urls.each do |thumbnail_url|
         # Split thumbnail_url and extract file type
+        if thumbnail_url.include?(';')
+          thumbnail_url, query_string = thumbnail_url.split(';')
+        end
         thumbnail_file_type = thumbnail_url.split('.').last
-        if thumbnail_file_type == 'pdf'
-          thumbnail_url = thumbnail_url.split('?').first
-          derivative_type = 'unknown'
-        else
-          derivative_type = thumbnail_file_type
+
+        # Set derivative type to "thumbnail" by default
+        derivative_type = "thumbnail"
+
+        # Check if thumbnail URL should have derivative type of "original"
+        if thumbnail_file_type == "pdf" && thumbnail_url.include?(".ARCHIVAL.pdf")
+          derivative_type = "original"
         end
-        # Split thumbnail URL if it contains a semicolon
-        thumbnail_url.split(';').each do |url|
-          # Write thumbnail URL to CSV
-          csv << [set, identifier, derivative_type, url]
-        end
+
+        # Write thumbnail URL to CSV
+        csv << [set, identifier, derivative_type, thumbnail_url]
       end
 
       related_urls.each do |related_url|
         # Split related_url and extract file type
-        related_file_type = related_url.split('.').last
-        # Split related URL if it contains a semicolon
-        related_url.split(';').each do |url|
-          # Write related URL to CSV
-          csv << [set, identifier, related_file_type, url]
+        if related_url.include?(';')
+          related_url, query_string = related_url.split(';')
         end
+        related_file_type = related_url.split('.').last
+
+        # Set derivative type to "original" if URL contains ".ARCHIVAL.pdf"
+        if related_file_type == "pdf" && related_url.include?(".ARCHIVAL.pdf")
+          derivative_type = "original"
+        elsif related_file_type == "txt" && related_url.include?(".RAW.txt")
+          derivative_type = "text"
+        else
+          derivative_type = "unknown"
+        end
+
+        # Write related URL to CSV
+        csv << [set, identifier, derivative_type, related_url]
       end
     end
   end
