@@ -37,21 +37,24 @@ CSV.open('csv_from_oai.csv', 'wb') do |csv|
     # For all records, comment out previous line and comment in the following.
     # records.full.each_with_index do |r|
       identifier = r.header.identifier
+      
       thumbnail_urls = r.metadata.first.find('thumbnail_url').map(&:content)
       related_urls = r.metadata.first.find('related_url').map(&:content)
 
       thumbnail_urls.each do |thumbnail_url|
+        thumbnail_urls.nil? ? "This value returned as nil." : thumbnail_urls
         derivative_type = "thumbnail"
-        if thumbnail_file_type = thumbnail_url.split(/[.;]/).last
+        if thumbnail_file_type = thumbnail_url.split(/[.;]/).each
           derivative_type = thumbnail_file_type == 'pdf' && thumbnail_url.include?(".ARCHIVAL.pdf") ? 'original' : 'thumbnail'
         end
         csv << [set, identifier, derivative_type, thumbnail_url]
       end
 
       related_urls.each do |related_url|
-        derivative_type = case related_file_type = related_url.split(/[.;]/).last
+        related_urls.nil? ? "This value returned as nil." : related_urls
+        derivative_type = case related_file_type = related_url.split(/[.;]/).each
                           when 'pdf'
-                            related_url.include?(".ARCHIVAL.pdf") ? 'original' : 'unknown'
+                            related_url.include?(".0.pdf") ? 'original' : 'unknown'
                           when 'txt'
                             related_url.include?(".RAW.txt") ? 'text' : 'unknown'
                           else
