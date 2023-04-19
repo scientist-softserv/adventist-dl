@@ -1,6 +1,5 @@
-require 'csv'
-require 'oai'
-require 'byebug'
+
+require_relative "../lib/oai/client_decorator"
 
 # Input for dynamic email
 puts "Enter your email address:"
@@ -21,7 +20,8 @@ CSV.open('csv_from_oai.csv', 'wb') do |csv|
   # Write the headers to the CSV file
   csv << ['set', 'identifier', 'derivative_type', 'URL']
 
-  sets = ["adl:thesis",
+  sets = [
+    "adl:thesis",
     "adl:periodical",
     "adl:issue",
     "adl:article",
@@ -32,47 +32,32 @@ CSV.open('csv_from_oai.csv', 'wb') do |csv|
 
   sets.each do |set|
     records = client.list_records(opts.merge(set: set))
-    records.each do |r|
+    # For the first 25 records
+    records.each_with_index do |r|
+    # For all records, comment out previous line and comment in the following.
+    # records.full.each_with_index do |r|
       identifier = r.header.identifier
       thumbnail_urls = r.metadata.first.find('thumbnail_url').map(&:content)
       related_urls = r.metadata.first.find('related_url').map(&:content)
 
       thumbnail_urls.each do |thumbnail_url|
-        # Split thumbnail_url and extract file type
-        if thumbnail_url.include?(';')
-          thumbnail_url, query_string = thumbnail_url.split(';')
-        end
-        thumbnail_file_type = thumbnail_url.split('.').last
-
-        # Set derivative type to "thumbnail" by default
         derivative_type = "thumbnail"
-
-        # Check if thumbnail URL should have derivative type of "original"
-        if thumbnail_file_type == "pdf" && thumbnail_url.include?(".ARCHIVAL.pdf")
-          derivative_type = "original"
+        if thumbnail_file_type = thumbnail_url.split(/[.;]/).last
+          derivative_type = thumbnail_file_type == 'pdf' && thumbnail_url.include?(".ARCHIVAL.pdf") ? 'original' : 'thumbnail'
         end
-
-        # Write thumbnail URL to CSV
         csv << [set, identifier, derivative_type, thumbnail_url]
       end
 
       related_urls.each do |related_url|
-        # Split related_url and extract file type
-        if related_url.include?(';')
-          related_url, query_string = related_url.split(';')
-        end
-        related_file_type = related_url.split('.').last
+        derivative_type = case related_file_type = related_url.split(/[.;]/).last
+                          when 'pdf'
+                            related_url.include?(".ARCHIVAL.pdf") ? 'original' : 'unknown'
+                          when 'txt'
+                            related_url.include?(".RAW.txt") ? 'text' : 'unknown'
+                          else
+                            'unknown'
+                          end
 
-        # Set derivative type to "original" if URL contains ".ARCHIVAL.pdf"
-        if related_file_type == "pdf" && related_url.include?(".ARCHIVAL.pdf")
-          derivative_type = "original"
-        elsif related_file_type == "txt" && related_url.include?(".RAW.txt")
-          derivative_type = "text"
-        else
-          derivative_type = "unknown"
-        end
-
-        # Write related URL to CSV
         csv << [set, identifier, derivative_type, related_url]
       end
     end
