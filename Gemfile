@@ -91,7 +91,7 @@ end
 
 # rubocop:disable Metrics/LineLength
 # Bulkrax :: While we technically don't need a version when we tag on the branch, this helps us have a quick scan of what version we're assuming/working with.
-gem 'bulkrax', "~> 5.1.0", git: 'https://github.com/samvera-labs/bulkrax.git', ref: '2bb4b6170a211a8cc5aa5999386b5efcea762277'
+gem 'bulkrax', "~> 5.1.0", git: 'https://github.com/samvera-labs/bulkrax.git', ref: '04d35b007d5495761fab91f39ca04eaf91494de9'
 # rubocop:enable Metrics/LineLength
 
 gem 'blacklight', '~> 6.7'
@@ -128,7 +128,7 @@ end
 # Sentry-raven for error handling
 gem "sentry-raven"
 
-gem 'sidekiq'
+gem 'good_job'
 
 gem 'secure_headers'
 
@@ -147,5 +147,6 @@ gem 'dog_biscuits', git: 'https://github.com/samvera-labs/dog_biscuits.git'
 gem 'order_already'
 
 gem 'hyrax-v2_graph_indexer'
-gem 'iiif_print', "~> 1.0", git: 'https://github.com/scientist-softserv/iiif_print.git', branch: 'main'
+# rubocop:disable Metrics/LineLength
+gem 'iiif_print', "~> 1.0", git: 'https://github.com/scientist-softserv/iiif_print.git', ref: '53ecfeb4ef90ba8dcdbe84f0126598b6f9b33279'
 # rubocop:enable Metrics/LineLength

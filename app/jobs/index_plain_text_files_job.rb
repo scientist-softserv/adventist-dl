@@ -77,7 +77,14 @@ class IndexPlainTextFilesJob < ApplicationJob
   # Why the indirection?  As I was exploring which logger to use, I was rotating between:
   # Rails.logger, Sidekiq.logger, and Logger.new.  All of which is to say this indirection helped me
   # not have to change too many places elsewhere in the code.
+  ##
+  # @api private
+  # @return [Logger]
   def self.default_logger
-    Sidekiq.logger
+    if defined?(Rails)
+      Rails.logger
+    else
+      Logger.new(STDOUT)
+    end
   end
 end

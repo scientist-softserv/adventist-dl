@@ -38,7 +38,6 @@ CSV.open('csv_from_oai.csv', 'wb') do |csv|
     # For the first 25 records, comment out previous line and comment in the following line.
     # records.each_with_index do |r|
       identifier = r.header.identifier
-      
       thumbnail_urls = r.metadata.first.find('thumbnail_url') || [ ]
       thumbnail_urls = thumbnail_urls.map(&:content).map { |url| url.split(';') }.flatten
       related_urls = r.metadata.first.find('related_url') || [ ]

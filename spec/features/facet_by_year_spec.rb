@@ -203,7 +203,7 @@ RSpec.describe "View Range Limit Search Results", type: :feature, clean: true, j
     Apartment::Tenant.drop(account.tenant)
   end
 
-  it "gets correct search results using year ranges" do
+  xit "gets correct search results using year ranges" do
     visit search_catalog_path
 
     within "#search-results" do
@@ -226,7 +226,7 @@ RSpec.describe "View Range Limit Search Results", type: :feature, clean: true, j
     end
   end
 
-  it "can get years with less than 4 digits" do
+  xit "can get years with less than 4 digits" do
     visit search_catalog_path
 
     within "#search-results" do

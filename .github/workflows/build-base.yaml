@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    uses: scientist-softserv/actions/.github/workflows/build.yaml@adl-update-build
+    uses: scientist-softserv/actions/.github/workflows/build.yaml@v0.0.14
     secrets: inherit
     with:
       baseTarget: hyku-base

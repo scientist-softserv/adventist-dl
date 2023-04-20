@@ -1,4 +1,4 @@
-# OVERRIDE Hyrax 2.9.5 to override default_thumbnail
+# OVERRIDE Hyrax 2.9.5 to override default_thumbnail and displaying human-readable titles on UV
 
 module Hyrax
   class FileSetIndexer < ActiveFedora::IndexingService
@@ -34,6 +34,8 @@ module Hyrax
         solr_doc['original_file_id_ssi']    = original_file_id
         # OVERRIDE Hyrax 2.9.5 to override default_thumbnail
         solr_doc['override_default_thumbnail_ssi'] = object.override_default_thumbnail
+        # OVERRIDE Hyrax 2.9.5 to index the file set's parent work's title for displaying in the UV
+        solr_doc['parent_title_tesim'] = human_readable_label_name(object.parent)
       end
     end
 
@@ -61,6 +63,21 @@ module Hyrax
         elsif object.format_label.present?
           object.format_label
         end
+      end
+
+      def human_readable_label_name(parent)
+        return unless parent
+
+        parent_title = parent.title.first
+        # The regex should reflect what is set in the `config/initializers/iiif_print.rb`,
+        # `config.unique_child_title_generator_function`.
+        page_number = parent_title[/Page \d+/]
+        return parent_title unless page_number
+
+        work_title = parent.member_of.first&.title&.first
+        return parent_title unless work_title
+
+        "#{work_title} - #{page_number}"
       end
   end
 end

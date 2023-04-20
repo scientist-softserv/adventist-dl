@@ -1,63 +1,54 @@
 <div class="featured-section">
   <h2 class="mt-5"><%= t('hyrax.homepage.admin_sets.title') %></h2>
-
   <div class="featured-collections-items">
     <div class="col-xs-12 col-sm-7 featured-collections-card-wrapper">
-      <a class="large-card" href="https://adl.b2.adventistdigitallibrary.org/collections/11aab197-b630-48c0-91cd-1578d42d9f53?locale=en" alt="Grace Amadon Collection">
+      <%# The large featured collection on the left column %>
+      <a class="large-card" href="https://adl.b2.adventistdigitallibrary.org/collections/4cbb9bb5-d67b-4776-a84e-edd37952d7ed?locale=en" alt="George McReady Price Papers">
         <div class="collection-thumbnail">
-          <%= image_tag('adl-featured-collections/grace-amadon.jpg', alt: "Grace Amadon Collection") %>
+          <%= image_tag('adl-featured-collections/george-mccready-price.jpg', alt: "George McReady Price Papers") %>
           <div class="collection-info px-4 py-4">
-            <h3 class="collection-title">Grace Amadon Collection</h3>
-            <p class="collection-description">This collection contains Amadon’s research concerning chronologies and time prophecies of the Bible.</p>
+            <h3 class="collection-title">George McCready Price Papers</h3>
+            <p class="collection-description">The Price collection contains correspondence, manuscripts, articles and poems written by Mr. Price, his wife, and others during the course of his life.</p>
           </div>
         </div>
       </a>
     </div>
     <div class="col-xs-12 col-sm-5 featured-collections-column-wrapper">
       <div class="featured-collections-column-scroll d-flex">
+        <%# The four smaller featured collections on the right column %>
+        <a class="small-card" href="https://adl.b2.adventistdigitallibrary.org/collections/ae6b2b1a-2af5-46d8-bca2-d8ab816d74a3?locale=en" alt="Seventh-day Adventist Inventors Collection">
+          <div class="collection-thumbnail">
+            <%= image_tag('adl-featured-collections/adventist-inventors.jpg', alt: "Seventh-day Adventist Inventors Collection") %>
+            <div class="collection-info py-1 px-4">
+              <h3 class="collection-title">Seventh-day Adventist Inventors Collection</h3>
+              <p class="collection-description"><%= 'These items related to Seventh-day Adventist inventors and their inventions were collected by Jim Nix.'.truncate(120, separator: ' ') %>.</p>
+            </div>
+          </div>
+        </a>
+        <a class="small-card" href="https://adl.b2.adventistdigitallibrary.org/collections/17635b76-4ef4-4951-8c3b-bdbdf22ba0d3?locale=en" alt="Warren Eugene Howell Travel Albums">
+          <div class="collection-thumbnail">
+            <%= image_tag('adl-featured-collections/warren-eugene-howell-travel.jpg', alt: "Warren Eugene Howell Travel Albums") %>
+            <div class="collection-info py-1 px-4">
+              <h3 class="collection-title">Warren Eugene Howell Travel Albums</h3>
+              <p class="collection-description"><%= 'Warren Eugene Howell was an active Seventh-day Adventist administrator and educator. Howell was a professor at Healdsburg College, principal of Palama Chinese School in Honolulu, a professor at Emmanuel Missionary College, the first president of the College of Medical Evangelists (now Loma Linda University), and a principal of the Fireside Correspondence School.'.truncate(120, separator: ' ') %>.</p>
+            </div>
+          </div>
+        </a>
+        <a class="small-card" href="https://adl.b2.adventistdigitallibrary.org/collections/11aab197-b630-48c0-91cd-1578d42d9f53?locale=en" alt="Grace Amadon Collection">
+          <div class="collection-thumbnail">
+            <%= image_tag('adl-featured-collections/grace-amadon.jpg', alt: "Grace Amadon Collection") %>
+            <div class="collection-info py-1 px-4">
+              <h3 class="collection-title">Grace Amadon Collection</h3>
+              <p class="collection-description"><%= 'This collection contains Amadon’s research concerning chronologies and time prophecies of the Bible'.truncate(120, separator: ' ') %>.</p>
+            </div>
+          </div>
+        </a>
         <a class="small-card" href="https://adl.b2.adventistdigitallibrary.org/collections/b1cb4449-c0ee-4499-82da-32c1246daeea?locale=en" alt="Center for Adventist Research Photograph Collection">
           <div class="collection-thumbnail">
             <%= image_tag('adl-featured-collections/car-photo.jpg', alt: "Center for Adventist Research Photograph Collection") %>
             <div class="collection-info py-1 px-4">
               <h4 class="collection-title">Center for Adventist Research Photograph Collection</h4>
               <p class="collection-description"><%= 'The Center for Adventist Research (CAR), seeks to promote an understanding and appreciation of the heritage and mission of the Seventh-day Adventist Church'.truncate(120, separator: ' ') %>.</p>
-            </div>
-          </div>
-        </a>
-        <a class="small-card" href="https://adl.b2.adventistdigitallibrary.org/collections/e15e4501-857f-4eb0-9ec6-4850efbd79e2?locale=en" alt="The Shiawassian (Newsletter)">
-          <div class="collection-thumbnail">
-            <%= image_tag('adl-featured-collections/shiawassian-newsletter.jpg', alt: "The Shiawassian (Newsletter)") %>
-            <div class="collection-info py-1 px-4">
-              <h4 class="collection-title">The Shiawassian (Newsletter)</h4>
-              <p class="collection-description"><%= "Originally the name of Adelphian's annual yearbook, 'The Shiawassian' became a monthly newsletter published by the school and used as a fundraiser when students were challenged to sell subscriptions each fall".truncate(120, separator: ' ') %></p>
-            </div>
-          </div>
-        </a>
-        <a class="small-card" href="https://adl.b2.adventistdigitallibrary.org/collections/8216c9e8-fbe7-4271-a88c-da890a9eeb8c?locale=en" alt="Evelyn Bigford Lutz Collection">
-          <div class="collection-thumbnail">
-            <%= image_tag('adl-featured-collections/evelyn-bigford-lutz.jpg', alt: "Evelyn Bigford Lutz Collection") %>
-            <div class="collection-info py-1 px-4">
-              <h4 class="collection-title">Evelyn Bigford Lutz Collection</h4>
-              <p class="collection-description"><%= "The Evelyn Bigford Lutz Collection includes photographs and historical material from Adelphian Academy, which operated in Holly, Michigan from 1905 to 1987.".truncate(120, separator: ' ') %></p>
-            </div>
-          </div>
-        </a>
-        <a class="small-card" href="https://adl.b2.adventistdigitallibrary.org/collections/62d6551d-c40a-44c0-bc3b-65583a8d3840?locale=en" alt="Elmer Coulston Collection">
-          <div class="collection-thumbnail">
-            <%= image_tag('adl-featured-collections/elmer-coulston.jpg', alt: "Elmer Coulston Collection") %>
-            <div class="collection-info py-1 px-4">
-              <h4 class="collection-title">Elmer Coulston Collection</h4>
-              <p class="collection-description"><%= "Small collection of correspondence, newspaper clippings, documents, and
-                photographs related to the medical work of Elmer F. and Leatha Wenke Coulston.".truncate(120, separator: ' ') %></p>
-            </div>
-          </div>
-        </a>
-        <a class="small-card" href="https://adl.b2.adventistdigitallibrary.org/collections/08b8fe91-7de2-4fdd-87b7-8d20efed5a9a?locale=en" alt="Diogenes Lantern">
-          <div class="collection-thumbnail">
-            <%= image_tag('adl-featured-collections/diogenes-lantern.jpg', alt: "Diogenes Lantern") %>
-            <div class="collection-info py-1 px-4">
-              <h4 class="collection-title">Diogenes Lantern</h4>
-              <p class="collection-description"><%= "Title varies: 1915, The Torch (cover-title: Phanos) -- 1917, Pacific Union Recorder, Commencement annual -- 1919-1926, Mountain Echo, Commencement numbers v.3 no.1, 1920".truncate(120, separator: ' ') %></p>
             </div>
           </div>
         </a>

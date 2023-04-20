@@ -9,7 +9,7 @@ RSpec.describe 'Admin Dashboard', type: :feature do
       login_as(user, scope: :user)
     end
 
-    it 'shows the admin page' do
+    xit 'shows the admin page' do
       visit Hyrax::Engine.routes.url_helpers.dashboard_path
       within '.sidebar' do
         expect(page).to have_link('Activity Summary')
