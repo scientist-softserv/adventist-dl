@@ -33,10 +33,10 @@ CSV.open('csv_from_oai.csv', 'wb') do |csv|
 
   sets.each do |set|
     records = client.list_records(opts.merge(set: set))
-    # For the first 25 records
-    records.each_with_index do |r|
-    # For the full set of records, comment out previous line and comment in the following line.
-    # records.full.each_with_index do |r|
+    # For the full set of records.
+    records.full.each_with_index do |r|
+    # For the first 25 records, comment out previous line and comment in the following line.
+    # records.each_with_index do |r|
       identifier = r.header.identifier
       
       thumbnail_urls = r.metadata.first.find('thumbnail_url') || [ ]
