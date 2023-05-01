@@ -5,6 +5,8 @@ USER root
 
 RUN apk --no-cache upgrade && \
   apk --no-cache add \
+    autoconf \
+    automake \
     bash \
     cmake \
     exiftool \
@@ -69,6 +71,19 @@ RUN set -x -o pipefail \
     && rm -rf /tmp/vips-${VIPS_VERSION} \
     && apk del --purge vips-dependencies \
     && rm -rf /var/cache/apk/*
+
+# Install pdfalto
+RUN cd /app && \
+    git clone https://github.com/kermitt2/pdfalto.git
+COPY --chown=1001:101 ./ops/CMakeLists.txt ./ops/install_deps.sh /app/pdfalto/
+COPY --chown=1001:101 ./ops/XmlAltoOutputDev.cc /app/pdfalto/src/
+RUN cd /app/pdfalto && \
+    git clone https://github.com/kermitt2/xpdf-4.03.git && \
+    chmod +x install_deps.sh && \
+    ./install_deps.sh && \
+    cmake . && \
+    make
+ENV PATH="${PATH}:/app/pdfalto"
 
 USER app
 
