@@ -78,7 +78,7 @@ RSpec.describe Bulkrax::OaiAdventistQdcEntry do
         expect(entry.parsed_metadata.fetch('location')).to eq(["Somewhere over the rainbow"])
         expect(entry.parsed_metadata.fetch('identifier')).to eq([identifier])
         expect(entry.parsed_metadata.fetch('edition')).to eq(["Revised"])
-        expect(entry.parsed_metadata.fetch('peer_reviewed')).to eq(["Peer Reviewed"])
+        expect(entry.parsed_metadata.fetch('refereed')).to eq(["Peer Reviewed"])
 
         expect(entry.parsed_metadata.fetch('publisher')).to eq(
           ["Steam Press of the Seventh-Day Adventist Publishing Association", "Other Publisher"]
@@ -108,7 +108,7 @@ RSpec.describe Bulkrax::OaiAdventistQdcEntry do
         expect(entry.parsed_metadata.fetch('volume_number')).to eq(["178"])
         expect(entry.parsed_metadata.fetch('location')).to eq(["Somewhere over the rainbow"])
         expect(entry.parsed_metadata.fetch('identifier')).to eq([identifier])
-        expect(entry.parsed_metadata.fetch('peer_reviewed')).to eq(["Peer Reviewed"])
+        expect(entry.parsed_metadata.fetch('refereed')).to eq(["Peer Reviewed"])
       end
     end
   end

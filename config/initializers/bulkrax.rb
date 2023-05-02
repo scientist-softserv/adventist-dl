@@ -66,7 +66,7 @@ if Settings.bulkrax.enabled
         'model' => { from: ['model', 'work_type'] },
         'remote_files' => { from: ['related_url'], split: ';', parsed: true },
         'thumbnail_url' => { from: ['thumbnail_url'], default_thumbnail: true, parsed: true },
-        'peer_reviewed' => { from: ['peer_reviewed'] }
+        'refereed' => { from: ['peer_reviewed'] }
     }
     config.field_mappings['Bulkrax::CsvParser'] = {
         'abstract' => { from:  ['description.abstract'] },
@@ -100,7 +100,7 @@ if Settings.bulkrax.enabled
         'remote_files' => { from: ['related_url'], split: ';', parsed: true },
         'remote_url' => { from: ['official_url', 'remote_url'], split: ';' },
         'thumbnail_url' => { from: ['thumbnail_url'], default_thumbnail: true, parsed: true },
-        'peer_reviewed' => { from: ['peer_reviewed'] }
+        'refereed' => { from: ['peer_reviewed'] }
     }
 
     # Lambda to set the default field mapping

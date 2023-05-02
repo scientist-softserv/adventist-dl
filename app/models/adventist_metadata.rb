@@ -48,12 +48,6 @@ module AdventistMetadata
       index.as :stored_searchable, :facetable
     end
 
-    # Creating an arbitrary URL for this predicate.  It may not resolve.  We're expecting the value
-    # "Peer Reviewed" or no value.
-    property :peer_reviewed, predicate: ::RDF::URI.new('http://adventist.org/rdf-vocab/peerReviewed') do |index|
-      index.as :facetable
-    end
-
     id_blank = proc { |attributes| attributes[:id].blank? }
 
     class_attribute :controlled_properties
