@@ -6,10 +6,10 @@ require 'spec_helper'
 # rubocop:disable RSpec/FilePath
 RSpec.describe IiifPrint::IiifManifestPresenterBehavior do
   let(:presenter) { double(Hyrax::IiifManifestPresenter) }
-
+  let(:hits) { [double("SolrHit")] }
   describe '#sanitize_v2' do
     context 'when thumbnail files are present' do
-      let(:service) { Hyrax::ManifestBuilderService.new }
+      let(:service) { Hyrax::ManifestBuilderService.new }app/services/iiif_print/manifest_builder_service_behavior_decorator.rbspec/services/iiif_print/manifest_builder_service_behavior_decorator_spec.rb
       # TODO: REFACTOR!
       let(:manifest_w_thumbnail_hash) do
         {
@@ -163,8 +163,8 @@ RSpec.describe IiifPrint::IiifManifestPresenterBehavior do
       before { allow(service).to receive(:apply_metadata_to_canvas) }
 
       it 'does not include thumbnail files in the returned hash' do
-        expect(service.sanitize_v2(hash: manifest_w_thumbnail_hash, presenter: presenter)['sequences'].first['canvases'].pluck('label')).not_to include("20000230.TN.jpg")
-        expect(service.sanitize_v2(hash: manifest_w_thumbnail_hash, presenter: presenter)['sequences'].first['canvases'].pluck('label')).to include("20000230.OBJ.jpg")
+        expect(service.sanitize_v2(hash: manifest_w_thumbnail_hash, presenter: presenter, hits: hits)['sequences'].first['canvases'].pluck('label')).not_to include("20000230.TN.jpg")
+        expect(service.sanitize_v2(hash: manifest_w_thumbnail_hash, presenter: presenter, hits: hits)['sequences'].first['canvases'].pluck('label')).to include("20000230.OBJ.jpg")
       end
     end
   end

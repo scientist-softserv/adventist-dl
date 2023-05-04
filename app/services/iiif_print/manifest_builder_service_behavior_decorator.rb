@@ -3,7 +3,7 @@
 # OVERRIDE IiifPrint v1.0.0 to not render thumbnail files in the UV
 
 IiifPrint::ManifestBuilderServiceBehavior.module_eval do
-  def sanitize_v2(hash:, presenter:)
+  def sanitize_v2(hash:, presenter:, hits:)
     hash['label'] = sanitize_label(hash['label']) if hash.key?('label')
     hash.delete('description') # removes default description since it's in the metadata fields
     hash['sequences']&.each do |sequence|
@@ -14,7 +14,7 @@ IiifPrint::ManifestBuilderServiceBehavior.module_eval do
 
       sequence['canvases']&.each do |canvas|
         canvas['label'] = sanitize_label(canvas['label'])
-        apply_metadata_to_canvas(canvas: canvas, presenter: presenter)
+        apply_metadata_to_canvas(canvas: canvas, presenter: presenter, hits: hits)
       end
     end
     hash
