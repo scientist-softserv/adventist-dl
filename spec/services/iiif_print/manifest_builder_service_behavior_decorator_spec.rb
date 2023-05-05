@@ -2,14 +2,13 @@
 
 require 'spec_helper'
 
-# rubocop:disable Metrics/LineLength
-# rubocop:disable RSpec/FilePath
 RSpec.describe IiifPrint::IiifManifestPresenterBehavior do
   let(:presenter) { double(Hyrax::IiifManifestPresenter) }
   let(:hits) { [double("SolrHit")] }
+
   describe '#sanitize_v2' do
     context 'when thumbnail files are present' do
-      let(:service) { Hyrax::ManifestBuilderService.new }app/services/iiif_print/manifest_builder_service_behavior_decorator.rbspec/services/iiif_print/manifest_builder_service_behavior_decorator_spec.rb
+      let(:service) { Hyrax::ManifestBuilderService.new }
       # TODO: REFACTOR!
       let(:manifest_w_thumbnail_hash) do
         {
@@ -169,5 +168,3 @@ RSpec.describe IiifPrint::IiifManifestPresenterBehavior do
     end
   end
 end
-# rubocop:enable RSpec/FilePath
-# rubocop:enable Metrics/LineLength
