@@ -5,7 +5,7 @@ require 'spec_helper'
 # rubocop:disable RSpec/FilePath, Metrics/LineLength
 RSpec.describe IiifPrint::IiifManifestPresenterBehavior do
   let(:presenter) { double(Hyrax::IiifManifestPresenter) }
-  let(:hits) { [double("SolrHit")] }
+  let(:solr_doc_hits) { [double("SolrHit")] }
 
   describe '#sanitize_v2' do
     context 'when thumbnail files are present' do
@@ -163,8 +163,8 @@ RSpec.describe IiifPrint::IiifManifestPresenterBehavior do
       before { allow(service).to receive(:apply_metadata_to_canvas) }
 
       it 'does not include thumbnail files in the returned hash' do
-        expect(service.sanitize_v2(hash: manifest_w_thumbnail_hash, presenter: presenter, hits: hits)['sequences'].first['canvases'].pluck('label')).not_to include("20000230.TN.jpg")
-        expect(service.sanitize_v2(hash: manifest_w_thumbnail_hash, presenter: presenter, hits: hits)['sequences'].first['canvases'].pluck('label')).to include("20000230.OBJ.jpg")
+        expect(service.sanitize_v2(hash: manifest_w_thumbnail_hash, presenter: presenter, solr_doc_hits: solr_doc_hits)['sequences'].first['canvases'].pluck('label')).not_to include("20000230.TN.jpg")
+        expect(service.sanitize_v2(hash: manifest_w_thumbnail_hash, presenter: presenter, solr_doc_hits: solr_doc_hits)['sequences'].first['canvases'].pluck('label')).to include("20000230.OBJ.jpg")
       end
     end
   end
