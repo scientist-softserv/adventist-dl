@@ -18,10 +18,8 @@
           so that the "Part of" label shows "Periodical" instead %>
       <% if (f.object.multiple? term) && term == :part_of %>
         <%= f.input term, label: 'Periodical', as: :multi_value, input_html: { class: 'form-control' }, required: f.object.required?(term) %>
-      <% elsif f.object.multiple? term %>
-        <%= f.input term, as: :multi_value, input_html: { class: 'form-control' }, required: f.object.required?(term) %>
       <% else %>
-        <%= f.input term, required: f.object.required?(term) %>
+        <%= render_edit_field_partial(term, f: f) %>
       <% end %>
     <% end %>
   </div>
