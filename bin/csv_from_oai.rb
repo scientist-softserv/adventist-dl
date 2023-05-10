@@ -1,64 +1,115 @@
+#!/usr/bin/env ruby
+
 require 'csv'
 require 'oai'
 require_relative "../lib/oai/client_decorator"
 
-# Input for dynamic email
-puts "Enter your email address:"
-email = gets.chomp
+class CsvFromOai
+  attr_accessor :email
 
-# OAI client setup
-client = OAI::Client.new(
-  "http://oai.adventistdigitallibrary.org/OAI-script",
-  headers: { from: email },
-  parser: 'libxml'
-)
+  def initialize(email:)
+    @email = email
+  end
 
-opts = {
-  metadata_prefix: "oai_adl"
-}
+  def client
+    # OAI client setup
+    @client ||= OAI::Client.new(
+      "http://oai.adventistdigitallibrary.org/OAI-script",
+      headers: { from: email },
+      parser: 'libxml'
+    )
+  end
 
-CSV.open('csv_from_oai.csv', 'wb') do |csv|
-  # Write the headers to the CSV file
-  csv << ['set', 'identifier', 'derivative_type', 'URL']
+  def sets
+    @sets ||= [
+      "adl:thesis",
+      "adl:periodical",
+      "adl:issue",
+      "adl:article",
+      "adl:image",
+      "adl:book",
+      "adl:other"
+    ]
+  end
 
-  sets = [
-    "adl:thesis",
-    "adl:periodical",
-    "adl:issue",
-    "adl:article",
-    "adl:image",
-    "adl:book",
-    "adl:other"
-  ]
+  def opts
+    @opts ||= {
+      metadata_prefix: "oai_adl"
+    }
+  end
 
-  sets.each do |set|
-    records = client.list_records(opts.merge(set: set))
-    # For the full set of records.
-    records.full.each_with_index do |r|
-    # For the first 25 records, comment out previous line and comment in the following line.
-    # records.each_with_index do |r|
-      identifier = r.header.identifier
-      thumbnail_urls = r.metadata.first.find('thumbnail_url') || [ ]
-      thumbnail_urls = thumbnail_urls.map(&:content).map { |url| url.split(';') }.flatten
-      related_urls = r.metadata.first.find('related_url') || [ ]
-      related_urls = related_urls.map(&:content).map { |url| url.split(';') }.flatten
+  def urls_for(record, metadata_label)
+    urls = record.metadata.first.find(metadata_label) || [ ]
+    urls.map(&:content).map { |url| url.split(';') }.flatten
+  end
 
-      thumbnail_urls.each do |thumbnail_url|
-        derivative_type = "thumbnail"
-        csv << [set, identifier, derivative_type, thumbnail_url]
+  def url_is_original?
+    ->(u) { u.end_with?('.ARCHIVAL.pdf') }
+  end
+
+  def url_is_text?
+    ->(u) { u.end_with?('.RAW.txt') }
+  end
+
+  def url_is_reader?
+    ->(u) { !u.end_with?('.ARCHIVAL.pdf') && u.end_with?('.pdf') }
+  end
+
+  def process_related_urls(urls)
+    original = text = reader = nil
+    other_files = []
+    urls.each do |url|
+      case url
+      when url_is_original?
+        original = url
+      when url_is_text?
+        text = url
+      when url_is_reader?
+        reader = url
+      else
+        other_files << url
       end
+    end
+    { 'original' => original, 'text' => text, 'reader' => reader, 'other_files' => other_files }
+  end
 
-      related_urls.each do |related_url|
-        derivative_type = if related_url.end_with?(".ARCHIVAL.pdf")
-                             'original'
-                          elsif related_url.end_with?(".RAW.txt")
-                            'text'
-                          else
-                            'unknown'
-                          end
 
-        csv << [set, identifier, derivative_type, related_url]
+  def csv_headers
+    @csv_headers ||= ["oai_set","aark_id", "original", "text", "reader", "thumbnail", "other_files"]
+  end
+
+  def build_csv
+    CSV.open('csv_from_oai.csv',
+      'wb',
+      write_headers: true,
+      headers: csv_headers
+    ) do |csv|
+      # Write the headers to the CSV file
+      sets.each do |set|
+        records = client.list_records(opts.merge(set: set))
+        # For the full set of records.
+        record_set = ENV.fetch('FULL', nil) ? records.full : records
+        record_set.each_with_index do |r, i|
+          puts "== Record #{i} of Set #{set}"
+          # For the first 25 records, comment out previous line and comment in the following line.
+          # records.each_with_index do |r|
+          row = { 'oai_set' => set }
+          row['aark_id'] = r.header.identifier
+          thumbnail_urls = urls_for(r, 'thumbnail_url')
+          related_urls = urls_for(r, 'related_url')
+
+          row.merge!(process_related_urls(related_urls))
+          row['thumbnail'] = thumbnail_urls.first
+          csv << csv_headers.map { |h| row[h] }.flatten
+        end
       end
     end
   end
 end
+
+email = ENV.fetch('CSV_EMAIL', nil)
+unless email
+  puts "Enter your email address:"
+  email =  || gets.chomp
+end
+CsvFromOai.new(email: email).build_csv
