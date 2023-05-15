@@ -37,7 +37,12 @@ module Bulkrax
       super
       @count_towards_limit = 0
       @counters = { file_set: 0, collection: 0, work: 0 }
+      @offset = importer.parser_fields['offset'].to_i
     end
+
+    ##
+    # Skip over records that are
+    attr_reader :offset
 
     # @see #initialize
     #
@@ -89,7 +94,7 @@ module Bulkrax
     end
 
     # In the adventist parser, we process the full records (e.g. OAI's listRecords).  To
-    # understand why we must contrast this with the Bulkrax OAI parser.
+    # understand why do this, we must contrast this with the Bulkrax OAI parser.
     #
     # In the Bulkrax OIA parser we process the identifiers (e.g. OAI's listIdentifiers).  The
     # limitation on the identifiers is that we can't "sniff" what type of object it is (e.g. work,
@@ -107,9 +112,18 @@ module Bulkrax
       # (via Ruby's OAI gem).  We choose #each so that we only load in memory each page's records.
       # Were we to choose #map, we would load all records into memory.
       records.full.each_with_index do |record, index|
-        break if limit_reached?(limit, count_towards_limit)
-        handle_creation_of(record: record, index: index)
-        self.count_towards_limit += 1
+        ##
+        # Start processing after we skipped the offset number of records.  Hello space for off by
+        # one errors.
+        #
+        # This reads much better if the if block.
+        # rubocop:disable Style/Next
+        if index >= offset
+          break if limit_reached?(limit, count_towards_limit)
+          handle_creation_of(record: record, index: index)
+          self.count_towards_limit += 1
+        end
+        # rubocop:enable Style/Next
       end
 
       @repository_objects_were_dispatched = true
