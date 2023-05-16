@@ -55,6 +55,15 @@ module OAI
       #   <resumptionToken expirationDate="2023-02-23T15:48:00Z" completeListSize="153" cursor="25">
       #     adl:periodical|2
       #   </resumptionToken>
+      #
+      # The completeListSize does not exist on tokens that would be for records outside the list
+      # size window.  For example, for token "adl:periodical|100" that would represent records in
+      # the 2500-ish range.  Which, per the adventist implementation of OAI, that token's XML
+      # attributes would not include a `completeListSize` attribute.  Hence we know we are outside
+      # of the range.
+      #
+      # Without this test and the follow `#resumable?` method, we would end up requesting infinite
+      # pages because the OAI implementation keeps retruning resumption tokens.
       @complete_list_size = get_attribute(xpath_first(doc, './/resumptionToken'), "completeListSize").to_i
       super
     end
