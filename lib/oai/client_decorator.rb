@@ -63,7 +63,7 @@ module OAI
       # of the range.
       #
       # Without this test and the follow `#resumable?` method, we would end up requesting infinite
-      # pages because the OAI implementation keeps retruning resumption tokens.
+      # pages because the OAI implementation keeps returning resumption tokens.
       @complete_list_size = get_attribute(xpath_first(doc, './/resumptionToken'), "completeListSize").to_i
       super
     end
