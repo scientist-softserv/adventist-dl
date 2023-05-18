@@ -148,5 +148,5 @@ gem 'order_already'
 
 gem 'hyrax-v2_graph_indexer'
 # rubocop:disable Metrics/LineLength
-gem 'iiif_print', "~> 1.0", git: 'https://github.com/scientist-softserv/iiif_print.git', ref: 'd6cafaad9a3f66d445403e69b5386692b8c4a60f'
+gem 'iiif_print', "~> 1.0", git: 'https://github.com/scientist-softserv/iiif_print.git', branch: 'main'
 # rubocop:enable Metrics/LineLength
