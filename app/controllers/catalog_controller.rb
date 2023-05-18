@@ -72,7 +72,8 @@ class CatalogController < ApplicationController
     config.default_solr_params = {
       qt: "search",
       rows: 10,
-      qf: "title_tesim description_tesim creator_tesim keyword_tesim all_text_timv"
+      qf: IiifPrint.config.metadata_fields.keys.map { |attribute| "#{attribute}_tesim" }
+                   .join(' ') << "title_tesim description_tesim all_text_timv"
     }
 
     # Specify which field to use in the tag cloud on the homepage.

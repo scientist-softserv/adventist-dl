@@ -35,6 +35,62 @@ IiifPrint.config do |config|
     page_suffix = "Page #{(page_number.to_i + 1).to_s.rjust(page_padding.to_i, '0')}"
     "#{filename} - #{page_suffix} || #{identifier}"
   }
+
+  config.metadata_fields = {
+    creator: { render_as: :faceted },
+    resource_type: { render_as: :faceted },
+    abstract: {},
+    presented_at: {},
+    location: {},
+    event_date: {},
+    part_of: { render_as: :faceted },
+    editor: {},
+    publisher: { render_as: :faceted },
+    place_of_publication: {},
+    date_published: {},
+    publication_status: {},
+    refereed: {},
+    pagination: {},
+    doi: {},
+    related_url: {},
+    identifier: {},
+    subject: { render_as: :faceted },
+    keyword: { render_as: :faceted },
+    language: { render_as: :faceted },
+    based_near: {},
+    rights_statement: { render_as: :rights_statement },
+    license: { render_as: :license },
+    aark_id: {},
+    date_created: {},
+    department: {},
+    qualification_level: {},
+    qualification_name: {},
+    module_code: {},
+    description: {},
+    source: { render_as: :faceted },
+    volume_number: {},
+    issue_number: {},
+    date_submitted: {},
+    date_accepted: {},
+    date_available: {},
+    remote_url: {},
+    contributor: { render_as: :faceted },
+    output_of: {},
+    date_issued: {},
+    bibliographic_citation: {},
+    alt: {},
+    advisor: {},
+    awarding_institution: {},
+    date_of_award: {},
+    funder: {},
+    isbn: {},
+    extent: {},
+    part: { render_as: :faceted },
+    series: {},
+    edition: {},
+    collection: {}
+  }
+
   # rubocop:enable Metrics/LineLength
 end
 
