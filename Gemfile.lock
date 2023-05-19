@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/samvera-labs/bulkrax.git
-  revision: 04d35b007d5495761fab91f39ca04eaf91494de9
-  ref: 04d35b007d5495761fab91f39ca04eaf91494de9
+  revision: 0652a8428f65af1bbe9b6016336c760ac96447b2
+  ref: 0652a8428f65af1bbe9b6016336c760ac96447b2
   specs:
-    bulkrax (5.1.0)
+    bulkrax (5.2.1)
       bagit (~> 0.4)
       coderay
       iso8601 (~> 0.9.0)
@@ -27,8 +27,8 @@ GIT
 
 GIT
   remote: https://github.com/scientist-softserv/iiif_print.git
-  revision: d6cafaad9a3f66d445403e69b5386692b8c4a60f
-  ref: d6cafaad9a3f66d445403e69b5386692b8c4a60f
+  revision: 8fdf56e151b5adb7e6aab1cd29d39b74554ed48a
+  branch: main
   specs:
     iiif_print (1.0.0)
       blacklight_iiif_search (~> 1.0)
@@ -1144,7 +1144,7 @@ DEPENDENCIES
   blacklight_oai_provider (~> 6.1, >= 6.1.1)
   blacklight_range_limit (= 6.5.0)
   bootstrap-datepicker-rails
-  bulkrax (~> 5.1.0)!
+  bulkrax (~> 5.2.1)!
   byebug
   capybara
   carrierwave-aws (~> 1.3)
