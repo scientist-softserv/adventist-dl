@@ -18,5 +18,8 @@ module Hyrax
       remote_url
       resource_type
     ]
+    def primary_terms
+      super + %i[video_embed]
+    end
   end
 end
