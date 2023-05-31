@@ -21,6 +21,7 @@ class GenericWork < ActiveFedora::Base
 
   validates :title, presence: { message: 'Your work must have a title.' }
 
+  # rubocop:disable Style/RegexpLiteral
   validates :video_embed,
             format: {
               # regex matches only youtube & vimeo urls that are formatted as embed links.
@@ -31,7 +32,7 @@ class GenericWork < ActiveFedora::Base
   # rubocop:enable Style/RegexpLiteral
 
   def video_embed?
-  video_embed.present?
+    video_embed.present?
   end
 
   self.indexer = WorkIndexer
