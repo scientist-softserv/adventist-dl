@@ -1,5 +1,14 @@
-ARG HYRAX_IMAGE_VERSION=v4.0.0.beta2
-FROM ghcr.io/samvera/hyrax/hyrax-base:$HYRAX_IMAGE_VERSION as hyku-base
+ARG RUBY_VERSION=2.7.6
+FROM ruby:$RUBY_VERSION-alpine3.15 as builder
+
+RUN apk add build-base
+RUN wget -O - https://github.com/jemalloc/jemalloc/releases/download/5.2.1/jemalloc-5.2.1.tar.bz2 | tar -xj && \
+    cd jemalloc-5.2.1 && \
+    ./configure && \
+    make && \
+    make install
+
+FROM ghcr.io/samvera/hyrax/hyrax-base:v4.0.0.beta2 as hyku-base
 
 USER root
 
@@ -98,8 +107,11 @@ COPY --chown=1001:101 $APP_PATH /app/samvera/hyrax-webapp
 
 ARG SETTINGS__BULKRAX__ENABLED="true"
 RUN RAILS_ENV=production SECRET_KEY_BASE=`bin/rake secret` DB_ADAPTER=nulldb DATABASE_URL='postgresql://fake' bundle exec rake assets:precompile && yarn install
+
+COPY --from=builder /usr/local/lib/libjemalloc.so.2 /usr/local/lib/
+ENV LD_PRELOAD=/usr/local/lib/libjemalloc.so.2
+
 CMD ./bin/web
 
 FROM hyku-web as hyku-worker
-ENV MALLOC_ARENA_MAX=2
 CMD ./bin/worker
