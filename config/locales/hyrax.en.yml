@@ -1124,7 +1124,7 @@ en:
         resource_type: Pre-defined categories to describe the type of content being uploaded, such as &quot;article&quot; or &quot;dataset.&quot;  More than one type may be selected.
         subject: Headings or index terms describing what the work is about; these do need to conform to an existing vocabulary.
         title: A name to aid in identifying a work.
-        video_embed: Youtube or Vimeo iframe embed code to show video embedded in the work page. If you enter an embed link for a video, it must be a properly formatted url beginning with 'http://' or 'https://'. It also needs to contain a valid link to a hosted video that can appear in an iframe. <br /><br /><i>Examples:<br/>https://player.vimeo.com/video/467264493?h=b089de0eab<br/>https://www.youtube.com/embed/Znf73dsFdC8</i>
+        video_embed: Youtube iframe embed code to show video embedded in the work page. If you enter an embed link for a video, it must be a properly formatted url beginning with 'http://' or 'https://'. It also needs to contain a valid link to a hosted video that can appear in an iframe. <br /><br /><i>Example:<br/>https://www.youtube.com/embed/Znf73dsFdC8</i>
     labels:
       collection:
         size: Size

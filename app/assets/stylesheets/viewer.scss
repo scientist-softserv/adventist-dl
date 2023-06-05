@@ -1,5 +1,5 @@
 .viewer-wrapper {
-  height: 500px;
+  height: 900px;
 }
 
 .viewer {
@@ -21,6 +21,6 @@
 }
 
 .video-embed-viewer {
-  aspect-ratio: 16 / 9;
+  aspect-ratio: auto;
   width: 100%;
 }
