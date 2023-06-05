@@ -37,11 +37,6 @@ module AdventistMetadata
     property :identifier, predicate: ::RDF::Vocab::DC.identifier
     property :based_near, predicate: ::RDF::Vocab::FOAF.based_near, class_name: Hyrax::ControlledVocabularies::Location
 
-    # This is for the video embed
-    property :video_embed, predicate: ::RDF::URI("https://schema.org/embedUrl"), multiple: false do |index|
-      index.as :stored_searchable
-    end
-
     # Due to the mappings for Bulkrax the "related_url" is not exposed as a field we can "import
     # into".  What do I mean by that?  For importers we map the related_url to "remote_files" then
     # ingest those files.  However, we do also expose a means of assigning a "related_url" via the

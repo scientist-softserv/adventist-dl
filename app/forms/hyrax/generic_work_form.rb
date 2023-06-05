@@ -17,9 +17,7 @@ module Hyrax
       place_of_publication
       remote_url
       resource_type
+      video_embed
     ]
-    def primary_terms
-      super + %i[video_embed]
-    end
   end
 end

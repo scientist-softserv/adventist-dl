@@ -5,12 +5,14 @@
 module Hyrax
   class DatasetForm < Hyrax::Forms::WorkForm
     self.model_class = Dataset
+    self.terms += %i[
+      video_embed
+    ]
 
     self.terms -= DogBiscuits.config.base_properties
     self.terms += DogBiscuits.config.dataset_properties
 
     # Add any local properties here
-    self.terms += []
 
     self.required_fields = DogBiscuits.config.dataset_properties_required
 
