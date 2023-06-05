@@ -18,5 +18,14 @@ module Hyrax
     def universal_viewer_config_url
       "#{request&.base_url}/uv/uv-config.json"
     end
+
+    def video_embed_viewer_display(work_presenter, locals = {})
+      render video_embed_viewer_display_partial(work_presenter),
+             locals.merge(presenter: work_presenter)
+    end
+
+    def video_embed_viewer_display_partial(work_presenter)
+      'hyrax/base/' + work_presenter.video_embed_viewer.to_s
+    end
   end
 end

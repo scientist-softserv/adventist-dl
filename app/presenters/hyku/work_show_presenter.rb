@@ -25,6 +25,10 @@ module Hyku
       extract_video_embed_presence
     end
 
+    def video_embed_viewer
+      :video_embed_viewer
+    end
+
     private
 
       def extract_video_embed_presence

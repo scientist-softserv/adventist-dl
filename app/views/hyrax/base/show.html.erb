@@ -15,23 +15,13 @@
       <div class="panel-body">
         <div class="row">
           <%= render 'workflow_actions_widget', presenter: @presenter %>
-          <div class="col-sm-12">
-            <% if @presenter.video_embed_viewer? %>
-              <%= render 'video_embed_viewer', presenter: @presenter %>
-            <% else %>
-              <% if @presenter.universal_viewer? %>
-                <%= render 'representative_media', presenter: @presenter, viewer: true %>
-              <% end %>
-            <% end %>
-          </div>
+          <% if @presenter.universal_viewer? %>
+            <div class="col-sm-12">
+              <%= render 'representative_media', presenter: @presenter, viewer: true %>
+            </div>
+          <% end %>
           <div class="col-sm-5 text-center">
-            <% if @presenter.video_embed_viewer? %>
-            <% else %>
-              <% if @presenter.universal_viewer? %>
-              <% else %>
-                <%= render 'representative_media', presenter: @presenter, viewer: false %>
-              <% end %>
-            <% end %>
+            <%= render 'representative_media', presenter: @presenter, viewer: false unless @presenter.universal_viewer? %>
             <%= render 'citations', presenter: @presenter %>
             <%= render 'social_media' %>
           </div>
@@ -50,3 +40,4 @@
     </div>
   </div>
 </div>
+
