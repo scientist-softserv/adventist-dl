@@ -1,6 +1,10 @@
 <%# OVERRIDE IiifPrint to add bootstrap classes %>
 
-<% if presenter.iiif_viewer? %>
+<% if presenter.video_embed_viewer? %>
+  <div class="center-block">
+    <%= video_embed_viewer_display presenter %>
+  </div>
+<% elsif presenter.iiif_viewer? %>
   <% if defined?(viewer) && viewer %>
     <div class="center-block">
       <%= iiif_viewer_display presenter %>

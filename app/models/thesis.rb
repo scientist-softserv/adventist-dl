@@ -3,6 +3,7 @@
 # Generated via
 #  `rails generate dog_biscuits:work Thesis`
 class Thesis < DogBiscuits::Thesis
+  include VideoEmbedViewer
   include ::Hyrax::WorkBehavior
   include SlugBug
   include DogBiscuits::BibliographicCitation

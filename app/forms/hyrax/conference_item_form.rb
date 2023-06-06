@@ -5,12 +5,14 @@
 module Hyrax
   class ConferenceItemForm < Hyrax::Forms::WorkForm
     self.model_class = ConferenceItem
+    self.terms += %i[
+      video_embed
+    ]
 
     self.terms -= DogBiscuits.config.base_properties
     self.terms += DogBiscuits.config.conference_item_properties
 
     # Add any local properties here
-    self.terms += []
 
     self.required_fields = DogBiscuits.config.conference_item_properties_required
 

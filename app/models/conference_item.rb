@@ -3,6 +3,7 @@
 # Generated via
 #  `rails generate dog_biscuits:work ConferenceItem`
 class ConferenceItem < DogBiscuits::ConferenceItem
+  include VideoEmbedViewer
   include ::Hyrax::WorkBehavior
   include SlugBug
 

@@ -36,6 +36,7 @@ class SolrDocument
   attribute :bibliographic_citation, Solr::String, solr_name('bibliographic_citation')
   attribute :alt, Solr::String, solr_name('alt')
   attribute :file_set_ids, Solr::Array, 'file_set_ids_ssim'
+  attribute :video_embed, Solr::String, 'video_embed_tesim'
 
   def remote_url
     self[Solrizer.solr_name('remote_url')]

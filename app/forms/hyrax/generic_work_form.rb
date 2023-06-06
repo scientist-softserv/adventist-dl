@@ -17,6 +17,7 @@ module Hyrax
       place_of_publication
       remote_url
       resource_type
+      video_embed
     ]
   end
 end

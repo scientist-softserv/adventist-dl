@@ -5,12 +5,14 @@
 module Hyrax
   class PublishedWorkForm < Hyrax::Forms::WorkForm
     self.model_class = PublishedWork
+    self.terms += %i[
+      video_embed
+    ]
 
     self.terms -= DogBiscuits.config.base_properties
     self.terms += DogBiscuits.config.published_work_properties
 
     # Add any local properties here
-    self.terms += []
 
     self.required_fields = DogBiscuits.config.published_work_properties_required
 

@@ -21,6 +21,14 @@ module Hyku
       isbns&.flatten&.compact
     end
 
+    def video_embed_viewer?
+      solr_document[:video_embed_tesim].present?
+    end
+
+    def video_embed_viewer
+      :video_embed_viewer
+    end
+
     private
 
       def extract_from_identifier(rgx)

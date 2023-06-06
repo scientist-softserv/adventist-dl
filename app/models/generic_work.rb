@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class GenericWork < ActiveFedora::Base
+  include VideoEmbedViewer
   include ::Hyrax::WorkBehavior
   include DogBiscuits::Abstract
   include DogBiscuits::BibliographicCitation
