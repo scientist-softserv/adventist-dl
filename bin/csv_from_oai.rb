@@ -44,7 +44,10 @@ class CsvFromOai
   end
 
   def url_is_original?
-    ->(u) { u.end_with?('.ARCHIVAL.pdf') }
+    ->(u) {
+      u.end_with?('.ARCHIVAL.pdf') ||
+        (u.match(/\.OBJ\./) && !u.match(/\.X\d+\./))
+    }
   end
 
   def url_is_text?
@@ -52,7 +55,10 @@ class CsvFromOai
   end
 
   def url_is_reader?
-    ->(u) { !u.end_with?('.ARCHIVAL.pdf') && u.end_with?('.pdf') }
+    ->(u) {
+      (!u.end_with?('.ARCHIVAL.pdf') && u.end_with?('.pdf')) ||
+        u.match(/\.X\d+/)
+    }
   end
 
   def process_related_urls(urls)
@@ -110,6 +116,6 @@ end
 email = ENV.fetch('CSV_EMAIL', nil)
 unless email
   puts "Enter your email address:"
-  email =  || gets.chomp
+  email = gets.chomp
 end
 CsvFromOai.new(email: email).build_csv
