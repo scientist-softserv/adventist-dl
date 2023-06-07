@@ -36,12 +36,54 @@ SERVERLESS_THUMBNAIL_SQS_URL = 'sqs://us-west-2.amazonaws.com/559021623471/space
 #- create thumbnail for the original
 
 class LoadSpaceStoneFromCsv
-
   def initialize
+    @csv = CSV.read('csv_from_oai.csv', headers: true)
+  end
+  attr_reader :csv
+
+  def insert_into_spacestone
+    csv.each do |row|
+      needs_thumbnail = !has_thumbnail?(row)
+      copy_original(row, needs_thumbnail)
+      copy_access(row, needs_thumbnail)
+      puts row.inspect
+    end
   end
 
-  def csv
-    @csv ||= CSV.read('csv_from_oai.csv', headers: true)
+  ##
+  # For an original file:
+  #
+  # - Copy the original file to the SpaceStone location
+  # - When it is a PDF, enqueue splitting it
+  # - When it does not have a thumbnail, enqueue creating a thumbnail
+  #
+  # @param row [CSV::Row]
+  # @param needs_thumbnail [Boolean] when true we will need to enqueue a thumbnail generation job.
+  def copy_original(row, needs_thumbnail)
+    original_extention = File.extname(row['original'])
+    jobs = [original_destination(row)]
+
+    # TODO: In the case of PDF, Split; in the case of images, OCR.  In all cases thumbnail.
+    jobs << enqueue_destination(row, key: 'original', url: SERVERLESS_SPLIT_SQS_URL) if original_extention == '.pdf'
+    if needs_thumbnail
+      jobs << enqueue_destination(row, key: 'original', url: SERVERLESS_THUMBNAIL_SQS_URL)
+    end
+
+    post_to_serverless_copy({ row['original'] => jobs })
+  end
+
+  def copy_access(row, needs_thumbnail)
+    return unless row['reader'].present?
+    original_extention = File.extname(row['original'])
+    return unless original_extention == '.pdf'
+
+    jobs = [original_destination(row, key: 'reader')]
+
+    if needs_thumbnail
+      jobs << enqueue_destination(row, key: 'reader', url: SERVERLESS_THUMBNAIL_SQS_URL)
+    end
+
+    post_to_serverless_copy({ row['original'] => jobs })
   end
 
   def post_to_serverless_copy(workload)
@@ -49,44 +91,29 @@ class LoadSpaceStoneFromCsv
     HTTParty.post(SERVERLESS_COPY_URL, body: JSON.generate([workload]), headers: { 'Content-Type' => 'application/json' }) unless ENV['DRY_RUN']
   end
 
-  def thumbnail_destination(row)
-    thumbnail_name = File.basename(row['original']).sub(/\..*\z/, ".thumbnail.jpeg")
+  def thumbnail_destination(row, key: 'original')
+    # We might have multiple periods in the filename, remove the extension.
+    thumbnail_name = File.basename(row[key]).sub(/\.[^\.]*\z/, ".thumbnail.jpeg")
     "#{SERVERLESS_S3_URL}#{row['aark_id']}/#{thumbnail_name}"
   end
 
-  def split_destination(row)
-    "#{SERVERLESS_SPLIT_SQS_URL}#{row['aark_id']}/#{row['aark_id']}.pdf?template=#{SERVERLESS_S3_URL}#{SERVERLESS_TEMPLATE}"
+  def enqueue_destination(row, url:, key: 'original')
+    basename = File.basename(row[key])
+    "#{url}#{row['aark_id']}/#{basename}?template=#{SERVERLESS_S3_URL}#{SERVERLESS_TEMPLATE}"
   end
 
-  def original_destination(row)
-    original_extention = File.extname(row['original'])
-    "#{SERVERLESS_S3_URL}#{row['aark_id']}/#{row['aark_id']}#{original_extention}"
+  def original_destination(row, key: 'original')
+    "#{SERVERLESS_S3_URL}#{row['aark_id']}/#{File.basename(row[key])}"
   end
 
   def has_thumbnail?(row)
     if row['thumbnail'] && row['thumbnail'].match(/^https/)
-      workload = {
-        row['thumbnail'] => [ thumbnail_destination(row) ]
-      }
-      post_to_serverless_copy(workload)
+      jobs = [ thumbnail_destination(row) ]
+      if row['reader'].present? && row['reader'].end_with?('.pdf')
+        jobs << thumbnail_destination(row, key: 'reader')
+      end
+      post_to_serverless_copy(row['thumbnail'] => jobs)
       true
-    end
-  end
-
-  def copy_original(row, needs_thumbnail)
-    original_extention = File.extname(row['original'])
-    workload = { row['original'] => [original_destination(row)] }
-    workload[row['original']] << split_destination(row) if original_extention == '.pdf'
-    workload[row['original']] << thumbnail_destination(row) if needs_thumbnail
-    post_to_serverless_copy(workload)
-  end
-
-  def insert_into_spacestone
-    csv.each do |row|
-      needs_thumbnail = !has_thumbnail?(row)
-      copy_original(row, needs_thumbnail)
-      # TODO copy_access(row)
-      puts row.inspect
     end
   end
 end
