@@ -6,6 +6,7 @@ SERVERLESS_COPY_URL = 'https://v1vzxgta7f.execute-api.us-west-2.amazonaws.com/co
 SERVERLESS_S3_URL = 's3://space-stone-dev-preprocessedbucketf21466dd-bxjjlz4251re.s3.us-west-1.amazonaws.com/'
 SERVERLESS_TEMPLATE = '{{dir_parts[-1..-1]}}/{{ filename }}'
 SERVERLESS_SPLIT_SQS_URL = 'sqs://us-west-2.amazonaws.com/559021623471/space-stone-dev-split-ocr-thumbnail/'
+SERVERLESS_OCR_SQS_URL = 'sqs://us-west-2.amazonaws.com/559021623471/space-stone-dev-ocr/'
 SERVERLESS_THUMBNAIL_SQS_URL = 'sqs://us-west-2.amazonaws.com/559021623471/space-stone-dev-thumbnail/'
 
 ## Read csv file
@@ -43,10 +44,11 @@ class LoadSpaceStoneFromCsv
 
   def insert_into_spacestone
     csv.each do |row|
+      puts row.inspect
       needs_thumbnail = !has_thumbnail?(row)
       copy_original(row, needs_thumbnail)
       copy_access(row, needs_thumbnail)
-      puts row.inspect
+      break
     end
   end
 
@@ -64,7 +66,11 @@ class LoadSpaceStoneFromCsv
     jobs = [original_destination(row)]
 
     # TODO: In the case of PDF, Split; in the case of images, OCR.  In all cases thumbnail.
-    jobs << enqueue_destination(row, key: 'original', url: SERVERLESS_SPLIT_SQS_URL) if original_extention == '.pdf'
+    if original_extention == '.pdf'
+      jobs << enqueue_destination(row, key: 'original', url: SERVERLESS_SPLIT_SQS_URL)
+    else
+      jobs << enqueue_destination(row, key: 'original', url: SERVERLESS_OCR_SQS_URL)
+    end
     if needs_thumbnail
       jobs << enqueue_destination(row, key: 'original', url: SERVERLESS_THUMBNAIL_SQS_URL)
     end
@@ -73,7 +79,7 @@ class LoadSpaceStoneFromCsv
   end
 
   def copy_access(row, needs_thumbnail)
-    return unless row['reader'].present?
+    return if row['reader'].to_s.strip.empty?
     original_extention = File.extname(row['original'])
     return unless original_extention == '.pdf'
 
@@ -87,7 +93,7 @@ class LoadSpaceStoneFromCsv
   end
 
   def post_to_serverless_copy(workload)
-    puts "#{SERVERLESS_COPY_URL}\n#{JSON.generate(workload)}"
+    puts "\t#{SERVERLESS_COPY_URL}\n\t#{JSON.generate(workload)}"
     HTTParty.post(SERVERLESS_COPY_URL, body: JSON.generate([workload]), headers: { 'Content-Type' => 'application/json' }) unless ENV['DRY_RUN']
   end
 
@@ -109,7 +115,7 @@ class LoadSpaceStoneFromCsv
   def has_thumbnail?(row)
     if row['thumbnail'] && row['thumbnail'].match(/^https/)
       jobs = [ thumbnail_destination(row) ]
-      if row['reader'].present? && row['reader'].end_with?('.pdf')
+      if !row['reader'].to_s.strip.empty? && row['reader'].end_with?('.pdf')
         jobs << thumbnail_destination(row, key: 'reader')
       end
       post_to_serverless_copy(row['thumbnail'] => jobs)
