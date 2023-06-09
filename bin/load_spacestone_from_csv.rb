@@ -2,12 +2,18 @@
 
 require 'csv'
 require 'httparty'
-SERVERLESS_COPY_URL = 'https://v1vzxgta7f.execute-api.us-west-2.amazonaws.com/copy'
+gem 'aws-sdk-sqs'
+require 'aws-sdk-sqs'
+
 SERVERLESS_S3_URL = 's3://space-stone-dev-preprocessedbucketf21466dd-bxjjlz4251re.s3.us-west-1.amazonaws.com/'
 SERVERLESS_TEMPLATE = '{{dir_parts[-1..-1]}}/{{ filename }}'
-SERVERLESS_SPLIT_SQS_URL = 'sqs://us-west-2.amazonaws.com/559021623471/space-stone-dev-split-ocr-thumbnail/'
-SERVERLESS_OCR_SQS_URL = 'sqs://us-west-2.amazonaws.com/559021623471/space-stone-dev-ocr/'
-SERVERLESS_THUMBNAIL_SQS_URL = 'sqs://us-west-2.amazonaws.com/559021623471/space-stone-dev-thumbnail/'
+
+SQS_QUEUE_NAMES = {
+  copy:  'space-stone-dev-copy',
+  split: 'space-stone-dev-split-ocr-thumbnail',
+  ocr: 'space-stone-dev-ocr',
+  thumbnail: 'space-stone-dev-thumbnail',
+}
 
 ## Read csv file
 ## if there is an archival pdf
@@ -39,8 +45,18 @@ SERVERLESS_THUMBNAIL_SQS_URL = 'sqs://us-west-2.amazonaws.com/559021623471/space
 class LoadSpaceStoneFromCsv
   def initialize
     @csv = CSV.read('csv_from_oai.csv', headers: true)
+    @sqs_client = Aws::SQS::Client.new(
+      region: ENV.fetch('AWS_REGION'),
+      credentials: Aws::Credentials.new(
+        ENV.fetch('AWS_ACCESS_KEY_ID'),
+        ENV.fetch('AWS_SECRET_ACCESS_KEY')
+      )
+    )
+    @queue_urls = SQS_QUEUE_NAMES.each_with_object({}) do |(key, name), hash|
+      hash[key] = @sqs_client.get_queue_url(queue_name: name).queue_url
+    end
   end
-  attr_reader :csv
+  attr_reader :csv, :sqs_client, :queue_urls
 
   def insert_into_spacestone
     csv.each do |row|
@@ -48,7 +64,6 @@ class LoadSpaceStoneFromCsv
       needs_thumbnail = !has_thumbnail?(row)
       copy_original(row, needs_thumbnail)
       copy_access(row, needs_thumbnail)
-      break
     end
   end
 
@@ -67,12 +82,12 @@ class LoadSpaceStoneFromCsv
 
     # TODO: In the case of PDF, Split; in the case of images, OCR.  In all cases thumbnail.
     if original_extention == '.pdf'
-      jobs << enqueue_destination(row, key: 'original', url: SERVERLESS_SPLIT_SQS_URL)
+      jobs << enqueue_destination(row, key: 'original', url: queue_urls.fetch(:split))
     else
-      jobs << enqueue_destination(row, key: 'original', url: SERVERLESS_OCR_SQS_URL)
+      jobs << enqueue_destination(row, key: 'original', url: queue_urls.fetch(:ocr))
     end
     if needs_thumbnail
-      jobs << enqueue_destination(row, key: 'original', url: SERVERLESS_THUMBNAIL_SQS_URL)
+      jobs << enqueue_destination(row, key: 'original', url: queue_urls.fetch(:thumbnail))
     end
 
     post_to_serverless_copy({ row['original'] => jobs })
@@ -86,15 +101,22 @@ class LoadSpaceStoneFromCsv
     jobs = [original_destination(row, key: 'reader')]
 
     if needs_thumbnail
-      jobs << enqueue_destination(row, key: 'reader', url: SERVERLESS_THUMBNAIL_SQS_URL)
+      jobs << enqueue_destination(row, key: 'reader', url: queue_urls.fetch(:thumbnail))
     end
 
     post_to_serverless_copy({ row['original'] => jobs })
   end
 
   def post_to_serverless_copy(workload)
-    puts "\t#{SERVERLESS_COPY_URL}\n\t#{JSON.generate(workload)}"
-    HTTParty.post(SERVERLESS_COPY_URL, body: JSON.generate([workload]), headers: { 'Content-Type' => 'application/json' }) unless ENV['DRY_RUN']
+    body = JSON.generate([workload])
+    puts "\t#{queue_urls.fetch(:copy)}\n\t#{body}"
+
+    return unless ENV['DRY_RUN']
+
+    sqs_client.send_message(
+      queue_url: queue_urls.fetch(:copy),
+      message_body: body
+    )
   end
 
   def thumbnail_destination(row, key: 'original')
@@ -124,4 +146,5 @@ class LoadSpaceStoneFromCsv
   end
 end
 
-LoadSpaceStoneFromCsv.new.insert_into_spacestone
+loader = LoadSpaceStoneFromCsv.new
+loader.insert_into_spacestone
