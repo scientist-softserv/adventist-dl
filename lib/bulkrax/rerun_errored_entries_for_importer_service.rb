@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Bulkrax
   ##
   # This class is responsible for rescheduling all failed entry imports.
@@ -30,11 +32,11 @@ module Bulkrax
     def initialize(importer_id:, last_run_id: nil, error_classes: [], logger: Rails.logger)
       @logger = logger
       @importer = Bulkrax::Importer.find(importer_id)
-      if last_run_id
-        @last_run = @importer.importer_runs.find(last_run_id)
-      else
-        @last_run = @importer.last_run
-      end
+      @last_run = if last_run_id
+                    @importer.importer_runs.find(last_run_id)
+                  else
+                    @importer.last_run
+                  end
       @error_classes = Array.wrap(error_classes).map(&:to_s)
     end
 
@@ -48,13 +50,17 @@ module Bulkrax
         logger.info("Starting re-importing #{reimport_logging_context} with entries that had any error.")
         relation.where.not(error_class: nil)
       else
+        # rubocop:disable Metrics/LineLength
         logger.info("Starting re-importing #{reimport_logging_context} with entries that had the following errors: #{error_class.inspect}.")
+        # rubocop:enable Metrics/LineLength
         relation.where(error_class: error_classes)
       end
 
       relation.find_each do |status|
         entry = status.statusable
+        # rubocop:disable Metrics/LineLength
         logger.info("Submitting re-import for #{entry.class} ID=#{entry.id} with previous error of #{status.error_class}.  Part of re-importing #{reimport_logging_context}.")
+        # rubocop:enable Metrics/LineLength
         entry.build
         entry.save
       end
