@@ -23,7 +23,7 @@ module Bulkrax
     # @param error_classes [String] only re-run for entries that had failures matching the given
     #        :error_classes.
     # @param logger [Logger]
-    def intialize(importer_id:, last_run_id: nil, error_classes: [], logger: Rails.logger)
+    def initialize(importer_id:, last_run_id: nil, error_classes: [], logger: Rails.logger)
       @logger = logger
       @importer = Bulkrax::Importer.find(importer_id)
       if last_run_id
