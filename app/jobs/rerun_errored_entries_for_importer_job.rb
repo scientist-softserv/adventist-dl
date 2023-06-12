@@ -38,21 +38,26 @@ class RerunErroredEntriesForImporterJob < ApplicationJob
 
     if error_classes.empty?
       logger.info("Starting re-importing #{reimport_logging_context} with entries that had any error.")
-      relation.where.not(error_class: nil)
+      relation = relation.where.not(error_class: nil)
     else
       # rubocop:disable Metrics/LineLength
       logger.info("Starting re-importing #{reimport_logging_context} with entries that had the following errors: #{error_class.inspect}.")
       # rubocop:enable Metrics/LineLength
-      relation.where(error_class: error_classes)
+      relation = relation.where(error_class: error_classes)
     end
 
-    relation.find_each do |status|
-      entry = status.statusable
-      # rubocop:disable Metrics/LineLength
-      logger.info("Submitting re-import for #{entry.class} ID=#{entry.id} with previous error of #{status.error_class}.  Part of re-importing #{reimport_logging_context}.")
-      # rubocop:enable Metrics/LineLength
-      entry.build
-      entry.save
+    # relation.select("statusable_id", "statusable_type").distinct.find_each do |status|
+    relation = relation.select("statusable_id", "statusable_type").distinct
+    counter = 0
+
+    relation.in_batches do |batch|
+
+      batch.each do |status|
+        entry = status.statusable
+        counter += 1
+        logger.info("Enqueuing re-import for #{reimport_logging_context} entry ID=#{entry.id} (#{counter}).")
+        RerunEntryJob.perform_later(bulkrax_entry: entry)
+      end
     end
 
     logger.info("Finished submitting re-imports for #{reimport_logging_context}.")
