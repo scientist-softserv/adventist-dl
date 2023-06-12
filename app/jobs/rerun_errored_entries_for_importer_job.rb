@@ -41,7 +41,7 @@ class RerunErroredEntriesForImporterJob < ApplicationJob
       relation = relation.where.not(error_class: nil)
     else
       # rubocop:disable Metrics/LineLength
-      logger.info("Starting re-importing #{reimport_logging_context} with entries that had the following errors: #{error_class.inspect}.")
+      logger.info("Starting re-importing #{reimport_logging_context} with entries that had the following errors: #{error_classes.inspect}.")
       # rubocop:enable Metrics/LineLength
       relation = relation.where(error_class: error_classes)
     end
