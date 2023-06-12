@@ -12,10 +12,8 @@ class RerunEntryJob < ApplicationJob
   # @param entry [Entry Object] the entry to run
   def perform(bulkrax_entry: entry)
     logger = Rails.logger
-    # rubocop:disable Metrics/LineLength
-    logger.info("Submitting re-import for #{bulkrax_entry.class} ID=#{bulkrax_entry.id} with previous error of #{bulkrax_entry.error_class}.  Part of re-importing #{reimport_logging_context}.")
-    # rubocop:enable Metrics/LineLength
-    
+    logger.info("Submitting re-import for #{bulkrax_entry.class} ID=#{bulkrax_entry.id}")
+
     bulkrax_entry.build
     bulkrax_entry.save
 
