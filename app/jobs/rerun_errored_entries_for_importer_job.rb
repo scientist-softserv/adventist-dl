@@ -51,7 +51,6 @@ class RerunErroredEntriesForImporterJob < ApplicationJob
     counter = 0
 
     relation.in_batches do |batch|
-
       batch.each do |status|
         entry = status.statusable
         counter += 1
