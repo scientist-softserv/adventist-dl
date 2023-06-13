@@ -105,6 +105,11 @@ if Settings.bulkrax.enabled
         'refereed' => { from: ['peer_reviewed'] }
     }
 
+    config.field_mappings['Bulkrax::CsvParser'].merge!(
+      'parents' => { from: ['parents'], split: /\s*[;|]\s*/, related_parents_field_mapping: true },
+      'children' => { from: ['children'], split: /\s*[;|]\s*/, related_children_field_mapping: true }
+    )
+
     # Lambda to set the default field mapping
     config.default_field_mapping = lambda do |field|
       return if field.blank?
