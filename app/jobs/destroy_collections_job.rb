@@ -9,7 +9,7 @@ class DestroyCollectionsJob < ApplicationJob
 
       # Destroy the collections
       collection.destroy!
-      puts "#{collection.title.first} was destroyed!"
+      Rails.logger.debug "#{collection.title.first} was destroyed!"
     end
   end
 end
