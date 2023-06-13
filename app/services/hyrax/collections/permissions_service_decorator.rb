@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-# OVERRIDE Hyrax v2.9.5 to use `post` rather than `get`
-
+# OVERRIDE class Hyrax::Collections::PermissionsService from Hyrax v2.9.5
 module Hyrax
   module Collections
     module PermissionsServiceDecorator
+      # OVERRIDE: use `post` rather than `get` to handle larger query sizes
       def filter_source(source_type:, ids:)
         return [] if ids.empty?
         id_clause = "{!terms f=id}#{ids.join(',')}"
@@ -15,7 +15,7 @@ module Hyrax
                   "_query_:\"{!raw f=has_model_ssim}Collection\""
                 end
         query += " AND #{id_clause}"
-        ActiveFedora::SolrService.query(query, { fl: 'id', rows: ids.count, method: :post }).map { |hit| hit['id'] }
+        ActiveFedora::SolrService.query(query, fl: 'id', rows: ids.count, method: :post).map { |hit| hit['id'] }
       end
     end
   end
