@@ -55,7 +55,7 @@ class RerunErroredEntriesForImporterJob < ApplicationJob
         entry = status.statusable
         counter += 1
         logger.info("Enqueuing re-import for #{reimport_logging_context} entry ID=#{entry.id} (#{counter}).")
-        RerunEntryJob.perform_later(bulkrax_entry: entry)
+        RerunEntryJob.perform_later(bulkrax_entry: entry, importer_run: last_run)
       end
     end
 

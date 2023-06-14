@@ -10,12 +10,20 @@
 class RerunEntryJob < ApplicationJob
   ##
   # @param entry [Entry Object] the entry to run
-  def perform(bulkrax_entry: entry)
+  def perform(bulkrax_entry: entry, importer_run: last_run)
     logger = Rails.logger
     logger.info("Submitting re-import for #{bulkrax_entry.class} ID=#{bulkrax_entry.id}")
 
     bulkrax_entry.build
     bulkrax_entry.save
+
+    if entry.status == "Complete"
+      importer_run.increment!(:processed_works)
+      importer_run.decrement!(:failed_records)
+    end
+      
+    bulkrax_entry.importer.current_run = importer_run
+    bulkrax_entry.importer.record_status
 
     # rubocop:disable Metrics/LineLength
     logger.info("Finished re-submitting entry for for #{bulkrax_entry.class} ID=#{bulkrax_entry.id}. entry status=#{bulkrax_entry.status}")
