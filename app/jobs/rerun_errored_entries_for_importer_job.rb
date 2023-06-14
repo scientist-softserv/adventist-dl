@@ -11,6 +11,8 @@
 # @example
 #   switch!('sdapi'); RerunErroredEntriesForImporterJob.perform_later(importer_id: 123, last_run_id: 456)
 class RerunErroredEntriesForImporterJob < ApplicationJob
+  queue_as :reimport
+
   ##
   # @param importer_id [Integer]
   # @param last_run_id [Integer]

@@ -8,6 +8,8 @@
 #
 # separating this into a job will allow us to run multiple jobs concurrently in the background
 class RerunEntryJob < ApplicationJob
+  queue_as :reimport
+
   ##
   # @param entry [Entry Object] the entry to run
   def perform(entry_class_name:, entry_id:)
