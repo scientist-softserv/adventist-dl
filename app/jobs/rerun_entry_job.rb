@@ -23,10 +23,12 @@ class RerunEntryJob < ApplicationJob
     end
 
     if bulkrax_entry.status == "Complete"
+      # rubocop:disable Rails/SkipsModelValidations
       importer_run.increment!(:processed_works)
       importer_run.decrement!(:failed_records)
+      # rubocop:enable Rails/SkipsModelValidations
     end
-      
+
     bulkrax_entry.importer.current_run = importer_run
     bulkrax_entry.importer.record_status
 

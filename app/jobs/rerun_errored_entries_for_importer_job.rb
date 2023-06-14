@@ -36,11 +36,12 @@ class RerunErroredEntriesForImporterJob < ApplicationJob
     reimport_logging_context = "#{importer.class} ID=#{importer.id} with #{last_run.class} ID=#{last_run.id}"
 
     relation = Bulkrax::Status
-                 .where(
-                   status_message: "Failed",
-                   id: Bulkrax::Status.where(runnable: last_run, statusable_type: 'Bulkrax::Entry')
-                         .group(:statusable_id, :statusable_type)
-                         .select('max(ID) as id'))
+               .where(
+                 status_message: "Failed",
+                 id: Bulkrax::Status.where(runnable: last_run, statusable_type: 'Bulkrax::Entry')
+                       .group(:statusable_id, :statusable_type)
+                       .select('max(ID) as id')
+               )
 
     if error_classes.empty?
       logger.info("Starting re-importing #{reimport_logging_context} with entries that had any error.")
@@ -55,7 +56,9 @@ class RerunErroredEntriesForImporterJob < ApplicationJob
     # We need to count before we do the select narrowing; otherwise ActiveRecord will throw a SQL
     # error.
     relation_count = relation.count
+    # rubocop:disable Metrics/LineLength
     logger.info("*****************Found #{relation_count} entries to re-import for #{reimport_logging_context}.*****************")
+    # rubocop:enable Metrics/LineLength
 
     # No sense loading all the fields; we really only need these two values to resubmit the given job.
     relation = relation.select('id', 'statusable_id', 'statusable_type')
@@ -63,8 +66,10 @@ class RerunErroredEntriesForImporterJob < ApplicationJob
 
     relation.find_each do |status|
       counter += 1
+      # rubocop:disable Metrics/LineLength
       logger.info("Enqueuing re-import for #{reimport_logging_context} #{status.statusable_type} ID=#{status.statusable_id} (#{counter} of #{relation_count}).")
       RerunEntryJob.perform_later(entry_class_name: status.statusable_type, entry_id: status.statusable_id, importer_run: last_run)
+      # rubocop:enable Metrics/LineLength
     end
 
     logger.info("Finished submitting re-imports for #{reimport_logging_context}.")
