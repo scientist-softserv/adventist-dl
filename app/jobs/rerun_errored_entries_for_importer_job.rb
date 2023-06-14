@@ -68,8 +68,8 @@ class RerunErroredEntriesForImporterJob < ApplicationJob
       counter += 1
       # rubocop:disable Metrics/LineLength
       logger.info("Enqueuing re-import for #{reimport_logging_context} #{status.statusable_type} ID=#{status.statusable_id} (#{counter} of #{relation_count}).")
-      RerunEntryJob.perform_later(entry_class_name: status.statusable_type, entry_id: status.statusable_id, importer_run: last_run)
       # rubocop:enable Metrics/LineLength
+      RerunEntryJob.perform_later(entry_class_name: status.statusable_type, entry_id: status.statusable_id)
     end
 
     logger.info("Finished submitting re-imports for #{reimport_logging_context}.")
