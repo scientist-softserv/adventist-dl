@@ -17,7 +17,7 @@ class RerunEntryJob < ApplicationJob
     bulkrax_entry.build
     bulkrax_entry.save
 
-    if entry.status == "Complete"
+    if bulkrax_entry.status == "Complete"
       importer_run.increment!(:processed_works)
       importer_run.decrement!(:failed_records)
     end
