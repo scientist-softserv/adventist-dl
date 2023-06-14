@@ -10,6 +10,7 @@ class WorkIndexer < Hyrax::WorkIndexer
   include Hyrax::IndexesLinkedMetadata
 
   # Uncomment this block if you want to add custom indexing behavior:
+  # rubocop:disable Metrics/AbcSize
   def generate_solr_document
     super.tap do |solr_doc|
       solr_doc['creator_ssi'] = object.creator.first.titlecase if object.creator.present?
@@ -18,6 +19,9 @@ class WorkIndexer < Hyrax::WorkIndexer
       solr_doc['fedora_id_ssi'] = object.id
       solr_doc[ActiveFedora.id_field.to_sym] = object.to_param
       solr_doc['source_sim'] = solr_doc['source_tesim']
+      solr_doc['file_set_text_tsimv'] = child_works_file_sets(object: object).map { |fs| all_text(object: fs) }
+                                                                             .select(&:present?)
+                                                                             .join("\n---------------------------\n")
 
       if object.date_created.present?
         # rubocop:disable Metrics/LineLength
@@ -29,5 +33,17 @@ class WorkIndexer < Hyrax::WorkIndexer
         solr_doc['sorted_year_isi'] = date_created.slice(0..3).to_i
       end
     end
+  end
+  # rubocop:enable Metrics/AbcSize
+
+  def child_works_file_sets(object:)
+    object.works.map { |work| work.file_sets.to_a }.flatten
+  end
+
+  def all_text(object:)
+    text = IiifPrint.config.all_text_generator_function.call(object: object) || ''
+    return text if text.empty?
+
+    text.tr("\n", ' ').squeeze(' ')
   end
 end
