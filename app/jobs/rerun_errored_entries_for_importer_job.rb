@@ -34,7 +34,13 @@ class RerunErroredEntriesForImporterJob < ApplicationJob
 
   def do_it!
     reimport_logging_context = "#{importer.class} ID=#{importer.id} with #{last_run.class} ID=#{last_run.id}"
-    relation = last_run.statuses.where(statusable_type: 'Bulkrax::Entry')
+
+    relation = Bulkrax::Status
+                 .where(
+                   status_message: "Failed",
+                   id: Bulkrax::Status.where(runnable: last_run, statusable_type: 'Bulkrax::Entry')
+                         .group(:statusable_id, :statusable_type)
+                         .select('max(ID) as id'))
 
     if error_classes.empty?
       logger.info("Starting re-importing #{reimport_logging_context} with entries that had any error.")
@@ -46,18 +52,15 @@ class RerunErroredEntriesForImporterJob < ApplicationJob
       relation = relation.where(error_class: error_classes)
     end
 
-    # relation.select("statusable_id", "statusable_type").distinct.find_each do |status|
-    relation = relation.select("statusable_id", "statusable_type").distinct
+    relation_count = relation.count
+    # No sense loading all the fields; we really only need these two values to resubmit the given job.
+    relation = relation.select('statusable_id', 'statusable_type')
     counter = 0
 
-    relation.in_batches do |batch|
-
-      batch.each do |status|
-        entry = status.statusable
-        counter += 1
-        logger.info("Enqueuing re-import for #{reimport_logging_context} entry ID=#{entry.id} (#{counter}).")
-        RerunEntryJob.perform_later(bulkrax_entry: entry)
-      end
+    relation.find_each do |status|
+      counter += 1
+      logger.info("Enqueuing re-import for #{reimport_logging_context} #{status.statusable_type} ID=#{status.statusable_id} (#{counter} of #{relation_count}).")
+      RerunEntryJob.perform_later(entry_class_name: status.statusable_type, entry_id: status.statusable_id)
     end
 
     logger.info("Finished submitting re-imports for #{reimport_logging_context}.")

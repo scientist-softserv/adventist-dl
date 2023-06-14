@@ -10,13 +10,13 @@
 class RerunEntryJob < ApplicationJob
   ##
   # @param entry [Entry Object] the entry to run
-  def perform(bulkrax_entry: entry)
-    logger = Rails.logger
-    logger.info("Submitting re-import for #{bulkrax_entry.class} ID=#{bulkrax_entry.id}")
+  def perform(entry_class_name:, entry_id:)
+    bulkrax_entry = entry_class_name.constantize.find(entry_id)
+    Rails.logger.info("Submitting re-import for #{bulkrax_entry.class} ID=#{bulkrax_entry.id}")
 
     bulkrax_entry.build
     bulkrax_entry.save
 
-    logger.info("Finished re-submitting entry for for #{bulkrax_entry.class} ID=#{bulkrax_entry.id}. entry status=#{bulkrax_entry.status}")
+    Rails.logger.info("Finished re-submitting entry for for #{bulkrax_entry.class} ID=#{bulkrax_entry.id}. entry status=#{bulkrax_entry.status}")
   end
 end
