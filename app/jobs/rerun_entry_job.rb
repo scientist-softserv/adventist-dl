@@ -14,8 +14,12 @@ class RerunEntryJob < ApplicationJob
     logger = Rails.logger
     logger.info("Submitting re-import for #{bulkrax_entry.class} ID=#{bulkrax_entry.id}")
 
-    bulkrax_entry.build
-    bulkrax_entry.save
+    begin
+      bulkrax_entry.build
+      bulkrax_entry.save
+    rescue StandardError => e
+      logger.error("Error re-submitting entry for #{bulkrax_entry.class} ID=#{bulkrax_entry.id}: #{e.message}")
+    end
 
     if bulkrax_entry.status == "Complete"
       importer_run.increment!(:processed_works)
