@@ -52,7 +52,10 @@ class RerunErroredEntriesForImporterJob < ApplicationJob
       relation = relation.where(error_class: error_classes)
     end
 
+    # We need to count before we do the select narrowing; otherwise ActiveRecord will throw a SQL
+    # error.
     relation_count = relation.count
+
     # No sense loading all the fields; we really only need these two values to resubmit the given job.
     relation = relation.select('statusable_id', 'statusable_type')
     counter = 0
