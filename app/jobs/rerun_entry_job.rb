@@ -10,7 +10,8 @@
 class RerunEntryJob < ApplicationJob
   ##
   # @param entry [Entry Object] the entry to run
-  def perform(bulkrax_entry: entry, importer_run: last_run)
+  def perform(entry_class_name:, entry_id:, importer_run: last_run)
+    bulkrax_entry = entry_class_name.constantize.find(entry_id)
     logger = Rails.logger
     logger.info("Submitting re-import for #{bulkrax_entry.class} ID=#{bulkrax_entry.id}")
 
@@ -30,7 +31,7 @@ class RerunEntryJob < ApplicationJob
     bulkrax_entry.importer.record_status
 
     # rubocop:disable Metrics/LineLength
-    logger.info("Finished re-submitting entry for for #{bulkrax_entry.class} ID=#{bulkrax_entry.id}. entry status=#{bulkrax_entry.status}")
+    logger.info("Finished re-submitting entry for #{bulkrax_entry.class} ID=#{bulkrax_entry.id}. entry status=#{bulkrax_entry.status}")
     # rubocop:enable Metrics/LineLength
   end
 end
