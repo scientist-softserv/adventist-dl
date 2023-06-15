@@ -33,7 +33,8 @@ class RerunErroredEntriesForImporterJob < ApplicationJob
       do_it!
     rescue StandardError => e
       @logger.info("Error in RerunErroredEntriesForImporterJob: #{e.message}")
-      Sentry.capture_exception(e, extra: { importer_id: importer_id, last_run_id: last_run_id, error_classes: error_classes })
+      Raven.capture_exception(e, extra: { importer_id: importer_id, last_run_id: last_run_id, error_classes: error_classes })
+      nil
     end
   end
 
