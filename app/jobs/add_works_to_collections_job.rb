@@ -13,8 +13,14 @@ class AddWorksToCollectionsJob < ApplicationJob
       work.save!
       Rails.logger.info("🦄🪺👩‍👩‍👧‍👦 #{record_data[:identifier]} processed")
     rescue StandardError => e
-      Rails.logger.error("😈😈😈 ERROR: unable to create relationship for #{record_data[:identifier]}")
+      notice = "😈😈😈 ERROR: unable to create relationship for #{record_data[:identifier]}"
+      Rails.logger.error(notice)
       Rails.logger.error(e.message)
+      File.open('lib/data/add_works_to_collection_errors.txt', 'a') do |f|
+        f.puts Time.now
+        f.puts notice
+        f.puts e.message
+      end
     end
   end
 end
