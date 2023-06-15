@@ -72,7 +72,7 @@ module Hyrax
         # The regex should reflect what is set in the `config/initializers/iiif_print.rb`,
         # `config.unique_child_title_generator_function`.
         page_number = parent_title[/Page \d+/]
-        return parent_title unless page_number
+        return object.label unless page_number
 
         work_title = parent.member_of.first&.title&.first
         return parent_title unless work_title
