@@ -20,16 +20,21 @@ class RerunErroredEntriesForImporterJob < ApplicationJob
   #        :error_classes.
   # @param logger [Logger]
   def perform(importer_id:, last_run_id: nil, error_classes: [], logger: Rails.logger)
-    @logger = logger
-    @importer = Bulkrax::Importer.find(importer_id)
-    @last_run = if last_run_id
-                  @importer.importer_runs.find(last_run_id)
-                else
-                  @importer.last_run
-                end
-    @error_classes = Array.wrap(error_classes).map(&:to_s)
+    begin
+      @logger = logger
+      @importer = Bulkrax::Importer.find(importer_id)
+      @last_run = if last_run_id
+                    @importer.importer_runs.find(last_run_id)
+                  else
+                    @importer.last_run
+                  end
+      @error_classes = Array.wrap(error_classes).map(&:to_s)
 
-    do_it!
+      do_it!
+    rescue StandardError => e
+      @logger.info("Error in RerunErroredEntriesForImporterJob: #{e.message}")
+      Sentry.capture_exception(e, extra: { importer_id: importer_id, last_run_id: last_run_id, error_classes: error_classes })
+    end
   end
 
   attr_reader :importer, :last_run, :new_run, :logger, :error_classes
