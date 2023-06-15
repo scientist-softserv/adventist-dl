@@ -24,7 +24,7 @@ body.public-facing {
   p {
     color: $darkgrey;
   }
-  
+
   .lh-40 {
     line-height: 40px;
   }
@@ -50,16 +50,16 @@ body.public-facing {
     border: 1px solid $mediumyellow;
     color: $darkyellow;
     outline: 0;
-    &:hover, 
+    &:hover,
     &:focus,
-    &.focus, 
-    &:active, 
-    &.active, 
+    &.focus,
+    &:active,
+    &.active,
     &.active:hover,
     &.active:focus,
     &:active:hover,
-    &:active:focus, 
-    &:active.focus, 
+    &:active:focus,
+    &:active.focus,
     &.active.focus {
       border-color: $darkyellow;
       border: 1px solid $darkyellow;
@@ -81,16 +81,16 @@ body.public-facing {
     letter-spacing: 1px;
     text-transform: uppercase;
     font-size: small;
-    &:hover, 
+    &:hover,
     &:focus,
-    &.focus, 
-    &:active, 
-    &.active, 
+    &.focus,
+    &:active,
+    &.active,
     &.active:hover,
     &.active:focus,
     &:active:hover,
-    &:active:focus, 
-    &:active.focus, 
+    &:active:focus,
+    &:active.focus,
     &.active.focus {
       border-color: $mediumgrey;
       border: 2px solid $mediumgrey;
@@ -326,16 +326,16 @@ body.public-facing {
     &.alert-success {
       background: linear-gradient(#efefef, $white, $white, #efefef);
     }
-    
+
     &.alert-info {
       background: linear-gradient(#dde5ee, #f7f7f7, $white, #f7f7f7, #dde5ee);
     }
-    
+
     &.alert-warning {
       background: linear-gradient(#fff7db, #f7f7f7, $white, #f7f7f7, #fff7db);
     }
   }
-  
+
   .legend {
     color: $black !important;
   }
@@ -387,7 +387,7 @@ body.public-facing {
     background-color: $white;
     border: 0;
   }
-  
+
   .dropdown-btn:hover,
   li.dropdown-item:hover {
     color: $darkyellow;
@@ -406,7 +406,7 @@ body.public-facing {
     background-color: $lightgrey;
     border: 0;
   }
-  
+
   .form-control {
     transition: border ease-in-out 0.2s, box-shadow ease-in-out 0.15s;
     &:focus {
@@ -422,7 +422,7 @@ body.public-facing {
     background-color: $white !important;
     border-radius: 4px !important;
   }
-  
+
   nav.breadcrumb {
     margin-top: 50px;
   }
@@ -431,11 +431,11 @@ body.public-facing {
   .label-success {
     background-color: $mediumyellow;
   }
-  
+
   .label-info {
     background-color: $darkyellow;
   }
-  
+
   .label-primary {
     background-color: $darkyellow;
   }
@@ -469,4 +469,10 @@ body.public-facing {
     width: 30px;
     object-fit: cover;
   }
+}
+
+// for catalog search result snippets
+.highlight {
+  background: yellow;
+  font-weight: 700;
 }

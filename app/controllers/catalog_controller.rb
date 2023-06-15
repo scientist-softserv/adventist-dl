@@ -36,7 +36,8 @@ class CatalogController < ApplicationController
 
   configure_blacklight do |config|
     # IiifPrint index fields
-    config.add_index_field 'all_text_timv', highlight: true, helper_method: :render_ocr_snippets
+    config.add_index_field 'all_text_timv'
+    config.add_index_field 'file_set_text_tsimv', label: "Item contents", highlight: true, helper_method: :render_ocr_snippets
 
     # configuration for Blacklight IIIF Content Search
     config.iiif_search = {
@@ -77,7 +78,12 @@ class CatalogController < ApplicationController
       qt: "search",
       rows: 10,
       qf: IiifPrint.config.metadata_fields.keys.map { |attribute| "#{attribute}_tesim" }
-                   .join(' ') << "title_tesim description_tesim all_text_timv"
+                   .join(' ') << "title_tesim description_tesim all_text_timv file_set_text_tsimv",
+      "hl": true,
+      "hl.simple.pre": "<span class='highlight'>",
+      "hl.simple.post": "</span>",
+      "hl.snippets": 30,
+      "hl.fragsize": 100
     }
 
     # Specify which field to use in the tag cloud on the homepage.
