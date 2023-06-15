@@ -16,12 +16,8 @@ class RerunEntryJob < ApplicationJob
     bulkrax_entry = entry_class_name.constantize.find(entry_id)
     Rails.logger.info("Submitting re-import for #{bulkrax_entry.class} ID=#{bulkrax_entry.id}")
 
-    begin
-      bulkrax_entry.build
-      bulkrax_entry.save
-    rescue StandardError => e
-      Rails.logger.error("Error re-submitting entry for #{bulkrax_entry.class} ID=#{bulkrax_entry.id}: #{e.message}")
-    end
+    bulkrax_entry.build
+    bulkrax_entry.save
 
     # rubocop:disable Metrics/LineLength
     Rails.logger.info("Finished re-submitting entry for for #{bulkrax_entry.class} ID=#{bulkrax_entry.id}. entry status=#{bulkrax_entry.status}")
