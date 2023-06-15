@@ -12,7 +12,7 @@ class BatchDestroyCollectionsJob < ApplicationJob
 
       DestroyCollectionsJob.perform_later(collection.id)
       counter += 1
-      Rails.logger.info "#{counter} of #{collection_count} collections were destroyed!"
+      Rails.logger.info "#{counter} of #{collection_count} collections were submitted!"
     end
   end
 end
