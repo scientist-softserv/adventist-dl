@@ -20,7 +20,7 @@ class RerunEntryJob < ApplicationJob
       bulkrax_entry.build
       bulkrax_entry.save
     rescue StandardError => e
-      logger.error("Error re-submitting entry for #{bulkrax_entry.class} ID=#{bulkrax_entry.id}: #{e.message}")
+      Rails.logger.error("Error re-submitting entry for #{bulkrax_entry.class} ID=#{bulkrax_entry.id}: #{e.message}")
     end
 
     # rubocop:disable Metrics/LineLength
