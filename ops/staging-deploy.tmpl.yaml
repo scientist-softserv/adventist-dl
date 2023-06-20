@@ -78,6 +78,8 @@ extraEnvVars: &envVars
     value: adventist
   - name: DATABASE_USER
     value: postgres
+  - name: EXTERNAL_IIIF_URL
+    value: https://d3pg70bdc74ala.cloudfront.net/iiif/2
   - name: FCREPO_BASE_PATH
     value: /adventist
   - name: FCREPO_HOST
