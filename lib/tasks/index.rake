@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'ruby-progressbar'
 
 namespace :hyku do
   desc "reindex just the works in the background"
