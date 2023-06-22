@@ -7,7 +7,7 @@ class AddWorksToCollectionsJob < ApplicationJob
     work = record_data[:model].constantize.where(identifier: record_data[:identifier]).first
     collection = Collection.where(identifier: record_data[:parents]).first
 
-    return if !work.present? && !collection.present?
+    return if work.blank? && collection.blank?
     return if work.member_of_collection_ids.include?(collection.id)
 
     collection.try(:reindex_extent=, Hyrax::Adapters::NestingIndexAdapter::LIMITED_REINDEX)
