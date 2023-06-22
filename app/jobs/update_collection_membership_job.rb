@@ -31,13 +31,9 @@ class UpdateCollectionMembershipJob < ApplicationJob
 
       wk_updated += 1
       Rails.logger.info("💯💯💯 Collections updated for #{wk.id}")
-
-    rescue StandardError => e
-      errors << Rails.logger.info("🚫🚫🚫 UpdateError #{e}")
     end
   
     Rails.logger.info("💜💜💜 Collection updates for work type #{work_type}: #{wk_count} processed, #{wk_updated} updated.")
-    Rails.logger.info(errors)
   end
 
   def load_collections_for(new_colls)
