@@ -1,30 +1,25 @@
 # frozen_string_literal: true
 
+require 'csv'
+
 class AddWorksToCollectionsJob < ApplicationJob
   queue_as :relationships
 
-  def perform(record_data:)
-    work = record_data[:model].constantize.where(identifier: record_data[:identifier]).first
-    collection = Collection.where(identifier: record_data[:parents]).first
+  retry_on StandardError, attempts: 0
 
-    return if work.blank? && collection.blank?
-    return if work.member_of_collection_ids.include?(collection.id)
+  def perform
+    csv_path = "lib/data/articles_parent_child_relationships_final.csv"
+    csv_data = File.read(csv_path)
+    CSV.parse(csv_data, headers: true) do |row|
+      record_data = row.to_hash.symbolize_keys
+      begin
+        ConvertToRelationshipJob.perform_later(record_data: record_data)
+      rescue StandardError => e
+        Rails.logger.error("😈😈😈 Error: #{e.message} for #{record_data[:identifier]}")
+        raise e
+      end
 
-    collection.try(:reindex_extent=, Hyrax::Adapters::NestingIndexAdapter::LIMITED_REINDEX)
-    work.member_of_collections << collection
-    work.save!
-    Rails.logger.info("🦄🪺👩‍👩‍👧‍👦 #{record_data[:identifier]} processed")
-  rescue StandardError => e
-    notice = "😈😈😈 ERROR: unable to create relationship for #{record_data[:identifier]}"
-    Rails.logger.error(notice)
-    Rails.logger.error(e.message)
-    File.open('uploads/add_works_to_collection_errors.txt', 'a') do |f|
-      f.puts Time.zone.now
-      f.puts notice
-      f.puts e.message
+      Rails.logger.info("🎁🎁🎁🎁")
     end
-
-    # raise error so that GoodJobs can log it
-    raise e
   end
 end
