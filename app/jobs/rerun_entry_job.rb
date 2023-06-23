@@ -10,6 +10,8 @@
 class RerunEntryJob < ApplicationJob
   queue_as :reimport
 
+  retry_on StandardError, attempts: 0
+
   ##
   # @param entry [Entry Object] the entry to run
   def perform(entry_class_name:, entry_id:)

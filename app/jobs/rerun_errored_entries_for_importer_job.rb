@@ -13,6 +13,8 @@
 class RerunErroredEntriesForImporterJob < ApplicationJob
   queue_as :reimport
 
+  retry_on StandardError, attempts: 0
+
   ##
   # @param importer_id [Integer]
   # @param last_run_id [Integer]
@@ -30,12 +32,6 @@ class RerunErroredEntriesForImporterJob < ApplicationJob
     @error_classes = Array.wrap(error_classes).map(&:to_s)
 
     do_it!
-  rescue StandardError => e
-    @logger.info("Error in RerunErroredEntriesForImporterJob: #{e.message}")
-    # rubocop:disable Metrics/LineLength
-    Raven.capture_exception(e, extra: { importer_id: importer_id, last_run_id: last_run_id, error_classes: error_classes })
-    # rubocop:enable Metrics/LineLength
-    nil
   end
 
   attr_reader :importer, :last_run, :new_run, :logger, :error_classes
@@ -77,7 +73,15 @@ class RerunErroredEntriesForImporterJob < ApplicationJob
       # rubocop:disable Metrics/LineLength
       logger.info("Enqueuing re-import for #{reimport_logging_context} #{status.statusable_type} ID=#{status.statusable_id} (#{counter} of #{relation_count}).")
       # rubocop:enable Metrics/LineLength
-      RerunEntryJob.perform_later(entry_class_name: status.statusable_type, entry_id: status.statusable_id)
+      begin
+        # rubocop:enable Metrics/LineLength
+        RerunEntryJob.perform_later(entry_class_name: status.statusable_type, entry_id: status.statusable_id)
+      rescue StandardError => e
+        # rubocop:disable Metrics/LineLength
+        logger.error("😈😈😈 Error: #{e.message} for #{reimport_logging_context} #{status.statusable_type} ID=#{status.statusable_id}")
+        # rubocop:enable Metrics/LineLength
+        raise e
+      end
     end
 
     logger.info("Finished submitting re-imports for #{reimport_logging_context}.")
