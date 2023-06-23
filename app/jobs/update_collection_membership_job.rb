@@ -3,6 +3,8 @@
 class UpdateCollectionMembershipJob < ApplicationJob
   queue_as :collections
 
+  retry_on StandardError, attempts: 0
+
   def perform(work_id:, colls:)
     wk = ActiveFedora::Base.find(work_id)
     new_colls_array = load_collections_for(colls)
