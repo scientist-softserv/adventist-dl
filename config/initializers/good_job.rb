@@ -15,8 +15,8 @@ end
 # Wrapping this in an after_initialize block to ensure that all constants are loaded
 Rails.application.config.after_initialize do
   # baseline of 0, higher is sooner
-  BatchDestroyCollectionsJob.priority = 70
-  RerunErroredEntriesForImporterJob.priority = 60
+  CollectionMembershipJob.priority = 70
+  UpdateCollectionMembershipJob.priority = 60
   Bulkrax::ScheduleRelationshipsJob.priority = 50
   CreateDerivativesJob.priority = 40
   CharacterizeJob.priority = 30
