@@ -32,6 +32,7 @@ class CollectionMembershipJob < ApplicationJob
         UpdateCollectionMembershipJob.perform_later(work_id: wk.id, colls: new_colls)
       rescue StandardError => e
         Rails.logger.error "👿👿 Error: #{e.message} for #{wk.id}"
+        Raven.capture_exception(e)
         raise e
       end
 
