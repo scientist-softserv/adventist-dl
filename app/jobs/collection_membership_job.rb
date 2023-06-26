@@ -37,7 +37,6 @@ class CollectionMembershipJob < ApplicationJob
       end
 
       wk_updated += 1
-      Rails.logger.info("💯💯💯 Collections updated for #{wk.id}")
     end
 
     # rubocop:disable Metrics/LineLength

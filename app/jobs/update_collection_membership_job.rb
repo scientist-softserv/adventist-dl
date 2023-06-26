@@ -10,6 +10,7 @@ class UpdateCollectionMembershipJob < ApplicationJob
     new_colls_array = load_collections_for(colls)
     wk.member_of_collections = new_colls_array
     wk.save!
+    Rails.logger.info("💯💯💯 Collections updated for #{wk.id}")
   end
 
   def load_collections_for(new_colls)
