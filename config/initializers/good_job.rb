@@ -17,8 +17,13 @@ end
 # Wrapping this in an after_initialize block to ensure that all constants are loaded
 Rails.application.config.after_initialize do
   # baseline of 0, higher is sooner
-  CollectionMembershipJob.priority = 70
-  UpdateCollectionMembershipJob.priority = 60
+
+  # Commented out the following two jobs because they were
+  # specfically used for the sdapi ingests.
+  # see sdapi_ingest_script directory and
+  # ref: https://github.com/scientist-softserv/adventist-dl/issues/468
+  # CollectionMembershipJob.priority = 70
+  # UpdateCollectionMembershipJob.priority = 60
   Bulkrax::ScheduleRelationshipsJob.priority = 50
   CreateDerivativesJob.priority = 40
   CharacterizeJob.priority = 30
