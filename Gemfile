@@ -146,5 +146,5 @@ gem 'dog_biscuits', git: 'https://github.com/samvera-labs/dog_biscuits.git'
 
 gem 'order_already'
 
-gem 'hyrax-v2_graph_indexer', git: 'https://github.com/scientist-softserv/hyrax-v2_graph_indexer', branch: 'production_initialization_order'
+gem 'hyrax-v2_graph_indexer', git: 'https://github.com/scientist-softserv/hyrax-v2_graph_indexer', ref: 'ec2329120dd4658e2af7efc38fd9c7708a18617c'
 gem 'iiif_print', "~> 1.0", git: 'https://github.com/scientist-softserv/iiif_print.git', branch: 'main'
