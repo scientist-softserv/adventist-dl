@@ -8,7 +8,7 @@ class AddWorksToCollectionsJob < ApplicationJob
   retry_on StandardError, attempts: 0
 
   def perform
-    csv_path = "lib/data/articles_parent_child_relationships_final.csv"
+    csv_path = "sdapi_ingest_scripts/data/articles_parent_child_relationships_final.csv"
     csv_data = File.read(csv_path)
     CSV.parse(csv_data, headers: true) do |row|
       record_data = row.to_hash.symbolize_keys
