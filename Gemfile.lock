@@ -27,8 +27,8 @@ GIT
 
 GIT
   remote: https://github.com/scientist-softserv/iiif_print.git
-  revision: d44ea621b0751d11f054d4ae30b994ea5454c591
-  branch: no-rodeo
+  revision: e770b6fbbc6faabcac91e50183c16ae23a2ddd44
+  branch: i469-adv-search-then-paginate
   specs:
     iiif_print (1.0.0)
       blacklight_iiif_search (~> 1.0)
