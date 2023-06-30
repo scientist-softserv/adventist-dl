@@ -1,9 +1,11 @@
 
+# frozen_string_literal: true
+
 Rails.application.configure do
   # Configure options individually...
   config.good_job.preserve_job_records = true
   config.good_job.retry_on_unhandled_error = false
-  config.good_job.on_thread_error = -> (exception) { Sentry.capture_exception(exception) }
+  config.good_job.on_thread_error = ->(exception) { Raven.capture_exception(exception) }
   config.good_job.execution_mode = :external
   # config.good_job.queues = '*'
   config.good_job.shutdown_timeout = 60 # seconds
@@ -15,6 +17,13 @@ end
 # Wrapping this in an after_initialize block to ensure that all constants are loaded
 Rails.application.config.after_initialize do
   # baseline of 0, higher is sooner
+
+  # Commented out the following two jobs because they were
+  # specfically used for the sdapi ingests.
+  # see sdapi_ingest_script directory and
+  # ref: https://github.com/scientist-softserv/adventist-dl/issues/468
+  # CollectionMembershipJob.priority = 70
+  # UpdateCollectionMembershipJob.priority = 60
   Bulkrax::ScheduleRelationshipsJob.priority = 50
   CreateDerivativesJob.priority = 40
   CharacterizeJob.priority = 30
