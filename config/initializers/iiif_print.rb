@@ -36,6 +36,10 @@ IiifPrint.config do |config|
     "#{filename} - #{page_suffix} || #{identifier}"
   }
 
+  config.all_text_generator_function = lambda do |object:|
+    IiifPrint::Data::WorkDerivatives.data(from: object, of_type: 'xml')
+  end
+
   config.metadata_fields = {
     creator: { render_as: :faceted },
     resource_type: { render_as: :faceted },
