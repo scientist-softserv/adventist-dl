@@ -27,7 +27,7 @@ GIT
 
 GIT
   remote: https://github.com/scientist-softserv/iiif_print.git
-  revision: e770b6fbbc6faabcac91e50183c16ae23a2ddd44
+  revision: 7ce73b4e0d6e3ddb7fb0826a85984186092c3b1c
   branch: i469-adv-search-then-paginate
   specs:
     iiif_print (1.0.0)
@@ -1168,7 +1168,7 @@ DEPENDENCIES
   hyrax-v2_graph_indexer
   i18n-debug
   i18n-tasks
-  iiif_print (~> 1.0)!
+  iiif_print!
   is_it_working
   jbuilder (~> 2.5)
   jquery-rails
