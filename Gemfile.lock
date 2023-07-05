@@ -26,6 +26,15 @@ GIT
       hyrax (>= 2, < 3)
 
 GIT
+  remote: https://github.com/scientist-softserv/hyrax-v2_graph_indexer
+  revision: ec2329120dd4658e2af7efc38fd9c7708a18617c
+  branch: main
+  specs:
+    hyrax-v2_graph_indexer (0.4.0)
+      hyrax (~> 2.9)
+      railties
+
+GIT
   remote: https://github.com/scientist-softserv/iiif_print.git
   revision: eb4f238db71698099f02cbb7c38f84213eca7a66
   branch: no-rodeo
@@ -552,9 +561,6 @@ GEM
       signet
       solrizer (>= 3.4, < 5)
       tinymce-rails (~> 4.1)
-    hyrax-v2_graph_indexer (0.3.0)
-      hyrax (~> 2.9)
-      railties
     i18n (1.8.11)
       concurrent-ruby (~> 1.0)
     i18n-debug (1.2.0)
@@ -1154,7 +1160,7 @@ DEPENDENCIES
   flutie
   good_job
   hyrax (~> 2.9, >= 2.9.1)
-  hyrax-v2_graph_indexer
+  hyrax-v2_graph_indexer!
   i18n-debug
   i18n-tasks
   iiif_print!
