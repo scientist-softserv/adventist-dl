@@ -40,6 +40,9 @@ extraVolumeMounts: &volMounts
 ingress:
   enabled: true
   hosts:
+    - host: qa.s2.adventistdigitallibrary.org
+      paths:
+        - path: /
     - host: s2.adventistdigitallibrary.org
       paths:
         - path: /
