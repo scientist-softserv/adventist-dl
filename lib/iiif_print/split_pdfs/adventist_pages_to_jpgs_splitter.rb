@@ -22,7 +22,7 @@ module IiifPrint
                     **args)
         return [] if suffixes.any? { |suffix| path.downcase.end_with?(suffix) }
 
-        splitter.call(path, args)
+        splitter.call(path, **args)
       end
     end
   end
