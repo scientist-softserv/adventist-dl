@@ -36,7 +36,7 @@ GIT
 
 GIT
   remote: https://github.com/scientist-softserv/iiif_print.git
-  revision: 23529a76bef9c90d8ccecd61a8a26c421e0a4ce8
+  revision: fe85c47c1ba8ba7fa0aae14104b86f98a8b581e4
   branch: main
   specs:
     iiif_print (1.0.0)
