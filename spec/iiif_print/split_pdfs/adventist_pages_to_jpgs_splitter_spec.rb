@@ -3,10 +3,8 @@
 require 'spec_helper'
 
 RSpec.describe IiifPrint::SplitPdfs::AdventistPagesToJpgsSplitter do
-  describe '.new' do
-    subject { described_class.new(path, suffixes: ["spec.rb"], splitter: splitter) }
-
-    let(:splitter) { Class.new { def initialize(path); end } }
+  describe '.call' do
+    subject { described_class.call(path, suffixes: ["spec.rb"], file_set: :file_set) }
 
     context 'when given path ends in the given suffix' do
       let(:path) { __FILE__ }
@@ -17,7 +15,9 @@ RSpec.describe IiifPrint::SplitPdfs::AdventistPagesToJpgsSplitter do
     context 'when given path does not end in the suffix' do
       let(:path) { "#{__FILE__}.hello.rb" }
 
-      it { is_expected.to be_a(splitter) }
+      before { allow(IiifPrint::SplitPdfs::PagesToJpgsSplitter).to receive(:call).and_return(:mocked_split) }
+
+      it { is_expected.to be(:mocked_split) }
     end
   end
 end

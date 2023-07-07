@@ -16,13 +16,14 @@ module IiifPrint
       # @note I am adding a {.new} method to a module to mimic the instantiation of a class.
       #
       # @see https://github.com/scientist-softserv/iiif_print/blob/a23706453f23e0f54c9d50bbf0ddf9311d82a0b9/lib/iiif_print/jobs/child_works_from_pdf_job.rb#L39-L63
-      # rubocop:disable Metrics/LineLength
-      def self.new(path, *args, splitter: PagesToJpgsSplitter, suffixes: CreateDerivativesJobDecorator::NON_ARCHIVAL_PDF_SUFFIXES)
+      def self.call(path,
+                    splitter: PagesToJpgsSplitter,
+                    suffixes: CreateDerivativesJobDecorator::NON_ARCHIVAL_PDF_SUFFIXES,
+                    **args)
         return [] if suffixes.any? { |suffix| path.downcase.end_with?(suffix) }
 
-        splitter.new(path, *args)
+        splitter.call(path, **args)
       end
-      # rubocop:enable Metrics/LineLength
     end
   end
 end
