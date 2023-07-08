@@ -36,12 +36,12 @@ GIT
 
 GIT
   remote: https://github.com/scientist-softserv/iiif_print.git
-  revision: fe85c47c1ba8ba7fa0aae14104b86f98a8b581e4
+  revision: fbe418a98bcdce590fc37401f216876fd4c33ec4
   branch: main
   specs:
     iiif_print (1.0.0)
       blacklight_iiif_search (~> 1.0)
-      derivative-rodeo (~> 0.3)
+      derivative-rodeo (~> 0.4)
       dry-monads (~> 1.4.0)
       hyrax (>= 2.5, < 4)
       nokogiri (>= 1.13.2)
