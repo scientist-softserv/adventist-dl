@@ -82,15 +82,15 @@ extraEnvVars: &envVars
   - name: DB_ADAPTER
     value: postgresql
   - name: DATABASE_HOST
-    value: samvera-alpha.cib2moxklxvd.us-east-1.rds.amazonaws.com
+    value: acid-postgres-cluster-alpha.postgres.svc.cluster.local
   - name: DB_HOST
-    value: samvera-alpha.cib2moxklxvd.us-east-1.rds.amazonaws.com
+    value: acid-postgres-cluster-alpha.postgres.svc.cluster.local
   - name: DATABASE_NAME
-    value: adventist-production
+    value: hyku-production-hyrax
   - name: DB_PORT
     value: "5432"
   - name: DATABASE_USER
-    value: postgres
+    value: hyku-production-hyrax
   - name: EXTERNAL_IIIF_URL
     value: https://d3pg70bdc74ala.cloudfront.net/iiif/2
   - name: FCREPO_BASE_PATH
@@ -177,6 +177,8 @@ extraEnvVars: &envVars
     value: "production"
   - name: OMP_THREAD_LIMIT
     value: "1"
+  - name: SECRET_KEY_BASE
+    value: $SECRET_KEY_BASE
 
 worker:
   replicaCount: 1
@@ -222,8 +224,8 @@ solr:
 
 externalFcrepoHost: fcrepo.default.svc.cluster.local
 externalPostgresql:
-  host: samvera-alpha.cib2moxklxvd.us-east-1.rds.amazonaws.com
-  username: postgres
+  host: acid-postgres-cluster-alpha.postgres.svc.cluster.local
+  username: hyku-production-hyrax
   password: $DATABASE_PASSWORD
 
 externalSolrHost: solr.default.cluster.local
