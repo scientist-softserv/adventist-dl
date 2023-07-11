@@ -8,55 +8,110 @@ SERVERLESS_COPY_URL = 'https://v1vzxgta7f.execute-api.us-west-2.amazonaws.com/co
 SERVERLESS_S3_URL = 's3://space-stone-dev-preprocessedbucketf21466dd-bxjjlz4251re.s3.us-west-1.amazonaws.com/'
 SERVERLESS_TEMPLATE = '{{dir_parts[-1..-1]}}/{{ filename }}'
 SERVERLESS_SPLIT_SQS_URL = 'sqs://us-west-2.amazonaws.com/559021623471/space-stone-dev-split-ocr-thumbnail/'
+SERVERLESS_OCR_SQS_URL = 'sqs://us-west-2.amazonaws.com/559021623471/space-stone-dev-ocr/'
 SERVERLESS_THUMBNAIL_SQS_URL = 'sqs://us-west-2.amazonaws.com/559021623471/space-stone-dev-thumbnail/'
 SERVERLESS_COPY_SQS_URL = 'https://sqs.us-west-2.amazonaws.com/559021623471/space-stone-dev-copy'
 BATCH_SIZE = 10
 
-## Read csv file
-## if there is an archival pdf
-## if there is a reader pdf
-## if there is a text file
-## if there is a thumbnail
-
-## if there is an original, a reader, text and a thumbnail
-#- what do we do with a reader?
-#- TODO text copy
-#- copy original to s3
-#- copy thumbnail in to the thumbnail place
-#- split-ocr-thumbnail the original pdf
-
-## if there is an original only
-#- copy original to s3
-#- create a thumbnail of the original pdf
-#- split-ocr-thumbnail the original pdf
-
-## if there is an image in the original slot and an access copy and there is a thumbnail
-#- copy original to s3
-#- copy the thumbnail to the thumbnail place
-#- TODO access copy
-
-## if there is an image in the original slot but no thumbnail
-#- copy original to s3
-#- create thumbnail for the original
-
+##
+# This class is responsible for looping through a CSV and enqueing those records based on some
+# business logic.
+#
+# @example
+#   LoadSpaceStoneFromCsv.new.insert_into_spacestone
 class LoadSpaceStoneFromCsv
-
+  CSV_NAME = 'csv_from_oai.csv'
   def initialize
+    @csv = CSV.read(CSV_NAME, headers: true)
+    @client = Aws::SQS::Client.new(region: 'us-west-2')
+  end
+  attr_reader :csv, :client
+
+  def insert_into_spacestone
+    csv.each do |row|
+      puts row.inspect
+      needs_thumbnail = !has_thumbnail?(row)
+      copy_original(row, needs_thumbnail)
+      copy_access(row, needs_thumbnail)
+    end
+    # When we are done processing each row, we need to handle whatever remains in the queue.
+    # Without this line, we could have CSV rows (or partial rows) that we buffered into the queue
+    # but never submitted.
+    send_remainder_of_queue!
   end
 
-  def csv
-    @csv ||= CSV.read('csv_from_oai.csv', headers: true)
+  ##
+  # For an original file:
+  #
+  # - Copy the original file to the SpaceStone location
+  # - When it is a PDF, enqueue splitting it
+  # - When it does not have a thumbnail, enqueue creating a thumbnail
+  #
+  # @param row [CSV::Row]
+  # @param needs_thumbnail [Boolean] when true we will need to enqueue a thumbnail generation job.
+  def copy_original(row, needs_thumbnail)
+    original_extension = File.extname(row['original'])
+    jobs = [original_destination(row)]
+
+    # TODO: In the case of PDF, Split; in the case of images, OCR.  In all cases thumbnail.
+    if original_extension == '.pdf'
+      jobs << enqueue_destination(row, key: 'original', url: SERVERLESS_SPLIT_SQS_URL)
+    else
+      jobs << enqueue_destination(row, key: 'original', url: SERVERLESS_OCR_SQS_URL)
+    end
+    if needs_thumbnail
+      jobs << enqueue_destination(row, key: 'original', url: SERVERLESS_THUMBNAIL_SQS_URL)
+    end
+
+    post_to_sqs_copy({ row['original'] => jobs })
   end
 
-  def post_to_serverless_copy(workload)
-    puts "#{SERVERLESS_COPY_URL}\n#{JSON.generate(workload)}"
-    HTTParty.post(SERVERLESS_COPY_URL, body: JSON.generate([workload]), headers: { 'Content-Type' => 'application/json' }) unless ENV['DRY_RUN']
+  def copy_access(row, needs_thumbnail)
+    return if row['reader'].to_s.strip.empty?
+    original_extension = File.extname(row['original'])
+    return unless original_extension == '.pdf'
+
+    jobs = [original_destination(row, key: 'reader')]
+
+    if needs_thumbnail
+      jobs << enqueue_destination(row, key: 'reader', url: SERVERLESS_THUMBNAIL_SQS_URL)
+    end
+
+    post_to_sqs_copy({ row['reader'] => jobs })
   end
 
-  def client
-    @client ||= Aws::SQS::Client.new(region: 'us-west-2')
+  def thumbnail_destination(row, key: 'original')
+    # We might have multiple periods in the filename, remove the extension.
+    thumbnail_name = File.basename(row[key]).sub(/\.[^\.]*\z/, ".thumbnail.jpeg")
+    "#{SERVERLESS_S3_URL}#{row['aark_id']}/#{thumbnail_name}"
   end
 
+  def enqueue_destination(row, url:, key: 'original')
+    basename = File.basename(row[key])
+    "#{url}#{row['aark_id']}/#{basename}?template=#{SERVERLESS_S3_URL}#{SERVERLESS_TEMPLATE}"
+  end
+
+  def original_destination(row, key: 'original')
+    "#{SERVERLESS_S3_URL}#{row['aark_id']}/#{File.basename(row[key])}"
+  end
+
+  def has_thumbnail?(row)
+    return false if row['thumbnail'].to_s.strip.empty?
+    return false unless row['thumbnail'].to_s.match(/^https?/)
+
+    # Regardless of the original's type, if we have a thumbnail copy it.
+    post_to_sqs_copy({ row['thumbnail'] => [thumbnail_destination(row)] })
+
+    # We'll only repurpose the thumbnail if the reader is a PDF.
+    if !row['reader'].to_s.strip.empty? && row['reader'].end_with?('.pdf')
+      post_to_sqs_copy({ row['thumbnail'] => thumbnail_destination(row, key: 'reader') })
+    end
+
+    true
+  end
+
+  ##
+  # SQS related methods
   def post_to_sqs_copy(workload)
     @queue ||= []
     @queue << { id: SecureRandom.uuid, message_body: workload.to_json }
@@ -66,55 +121,19 @@ class LoadSpaceStoneFromCsv
     end
   end
 
+  def send_remainder_of_queue!
+    return unless defined?(@queue)
+    return if @queue.empty?
+    send_batch(@queue)
+  end
+
   def send_batch(batch)
+    puts "\t#{SERVERLESS_COPY_SQS_URL}\n\t#{batch.inspect}"
     client.send_message_batch({
       queue_url: SERVERLESS_COPY_SQS_URL,
       entries: batch
-    })
-  end
-
-  def thumbnail_destination(row)
-    thumbnail_name = File.basename(row['original']).sub(/\..*\z/, ".thumbnail.jpeg")
-    "#{SERVERLESS_S3_URL}#{row['aark_id']}/#{thumbnail_name}"
-  end
-
-  def split_destination(row)
-    "#{SERVERLESS_SPLIT_SQS_URL}#{row['aark_id']}/#{row['aark_id']}.pdf?template=#{SERVERLESS_S3_URL}#{SERVERLESS_TEMPLATE}"
-  end
-
-  def original_destination(row)
-    original_extention = File.extname(row['original'])
-    "#{SERVERLESS_S3_URL}#{row['aark_id']}/#{row['aark_id']}#{original_extention}"
-  end
-
-  def has_thumbnail?(row)
-    if row['thumbnail'] && row['thumbnail'].match(/^https/)
-      workload = {
-        row['thumbnail'] => [ thumbnail_destination(row) ]
-      }
-      # post_to_serverless_copy(workload)
-      post_to_sqs_copy(workload)
-      true
-    end
-  end
-
-  def copy_original(row, needs_thumbnail)
-    original_extention = File.extname(row['original'])
-    workload = { row['original'] => [original_destination(row)] }
-    workload[row['original']] << split_destination(row) if original_extention == '.pdf'
-    workload[row['original']] << thumbnail_destination(row) if needs_thumbnail
-    post_to_sqs_copy(workload)
-    # post_to_serverless_copy(workload)
-  end
-
-  def insert_into_spacestone
-    csv.each do |row|
-      needs_thumbnail = !has_thumbnail?(row)
-      copy_original(row, needs_thumbnail)
-      # TODO copy_access(row)
-      puts row.inspect
-    end
+    }) unless ENV['DRY_RUN']
   end
 end
 
-LoadSpaceStoneFromCsv.new.insert_into_spacestone
+loader = LoadSpaceStoneFromCsv.new.insert_into_spacestone
