@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-RSpec.describe Hyku::RegistrationsController, type: :controller do
+# Turn off spec temporarily due to removing registerable
+# ref https://github.com/scientist-softserv/adventist-dl/pull/493
+RSpec.xdescribe Hyku::RegistrationsController, type: :controller do
   before do
     allow(Settings.devise).to receive(:account_signup).and_return(account_signup_enabled)
     # Recommended by Devise: https://github.com/plataformatec/devise/wiki/How-To:-Test-controllers-with-Rails-3-and-4-%28and-RSpec%29
