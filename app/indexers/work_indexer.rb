@@ -41,7 +41,7 @@ class WorkIndexer < Hyrax::WorkIndexer
   end
 
   def all_text(object:)
-    text = IiifPrint.config.all_text_generator_function.call(object: object) || ''
+    text = IiifPrint::Data::WorkDerivatives.data(from: object, of_type: 'txt') || ''
     return text if text.empty?
 
     text.tr("\n", ' ').squeeze(' ')
