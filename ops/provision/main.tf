@@ -14,13 +14,6 @@ terraform {
   }
 }
 
-variable "region" {
-  default     = "us-east-1"
-  description = "AWS region"
-}
-
-variable "keel_password" {}
-
 provider "helm" {
   kubernetes {
     config_path = "kube_config.yml"
@@ -74,7 +67,7 @@ resource "kubernetes_storage_class" "storage_class" {
     fileSystemId     = trimspace(data.local_file.efs_name.content)
     provisioningMode = "efs-ap"
   }
-
+  reclaim_policy = "Retain"
   metadata {
     name = "efs-sc"
   }
@@ -235,4 +228,48 @@ resource "kubernetes_namespace" "productionn" {
 resource "kubectl_manifest" "gitlab-secrets" {
   depends_on = [helm_release.cert_manager]
   yaml_body = file("k8s/gitlab-secret-values.yaml")
+}
+
+# Zalando
+# v 1.8 is max version until we go to k8s 1.25+
+resource "helm_release" "zalando-postgres-operator" {
+  name = "zalando-postgres-operator"
+  create_namespace = true
+  namespace = "zalando-postgres-operator"
+  version = "1.8.2"
+  repository = "https://opensource.zalando.com/postgres-operator/charts/postgres-operator"
+  chart = "postgres-operator"
+  values = [
+    templatefile("k8s/zalando-postgres-operator-values.yaml", {
+      backup_bucket = var.pg_bucket
+      region = var.region
+      aws_access_key_id = var.aws_access_key_id
+      aws_secret_access_key = var.aws_secret_access_key
+    })
+  ]
+}
+
+resource "helm_release" "zalando-postgres-operator-ui" {
+  depends_on = [helm_release.zalando-postgres-operator]
+  name = "zalando-postgres-operator-ui"
+  create_namespace = true
+  namespace = "zalando-postgres-operator"
+  version = "1.8.2"
+  repository = "https://opensource.zalando.com/postgres-operator/charts/postgres-operator-ui"
+  chart = "postgres-operator-ui"
+  values = [
+    templatefile("k8s/zalando-postgres-operator-ui-values.yaml", {
+      backup_bucket = var.pg_bucket
+      region = var.region
+      aws_access_key_id = var.aws_access_key_id
+      aws_secret_access_key = var.aws_secret_access_key
+    })
+  ]
+}
+
+resource "kubectl_manifest" "postgres-cluster-alpha" {
+  depends_on = [helm_release.zalando-postgres-operator-ui]
+  yaml_body =     templatefile("k8s/postgres-cluster-alpha-values.yaml", {
+    databases = split(",", var.pg_alpha_databases)
+  })
 }
