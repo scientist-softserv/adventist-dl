@@ -43,26 +43,19 @@ ingress:
     - host: s2.adventistdigitallibrary.org
       paths:
         - path: /
-    - host: adl.s2.adventistdigitallibrary.org
-      paths:
-        - path: /
-    - host: sdapi.s2.adventistdigitallibrary.org
-      paths:
-        - path: /
     - host: "*.s2.adventistdigitallibrary.org"
       paths:
         - path: /
   annotations: {
     kubernetes.io/ingress.class: "nginx",
     nginx.ingress.kubernetes.io/proxy-body-size: "0",
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: wildcard-issuer
   }
   tls:
     - hosts:
-        - adl.s2.adventistdigitallibrary.org
-        - sdapi.s2.adventistdigitallibrary.org
+        - '*.s2.adventistdigitallibrary.org'
         - s2.adventistdigitallibrary.org
-      secretName: adventist-dev-tls-1
+      secretName: adventist-dev-wild-tls
 
 extraEnvVars: &envVars
   - name: SETTINGS__MULTITENANCY__ADMIN_HOST
@@ -154,6 +147,8 @@ extraEnvVars: &envVars
   - name: SOLR_PORT
     value: "8983"
   - name: SOLR_URL
+    value: http://admin:$SOLR_ADMIN_PASSWORD@solr.default:8983/solr/
+  - name: SETTINGS__SOLR__URL
     value: http://admin:$SOLR_ADMIN_PASSWORD@solr.default:8983/solr/
   - name: SMTP_ENABLED
     value: "true"
