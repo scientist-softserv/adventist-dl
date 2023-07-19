@@ -99,3 +99,5 @@ IiifPrint.config do |config|
 end
 
 require "iiif_print/split_pdfs/adventist_pages_to_jpgs_splitter"
+
+DerivativeRodeo::Generators::PdfSplitGenerator.output_extension = 'jpg'
