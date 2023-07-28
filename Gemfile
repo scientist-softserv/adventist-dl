@@ -145,7 +145,7 @@ gem 'blacklight_range_limit', '6.5.0'
 gem 'dog_biscuits', git: 'https://github.com/samvera-labs/dog_biscuits.git'
 
 gem 'hyrax-v2_graph_indexer', git: 'https://github.com/scientist-softserv/hyrax-v2_graph_indexer', branch: 'main'
-# rubcop:disable Metrics/LineLength
+# rubocop:disable Metrics/LineLength
 gem 'iiif_print', git: 'https://github.com/scientist-softserv/iiif_print.git', ref: '9e7837ce4bd08bf8fff9126455d0e0e2602f6018'
-# rubcop:enable Metrics/LineLength
+# rubocop:enable Metrics/LineLength
 gem 'order_already'
