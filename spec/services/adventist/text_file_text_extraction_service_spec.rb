@@ -25,7 +25,8 @@ RSpec.describe Adventist::TextFileTextExtractionService do
       expect(Hyrax::DerivativeService.services).to(
         match_array(
           [Adventist::TextFileTextExtractionService,
-           IiifPrint::PluggableDerivativeService])
+           IiifPrint::PluggableDerivativeService]
+        )
       )
       # expect(Hyrax::DerivativeService.services).to(
       #   match_array(
