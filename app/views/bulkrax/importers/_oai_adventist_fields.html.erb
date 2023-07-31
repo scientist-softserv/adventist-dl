@@ -18,6 +18,8 @@
 
   <%= fi.input :offset, as: :string, hint: "Start importing after the offset number of records.", input_html: { value: importer.parser_fields['offset'].to_i } %>
 
+  <%= fi.input :skip_thumbnail_url, as: :boolean, hint: "When checked, skip the thumbnail_url found in the feed.  If not checked, we'll still generate a thumbnail.", input_html: { checked: importer.parser_fields.key?('skip_thumbnail_url') ? importer.parser_fields['skip_thumbnail_url'] == "1" : true } %>
+
   <% rights_statements = Hyrax.config.rights_statement_service_class.new %>
   <%= fi.input :rights_statement,
         collection: rights_statements.select_active_options,

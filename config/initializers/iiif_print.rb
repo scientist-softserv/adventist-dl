@@ -100,4 +100,28 @@ end
 
 require "iiif_print/split_pdfs/adventist_pages_to_jpgs_splitter"
 
+# Adventist wants to reduce storage size of their split pages; JPGs are a reasonable storage size
+# compared to TIFFs
 DerivativeRodeo::Generators::PdfSplitGenerator.output_extension = 'jpg'
+
+####################################################################################################
+# The DerivativeRodeo is responsible for finding, moving, and/or generating files from various
+# places.  I have found it invaluable to have a segmented logger for that particular set of
+# functions.  Imagine importing 25 works from an OAI feed, and all of the chatter you'll see.  Now
+# try to find the DerivativeRodeo specific calls, as it:
+#
+# - Checks if the file exists at the output location
+# - Checks if the file exists at the preprocessed location
+# - Copies the preprocessed file to the output location
+# - Generates the file to the output location based on the input uri (by copying that locally)
+# - Sniffs out if a PDF has been split into constituent pages
+#
+# Uncomment the `DerivativeRodeo.config.logger` line, spin up They Might Be Giants's "Doctor Worm"
+# and start tailing good ol' "Dr. Log".  It is what helped me see, in detail, what was happening
+# with all of these bits flying hither and yon.
+#
+# NOTE: By default `DerivativeRodeo.config.logger` will be automatically set to `Rails.logger` when
+# `Rails.logger` is defined.
+####################################################################################################
+
+# DerivativeRodeo.config.logger = Logger.new(Rails.root.join("dr.log").to_s, level: Logger::DEBUG)
