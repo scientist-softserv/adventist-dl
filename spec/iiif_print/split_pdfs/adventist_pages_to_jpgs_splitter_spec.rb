@@ -15,7 +15,6 @@ RSpec.describe IiifPrint::SplitPdfs::AdventistPagesToJpgsSplitter do
     context 'when given path does not end in the suffix' do
       let(:path) { "#{__FILE__}.hello.rb" }
 
-      # before { allow(IiifPrint::SplitPdfs::DerivativeRodeoSplitter).to receive(:call).and_return(:mocked_split) }
       before { allow(IiifPrint::SplitPdfs::PagesToJpgsSplitter).to receive(:call).and_return(:mocked_split) }
 
       it { is_expected.to be(:mocked_split) }

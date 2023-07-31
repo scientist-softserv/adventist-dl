@@ -70,16 +70,9 @@ module Hyku
       # enabling text extraction from plain text files.
       Hyrax::DerivativeService.services = [
         Adventist::TextFileTextExtractionService,
-        IiifPrint::PluggableDerivativeService]
-
-      # When you are ready to use the derivative rodeo instead of the pluggable uncomment the
-      # following and comment out the preceding Hyrax::DerivativeService.service
-      #
-      # Hyrax::DerivativeService.services = [
-      #   Adventist::TextFileTextExtractionService,
-      #   IiifPrint::DerivativeRodeoService,
-      #   Hyrax::FileSetDerivativesService]
-
+        IiifPrint::DerivativeRodeoService,
+        Hyrax::FileSetDerivativesService
+      ]
       DerivativeRodeo::Generators::HocrGenerator.additional_tessearct_options = "-l eng_best"
 
       # Allows us to use decorator files
