@@ -11,7 +11,9 @@ module Bulkrax
       # attaching that thumbnail as it's own file_set.  Which is likely non-desirous behavior.
       #
       # TODO: What is the impact of changing this assumption?
-      parser.parser_fields['skip_thumbnail_url'] == "1" && parsed_metadata.delete('thumbnail_url')
+      if parser.parser_fields['skip_thumbnail_url'] == "1"
+        parsed_metadata.delete('thumbnail_url')
+      end
 
       true
     end
