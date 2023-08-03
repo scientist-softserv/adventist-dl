@@ -78,7 +78,7 @@ class CatalogController < ApplicationController
       qt: "search",
       rows: 10,
       qf: IiifPrint.config.metadata_fields.keys.map { |attribute| "#{attribute}_tesim" }
-                   .join(' ') << "title_tesim description_tesim all_text_timv file_set_text_tsimv",
+                   .join(' ') << " title_tesim description_tesim all_text_timv file_set_text_tsimv", # the first space character is necessary!
       "hl": true,
       "hl.simple.pre": "<span class='highlight'>",
       "hl.simple.post": "</span>",
