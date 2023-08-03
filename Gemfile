@@ -89,10 +89,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
-# rubocop:disable Metrics/LineLength
-# Bulkrax :: While we technically don't need a version when we tag on the branch, this helps us have a quick scan of what version we're assuming/working with.
-gem 'bulkrax', "~> 5.2.1", git: 'https://github.com/samvera-labs/bulkrax.git', ref: '0652a8428f65af1bbe9b6016336c760ac96447b2'
-# rubocop:enable Metrics/LineLength
+gem 'bulkrax', '~> 5.0'
 
 gem 'blacklight', '~> 6.7'
 gem 'blacklight_oai_provider', '~> 6.1', '>= 6.1.1'
