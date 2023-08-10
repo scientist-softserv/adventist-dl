@@ -75,9 +75,9 @@ extraEnvVars: &envVars
   - name: DB_ADAPTER
     value: postgresql
   - name: DATABASE_HOST
-    value: acid-postgres-cluster-alpha.postgres.svc.cluster.local
+    value: acid-postgres-cluster-bravo.postgres.svc.cluster.local
   - name: DB_HOST
-    value: acid-postgres-cluster-alpha.postgres.svc.cluster.local
+    value: acid-postgres-cluster-bravo.postgres.svc.cluster.local
   - name: DATABASE_NAME
     value: hyku-production-hyrax
   - name: DB_PORT
@@ -217,7 +217,7 @@ solr:
 
 externalFcrepoHost: fcrepo.default.svc.cluster.local
 externalPostgresql:
-  host: acid-postgres-cluster-alpha.postgres.svc.cluster.local
+  host: acid-postgres-cluster-bravo.postgres.svc.cluster.local
   username: hyku-production-hyrax
   password: $DATABASE_PASSWORD
 
