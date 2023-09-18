@@ -4,14 +4,14 @@ require 'csv'
 require 'httparty'
 require 'aws-sdk-sqs'
 
-SERVERLESS_COPY_URL = 'https://v1vzxgta7f.execute-api.us-west-2.amazonaws.com/copy'
-SERVERLESS_S3_URL = 's3://space-stone-dev-preprocessedbucketf21466dd-bxjjlz4251re.s3.us-west-1.amazonaws.com/'
-SERVERLESS_TEMPLATE = '{{dir_parts[-1..-1]}}/{{ filename }}'
-SERVERLESS_SPLIT_SQS_URL = 'sqs://us-west-2.amazonaws.com/559021623471/space-stone-dev-split-ocr-thumbnail/'
-SERVERLESS_OCR_SQS_URL = 'sqs://us-west-2.amazonaws.com/559021623471/space-stone-dev-ocr/'
-SERVERLESS_THUMBNAIL_SQS_URL = 'sqs://us-west-2.amazonaws.com/559021623471/space-stone-dev-thumbnail/'
-SERVERLESS_COPY_SQS_URL = 'https://sqs.us-west-2.amazonaws.com/559021623471/space-stone-dev-copy'
-BATCH_SIZE = 10
+SERVERLESS_COPY_URL = ENV.fetch('SERVERLESS_COPY_URL')
+SERVERLESS_S3_URL = ENV.fetch('SERVERLESS_S3_URL')
+SERVERLESS_TEMPLATE = ENV.fetch('SERVERLESS_TEMPLATE')
+SERVERLESS_SPLIT_SQS_URL = ENV.fetch('SERVERLESS_SPLIT_SQS_URL')
+SERVERLESS_OCR_SQS_URL = ENV.fetch('SERVERLESS_OCR_SQS_URL')
+SERVERLESS_THUMBNAIL_SQS_URL = ENV.fetch('SERVERLESS_THUMBNAIL_SQS_URL')
+SERVERLESS_COPY_SQS_URL = ENV.fetch('SERVERLESS_COPY_SQS_URL')
+SERVERLESS_BATCH_SIZE = ENV.fetch('SERVERLESS_BATCH_SIZE', 10).to_i
 
 ##
 # This class is responsible for looping through a CSV and enqueing those records based on some
@@ -115,7 +115,7 @@ class LoadSpaceStoneFromCsv
   def post_to_sqs_copy(workload)
     @queue ||= []
     @queue << { id: SecureRandom.uuid, message_body: workload.to_json }
-    if (@queue.size % BATCH_SIZE) == 0
+    if (@queue.size % SERVERLESS_BATCH_SIZE) == 0
       send_batch(@queue)
       @queue = []
     end

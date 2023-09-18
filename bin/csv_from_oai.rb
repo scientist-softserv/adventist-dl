@@ -24,7 +24,7 @@ class CsvFromOai
     @sets ||= [
       "adl:thesis",
       "adl:periodical",
-      "adl:issue",
+      "adl:issue"
       "adl:article",
       "adl:image",
       "adl:book",
@@ -111,6 +111,35 @@ class CsvFromOai
       end
     end
   end
+
+  def build_csv_resume(page: )
+    set = "adl:issue"
+
+    CSV.open("csv_from_oai#{page}.csv",
+      'wb',
+      write_headers: true,
+      headers: csv_headers
+    ) do |csv|
+      # Write the headers to the CSV file
+      records = client.list_records(opts.merge(set: set, resumption_token: "adl:issue|#{page}"))
+        # For the full set of records.
+        record_set = ENV.fetch('FULL', nil) ? records.full : records
+        record_set.each_with_index do |r, i|
+          puts "== Record #{i} of Set #{set} - Page #{record_set.instance_variable_get("@response").resumption_token}"
+          # For the first 25 records, comment out previous line and comment in the following line.
+          # records.each_with_index do |r|
+          row = { 'oai_set' => set }
+          row['aark_id'] = r.header.identifier
+          thumbnail_urls = urls_for(r, 'thumbnail_url')
+          related_urls = urls_for(r, 'related_url')
+
+          row.merge!(process_related_urls(related_urls))
+          row['thumbnail'] = thumbnail_urls.first
+          csv << csv_headers.map { |h| row[h] }.flatten
+        end
+    end
+  end
+
 end
 
 email = ENV.fetch('CSV_EMAIL', nil)

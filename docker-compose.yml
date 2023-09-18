@@ -12,6 +12,7 @@ x-app: &app
       - ghcr.io/scientist-softserv/adventist-dl:${TAG:-latest}
   env_file:
     - .env
+    - .env.development
   # NOTE: all common env variables moved to .env
   volumes:
     - node_modules:/app/samvera/hyrax-webapp/node_modules:cached
@@ -41,8 +42,8 @@ services:
   zoo:
     image: zookeeper:3.6.2
     ports:
-      - 2181:2181
-      - 7001:7000
+      - 2181
+      - 7000
     environment:
       - ZOO_MY_ID=1
       - ZOO_4LW_COMMANDS_WHITELIST=mntr,srvr,ruok,conf
