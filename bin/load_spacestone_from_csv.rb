@@ -27,8 +27,12 @@ class LoadSpaceStoneFromCsv
   end
   attr_reader :csv, :client
 
-  def insert_into_spacestone
+  def insert_into_spacestone(start_at = 0, end_at = 0)
+    count = 0
     csv.each do |row|
+      puts "Processing row #{count += 1}"
+      next if count < start_at
+      break if end_at > 0 && count > end_at
       puts row.inspect
       needs_thumbnail = !has_thumbnail?(row)
       copy_original(row, needs_thumbnail)
@@ -50,6 +54,8 @@ class LoadSpaceStoneFromCsv
   # @param row [CSV::Row]
   # @param needs_thumbnail [Boolean] when true we will need to enqueue a thumbnail generation job.
   def copy_original(row, needs_thumbnail)
+    return if row['original'].to_s.strip.empty?
+
     original_extension = File.extname(row['original'])
     jobs = [original_destination(row)]
 
@@ -136,4 +142,6 @@ class LoadSpaceStoneFromCsv
   end
 end
 
-loader = LoadSpaceStoneFromCsv.new.insert_into_spacestone
+start_at = ENV.fetch('START_AT', 0).to_i
+end_at = ENV.fetch('END_AT', 0).to_i
+loader = LoadSpaceStoneFromCsv.new.insert_into_spacestone(start_at, end_at)
