@@ -124,4 +124,7 @@ DerivativeRodeo::Generators::PdfSplitGenerator.output_extension = 'jpg'
 # `Rails.logger` is defined.
 ####################################################################################################
 
-# DerivativeRodeo.config.logger = Logger.new(Rails.root.join("dr.log").to_s, level: Logger::DEBUG)
+if ENV.fetch('LOCAL_RODEO_LOG', 'false') == 'true'
+  FileUtils.mkdir_p(Rails.root.join('log').to_s)
+  DerivativeRodeo.config.logger = Logger.new(Rails.root.join("log/dr.log").to_s, level: Logger::DEBUG)
+end
