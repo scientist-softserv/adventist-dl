@@ -183,7 +183,7 @@ extraEnvVars: &envVars
   - name: SERVERLESS_ALTO_DLQ
     value: https://sqs.us-east-1.amazonaws.com/031107666127/space-stone-production-alto-xml-dlq
   - name: SERVERLESS_BATCH_SIZE
-    value: 10
+    value: "10"
   - name: SERVERLESS_COPY_DLQ
     value: https://sqs.us-east-1.amazonaws.com/031107666127/space-stone-production-copy-dlq
   - name: SERVERLESS_COPY_SQS_URL
