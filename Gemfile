@@ -143,6 +143,6 @@ gem 'dog_biscuits', git: 'https://github.com/samvera-labs/dog_biscuits.git'
 
 gem 'hyrax-v2_graph_indexer', git: 'https://github.com/scientist-softserv/hyrax-v2_graph_indexer', branch: 'main'
 # rubocop:disable Metrics/LineLength
-gem 'iiif_print', git: 'https://github.com/scientist-softserv/iiif_print.git', ref: '9e7837ce4bd08bf8fff9126455d0e0e2602f6018'
+gem 'iiif_print', git: 'https://github.com/scientist-softserv/iiif_print.git', ref: '5fb1531c2aa4c4797aea5a83c74797148a9fbc32'
 # rubocop:enable Metrics/LineLength
 gem 'order_already'

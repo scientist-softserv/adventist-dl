@@ -68,6 +68,16 @@ The full spec suite can be run in docker locally. There are several ways to do t
 docker-compose exec web rake
 ```
 
+#### Update Dependencies
+
+You can edit the Gemfile then run:
+
+```bash
+docker compose -f ./docker-compose.yml -f ./docker-compose.bundle.yml up
+```
+
+The above will make sure to bundle the updated gems.
+
 ### With out Docker
 
 Please note that this is unused by most contributors at this point and will likely become unsupported in a future release of Hyku unless someone in the community steps up to maintain it.
