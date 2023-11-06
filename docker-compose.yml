@@ -174,7 +174,7 @@ services:
         condition: service_started
       check_volumes:
         condition: service_started
-     fits:
+      fits:
         condition: service_started
       chrome:
         condition: service_started
