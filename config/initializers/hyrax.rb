@@ -188,6 +188,8 @@ Hyrax.config do |config|
     uri.sub(%r{/info\.json\Z}, '')
   end
 
+  config.nested_relationship_reindexer = ->(id:, extent:) {}
+
 end
 
 Date::DATE_FORMATS[:standard] = "%m/%d/%Y"
