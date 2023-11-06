@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # OVERIDE Hyrax 3.6 to support fits servlet
 class CharacterizeJob < Hyrax::ApplicationJob
   queue_as Hyrax.config.ingest_queue_name
