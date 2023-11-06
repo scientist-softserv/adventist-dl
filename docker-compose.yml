@@ -121,6 +121,12 @@ services:
     networks:
       internal:
 
+  fits:
+     image: harvardlts/fitsservlet_container:1.5.0
+     ports:
+       - 9090:8080
+     networks:
+       internal:
   # Used exclusively for building and caching the
   # base image to reduce build times, if running
   # docker-compose up this container will exit with
@@ -168,6 +174,8 @@ services:
         condition: service_started
       check_volumes:
         condition: service_started
+      fits:
+        condition: service_started
       chrome:
         condition: service_started
       worker:
@@ -213,6 +221,8 @@ services:
       fcrepo:
         condition: service_started
       redis:
+        condition: service_started
+      fits:
         condition: service_started
       zoo:
         condition: service_started
