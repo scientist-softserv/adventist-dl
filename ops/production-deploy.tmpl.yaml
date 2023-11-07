@@ -247,11 +247,13 @@ fcrepo:
 postgresql:
   enabled: false
 redis:
-  cluster:
-    enabled: false
-  password: $REDIS_PASSWORD
+  architecture: standalone
+  auth:
+    password: $REDIS_PASSWORD
 solr:
   enabled: false
+
+fcrepoBasePathOverride: "/adventist-production"
 
 externalFcrepoHost: fcrepo.default.svc.cluster.local
 externalPostgresql:
@@ -260,6 +262,7 @@ externalPostgresql:
   password: $DATABASE_PASSWORD
 
 externalSolrHost: solr.default.cluster.local
+externalSolrPort: 8983
 externalSolrUser: admin
 externalSolrPassword: $SOLR_ADMIN_PASSWORD
 externalSolrCollection: "hyku-adventist-production"
