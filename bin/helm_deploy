@@ -23,7 +23,8 @@ WORKER_IMAGE="${WORKER_IMAGE:-ghcr.io/samvera/hyku/worker}"
 DEPLOY_TAG="${DEPLOY_TAG:-latest}"
 WORKER_TAG="${WORKER_TAG:-$DEPLOY_TAG}"
 
-helm pull --untar oci://ghcr.io/samvera/hyrax/hyrax-base:hyrax-v5.0.0.rc2
+helm pull --untar oci://ghcr.io/samvera/hyrax/hyrax-base --version hyrax-v5.0.0.rc2
+
 helm repo update
 
 helm upgrade \
