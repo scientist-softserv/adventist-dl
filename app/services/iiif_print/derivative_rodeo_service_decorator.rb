@@ -1,7 +1,7 @@
-##
-# OVERRIDE: This is in play to to introduce additional logging to see where things are faililng.
 module IiifPrint
   module DerivativeRodeoServiceDecorator
+    ##
+    # OVERRIDE: This is in play to to introduce additional logging to see where things are faililng.
     module ClassMethods
       def derivative_rodeo_preprocessed_directory_for(file_set:, filename:)
         # In the case of a page split from a PDF, we need to know the grandparent's identifier to
@@ -35,6 +35,17 @@ module IiifPrint
       end
     end
   end
+
+  module SplitPdfs
+    ##
+    # OVERRIDE: This is in play to correct the mktmpdir bug introduced.
+    module DerivativeRodeoSplitterDecorator
+      def initialize(filename, file_set:, output_tmp_dir: Dir.tmpdir)
+        super
+      end
+    end
+  end
 end
 
 IiifPrint::DerivativeRodeoService.singleton_class.send(:prepend, IiifPrint::DerivativeRodeoServiceDecorator::ClassMethods)
+IiifPrint::SplitPdfs::DerivativeRodeoSplitter.prepend(IiifPrint::SplitPdfs::DerivativeRodeoSplitterService)
