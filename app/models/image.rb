@@ -11,6 +11,7 @@ class Image < ActiveFedora::Base
   include DogBiscuits::Geo
   include DogBiscuits::PartOf
   include DogBiscuits::PlaceOfPublication
+  include DestroyableChildren
   include IiifPrint.model_configuration(
     pdf_split_child_model: self,
     pdf_splitter_service: IiifPrint::SplitPdfs::AdventistPagesToJpgsSplitter,

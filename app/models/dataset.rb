@@ -20,6 +20,7 @@ class Dataset < DogBiscuits::Dataset
   before_save :combine_dates
 
   prepend OrderAlready.for(:creator)
+  include DestroyableChildren
   include IiifPrint.model_configuration(
     pdf_split_child_model: self,
     pdf_splitter_service: IiifPrint::SplitPdfs::AdventistPagesToJpgsSplitter,
