@@ -379,6 +379,7 @@ ActiveRecord::Schema.define(version: 2023_11_10_163052) do
     t.datetime "updated_at", null: false
     t.string "parent_model"
     t.string "child_model"
+    t.string "file_id"
     t.index ["parent_id"], name: "index_iiif_print_pending_relationships_on_parent_id"
   end
 
