@@ -5,7 +5,7 @@ terraform {
   required_providers {
     rancher2 = {
       source = "rancher/rancher2"
-      version = "1.11.0"
+      version = "1.25.0"
     }
     kubectl = {
       source  = "gavinbunney/kubectl"
@@ -272,4 +272,16 @@ resource "kubectl_manifest" "postgres-cluster-alpha" {
   yaml_body =     templatefile("k8s/postgres-cluster-alpha-values.yaml", {
     databases = split(",", var.pg_alpha_databases)
   })
+}
+
+resource "helm_release" "crowdsec" {
+  depends_on = [helm_release.ingress-nginx]
+  name = "crowdsec"
+  create_namespace = true
+  namespace = "crowdsec"
+  repository = "https://crowdsecurity.github.io/helm-charts"
+  chart = "crowdsec"
+  values = [
+    templatefile("k8s/crowdsec-values.yaml", {})
+  ]
 }
