@@ -266,7 +266,10 @@ externalSolrPort: 8983
 externalSolrUser: admin
 externalSolrPassword: $SOLR_ADMIN_PASSWORD
 externalSolrCollection: "hyku-adventist-production"
+
 nginx:
+  service:
+    port: 80
   enabled: true
   image:
     registry: registry.gitlab.com
