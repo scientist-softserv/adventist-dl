@@ -923,8 +923,7 @@ GEM
       rexml (~> 3.2)
     redic (1.5.3)
       hiredis
-    redis (5.0.8)
-      redis-client (>= 0.17.0)
+    redis (4.8.1)
     redis-client (0.18.0)
       connection_pool
     redis-namespace (1.11.0)
@@ -1214,6 +1213,7 @@ DEPENDENCIES
   rack-test (= 0.7.0)
   rails (~> 5.2.5)
   rails-controller-testing
+  redis (~> 4.0)
   riiif (~> 1.1)
   rolify
   rsolr (~> 2.0)

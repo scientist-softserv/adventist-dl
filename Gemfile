@@ -146,3 +146,4 @@ gem 'derivative-rodeo', git: 'https://github.com/scientist-softserv/derivative_r
 gem 'iiif_print', git: 'https://github.com/scientist-softserv/iiif_print.git', branch: 'main'
 # rubocop:enable Metrics/LineLength
 gem 'order_already'
+gem 'redis', '~> 4.0'
