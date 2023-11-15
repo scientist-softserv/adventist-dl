@@ -277,7 +277,7 @@ nginx:
   image:
     registry: registry.gitlab.com
     repository: notch8/scripts/bitnami-nginx
-    tag: 1.21.5-debian-10-r4
+    tag: 1.21.5-debian-10-r7
   serverBlock: |-
     upstream rails_app {
       server {{ .Values.global.hyraxName }};
