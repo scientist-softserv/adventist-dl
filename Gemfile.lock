@@ -924,12 +924,10 @@ GEM
     redic (1.5.3)
       hiredis
     redis (4.8.1)
-    redis-client (0.18.0)
-      connection_pool
     redis-namespace (1.11.0)
       redis (>= 4)
-    redlock (2.0.6)
-      redis-client (>= 0.14.1, < 1.0.0)
+    redlock (1.2.2)
+      redis (>= 3.0.0, < 5.0)
     regexp_parser (1.7.1)
     representable (3.2.0)
       declarative (< 0.1.0)
@@ -1214,6 +1212,7 @@ DEPENDENCIES
   rails (~> 5.2.5)
   rails-controller-testing
   redis (~> 4.0)
+  redlock (~> 1.2.1)
   riiif (~> 1.1)
   rolify
   rsolr (~> 2.0)

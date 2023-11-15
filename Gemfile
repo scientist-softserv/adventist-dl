@@ -145,3 +145,4 @@ gem 'hyrax-v2_graph_indexer', git: 'https://github.com/scientist-softserv/hyrax-
 gem 'iiif_print', git: 'https://github.com/scientist-softserv/iiif_print.git', branch: 'main'
 gem 'order_already'
 gem 'redis', '~> 4.0'
+gem 'redlock', '~> 1.2.1'
