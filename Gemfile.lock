@@ -7,10 +7,10 @@ GIT
 
 GIT
   remote: https://github.com/scientist-softserv/derivative_rodeo.git
-  revision: 398c186ebf763fef09f1ec2dffd50bdbb9976e58
+  revision: e860b62effa0d29f74515fec4056eb5acb009d69
   branch: main
   specs:
-    derivative-rodeo (0.5.1)
+    derivative-rodeo (0.5.2)
       activesupport (>= 5)
       aws-sdk-s3
       aws-sdk-sqs
@@ -31,16 +31,15 @@ GIT
 
 GIT
   remote: https://github.com/scientist-softserv/iiif_print.git
-  revision: a86c2e570c9019da2280003cd88e106147e21f69
+  revision: e4927984003551b3da702ec986dfb1efdb102d01
   branch: main
   specs:
     iiif_print (1.0.0)
-      blacklight_iiif_search (~> 1.0)
+      blacklight_iiif_search (>= 1.0, < 3.0)
       derivative-rodeo (~> 0.5)
-      dry-monads (~> 1.4.0)
-      hyrax (>= 2.5, < 4)
+      hyrax (>= 2.5, < 6)
       nokogiri (>= 1.13.2)
-      rails (~> 5.0)
+      rails (>= 5.0, < 8.0)
       rdf-vocab (~> 3.0)
 
 GIT
