@@ -100,6 +100,7 @@ module Hyku
 
     # resolve reloading issue in dev mode
     config.paths.add 'app/helpers', eager_load: true
+    config.active_record.yaml_column_permitted_classes = [OpenStruct, Symbol, Time, URI, BigDecimal, Date, DateTime, ActiveSupport::TimeWithZone, ActiveSupport::Duration, ActiveSupport::TimeZone, ActiveSupport::HashWithIndifferentAccess, ActiveSupport::OrderedHash]
 
     config.before_initialize do
       if defined? ActiveElasticJob

@@ -141,9 +141,7 @@ gem 'blacklight_range_limit', '6.5.0'
 
 gem 'dog_biscuits', git: 'https://github.com/samvera-labs/dog_biscuits.git'
 gem 'hyrax-v2_graph_indexer', git: 'https://github.com/scientist-softserv/hyrax-v2_graph_indexer', branch: 'main'
-# rubocop:disable Metrics/LineLength
 gem 'derivative-rodeo', git: 'https://github.com/scientist-softserv/derivative_rodeo.git', branch: 'main'
 gem 'iiif_print', git: 'https://github.com/scientist-softserv/iiif_print.git', branch: 'main'
-# rubocop:enable Metrics/LineLength
 gem 'order_already'
 gem 'redis', '~> 4.0'
