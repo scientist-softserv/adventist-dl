@@ -29,6 +29,17 @@ module Hyku
       :video_embed_viewer
     end
 
+    def pdf_viewer?
+      return unless Flipflop.default_pdf_viewer?
+      return unless file_set_presenters.any?(&:pdf?)
+
+      true
+    end
+
+    def viewer?
+      iiif_viewer? || video_embed_viewer? || pdf_viewer?
+    end
+
     private
 
       def extract_from_identifier(rgx)
