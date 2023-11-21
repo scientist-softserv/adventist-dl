@@ -18,8 +18,7 @@ module ImportUrlJobDecorator
           %(ImportUrlJob: Error copying <#{uri}> to #{dir} with #{e.message}.  #{e.backtrace.join("\n")})
         )
         send_error(e.message)
-        # TODO: Should we re-raise the exception?  As written this copy_remote_file has a false
-        # success.
+        raise "File #{filename} attachment failed for File Set ID #{file_set.id}, with errors #{e.message}"
       end
     end
     Rails.logger.debug("ImportUrlJob: Copying <#{uri}> to #{dir}, closing #{File.join(dir, filename)}")
