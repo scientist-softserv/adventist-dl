@@ -32,7 +32,7 @@ module Hyku
     def pdf_viewer?
       return unless Flipflop.default_pdf_viewer?
       return unless file_set_presenters.any?(&:pdf?)
-      
+
       # If all of the member_presenters are file_set presenters, return true
       # this also means that there are no child works
       member_presenters.all? { |presenter| presenter.is_a? Hyrax::FileSetPresenter }

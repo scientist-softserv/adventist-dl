@@ -8,7 +8,7 @@ module Flipflop
       values = StrategiesController::ENABLE_VALUES | ADDITIONAL_ENABLE_VALUES
       values.include?(params[:commit])
     end
-    
+
     def features_url(**_kargs)
       hyrax.admin_features_path
     end
