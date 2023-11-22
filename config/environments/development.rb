@@ -62,4 +62,14 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  ##
+  # In the development environment we may not have AWS credentials.  When we do, let's use s3.  When
+  # we don't, we'll use local files (which almost certainly will fail).  This means we'd be locally
+  # using the derivative rodeo's splitting process (which should work without a preprocess lcoation).
+  if DerivativeRodeo.config.aws_s3_access_key_id.present? && DerivativeRodeo.config.aws_s3_secret_access_key.present?
+    IiifPrint::DerivativeRodeoService.preprocessed_location_adapter_name = 's3'
+  else
+    IiifPrint::DerivativeRodeoService.preprocessed_location_adapter_name = 'file'
+  end
 end
