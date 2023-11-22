@@ -15,15 +15,15 @@
       <div class="panel-body">
         <div class="row">
           <%= render 'workflow_actions_widget', presenter: @presenter %>
-          <% if @presenter.universal_viewer? || @presenter.video_embed_viewer? %>
+          <% if @presenter.pdf_viewer? %>
+            <div class="col-sm-12">
+              <%= render 'pdf_js', file_set_presenter: pdf_file_set_presenter(@presenter) %>
+            </div>
+          <% elsif @presenter.iiif_viewer? || @presenter.video_embed_viewer? %>
             <div class="col-sm-12">
               <%= render 'representative_media', presenter: @presenter, viewer: true %>
             </div>
-             <% elsif @presenter.pdf_viewer? %>
-              <div class="col-sm-12">
-                <%= render 'pdf_js', file_set_presenter: pdf_file_set_presenter(@presenter) %>
-              </div>
-            <% else %>          
+          <% else %>          
             <div class="col-sm-5 text-center">
               <%= render 'representative_media', presenter: @presenter, viewer: false unless (@presenter.universal_viewer? || @presenter.video_embed_viewer?) %>
               <%= render 'citations', presenter: @presenter %>
