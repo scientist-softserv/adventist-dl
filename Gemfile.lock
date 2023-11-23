@@ -1035,7 +1035,7 @@ GEM
       faraday (>= 0.17.5, < 3.a)
       jwt (>= 1.5, < 3.0)
       multi_json (~> 1.10)
-    simple_form (5.3.0)
+    simple_form (5.1.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
     simplecov (0.16.1)
@@ -1225,6 +1225,7 @@ DEPENDENCIES
   secure_headers
   selenium-webdriver
   sentry-raven
+  simple_form (= 5.1.0)
   simplecov
   solr_wrapper (~> 2.0)
   spring (~> 1.7)
