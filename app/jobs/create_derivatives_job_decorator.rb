@@ -15,7 +15,7 @@ module CreateDerivativesJobDecorator
 
   ##
   # We should not be creating derivatives for thumbnails.
-  FILE_SUFFIXES_TO_SKIP_DERIVATIVE_CREATION = ([".tn.jpg", ".tn.png"] + NON_ARCHIVAL_PDF_SUFFIXES).freeze
+  FILE_SUFFIXES_TO_SKIP_DERIVATIVE_CREATION = ([] + NON_ARCHIVAL_PDF_SUFFIXES).freeze
 
   # rubocop:disable Metrics/LineLength
   def self.create_derivative_for?(file_set:)
