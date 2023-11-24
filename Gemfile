@@ -146,3 +146,5 @@ gem 'iiif_print', git: 'https://github.com/scientist-softserv/iiif_print.git', b
 gem 'order_already'
 gem 'redis', '~> 4.0'
 gem 'redlock', '~> 1.2.1'
+# locking to 5.1.0 because it was throwing errors on 5.3.0 in development
+gem 'simple_form', '5.1.0'
