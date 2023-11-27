@@ -34,6 +34,7 @@ Rails.application.config.after_initialize do
   AttachFilesToWorkJob.priority = -1
   Bulkrax::ImportWorkJob.priority = -5
   Bulkrax::ImportFileSetJob.priority = -15
+  IiifPrint::Jobs::ChildWorksFromPdfJob.priority = -17
   Bulkrax::CreateRelationshipsJob.priority = -20
   Bulkrax::ImporterJob.priority = -20
   IiifPrint::Jobs::CreateRelationshipsJob.priority = -20
