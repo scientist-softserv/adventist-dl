@@ -2,7 +2,6 @@
 
 # OVERRIDE IiifPrint v1.0.0 to not render thumbnail files in the UV
 
-# rubocop:disable Metrics/BlockLength
 IiifPrint::ManifestBuilderServiceBehavior.module_eval do
   def build_manifest(presenter:)
     manifest = manifest_factory.new(presenter).to_h
@@ -30,26 +29,4 @@ IiifPrint::ManifestBuilderServiceBehavior.module_eval do
       }
     end
   end
-
-  def sanitize_v2(hash:, presenter:, solr_doc_hits:)
-    hash['label'] = sanitize_label(hash['label']) if hash.key?('label')
-    hash.delete('description') # removes default description since it's in the metadata fields
-    hash['sequences']&.each do |sequence|
-      # removes canvases if there are thumbnail files
-      sequence['canvases'].reject! do |canvas|
-        sanitize_label(canvas['label']).end_with?('.TN.jpg')
-      end
-
-      sequence['canvases']&.each do |canvas|
-        canvas['label'] = sanitize_label(canvas['label'])
-        apply_metadata_to_canvas(canvas: canvas, presenter: presenter, solr_doc_hits: solr_doc_hits)
-      end
-    end
-    hash
-  end
-
-  def sanitize_label(label)
-    CGI.unescapeHTML(sanitize_value(label))
-  end
 end
-# rubocop:enable Metrics/BlockLength
