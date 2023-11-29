@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   mount BlacklightAdvancedSearch::Engine => '/'
 
   mount Hyrax::Engine, at: '/'
+  mount IiifPrint::Engine, at: '/'
   if Settings.bulkrax.enabled
     mount Bulkrax::Engine, at: '/'
   end
