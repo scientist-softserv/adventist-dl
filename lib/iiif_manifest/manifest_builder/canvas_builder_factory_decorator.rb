@@ -5,12 +5,10 @@
 module IIIFManifest
   module ManifestBuilderDecorator
     module CanvasBuilderFactoryDecorator
-      THUMBNAIL_FILE_SUFFIX = '.tn.jpg'
-
       def from(work)
         composite_builder.new(
           *file_set_presenters(work).map do |presenter|
-            next if presenter.label.downcase.end_with?(THUMBNAIL_FILE_SUFFIX) || !presenter.image?
+            next if presenter.label.downcase.end_with?(Hyku::THUMBNAIL_FILE_SUFFIX) || !presenter.image?
             canvas_builder_factory.new(presenter, work)
           end
         )

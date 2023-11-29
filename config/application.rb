@@ -96,6 +96,13 @@ module Hyku
         Rails.configuration.cache_classes ? require(c) : load(c)
       end
 
+      # See: https://github.com/scientist-softserv/adventist-dl/issues/676
+      IiifPrint::DerivativeRodeoService.named_derivatives_and_generators_filter =
+        ->(file_set:, filename:, named_derivatives_and_generators:) do
+          named_derivatives_and_generators.reject do |named_derivative, generators|
+            named_derivative != :thumbnail && filename.downcase.ends_with?(Hyku::THUMBNAIL_FILE_SUFFIX)
+          end
+        end
     end
 
     # resolve reloading issue in dev mode
@@ -121,4 +128,6 @@ module Hyku
     # copies tinymce assets directly into public/assets
     config.tinymce.install = :copy
   end
+
+  THUMBNAIL_FILE_SUFFIX = '.tn.jpg'
 end
