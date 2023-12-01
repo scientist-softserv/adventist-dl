@@ -4,12 +4,23 @@ module IiifPrint
   module SplitPdfs
     module AdventistPagesToJpgsSplitter
       ##
+      # @param path [String] the path, in particular filename (that hopefully ends with an
+      #        extension).
+      #
+      # @param suffixes [Array<String>] the list of suffixes that we want to ignore for splitting.
+      # @return [TrueClass] when we should be splitting this path.
+      # @return [TrueClass] when we should not be splitting this path.
+      def self.split_this?(path:, suffixes: CreateDerivativesJobDecorator::NON_ARCHIVAL_PDF_SUFFIXES)
+        suffixes.none? { |suffix| path.downcase.end_with?(suffix) }
+      end
+
+      ##
       # We do not always want to split a PDF; this provides a decision point.
       #
       # @param path [String] the path of the file we're attempting to run derivatives against.
       # @param args [Array<Object>] pass through args
       # @param splitter [IiifPrint::SplitPdfs::BaseSplitter] (for dependency injection)
-      # @param suffix [String] (for dependency injection)
+      # @param suffixes [String] (for dependency injection)
       #
       # @return [Enumerable] when we are going to skip splitting, return an empty array; otherwise return
       #         an instance of {IiifPrint::SplitPdfs::AdventistPagesToJpgsSplitter}.
@@ -20,7 +31,7 @@ module IiifPrint
                     splitter: DerivativeRodeoSplitter,
                     suffixes: CreateDerivativesJobDecorator::NON_ARCHIVAL_PDF_SUFFIXES,
                     **args)
-        return [] if suffixes.any? { |suffix| path.downcase.end_with?(suffix) }
+        return [] unless AdventistPagesToJpgsSplitter.split_this?(path: path, suffixes: suffixes)
 
         splitter.call(path, **args)
       end
