@@ -95,6 +95,7 @@ IiifPrint.config do |config|
     collection: {}
   }
 
+  config.skip_splitting_pdf_files_that_end_with_these_texts = CreateDerivativesJobDecorator::NON_ARCHIVAL_PDF_SUFFIXES
   # rubocop:enable Metrics/LineLength
 end
 
