@@ -18,7 +18,9 @@ IiifPrint::ManifestBuilderServiceBehavior.module_eval do
   end
 
   def rendering(presenter:)
-    file_set_presenters = presenter.file_set_presenters.reject { |fsp| fsp.mime_type.include?('image') }
+    file_set_presenters = presenter.file_set_presenters.select do |fsp|
+      fsp.mime_type && !fsp.mime_type.include?('image')
+    end
 
     file_set_presenters.map do |fsp|
       {
