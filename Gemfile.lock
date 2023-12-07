@@ -7,10 +7,10 @@ GIT
 
 GIT
   remote: https://github.com/scientist-softserv/derivative_rodeo.git
-  revision: e860b62effa0d29f74515fec4056eb5acb009d69
+  revision: f8e2173fc907a2f24db37479679a4a84c840e00c
   branch: main
   specs:
-    derivative-rodeo (0.5.2)
+    derivative-rodeo (0.5.3)
       activesupport (>= 5)
       aws-sdk-s3
       aws-sdk-sqs
@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/scientist-softserv/iiif_print.git
-  revision: 9f4b13098ec843f0f8c51c4bdfd0cdcc417c526d
+  revision: e476998ab453afabf1bcb8afa059b4416af9b705
   branch: main
   specs:
     iiif_print (1.0.0)
