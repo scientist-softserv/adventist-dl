@@ -6,6 +6,8 @@ module Hyrax
   module FileSetIndexerDecorator
     def generate_solr_document
       return super unless Flipflop.default_pdf_viewer?
+      return super unless object.pdf?
+      return super unless object.original_file&.content.is_a? String
 
       super.tap do |solr_doc|
         solr_doc['all_text_timv'] = solr_doc['all_text_tsimv'] = pdf_text
@@ -15,9 +17,6 @@ module Hyrax
     private
 
       def pdf_text
-        return unless object.pdf?
-        return unless object.original_file&.content.is_a? String
-
         text = IO.popen(['pdftotext', '-', '-'], 'r+b') do |pdftotext|
           pdftotext.write(object.original_file.content)
           pdftotext.close_write
