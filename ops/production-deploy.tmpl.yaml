@@ -220,6 +220,16 @@ worker:
     limits:
       memory: "8Gi"
       cpu: "2000m"
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: name
+            operator: In
+            values:
+              - {{ include "hyrax.fullname" . }}-worker
+        topologyKey: "kubernetes.io/hostname"
   podSecurityContext:
     runAsUser: 1001
     runAsGroup: 101
@@ -227,6 +237,17 @@ worker:
     fsGroupChangePolicy: "OnRootMismatch"
   extraVolumeMounts: *volMounts
   extraEnvVars: *envVars
+
+affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: name
+            operator: In
+            values:
+              - {{ include "hyrax.fullname" . }}
+        topologyKey: "kubernetes.io/hostname"
 
 podSecurityContext:
   runAsUser: 1001
