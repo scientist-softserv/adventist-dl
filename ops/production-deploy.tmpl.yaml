@@ -239,15 +239,15 @@ worker:
   extraEnvVars: *envVars
 
 affinity:
-    podAntiAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-      - labelSelector:
-          matchExpressions:
-          - key: name
-            operator: In
-            values:
-              - {{ include "hyrax.fullname" . }}
-        topologyKey: "kubernetes.io/hostname"
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+    - labelSelector:
+        matchExpressions:
+        - key: name
+          operator: In
+          values:
+            - {{ include "hyrax.fullname" . }}
+      topologyKey: "kubernetes.io/hostname"
 
 podSecurityContext:
   runAsUser: 1001
