@@ -23,6 +23,36 @@ x-app: &app
   networks:
     internal:
 
+x-app-worker: &app-worker
+  <<: *app
+  build:
+    context: .
+    target: hyku-worker
+    args:
+      - SETTINGS__BULKRAX__ENABLED=true
+    cache_from:
+      - ghcr.io/scientist-softserv/adventist-dl/base:${TAG:-latest}
+      - ghcr.io/scientist-softserv/adventist-dl:${TAG:-latest}
+      - ghcr.io/scientist-softserv/adventist-dl/worker:${TAG:-latest}
+  image: ghcr.io/scientist-softserv/adventist-dl/worker:${TAG:-latest}
+  depends_on:
+    db:
+      condition: service_started
+    solr:
+      condition: service_started
+    fcrepo:
+      condition: service_started
+    redis:
+      condition: service_started
+    fits:
+      condition: service_started
+    zoo:
+      condition: service_started
+    check_volumes:
+      condition: service_completed_successfully
+    initialize_app:
+      condition: service_completed_successfully
+
 volumes:
   assets:
   cache:
@@ -186,7 +216,7 @@ services:
       - 3000
 
   worker:
-    <<: *app
+    <<: *app-worker
     ################################################################################
     ## Note on commands: by default the commands don't run bundle.  That is to
     ## reduce boot times.  However, when the application is in active
@@ -203,33 +233,11 @@ services:
     ## in your code, bash into the worker container, and interact with the
     ## breakpoints.
     # command: sh -l -c "bundle && tail -f /dev/null"
-    build:
-      context: .
-      target: hyku-worker
-      args:
-        - SETTINGS__BULKRAX__ENABLED=true
-      cache_from:
-        - ghcr.io/scientist-softserv/adventist-dl/base:${TAG:-latest}
-        - ghcr.io/scientist-softserv/adventist-dl:${TAG:-latest}
-        - ghcr.io/scientist-softserv/adventist-dl/worker:${TAG:-latest}
-    image: ghcr.io/scientist-softserv/adventist-dl/worker:${TAG:-latest}
-    depends_on:
-      db:
-        condition: service_started
-      solr:
-        condition: service_started
-      fcrepo:
-        condition: service_started
-      redis:
-        condition: service_started
-      fits:
-        condition: service_started
-      zoo:
-        condition: service_started
-      check_volumes:
-        condition: service_completed_successfully
-      initialize_app:
-        condition: service_completed_successfully
+
+  worker_auxiliary:
+    <<: *app-worker
+    environment:
+      - GOOD_JOB_QUEUES=*
 
   # Do not recurse through all of tmp. derivitives will make booting
   # very slow and eventually just time out as data grows
