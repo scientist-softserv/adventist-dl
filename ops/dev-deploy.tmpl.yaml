@@ -93,6 +93,8 @@ extraEnvVars: &envVars
     value: /rest
   - name: FEDORA_URL
     value: http://fcrepo.default.svc.cluster.local:8080/rest
+  - name: GOOD_JOB_QUEUES
+    value: -auxiliary
   - name: AUXILIARY_QUEUE_PRIORITY
     value: "100"
   - name: IN_DOCKER
@@ -227,9 +229,7 @@ worker:
     fsGroup: 101
     fsGroupChangePolicy: "OnRootMismatch"
   extraVolumeMounts: *volMounts
-  extraEnvVars:
-    - name: GOOD_JOB_QUEUES
-      value: -auxiliary
+  extraEnvVars: *envVars
 
 # When adding/removing key-value pairs to this block, ensure the
 # corresponding changes are made in the `extraDeploy` block below.
@@ -271,7 +271,7 @@ extraDeploy:
                       name: {{ template "hyrax.fullname" . }}
                 env:
                   {{- toYaml .Values.workerAuxiliary.extraEnvVars | nindent 12 }}
-                  {{- toYaml .Values.worker.extraEnvVars | nindent 12 }}
+                  {{- toYaml .Values.extraEnvVars | nindent 12 }}
                 command:
                   - sh
                   - -c
