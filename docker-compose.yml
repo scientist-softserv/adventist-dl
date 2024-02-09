@@ -210,6 +210,8 @@ services:
         condition: service_started
       worker:
         condition: service_started
+      worker_auxiliary:
+        condition: service_started
       initialize_app:
         condition: service_completed_successfully
     expose:

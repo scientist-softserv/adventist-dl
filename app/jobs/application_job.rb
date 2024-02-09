@@ -11,7 +11,8 @@ class ApplicationJob < ActiveJob::Base
   private
 
     def set_auxiliary_queue_priority
-      # TODO: make ENV variable
-      self.priority = 100 if queue_name.to_sym == :auxiliary
+      return unless queue_name.to_sym == :auxiliary
+
+      self.priority = ENV.fetch('AUXILIARY_QUEUE_PRIORITY', 100).to_i
     end
 end
