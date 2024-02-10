@@ -305,8 +305,8 @@ extraDeploy:
                     {{- toYaml . | nindent 12 }}
                   {{- end }}
                 env:
+                  {{- toYaml .Values.extraEnvVars | nindent 12 }}
                   {{- toYaml .Values.workerAuxiliary.extraEnvVars | nindent 12 }}
-                  {{- toYaml .Values.worker.extraEnvVars | nindent 12 }}
                 {{- if .Values.worker.readinessProbe.enabled }}
                 readinessProbe:
                   exec:
