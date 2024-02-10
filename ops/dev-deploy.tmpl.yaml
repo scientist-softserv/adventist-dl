@@ -93,8 +93,6 @@ extraEnvVars: &envVars
     value: /rest
   - name: FEDORA_URL
     value: http://fcrepo.default.svc.cluster.local:8080/rest
-  - name: GOOD_JOB_QUEUES
-    value: -auxiliary
   - name: AUXILIARY_QUEUE_PRIORITY
     value: "100"
   - name: IN_DOCKER
@@ -213,6 +211,8 @@ extraEnvVars: &envVars
     value: sqs://us-east-1.amazonaws.com/031107666127/space-stone-production-thumbnail/
   - name: SERVERLESS_WORD_DLQ
     value: https://sqs.us-east-1.amazonaws.com/031107666127/space-stone-production-word-coordinates-dlq
+  - name: GOOD_JOB_QUEUES
+    value: -auxiliary
 
 worker:
   replicaCount: 1
@@ -270,8 +270,8 @@ extraDeploy:
                   - secretRef:
                       name: {{ template "hyrax.fullname" . }}
                 env:
-                  {{- toYaml .Values.workerAuxiliary.extraEnvVars | nindent 12 }}
                   {{- toYaml .Values.extraEnvVars | nindent 12 }}
+                  {{- toYaml .Values.workerAuxiliary.extraEnvVars | nindent 12 }}
                 command:
                   - sh
                   - -c
