@@ -212,6 +212,18 @@ extraEnvVars: &envVars
   - name: SERVERLESS_WORD_DLQ
     value: https://sqs.us-east-1.amazonaws.com/031107666127/space-stone-production-word-coordinates-dlq
 
+{{- define "adventist.workerEnvVars" -}}
+{{- toYaml .Values.extraEnvVars -}}
+- name: GOOD_JOB_QUEUES
+  value: -auxiliary
+{{- end -}}
+
+{{- define "adventist.workerAuxiliaryEnvVars" -}}
+{{- toYaml .Values.extraEnvVars -}}
+- name: GOOD_JOB_QUEUES
+  value: "*"
+{{- end -}}
+
 worker:
   replicaCount: 1
   resources:
@@ -228,17 +240,13 @@ worker:
     fsGroupChangePolicy: "OnRootMismatch"
   extraVolumeMounts: *volMounts
   extraEnvVars:
-    - <<: *envVars
-    - name: GOOD_JOB_QUEUES
-      value: -auxiliary
+    {{ include "adventist.workerEnvVars" . | nindent 4 }}
 
 # When adding/removing key-value pairs to this block, ensure the
 # corresponding changes are made in the `extraDeploy` block below.
 workerAuxiliary:
   extraEnvVars:
-    - <<: *envVars
-    - name: GOOD_JOB_QUEUES
-      value: "*"
+    {{ include "adventist.workerAuxiliaryEnvVars" . | nindent 4 }}
 
 extraDeploy:
   - |-
