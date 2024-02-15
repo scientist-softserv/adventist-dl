@@ -31,29 +31,10 @@ Rails.application.configure do
 end
 
 # Wrapping this in an after_initialize block to ensure that all constants are loaded
-Rails.application.config.after_initialize do
-  # baseline of 0, higher is sooner
+# Rails.application.config.after_initialize do
+#   # baseline of 0, higher is sooner
 
-  # Commented out the following two jobs because they were
-  # specfically used for the sdapi ingests.
-  # see sdapi_ingest_script directory and
-  # ref: https://github.com/scientist-softserv/adventist-dl/issues/468
-  # CollectionMembershipJob.priority = 70
-  # UpdateCollectionMembershipJob.priority = 60
-  Bulkrax::ScheduleRelationshipsJob.priority = 50
-  CreateDerivativesJob.priority = 40
-  CharacterizeJob.priority = 30
-  Hyrax::GrantEditToMembersJob.priority = 10
-  ImportUrlJob.priority = 10
-  IngestJob.priority = 10
-  ApplicationJob.priority = 0
-  AttachFilesToWorkJob.priority = -1
-  Bulkrax::ImportWorkJob.priority = -5
-  Bulkrax::ImportFileSetJob.priority = -15
-  IiifPrint::Jobs::ChildWorksFromPdfJob.priority = -17
-  Bulkrax::CreateRelationshipsJob.priority = -20
-  Bulkrax::ImporterJob.priority = -20
-  IiifPrint::Jobs::CreateRelationshipsJob.priority = -20
-  ContentDepositEventJob.priority = -50
-  ContentUpdateEventJob.priority = -50
-end
+#   Job prioritization has been moved to application_job. Using
+#   the GoodJob config swallowed queue_with_priority behavior.
+
+# end

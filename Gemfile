@@ -89,7 +89,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
-gem 'bulkrax', '~> 5.0'
+gem 'bulkrax', '~> 5.3.0'
 
 gem 'blacklight', '~> 6.7'
 gem 'blacklight_oai_provider', '~> 6.1', '>= 6.1.1'
@@ -142,7 +142,7 @@ gem 'blacklight_range_limit', '6.5.0'
 gem 'derivative-rodeo', git: 'https://github.com/scientist-softserv/derivative_rodeo.git', branch: 'main'
 gem 'dog_biscuits', git: 'https://github.com/samvera-labs/dog_biscuits.git'
 gem 'hyrax-v2_graph_indexer', git: 'https://github.com/scientist-softserv/hyrax-v2_graph_indexer', branch: 'main'
-gem 'iiif_print', git: 'https://github.com/scientist-softserv/iiif_print.git', branch: 'main'
+gem 'iiif_print', git: 'https://github.com/scientist-softserv/iiif_print.git', branch: 'adventist-custom-queue'
 gem 'order_already'
 gem 'redis', '~> 4.0'
 gem 'redlock', '~> 1.2.1'
