@@ -10,7 +10,7 @@ else
 end
 
 if ENV['AUX_WORKER']
-  exec "echo $DATABASE_URL && bundle exec good_job start --queues=*"
+  exec "echo $DATABASE_URL && bundle exec good_job --queues='*'"
 else
-  exec "echo $DATABASE_URL && bundle exec good_job start --queues=-auxiliary"
+  exec "echo $DATABASE_URL && bundle exec good_job --queues='-auxiliary'"
 end
