@@ -61,8 +61,6 @@ extraEnvVars: &envVars
     value: s2.adventistdigitallibrary.org
   - name: SETTINGS__MULTITENANCY__ROOT_HOST
     value: s2.adventistdigitallibrary.org
-  - name: SETTINGS__MULTITENANCY__DEFAULT_HOST
-    value: "%{tenant}.s2.adventistdigitallibrary.org"
   - name: CONFDIR
     value: "/app/samvera/hyrax-webapp/solr/config"
   - name: INITIAL_ADMIN_EMAIL
@@ -95,8 +93,6 @@ extraEnvVars: &envVars
     value: http://fcrepo.default.svc.cluster.local:8080/rest
   - name: AUXILIARY_QUEUE_PRIORITY
     value: "100"
-  - name: GOOD_JOB_QUEUES
-    value: "-auxiliary"
   - name: IN_DOCKER
     value: "true"
   - name: LD_LIBRARY_PATH
