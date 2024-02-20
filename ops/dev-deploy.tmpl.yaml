@@ -212,18 +212,6 @@ extraEnvVars: &envVars
   - name: SERVERLESS_WORD_DLQ
     value: https://sqs.us-east-1.amazonaws.com/031107666127/space-stone-production-word-coordinates-dlq
 
-{{- define "adventist.workerEnvVars" -}}
-{{- toYaml .Values.extraEnvVars -}}
-- name: GOOD_JOB_QUEUES
-  value: -auxiliary
-{{- end -}}
-
-{{- define "adventist.workerAuxiliaryEnvVars" -}}
-{{- toYaml .Values.extraEnvVars -}}
-- name: GOOD_JOB_QUEUES
-  value: "*"
-{{- end -}}
-
 worker:
   replicaCount: 1
   resources:
@@ -239,14 +227,17 @@ worker:
     fsGroup: 101
     fsGroupChangePolicy: "OnRootMismatch"
   extraVolumeMounts: *volMounts
-  extraEnvVars:
-    {{ include "adventist.workerEnvVars" . | nindent 4 }}
+  extraEnvVars: *envVars
+  extraDeployEnvVars:
+    - name: GOOD_JOB_QUEUES
+      value: -auxiliary
 
 # When adding/removing key-value pairs to this block, ensure the
 # corresponding changes are made in the `extraDeploy` block below.
 workerAuxiliary:
-  extraEnvVars:
-    {{ include "adventist.workerAuxiliaryEnvVars" . | nindent 4 }}
+  extraDeployEnvVars:
+    - name: GOOD_JOB_QUEUES
+      value:  "*"
 
 extraDeploy:
   - |-
@@ -280,7 +271,14 @@ extraDeploy:
                   - secretRef:
                       name: {{ template "hyrax.fullname" . }}
                 env:
-                  {{- toYaml .Values.workerAuxiliary.extraEnvVars | nindent 12 }}
+                  {{- range .Values.workerAuxiliary.extraDeployEnvVars }}
+                  - name: {{ .name }}
+                    value: {{ .value | quote }}
+                  {{- end }}
+                  {{- range .Values.workerAuxiliary.extraEnvVars }}
+                  - name: {{ .name }}
+                    value: {{ .value | quote }}
+                  {{- end }}
                 command:
                   - sh
                   - -c
@@ -314,7 +312,14 @@ extraDeploy:
                     {{- toYaml . | nindent 12 }}
                   {{- end }}
                 env:
-                  {{- toYaml .Values.workerAuxiliary.extraEnvVars | nindent 12 }}
+                  {{- range .Values.workerAuxiliary.extraDeployEnvVars }}
+                  - name: {{ .name }}
+                    value: {{ .value | quote }}
+                  {{- end }}
+                  {{- range .Values.workerAuxiliary.extraEnvVars }}
+                  - name: {{ .name }}
+                    value: {{ .value | quote }}
+                  {{- end }}
                 {{- if .Values.worker.readinessProbe.enabled }}
                 readinessProbe:
                   exec:
