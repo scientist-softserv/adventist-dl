@@ -219,6 +219,8 @@ services:
 
   worker:
     <<: *app-worker
+    environment:
+      - GOOD_JOB_QUEUES=-auxiliary
     ################################################################################
     ## Note on commands: by default the commands don't run bundle.  That is to
     ## reduce boot times.  However, when the application is in active

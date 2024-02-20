@@ -9,4 +9,4 @@ else
   puts 'DATABASE_URL not set, no pool change needed'
 end
 
-exec "echo $DATABASE_URL && echo ${GOOD_JOB_QUEUES:--auxiliary} && bundle exec good_job start"
+exec "echo $DATABASE_URL && bundle exec good_job start"
