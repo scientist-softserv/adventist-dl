@@ -91,6 +91,8 @@ extraEnvVars: &envVars
     value: /rest
   - name: FEDORA_URL
     value: http://fcrepo.default.svc.cluster.local:8080/rest
+  - name: GOOD_JOB_QUEUES
+    value:  "-auxiliary"
   - name: AUXILIARY_QUEUE_PRIORITY
     value: "100"
   - name: IN_DOCKER
