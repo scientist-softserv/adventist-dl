@@ -10,7 +10,11 @@ else
 end
 
 if ENV['AUX_WORKER']
-  exec "echo $DATABASE_URL && bundle exec good_job --queues='*'"
+  # Run all queues (including :auxiliary)
+  exec "export GOOD_JOB_QUEUES='*'"
+  exec "echo $DATABASE_URL && bundle exec good_job"
 else
-  exec "echo $DATABASE_URL && bundle exec good_job --queues='-auxiliary'"
+  # Run all queues (excluding :auxiliary)
+  exec "export GOOD_JOB_QUEUES='-auxiliary'"
+  exec "echo $DATABASE_URL && bundle exec good_job"
 end

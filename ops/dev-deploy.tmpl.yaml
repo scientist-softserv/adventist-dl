@@ -227,12 +227,13 @@ worker:
     fsGroup: 101
     fsGroupChangePolicy: "OnRootMismatch"
   extraVolumeMounts: *volMounts
-  extraEnvVars: *envVars
+  extraEnvVars: *envVars # GOOD_JOB_QUEUES gets set in bin/worker
 
 # When adding/removing key-value pairs to this block, ensure the
 # corresponding changes are made in the `extraDeploy` block below.
 workerAuxiliary:
   extraEnvVars:
+    # GOOD_JOB_QUEUES gets set in bin/worker
     - name: AUX_WORKER
       value: "true"
 
