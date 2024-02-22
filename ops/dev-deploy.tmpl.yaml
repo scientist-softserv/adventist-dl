@@ -231,7 +231,7 @@ worker:
 
 # When adding/removing key-value pairs to this block, ensure the
 # corresponding changes are made in the `extraDeploy` block below.
-workerAuxiliary:
+workerAux:
   extraEnvVars:
     # GOOD_JOB_QUEUES gets set in bin/worker
     - name: AUX_WORKER
@@ -242,7 +242,7 @@ extraDeploy:
       apiVersion: apps/v1
       kind: Deployment
       metadata:
-        name: {{ include "hyrax.fullname" . }}-auxiliary-worker
+        name: {{ include "hyrax.fullname" . }}-worker-aux
         labels:
           {{- include "hyrax.labels" . | nindent 4 }}
       spec:
@@ -270,7 +270,7 @@ extraDeploy:
                       name: {{ template "hyrax.fullname" . }}
                 env:
                   {{- toYaml .Values.worker.extraEnvVars | nindent 12 }}
-                  {{- toYaml .Values.workerAuxiliary.extraEnvVars | nindent 12 }}
+                  {{- toYaml .Values.workerAux.extraEnvVars | nindent 12 }}
                 command:
                   - sh
                   - -c
@@ -305,7 +305,7 @@ extraDeploy:
                   {{- end }}
                 env:
                   {{- toYaml .Values.worker.extraEnvVars | nindent 12 }}
-                  {{- toYaml .Values.workerAuxiliary.extraEnvVars | nindent 12 }}
+                  {{- toYaml .Values.workerAux.extraEnvVars | nindent 12 }}
                 {{- if .Values.worker.readinessProbe.enabled }}
                 readinessProbe:
                   exec:

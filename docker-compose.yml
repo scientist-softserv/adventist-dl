@@ -210,7 +210,7 @@ services:
         condition: service_started
       worker:
         condition: service_started
-      worker_auxiliary:
+      worker_aux:
         condition: service_started
       initialize_app:
         condition: service_completed_successfully
@@ -236,10 +236,10 @@ services:
     ## breakpoints.
     # command: sh -l -c "bundle && tail -f /dev/null"
 
-  worker_auxiliary:
+  worker_aux:
     <<: *app-worker
     environment:
-      - GOOD_JOB_QUEUES=*
+      - AUX_WORKER="true"
 
   # Do not recurse through all of tmp. derivitives will make booting
   # very slow and eventually just time out as data grows
