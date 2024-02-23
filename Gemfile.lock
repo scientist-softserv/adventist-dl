@@ -31,8 +31,8 @@ GIT
 
 GIT
   remote: https://github.com/scientist-softserv/iiif_print.git
-  revision: e476998ab453afabf1bcb8afa059b4416af9b705
-  branch: main
+  revision: a9b270c2f07af4cc11111e971b50e4aeb0dc44b6
+  branch: adventist-custom-queue
   specs:
     iiif_print (1.0.0)
       blacklight_iiif_search (>= 1.0, < 3.0)
@@ -158,7 +158,7 @@ GEM
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
-    bagit (0.4.5)
+    bagit (0.4.6)
       docopt (~> 0.5.0)
       validatable (~> 1.6)
     bcp47 (0.3.3)
@@ -216,7 +216,7 @@ GEM
       signet (~> 0.8)
       typhoeus
     builder (3.2.4)
-    bulkrax (5.3.0)
+    bulkrax (5.3.1)
       bagit (~> 0.4)
       coderay
       dry-monads (~> 1.4.0)
@@ -1163,7 +1163,7 @@ DEPENDENCIES
   blacklight_oai_provider (~> 6.1, >= 6.1.1)
   blacklight_range_limit (= 6.5.0)
   bootstrap-datepicker-rails
-  bulkrax (~> 5.0)
+  bulkrax (~> 5.3.0)
   byebug
   capybara
   carrierwave-aws (~> 1.3)

@@ -10,6 +10,14 @@ module ActiveJobTenant
   end
 
   module ClassMethods
+    def queue_as(part_name = nil, &block)
+      if part_name.is_a?(Proc)
+        self.queue_name = part_name
+      else
+        super
+      end
+    end
+
     def deserialize(job_data)
       super.tap do |job|
         job.tenant = job_data['tenant']

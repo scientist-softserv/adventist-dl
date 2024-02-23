@@ -1,4 +1,6 @@
 Hyrax.config do |config|
+  config.ingest_queue_name = -> { redirect_priority_jobs }
+
   config.register_curation_concern :generic_work
   # Injected via `rails g hyrax:work Image`
   config.register_curation_concern :image

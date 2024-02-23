@@ -93,8 +93,8 @@ extraEnvVars: &envVars
     value: /rest
   - name: FEDORA_URL
     value: http://fcrepo.default.svc.cluster.local:8080/rest
-  - name: AUXILIARY_QUEUE_PRIORITY
-    value: "100"
+  - name: AUXILIARY_QUEUE_TENANTS
+    value: "sdapi"
   - name: IN_DOCKER
     value: "true"
   - name: LD_LIBRARY_PATH
