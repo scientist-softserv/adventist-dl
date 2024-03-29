@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 RSpec.describe FcrepoEndpoint do
-  let(:base_path) { 'foobar' }
   subject { described_class.new base_path: base_path }
+
+  let(:base_path) { 'foobar' }
 
   describe '.options' do
     it 'uses the configured application settings' do
