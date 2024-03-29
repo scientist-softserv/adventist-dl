@@ -28,7 +28,7 @@ RSpec.describe FcrepoEndpoint do
 
       it 'returns "Fedora is Down"' do
         allow(ActiveFedora::Fedora.instance.connection).to receive(:head).with(url_prefix).and_return(failure_response)
-        expect(subject.ping).to eq("Fedora is Down")
+        expect(subject.ping).to eq("Error checking Fedora status: Fedora is Down")
       end
     end
 

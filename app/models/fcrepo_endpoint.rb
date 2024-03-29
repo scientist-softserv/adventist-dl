@@ -17,7 +17,7 @@ class FcrepoEndpoint < Endpoint
     ).response.success?
       "Fedora is OK"
     else
-      "Fedora is Down"
+      "Error checking Fedora status: Fedora is Down"
     end
   rescue StandardError => e
     "Error checking Fedora status: #{e.message}"
