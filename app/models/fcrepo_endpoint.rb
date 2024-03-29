@@ -12,11 +12,15 @@ class FcrepoEndpoint < Endpoint
   end
 
   def ping
-    ActiveFedora::Fedora.instance.connection.head(
+    if ActiveFedora::Fedora.instance.connection.head(
       ActiveFedora::Fedora.instance.connection.connection.http.url_prefix.to_s
     ).response.success?
-  rescue StandardError
-    false
+      "Fedora is OK"
+    else
+      "Fedora is Down"
+    end
+  rescue StandardError => e
+    "Error checking Fedora status: #{e.message}"
   end
 
   # Remove the Fedora resource for this endpoint, then destroy the record
