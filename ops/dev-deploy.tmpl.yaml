@@ -399,8 +399,8 @@ fcrepo:
 postgresql:
   enabled: false
 redis:
-  cluster:
-    enabled: false
+  replica:
+    replicaCount: 1
   password: $REDIS_PASSWORD
 solr:
   enabled: false
