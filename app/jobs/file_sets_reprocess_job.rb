@@ -7,7 +7,7 @@
 # The reasons are two fold, and addressed by the two jobs:
 #
 # 1. We did not successfully split a PDF; handled by ConditionallyResplitFileSetJob
-# 2. We did not successfully attach a PDF; handled by ConditionallyResplitFileSetJob
+# 2. We did not successfully attach a PDF; handled by ConditionallyReingestFileSetJob
 class FileSetsReprocessJob < ApplicationJob
   ##
   # @param cname [String, Symbol] when given :all, submit one {FileSetsReprocessJob} per tenant.
